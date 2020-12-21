@@ -57,7 +57,7 @@ class RegisterFragment : BaseFragment() {
         appComponent.inject(this)
         vm = viewModel(viewModelFactory) {
             observe(navigateMain) { _ ->
-                activity?.let { navigator.showPin(it) }
+                activity?.let { navigator.showOtp(it) }
             }
         }
     }

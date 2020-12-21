@@ -30,6 +30,7 @@ import com.dre.loyalty.features.login.presentation.LoginActivity
 import com.dre.loyalty.features.movies.MovieDetailsActivity
 import com.dre.loyalty.features.movies.MovieView
 import com.dre.loyalty.features.movies.MoviesActivity
+import com.dre.loyalty.features.otp.OtpActivity
 import com.dre.loyalty.features.pin.presentation.PinActivity
 import com.dre.loyalty.features.register.presentation.RegisterActivity
 import com.dre.loyalty.features.splash.presentation.SplashScreenActivity
@@ -90,6 +91,10 @@ class Navigator @Inject constructor(private val authenticator: Authenticator) {
 
     fun showPin(context: Context) {
         context.startActivity(PinActivity.callingIntent(context))
+    }
+
+    fun showOtp(context: Context) {
+        context.startActivity(OtpActivity.callingIntent(context))
     }
 
     fun showSplashScreen(context: Context) {
