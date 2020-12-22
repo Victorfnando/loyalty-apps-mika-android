@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="userdetailform_screen_title">Verifikasi berhasil</string>
+    <string name="userdetailform_screen_desc">Silahkan lengkapi data diri kamu ya</string>
+    <string name="userdetailform_screen_label_firstname">Nama Depan</string>
+    <string name="userdetailform_screen_label_lastname">Nama Belakang</string>
+    <string name="userdetailform_screen_label_ktpnumber">Nomor KTP</string>
+    <string name="userdetailform_screen_label_email">Email</string>
+    <string name="userdetailform_screen_label_gender">Gender</string>
+    <string name="userdetailform_screen_label_dob">Tanggal lahir</string>
+</resources>

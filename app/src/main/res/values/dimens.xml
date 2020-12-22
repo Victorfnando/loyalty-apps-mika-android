@@ -13,6 +13,10 @@
     <!-- Progress view. -->
     <dimen name="progress_view_height">10dp</dimen>
 
+    <!-- EditText. -->
+    <dimen name="edittext_radius">4dp</dimen>
+    <dimen name="edittext_border_size">1dp</dimen>
+
     <!--Text Size-->
     <dimen name="text_size_12sp">12sp</dimen>
     <dimen name="text_size_20sp">20sp</dimen>

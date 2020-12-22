@@ -4,4 +4,6 @@
     <string name="login_screen_subdescription">Silahkan masuk dengan nomor HP kamu yang terdaftar</string>
     <string name="login_screen_btn_register">Daftar</string>
     <string name="login_screen_label_register">Belum punya akun?</string>
+    <string name="login_screen_et_hint">Cth:8123412678</string>
+    <string name="login_screen_et_prefix">+62</string>
 </resources>
