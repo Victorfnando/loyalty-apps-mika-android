@@ -71,6 +71,10 @@
         <item name="android:textSize">@dimen/text_size_12sp</item>
     </style>
 
+    <style name="NormalText.Error" parent="NormalText">
+        <item name="android:textColor">@color/red</item>
+    </style>
+
     <style name="PrefixEditText" parent="@android:style/Widget.EditText">
         <item name="android:textAppearance">@style/NormalText</item>
         <item name="android:textColor">@color/colorTextPrimary</item>

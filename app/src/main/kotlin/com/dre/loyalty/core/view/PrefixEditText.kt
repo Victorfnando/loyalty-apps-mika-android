@@ -102,12 +102,12 @@ class PrefixEditText @JvmOverloads constructor(
         )
     }
 
-    fun setDrawableEndOnCLickListener(onClickListener: OnClickListener?) {
+    fun setDrawableEndOnClickListener(onClickListener: OnClickListener?) {
         drawableEndOnClickListener = onClickListener
     }
 
-    override fun onTouchEvent(event: MotionEvent?): Boolean {
-        event?.takeIf { isEnabled }?.let { event ->
+    override fun onTouchEvent(motionEvent: MotionEvent?): Boolean {
+        motionEvent?.takeIf { isEnabled }?.let { event ->
             compoundDrawables[DRAWABLE_START]?.bounds?.width()
                 ?.takeIf { drawableStartOnClickListener != null && event.x < paddingLeft + it }
                 ?.let {
@@ -135,7 +135,7 @@ class PrefixEditText @JvmOverloads constructor(
             }
         }
 
-        return super.onTouchEvent(event)
+        return super.onTouchEvent(motionEvent)
     }
 
 

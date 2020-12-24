@@ -42,11 +42,14 @@ class LoginFragment : BaseFragment() {
             if (s.toString().length > 2) {
                 if (s?.substring(0, 3) != "62" && s?.firstOrNull() != '0') {
                     binding?.etPhone?.error = "Not Correct Phone Number Format"
+                    return
                 }
             }
             if (s?.isDigitsOnly() == false) {
                 binding?.etPhone?.error = "Not Correct Phone Number Format"
+                return
             }
+            binding?.etPhone?.error = ""
         }
     }
 
@@ -76,13 +79,13 @@ class LoginFragment : BaseFragment() {
             btnLogin.setOnClickListener {
                 vm.handleLoginButtonClicked()
             }
-            etPhone.addTextChangedListener(phoneChangeListener)
+            etPhone.editText.addTextChangedListener(phoneChangeListener)
         }
     }
 
     override fun onDetach() {
         super.onDetach()
-        binding?.etPhone?.removeTextChangedListener(phoneChangeListener)
+        binding?.etPhone?.editText?.removeTextChangedListener(phoneChangeListener)
         binding = null
     }
 }

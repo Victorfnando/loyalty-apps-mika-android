@@ -83,13 +83,13 @@ class RegisterFragment : BaseFragment() {
             }
             tvLabelRegister.setText(R.string.register_screen_label_login)
             btnRegister.setText(R.string.register_screen_btn_login)
-            etPhone.addTextChangedListener(phoneChangeListener)
+            etPhone.editText.addTextChangedListener(phoneChangeListener)
         }
     }
 
     override fun onDetach() {
         super.onDetach()
-        binding?.etPhone?.removeTextChangedListener(phoneChangeListener)
+        binding?.etPhone?.editText?.removeTextChangedListener(phoneChangeListener)
         binding = null
     }
 }

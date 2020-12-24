@@ -33,9 +33,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_login" />
 
-    <com.dre.loyalty.core.view.PrefixEditText
+    <com.dre.loyalty.core.view.PrefixEditTextWithLabel
         android:id="@+id/et_phone"
-        style="@style/PrefixEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/activity_horizontal_margin"
@@ -44,7 +43,8 @@
         android:inputType="phone"
         android:maxLength="13"
         android:hint="@string/login_screen_et_hint"
-        app:prefix="+62"
+        app:prefixText="+62"
+        app:label="Testing"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_description" />
