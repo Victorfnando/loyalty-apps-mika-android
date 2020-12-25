@@ -48,6 +48,12 @@ class UserDetailFormFragment : BaseFragment() {
                 getString(R.string.userdetailform_screen_label_tnc),
                 HtmlCompat.FROM_HTML_MODE_LEGACY
             )
+            etFormGender.isClickable = true
+            activity?.let { act ->
+                etFormGender.editText.setOnClickListener {
+                    GenderSheetModal.newInstance().show(act.supportFragmentManager, GenderSheetModal.TAG)
+                }
+            }
         }
     }
 

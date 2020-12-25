@@ -27,11 +27,18 @@
     <dimen name="button_ghost_border_width">1dp</dimen>
     <dimen name="button_ghost_border_width_clicked">3dp</dimen>
 
+    <!--Divider-->
+    <dimen name="divider_height">1dp</dimen>
+
+    <!--Bottom Sheet-->
+    <dimen name="bottom_sheet_radius">16dp</dimen>
+
     <!--Margin-->
     <dimen name="space_4dp">4dp</dimen>
     <dimen name="space_12dp">12dp</dimen>
     <dimen name="space_16dp">16dp</dimen>
     <dimen name="space_20dp">20dp</dimen>
     <dimen name="space_24dp">24dp</dimen>
+    <dimen name="space_28dp">28dp</dimen>
     <dimen name="space_48dp">48dp</dimen>
 </resources>

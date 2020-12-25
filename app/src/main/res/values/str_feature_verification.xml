@@ -23,4 +23,7 @@
     <string name="userdetailform_screen_hint_dob">Pilih Tanggal Lahir</string>
     <string name="userdetailform_screen_label_tnc"><![CDATA[Dengan mendaftar, saya menyetujui <font color=\'blue\'> syarat dan ketentuan </font>dari Altea Hospital Loyalty.]]></string>
     <string name="userdetailform_screen_btn_register">Daftar</string>
+    <string name="userdetailform_screen_sheet_gender_title">Gender</string>
+    <string name="userdetailform_screen_sheet_gender_label_man">Laki - laki</string>
+    <string name="userdetailform_screen_sheet_gender_label_woman">Perempuan</string>
 </resources>
