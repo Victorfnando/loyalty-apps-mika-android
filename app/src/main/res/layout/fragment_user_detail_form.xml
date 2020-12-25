@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include
-        layout="@layout/toolbar"/>
+    <include layout="@layout/toolbar" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -14,19 +14,82 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="@dimen/space_24dp"
-            android:paddingBottom="@dimen/space_24dp"
+            android:orientation="vertical"
             android:paddingStart="@dimen/space_16dp"
+            android:paddingTop="@dimen/space_24dp"
             android:paddingEnd="@dimen/space_16dp"
-            android:orientation="vertical">
+            android:paddingBottom="@dimen/space_24dp">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_pin_title"
+                android:id="@+id/tv_form_title"
                 style="@style/TitleText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/otp_screen_title" />
+                android:text="@string/userdetailform_screen_title" />
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_form_desc"
+                style="@style/NormalText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_12dp"
+                android:text="@string/userdetailform_screen_desc" />
+
+            <com.dre.loyalty.core.view.PrefixEditTextWithLabel
+                android:id="@+id/et_form_firstname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_24dp"
+                android:inputType="text"
+                app:label="@string/userdetailform_screen_label_firstname" />
+
+            <com.dre.loyalty.core.view.PrefixEditTextWithLabel
+                android:id="@+id/et_form_lastname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_20dp"
+                android:inputType="text"
+                app:label="@string/userdetailform_screen_label_lastname" />
+
+            <com.dre.loyalty.core.view.PrefixEditTextWithLabel
+                android:id="@+id/et_form_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_20dp"
+                android:inputType="textEmailAddress"
+                app:label="@string/userdetailform_screen_label_email" />
+
+            <com.dre.loyalty.core.view.PrefixEditTextWithLabel
+                android:id="@+id/et_form_gender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_20dp"
+                android:inputType="none"
+                app:label="@string/userdetailform_screen_label_gender" />
+
+            <com.dre.loyalty.core.view.PrefixEditTextWithLabel
+                android:id="@+id/et_form_dob"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_20dp"
+                android:inputType="none"
+                app:label="@string/userdetailform_screen_label_dob" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_form_tnc"
+                style="@style/NormalText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_24dp"
+                android:text="@string/userdetailform_screen_label_tnc" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_register"
+                style="@style/NormalText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_20dp"
+                android:text="@string/userdetailform_screen_btn_register" />
         </androidx.appcompat.widget.LinearLayoutCompat>
     </ScrollView>
 

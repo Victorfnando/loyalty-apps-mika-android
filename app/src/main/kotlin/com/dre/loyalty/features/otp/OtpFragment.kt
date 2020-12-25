@@ -30,6 +30,15 @@ class OtpFragment : BaseFragment() {
         return binding!!.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding?.btnResend?.setOnClickListener {
+            activity?.let {
+                navigator.showUserDetailForm(it)
+            }
+        }
+    }
+
     override fun onDetach() {
         super.onDetach()
         binding = null

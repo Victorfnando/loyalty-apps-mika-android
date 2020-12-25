@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Andreas Oen on 12/24/20 8:01 PM
+  ~ Copyright (c) 2020 . All rights reserved.
+  ~ Last modified 12/21/20 7:56 PM
+  ~ github: https://github.com/oandrz
+  -->
+
 <resources>
     <string name="userdetailform_screen_title">Verifikasi berhasil</string>
     <string name="userdetailform_screen_desc">Silahkan lengkapi data diri kamu ya</string>
@@ -8,4 +15,6 @@
     <string name="userdetailform_screen_label_email">Email</string>
     <string name="userdetailform_screen_label_gender">Gender</string>
     <string name="userdetailform_screen_label_dob">Tanggal lahir</string>
+    <string name="userdetailform_screen_label_tnc">Dengan mendaftar, saya menyetujui syarat dan ketentuan dari Altea Hospital Loyalty.</string>
+    <string name="userdetailform_screen_btn_register">Daftar</string>
 </resources>

@@ -66,6 +66,10 @@ xmlns:android="http://schemas.android.com/apk/res/android">
       android:name=".features.otp.OtpActivity">
   </activity>
 
+  <activity
+      android:name=".features.userdetailform.presentation.UserDetailFormActivity">
+  </activity>
+
 </application>
 
 </manifest>

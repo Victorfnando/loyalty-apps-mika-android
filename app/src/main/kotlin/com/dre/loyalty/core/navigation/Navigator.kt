@@ -34,6 +34,7 @@ import com.dre.loyalty.features.otp.OtpActivity
 import com.dre.loyalty.features.pin.presentation.PinActivity
 import com.dre.loyalty.features.register.presentation.RegisterActivity
 import com.dre.loyalty.features.splash.presentation.SplashScreenActivity
+import com.dre.loyalty.features.userdetailform.presentation.UserDetailFormActivity
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -99,6 +100,10 @@ class Navigator @Inject constructor(private val authenticator: Authenticator) {
 
     fun showSplashScreen(context: Context) {
         context.startActivity(SplashScreenActivity.callingIntent(context))
+    }
+
+    fun showUserDetailForm(context: Context) {
+        context.startActivity(UserDetailFormActivity.callingIntent(context))
     }
 
     class Extras(val transitionSharedElement: View)
