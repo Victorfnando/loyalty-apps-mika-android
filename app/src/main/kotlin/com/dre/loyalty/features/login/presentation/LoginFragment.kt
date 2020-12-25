@@ -19,7 +19,7 @@ import com.dre.loyalty.core.extension.observe
 import com.dre.loyalty.core.extension.viewModel
 import com.dre.loyalty.core.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
-import com.dre.loyalty.databinding.FragmentAuthFormBinding
+import com.dre.loyalty.databinding.FragmentLoginBinding
 import javax.inject.Inject
 
 class LoginFragment : BaseFragment() {
@@ -29,7 +29,7 @@ class LoginFragment : BaseFragment() {
 
     private lateinit var vm: LoginViewModel
 
-    private var binding: FragmentAuthFormBinding? = null
+    private var binding: FragmentLoginBinding? = null
 
     private val phoneChangeListener: TextWatcher = object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -68,7 +68,7 @@ class LoginFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentAuthFormBinding.inflate(inflater, container, false)
+        binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding?.root!!
     }
 

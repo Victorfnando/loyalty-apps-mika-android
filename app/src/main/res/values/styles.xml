@@ -71,6 +71,12 @@
         <item name="android:textSize">@dimen/text_size_12sp</item>
     </style>
 
+    <style name="NormalText.Bold" >
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/text_size_14sp</item>
+    </style>
+
     <style name="NormalText.Error" parent="NormalText">
         <item name="android:textColor">@color/red</item>
     </style>
@@ -84,7 +90,6 @@
 
     <style name="NormalGhostButton">
         <item name="android:background">@drawable/ghost_button_background</item>
-        <item name="android:textColor">@color/black</item>
         <item name="android:textSize">@dimen/text_size_14sp</item>
         <item name="android:textAllCaps">false</item>
     </style>

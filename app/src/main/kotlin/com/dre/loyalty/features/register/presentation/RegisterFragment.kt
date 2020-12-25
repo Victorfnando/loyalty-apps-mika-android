@@ -9,6 +9,7 @@ package com.dre.loyalty.features.register.presentation
 
 import android.os.Bundle
 import android.text.Editable
+import android.text.Html
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
@@ -20,7 +21,7 @@ import com.dre.loyalty.core.extension.observe
 import com.dre.loyalty.core.extension.viewModel
 import com.dre.loyalty.core.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
-import com.dre.loyalty.databinding.FragmentAuthFormBinding
+import com.dre.loyalty.databinding.FragmentRegisterBinding
 import com.dre.loyalty.features.login.presentation.LoginViewModel
 import javax.inject.Inject
 
@@ -31,7 +32,7 @@ class RegisterFragment : BaseFragment() {
 
     private lateinit var vm: LoginViewModel
 
-    private var binding: FragmentAuthFormBinding? = null
+    private var binding: FragmentRegisterBinding? = null
 
     private val phoneChangeListener: TextWatcher = object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -67,7 +68,7 @@ class RegisterFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentAuthFormBinding.inflate(inflater, container, false)
+        binding = FragmentRegisterBinding.inflate(inflater, container, false)
         return binding!!.root
     }
 
@@ -80,7 +81,7 @@ class RegisterFragment : BaseFragment() {
         }
         binding?.run {
             tvLogin.setText(R.string.register_screen_title)
-            tvDescription.setText(R.string.register_screen_subdescription)
+            setToastDescription()
             btnLogin.setText(R.string.register_screen_btn_register)
             btnLogin.setOnClickListener {
                 vm.handleLoginButtonClicked()
@@ -88,6 +89,12 @@ class RegisterFragment : BaseFragment() {
             tvLabelRegister.setText(R.string.register_screen_label_login)
             btnRegister.setText(R.string.register_screen_btn_login)
             etPhone.editText.addTextChangedListener(phoneChangeListener)
+        }
+    }
+
+    private fun setToastDescription() {
+        binding?.run {
+            tvDescription.fromHtml(getString(R.string.register_screen_toast_desc))
         }
     }
 

@@ -9,7 +9,8 @@
 <resources>
     <string name="register_screen_title">Daftar</string>
     <string name="register_screen_btn_login">Log in</string>
-    <string name="register_screen_subdescription">Daftar dengan nomor HP kamu yang aktif ya</string>
+    <string name="register_screen_toast_desc"><![CDATA[Pastikan nomor kamu terdaftar pada akun <b>OVO</b> agar kami dapat mengirimkan <b>CASHBACK</b>.]]></string>
     <string name="register_screen_btn_register">Daftar</string>
     <string name="register_screen_label_login">Sudah punya akun?</string>
+    <string name="register_screen_label_phone">Nomor HP</string>
 </resources>

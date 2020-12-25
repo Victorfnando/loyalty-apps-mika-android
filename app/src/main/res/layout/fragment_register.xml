@@ -15,20 +15,18 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/activity_horizontal_margin"
         android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:text="@string/login_screen_title"
+        android:text="@string/register_screen_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar_layout" />
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <com.dre.loyalty.core.view.StaticToastView
         android:id="@+id/tv_description"
-        style="@style/NormalText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/space_16dp"
         android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:text="@string/login_screen_subdescription"
-        android:textColor="@color/gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_login" />
@@ -43,8 +41,8 @@
         android:inputType="phone"
         android:maxLength="13"
         android:hint="@string/login_screen_et_hint"
+        app:fieldLabel="@string/register_screen_label_phone"
         app:prefixText="+62"
-        app:label="Testing"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_description" />

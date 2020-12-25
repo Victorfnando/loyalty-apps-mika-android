@@ -3,10 +3,10 @@
     <declare-styleable name="PrefixEditText">
         <attr name="prefix" format="string" />
     </declare-styleable>
-    <declare-styleable name="PrefixEditTextWithLabel">
-        <attr name="label" format="string" />
+    <declare-styleable name="PrefixEditTextWithLabel" parent="ViewWithLabel">
         <attr name="error" format="string" />
         <attr name="prefixText" format="string" />
+        <attr name="fieldLabel" format="string" />
         <attr name="android:hint" format="string" />
         <attr name="android:inputType">
             <flag name="none" value="0x00000000" />
@@ -29,7 +29,7 @@
             <flag name="textPassword" value="0x00000081" />
             <flag name="textVisiblePassword" value="0x00000091" />
             <flag name="textWebEditText" value="0x000000a1" />
-            <flag name="textFilter" value="0x000000b1" />
+            <flag name="taextFilter" value="0x000000b1" />
             <flag name="textPhonetic" value="0x000000c1" />
             <flag name="textWebEmailAddress" value="0x000000d1" />
             <flag name="textWebPassword" value="0x000000e1" />
@@ -40,5 +40,9 @@
             <flag name="phone" value="0x00000003" />
         </attr>
         <attr name="android:maxLength" format="integer" min="0" />
+    </declare-styleable>
+    <declare-styleable name="StaticToastView" parent="ViewWithLabel">
+        <attr name="label" format="string" />
+        <attr name="desc" format="string" />
     </declare-styleable>
 </resources>

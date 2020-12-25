@@ -29,7 +29,6 @@ class PrefixEditText @JvmOverloads constructor(
     private var drawablePaddingOriginal: Int = 0
 
     var prefixText: CharSequence? = null
-    var hintText: CharSequence? = null
 
     private val prefixBackgroundPaint by lazy {
         Paint().apply {
@@ -72,7 +71,6 @@ class PrefixEditText @JvmOverloads constructor(
         } ?: 0
         paddingStartOriginal = paddingStart
         drawablePaddingOriginal = compoundDrawablePadding
-        hintText = hint
         setDrawableStart(null)
     }
 

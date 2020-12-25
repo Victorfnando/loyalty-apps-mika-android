@@ -20,7 +20,7 @@ import com.dre.loyalty.databinding.ViewPrefixedittextWithLabelBinding
 
 
 class PrefixEditTextWithLabel @JvmOverloads constructor(
-        context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
+    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : LinearLayoutCompat(context, attrs, defStyleAttr) {
 
     private var binding: ViewPrefixedittextWithLabelBinding
@@ -54,7 +54,6 @@ class PrefixEditTextWithLabel @JvmOverloads constructor(
     var hint: CharSequence? = null
         set(value) {
             field = value
-            editText.hintText = value
             editText.hint = value
         }
 
@@ -88,7 +87,7 @@ class PrefixEditTextWithLabel @JvmOverloads constructor(
     private fun initAttribute(attrs: AttributeSet?) {
         val attribute = context.obtainStyledAttributes(attrs, R.styleable.PrefixEditTextWithLabel)
         error = attribute.getText(R.styleable.PrefixEditTextWithLabel_error)
-        label = attribute.getText(R.styleable.PrefixEditTextWithLabel_label)
+        label = attribute.getText(R.styleable.PrefixEditTextWithLabel_fieldLabel)
         hint = attribute.getText(R.styleable.PrefixEditTextWithLabel_android_hint)
         prefix = attribute.getText(R.styleable.PrefixEditTextWithLabel_prefixText)
         inputType = attribute.getInt(R.styleable.PrefixEditTextWithLabel_android_inputType, InputType.TYPE_NULL)
