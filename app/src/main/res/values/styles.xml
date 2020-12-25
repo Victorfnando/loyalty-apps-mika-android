@@ -21,7 +21,6 @@
 
     <style name="BaseToolbarStyle">
         <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
-        <item name="android:theme">@style/BaseToolbarTheme</item>
         <item name="titleTextAppearance">@style/CustomTitleTextAppearance</item>
     </style>
 

@@ -74,7 +74,11 @@ class LoginFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as AppCompatActivity).setSupportActionBar(binding?.toolbarLayout?.toolbar)
+        (activity as AppCompatActivity).run {
+            setSupportActionBar(binding?.toolbarLayout?.toolbar)
+            supportActionBar?.setDisplayShowTitleEnabled(false)
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        }
         binding?.run {
             btnLogin.setOnClickListener {
                 vm.handleLoginButtonClicked()

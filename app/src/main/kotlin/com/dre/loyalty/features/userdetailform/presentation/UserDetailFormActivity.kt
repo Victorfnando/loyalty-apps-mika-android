@@ -14,7 +14,7 @@ import com.dre.loyalty.core.platform.BaseFragment
 
 class UserDetailFormActivity : BaseActivity() {
 
-    override fun fragment(): BaseFragment = UserDetailFormFragment()
+    override fun fragment(): BaseFragment = UserDetailFormFragment.newInstance()
 
     companion object {
         fun callingIntent(context: Context) = Intent(context, UserDetailFormActivity::class.java)

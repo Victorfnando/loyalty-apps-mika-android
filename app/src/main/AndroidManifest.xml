@@ -30,11 +30,13 @@ xmlns:android="http://schemas.android.com/apk/res/android">
 
     <activity
         android:name="com.dre.loyalty.features.login.presentation.LoginActivity"
+        android:parentActivityName=".features.authenticationselector.presentation.AuthenticationSelectorActivity"
         android:label="@string/login_screen_title">
     </activity>
 
     <activity
         android:name=".features.register.presentation.RegisterActivity"
+        android:parentActivityName=".features.authenticationselector.presentation.AuthenticationSelectorActivity"
         android:label="@string/register_screen_title">
     </activity>
 
@@ -45,6 +47,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
 
     <activity
         android:name="com.dre.loyalty.features.pin.presentation.PinActivity"
+        android:parentActivityName=".features.register.presentation.RegisterActivity"
         android:label="@string/pin_screen_title">
     </activity>
 
@@ -63,11 +66,13 @@ xmlns:android="http://schemas.android.com/apk/res/android">
     </activity>
 
   <activity
-      android:name=".features.otp.OtpActivity">
+      android:name=".features.otp.OtpActivity"
+      android:parentActivityName=".features.register.presentation.RegisterActivity">
   </activity>
 
   <activity
-      android:name=".features.userdetailform.presentation.UserDetailFormActivity">
+      android:name=".features.userdetailform.presentation.UserDetailFormActivity"
+      android:parentActivityName=".features.register.presentation.RegisterActivity">
   </activity>
 
 </application>

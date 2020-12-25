@@ -73,8 +73,12 @@ class RegisterFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as AppCompatActivity).run {
+            setSupportActionBar(binding?.toolbarLayout?.toolbar)
+            supportActionBar?.setDisplayShowTitleEnabled(false)
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        }
         binding?.run {
-            (activity as AppCompatActivity).setSupportActionBar(toolbarLayout.toolbar)
             tvLogin.setText(R.string.register_screen_title)
             tvDescription.setText(R.string.register_screen_subdescription)
             btnLogin.setText(R.string.register_screen_btn_register)
