@@ -51,13 +51,13 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_login"
+        style="@style/NormalButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/activity_horizontal_margin"
         android:layout_marginTop="@dimen/space_20dp"
         android:layout_marginEnd="@dimen/activity_horizontal_margin"
         android:text="@string/login_screen_btn_login"
-        android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_phone" />
@@ -76,13 +76,13 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_register"
+        style="@style/NormalGhostButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/activity_horizontal_margin"
         android:layout_marginEnd="@dimen/activity_horizontal_margin"
         android:layout_marginBottom="@dimen/space_24dp"
         android:text="@string/login_screen_btn_register"
-        android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

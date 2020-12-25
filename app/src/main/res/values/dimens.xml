@@ -19,7 +19,13 @@
 
     <!--Text Size-->
     <dimen name="text_size_12sp">12sp</dimen>
+    <dimen name="text_size_14sp">14sp</dimen>
     <dimen name="text_size_20sp">20sp</dimen>
+
+    <!--Button-->
+    <dimen name="button_radius">4dp</dimen>
+    <dimen name="button_ghost_border_width">1dp</dimen>
+    <dimen name="button_ghost_border_width_clicked">3dp</dimen>
 
     <!--Margin-->
     <dimen name="space_4dp">4dp</dimen>

@@ -70,13 +70,13 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_resend"
+        style="@style/NormalGhostButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/activity_horizontal_margin"
         android:layout_marginTop="@dimen/space_12dp"
         android:layout_marginEnd="@dimen/activity_horizontal_margin"
         android:text="@string/otp_screen_button_resend"
-        android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

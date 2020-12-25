@@ -12,7 +12,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.5"
@@ -51,6 +51,7 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_login"
+            style="@style/NormalButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
@@ -64,13 +65,13 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_register"
+            style="@style/NormalButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:layout_marginEnd="@dimen/activity_horizontal_margin"
             android:layout_marginBottom="@dimen/space_24dp"
             android:text="@string/login_screen_btn_register"
-            android:textAllCaps="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
