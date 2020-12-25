@@ -10,11 +10,17 @@
     <string name="userdetailform_screen_title">Verifikasi berhasil</string>
     <string name="userdetailform_screen_desc">Silahkan lengkapi data diri kamu ya</string>
     <string name="userdetailform_screen_label_firstname">Nama Depan</string>
+    <string name="userdetailform_screen_hint_firstname">Cth: Arif</string>
     <string name="userdetailform_screen_label_lastname">Nama Belakang</string>
+    <string name="userdetailform_screen_hint_lastname">Cth: Rahman</string>
     <string name="userdetailform_screen_label_ktpnumber">Nomor KTP</string>
+    <string name="userdetailform_screen_hint_ktpnumber">1234567892</string>
     <string name="userdetailform_screen_label_email">Email</string>
+    <string name="userdetailform_screen_hint_email">nama@mail.com</string>
     <string name="userdetailform_screen_label_gender">Gender</string>
+    <string name="userdetailform_screen_hint_gender">Pilih Gender</string>
     <string name="userdetailform_screen_label_dob">Tanggal lahir</string>
-    <string name="userdetailform_screen_label_tnc">Dengan mendaftar, saya menyetujui syarat dan ketentuan dari Altea Hospital Loyalty.</string>
+    <string name="userdetailform_screen_hint_dob">Pilih Tanggal Lahir</string>
+    <string name="userdetailform_screen_label_tnc"><![CDATA[Dengan mendaftar, saya menyetujui <font color=\'blue\'> syarat dan ketentuan </font>dari Altea Hospital Loyalty.]]></string>
     <string name="userdetailform_screen_btn_register">Daftar</string>
 </resources>

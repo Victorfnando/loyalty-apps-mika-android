@@ -8,6 +8,7 @@
 package com.dre.loyalty.core.view
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.text.InputFilter
 import android.text.InputFilter.LengthFilter
 import android.text.InputType
@@ -15,6 +16,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.core.content.ContextCompat
 import com.dre.loyalty.R
 import com.dre.loyalty.databinding.ViewPrefixedittextWithLabelBinding
 
@@ -74,6 +76,18 @@ class PrefixEditTextWithLabel @JvmOverloads constructor(
             editText.filters = arrayOf<InputFilter>(LengthFilter(maxLength))
         }
 
+    var drawableEnd: Drawable? = null
+        set(value) {
+            field = value
+            editText.setDrawableEnd(drawableEnd)
+        }
+
+    var text: CharSequence? = null
+        set(value) {
+            field = value
+            editText.setText(value)
+        }
+
     val editText: PrefixEditText
         get() = binding.etInput
 
@@ -87,11 +101,16 @@ class PrefixEditTextWithLabel @JvmOverloads constructor(
     private fun initAttribute(attrs: AttributeSet?) {
         val attribute = context.obtainStyledAttributes(attrs, R.styleable.PrefixEditTextWithLabel)
         error = attribute.getText(R.styleable.PrefixEditTextWithLabel_error)
+        text = attribute.getText(R.styleable.PrefixEditTextWithLabel_android_text)
         label = attribute.getText(R.styleable.PrefixEditTextWithLabel_fieldLabel)
         hint = attribute.getText(R.styleable.PrefixEditTextWithLabel_android_hint)
         prefix = attribute.getText(R.styleable.PrefixEditTextWithLabel_prefixText)
         inputType = attribute.getInt(R.styleable.PrefixEditTextWithLabel_android_inputType, InputType.TYPE_NULL)
         maxLength = attribute.getInt(R.styleable.PrefixEditTextWithLabel_android_maxLength, Int.MAX_VALUE)
+        drawableEnd = attribute.getResourceId(R.styleable.PrefixEditTextWithLabel_android_drawableEnd, -1)
+                .takeIf { it != -1 }?.let {
+                    ContextCompat.getDrawable(context, it)
+                }
         attribute.recycle()
     }
 }

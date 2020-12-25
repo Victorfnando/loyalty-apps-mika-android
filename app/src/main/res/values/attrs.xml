@@ -8,6 +8,7 @@
         <attr name="prefixText" format="string" />
         <attr name="fieldLabel" format="string" />
         <attr name="android:hint" format="string" />
+        <attr name="android:text" format="string" />
         <attr name="android:inputType">
             <flag name="none" value="0x00000000" />
             <flag name="text" value="0x00000001" />
@@ -40,6 +41,7 @@
             <flag name="phone" value="0x00000003" />
         </attr>
         <attr name="android:maxLength" format="integer" min="0" />
+        <attr name="android:drawableEnd" />
     </declare-styleable>
     <declare-styleable name="StaticToastView" parent="ViewWithLabel">
         <attr name="label" format="string" />

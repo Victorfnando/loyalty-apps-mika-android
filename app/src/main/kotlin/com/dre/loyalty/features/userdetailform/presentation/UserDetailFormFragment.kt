@@ -12,6 +12,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.text.HtmlCompat
+import com.dre.loyalty.R
 import com.dre.loyalty.core.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.databinding.FragmentUserDetailFormBinding
@@ -40,6 +42,12 @@ class UserDetailFormFragment : BaseFragment() {
             setSupportActionBar(binding?.toolbarLayout?.toolbar)
             supportActionBar?.setDisplayShowTitleEnabled(false)
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        }
+        binding?.run {
+            tvFormTnc.text = HtmlCompat.fromHtml(
+                getString(R.string.userdetailform_screen_label_tnc),
+                HtmlCompat.FROM_HTML_MODE_LEGACY
+            )
         }
     }
 
