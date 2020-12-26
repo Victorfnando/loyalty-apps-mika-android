@@ -74,16 +74,20 @@ class LoginFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as AppCompatActivity).run {
-            setSupportActionBar(binding?.toolbarLayout?.toolbar)
-            supportActionBar?.setDisplayShowTitleEnabled(false)
-            supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        }
+        bindToolbar()
         binding?.run {
             btnLogin.setOnClickListener {
                 vm.handleLoginButtonClicked()
             }
             etPhone.editText.addTextChangedListener(phoneChangeListener)
+        }
+    }
+
+    private fun bindToolbar() {
+        (activity as AppCompatActivity).run {
+            setSupportActionBar(binding?.toolbarLayout?.toolbar)
+            supportActionBar?.setDisplayShowTitleEnabled(false)
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
     }
 

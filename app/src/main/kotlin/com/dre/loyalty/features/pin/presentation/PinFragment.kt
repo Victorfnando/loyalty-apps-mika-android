@@ -1,16 +1,13 @@
 package com.dre.loyalty.features.pin.presentation
 
-import android.graphics.Typeface
 import android.os.Bundle
 import android.text.Editable
-import android.text.Spannable
-import android.text.SpannableString
 import android.text.TextWatcher
-import android.text.style.StyleSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.text.HtmlCompat
 import com.dre.loyalty.R
 import com.dre.loyalty.core.extension.observe
 import com.dre.loyalty.core.extension.viewModel
@@ -53,28 +50,21 @@ class PinFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentPinBinding.inflate(inflater, container, false)
         return binding!!.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as AppCompatActivity).run {
-            setSupportActionBar(binding?.toolbarLayout?.toolbar)
-            supportActionBar?.setDisplayShowTitleEnabled(false)
-            supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        }
-        binding?.run {
-            val forgotPinLabelText = SpannableString(resources.getString(R.string.pin_screen_label_forgotpin))
-            forgotPinLabelText.setSpan(
-                StyleSpan(Typeface.BOLD),
-                10,
-                forgotPinLabelText.length,
-                Spannable.SPAN_EXCLUSIVE_INCLUSIVE
-            )
-            tvForgotpinLabel.text = forgotPinLabelText
-            etPin.addTextChangedListener(textWatcher)
+        bindToolbar()
+        binding?.tvForgotpinLabel?.text = HtmlCompat.fromHtml(
+           getString(R.string.pin_screen_label_forgotpin),
+           HtmlCompat.FROM_HTML_MODE_LEGACY
+        )
+        bindInputPin()
+        binding?.tvForgotpinLabel?.setOnClickListener {
+            navigator.showResetPin(activity!!)
         }
     }
 
@@ -82,6 +72,21 @@ class PinFragment : BaseFragment() {
         binding?.etPin?.removeTextChangedListener(textWatcher)
         binding = null
         super.onDetach()
+    }
+
+    private fun bindToolbar() {
+        (activity as AppCompatActivity).run {
+            setSupportActionBar(binding?.toolbarLayout?.toolbar)
+            supportActionBar?.setDisplayShowTitleEnabled(false)
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        }
+    }
+
+    private fun bindInputPin() {
+        binding?.etPin?.run {
+            requestFocus()
+            addTextChangedListener(textWatcher)
+        }
     }
 
     companion object {

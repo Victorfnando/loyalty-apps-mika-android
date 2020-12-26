@@ -20,5 +20,4 @@ class LoginViewModel @Inject constructor() : BaseViewModel() {
     fun handleLoginButtonClicked() {
         _navigateMain.value = true
     }
-
 }

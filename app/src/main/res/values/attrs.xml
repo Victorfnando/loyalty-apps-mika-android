@@ -3,7 +3,7 @@
     <declare-styleable name="PrefixEditText">
         <attr name="prefix" format="string" />
     </declare-styleable>
-    <declare-styleable name="PrefixEditTextWithLabel" parent="ViewWithLabel">
+    <declare-styleable name="PrefixEditTextWithLabel">
         <attr name="error" format="string" />
         <attr name="prefixText" format="string" />
         <attr name="fieldLabel" format="string" />
@@ -43,7 +43,7 @@
         <attr name="android:maxLength" format="integer" min="0" />
         <attr name="android:drawableEnd" />
     </declare-styleable>
-    <declare-styleable name="StaticToastView" parent="ViewWithLabel">
+    <declare-styleable name="StaticToastView">
         <attr name="label" format="string" />
         <attr name="desc" format="string" />
     </declare-styleable>

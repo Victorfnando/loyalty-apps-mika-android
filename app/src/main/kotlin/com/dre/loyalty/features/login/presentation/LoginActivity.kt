@@ -9,13 +9,23 @@ package com.dre.loyalty.features.login.presentation
 
 import android.content.Context
 import android.content.Intent
+import android.view.MenuItem
 import com.dre.loyalty.core.platform.BaseActivity
 import com.dre.loyalty.features.register.presentation.RegisterFragment
 
 class LoginActivity : BaseActivity() {
+
+    override fun fragment() = LoginFragment()
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            onBackPressed()
+            return true
+        }
+        return true
+    }
+
     companion object {
         fun callingIntent(context: Context) = Intent(context, LoginActivity::class.java)
     }
-
-    override fun fragment() = LoginFragment()
 }

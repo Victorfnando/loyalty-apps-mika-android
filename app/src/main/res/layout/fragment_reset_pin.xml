@@ -1,8 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Created by Andreas Oen on 12/26/20 11:29 AM
+  ~ Copyright (c) 2020 . All rights reserved.
+  ~ Last modified 12/26/20 11:29 AM
+  ~ github: https://github.com/oandrz
+  -->
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:layout_height="match_parent">
 
     <include
         android:id="@+id/toolbar_layout"
@@ -10,9 +16,8 @@
 
     <ScrollView
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_vertical_margin"
-        app:layout_constraintBottom_toTopOf="@id/tv_label_register"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar_layout">
@@ -28,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/activity_horizontal_margin"
                 android:layout_marginEnd="@dimen/space_16dp"
-                android:text="@string/login_screen_title"
+                android:text="@string/resetpin_screen_title"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -41,7 +46,7 @@
                 android:layout_marginStart="@dimen/activity_horizontal_margin"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
                 android:layout_marginEnd="@dimen/space_16dp"
-                android:text="@string/login_screen_subdescription"
+                android:text="@string/resetpin_screen_label_desc"
                 android:textColor="@color/gray"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -54,7 +59,7 @@
                 android:layout_marginStart="@dimen/activity_horizontal_margin"
                 android:layout_marginTop="@dimen/space_20dp"
                 android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                android:hint="@string/login_screen_et_hint"
+                android:hint="@string/resetpin_screen_et_hint"
                 android:inputType="phone"
                 android:maxLength="13"
                 app:fieldLabel="@string/login_screen_label_phone"
@@ -64,44 +69,31 @@
                 app:prefixText="+62" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_login"
+                android:id="@+id/btn_reset"
                 style="@style/NormalButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/activity_horizontal_margin"
                 android:layout_marginTop="@dimen/space_20dp"
                 android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                android:text="@string/login_screen_btn_login"
+                android:text="@string/resetpin_screen_btn_label"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/et_phone" />
+
+            <com.dre.loyalty.core.view.StaticToastView
+                android:id="@+id/tv_notes"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:layout_marginEnd="@dimen/space_16dp"
+                app:desc="@string/resetpin_screen_label_notedesc"
+                app:label="@string/resetpin_screen_label_note"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_reset" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_label_register"
-        style="@style/NormalText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/space_16dp"
-        android:layout_marginEnd="@dimen/space_16dp"
-        android:layout_marginBottom="@dimen/space_12dp"
-        android:gravity="center"
-        android:text="@string/login_screen_label_register"
-        app:layout_constraintBottom_toTopOf="@id/btn_register"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_register"
-        style="@style/NormalGhostButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:layout_marginEnd="@dimen/activity_horizontal_margin"
-        android:layout_marginBottom="@dimen/space_24dp"
-        android:text="@string/login_screen_btn_register"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

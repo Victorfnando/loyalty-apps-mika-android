@@ -62,7 +62,6 @@
         android:layout_marginTop="@dimen/space_48dp"
         android:layout_marginBottom="@dimen/space_12dp"
         android:gravity="center"
-        android:text="@string/pin_screen_label_forgotpin"
         android:textColor="@color/gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
