@@ -48,28 +48,35 @@ class UserDetailFormFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as AppCompatActivity).run {
-            setSupportActionBar(binding?.toolbarLayout?.toolbar)
-            supportActionBar?.setDisplayShowTitleEnabled(false)
-            supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        }
-        binding?.run {
-            tvFormTnc.text = HtmlCompat.fromHtml(
-                getString(R.string.userdetailform_screen_label_tnc),
-                HtmlCompat.FROM_HTML_MODE_LEGACY
-            )
-            etFormGender.isClickable = true
-            activity?.let { act ->
-                etFormGender.editText.setOnClickListener {
-                    vm.handleGenderFormClicked()
-                }
-            }
-        }
+        bindToolbar()
+        binding?.tvFormTnc?.text = HtmlCompat.fromHtml(
+            getString(R.string.userdetailform_screen_label_tnc),
+            HtmlCompat.FROM_HTML_MODE_LEGACY
+        )
+        bindEtFormGender()
     }
 
     override fun onDetach() {
         binding = null
         super.onDetach()
+    }
+
+    private fun bindToolbar() {
+        (activity as AppCompatActivity).run {
+            setSupportActionBar(binding?.toolbarLayout?.toolbar)
+            supportActionBar?.setDisplayShowTitleEnabled(false)
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        }
+    }
+
+    private fun bindEtFormGender() {
+        binding?.etFormGender?.editText?.run {
+            isFocusableInTouchMode = false
+            isClickable = true
+            setOnClickListener {
+                vm.handleGenderFormClicked()
+            }
+        }
     }
 
     private fun showGenderModal(event: Event<String?>?) {
