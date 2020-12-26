@@ -14,8 +14,12 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.HtmlCompat
 import com.dre.loyalty.R
+import com.dre.loyalty.core.extension.observe
+import com.dre.loyalty.core.extension.viewModel
+import com.dre.loyalty.core.functional.Event
 import com.dre.loyalty.core.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
+import com.dre.loyalty.core.view.PrefixEditTextWithLabel
 import com.dre.loyalty.databinding.FragmentUserDetailFormBinding
 import javax.inject.Inject
 
@@ -24,11 +28,17 @@ class UserDetailFormFragment : BaseFragment() {
     @Inject
     lateinit var navigator: Navigator
 
+    private lateinit var vm: UserDetailFormViewModel
+
     private var binding: FragmentUserDetailFormBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
+        vm = viewModel(viewModelFactory) {
+            observe(showGenderSheet, ::showGenderModal)
+            observe(selectedGender, ::renderSelectedGenderText)
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -51,7 +61,7 @@ class UserDetailFormFragment : BaseFragment() {
             etFormGender.isClickable = true
             activity?.let { act ->
                 etFormGender.editText.setOnClickListener {
-                    GenderSheetModal.newInstance().show(act.supportFragmentManager, GenderSheetModal.TAG)
+                    vm.handleGenderFormClicked()
                 }
             }
         }
@@ -60,6 +70,20 @@ class UserDetailFormFragment : BaseFragment() {
     override fun onDetach() {
         binding = null
         super.onDetach()
+    }
+
+    private fun showGenderModal(event: Event<String?>?) {
+        event?.getIfNotHandled().let {
+            val modal = GenderSheetModal.newInstance(it)
+            modal.onItemClickListener = { selected ->
+                vm.handleSelectedGender(selected)
+            }
+            modal.show(activity!!.supportFragmentManager, GenderSheetModal.TAG)
+        }
+    }
+
+    private fun renderSelectedGenderText(value: String?) {
+        binding?.etFormGender?.editText?.setText(value)
     }
 
     companion object {

@@ -34,6 +34,7 @@ class GenderSheetModal : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        selectedItem = arguments?.getString(SELECTED_GENDER_KEY)
         binding?.let {
             bindItem(it.layoutGenderMan, it.tvGenderMan, it.radioMan)
             bindItem(it.layoutGenderWoman, it.tvGenderWoman, it.radioWoman)
@@ -47,11 +48,10 @@ class GenderSheetModal : BottomSheetDialogFragment() {
     ) {
         genderLayoutGroup.setOnClickListener {
             onItemClickListener?.invoke(genderTv.text.toString())
+            dismiss()
         }
         selectedItem?.let {
-            if (it == genderTv.text.toString()) {
-                genderRadio.isSelected = true
-            }
+            genderRadio.isChecked = it == genderTv.text.toString()
         }
     }
 
@@ -62,7 +62,7 @@ class GenderSheetModal : BottomSheetDialogFragment() {
 
     companion object {
         const val TAG = "GenderSheetModal"
-        const val SELECTED_GENDER_KEY = "SELECTED_GENDER_KEY"
+        private const val SELECTED_GENDER_KEY = "SELECTED_GENDER_KEY"
 
         fun newInstance(selectedItem: String? = null): GenderSheetModal {
             val args = Bundle()
