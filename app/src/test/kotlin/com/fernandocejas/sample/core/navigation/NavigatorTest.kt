@@ -19,7 +19,7 @@ import com.dre.loyalty.core.navigation.Navigator
 import com.dre.loyalty.core.navigation.RouteActivity
 import com.fernandocejas.sample.AndroidTest
 import com.dre.loyalty.features.login.data.Authenticator
-import com.dre.loyalty.features.login.presentation.LoginActivity
+import com.dre.loyalty.features.login.presentation.ui.LoginActivity
 import com.dre.loyalty.features.movies.MoviesActivity
 import com.fernandocejas.sample.shouldNavigateTo
 import io.mockk.every

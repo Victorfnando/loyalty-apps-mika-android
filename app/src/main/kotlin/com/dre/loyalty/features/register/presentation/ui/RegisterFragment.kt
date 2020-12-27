@@ -1,15 +1,14 @@
 /*
- *  Created by Andreas Oentoro on 12/19/20 5:03 PM
- *  Copyright (c) 2020 . All rights reserved.
- *  Last modified 12/19/20 5:03 PM
- *  Github Profile: https://github.com/oandrz
+ * Created by Andreas Oen on 12/27/20 10:54 AM
+ * Copyright (c) 2020 . All rights reserved.
+ * Last modified 12/27/20 10:49 AM
+ * github: https://github.com/oandrz
  */
 
-package com.dre.loyalty.features.register.presentation
+package com.dre.loyalty.features.register.presentation.ui
 
 import android.os.Bundle
 import android.text.Editable
-import android.text.Html
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
@@ -22,7 +21,9 @@ import com.dre.loyalty.core.extension.viewModel
 import com.dre.loyalty.core.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.databinding.FragmentRegisterBinding
-import com.dre.loyalty.features.login.presentation.LoginViewModel
+import com.dre.loyalty.features.login.presentation.ui.LoginViewModel
+import com.dre.loyalty.features.register.presentation.entity.RegisterButtonState
+import com.dre.loyalty.features.register.presentation.entity.RegisterPhoneInputState
 import javax.inject.Inject
 
 class RegisterFragment : BaseFragment() {
@@ -30,7 +31,7 @@ class RegisterFragment : BaseFragment() {
     @Inject
     lateinit var navigator: Navigator
 
-    private lateinit var vm: LoginViewModel
+    private lateinit var vm: RegisterViewModel
 
     private var binding: FragmentRegisterBinding? = null
 
@@ -42,14 +43,7 @@ class RegisterFragment : BaseFragment() {
         }
 
         override fun afterTextChanged(s: Editable?) {
-            if (s.toString().length > 2) {
-                if (s?.substring(0, 3) != "62" && s?.firstOrNull() != '0') {
-                    binding!!.etPhone.error = "Not Correct Phone Number Format"
-                }
-            }
-            if (s?.isDigitsOnly() == false) {
-                binding!!.etPhone.error = "Not Correct Phone Number Format"
-            }
+            vm.handlePhoneNumberTextChanged(s.toString())
         }
     }
 
@@ -58,8 +52,10 @@ class RegisterFragment : BaseFragment() {
         appComponent.inject(this)
         vm = viewModel(viewModelFactory) {
             observe(navigateMain) { _ ->
-                activity?.let { navigator.showOtp(it) }
+                activity?.let { navigator.showLogin(it) }
             }
+            observe(regisButtonState, ::updateRegisButtonState)
+            observe(regisPhoneInputState, ::updatePhoneInputState)
         }
     }
 
@@ -80,14 +76,10 @@ class RegisterFragment : BaseFragment() {
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
         binding?.run {
-            tvLogin.setText(R.string.register_screen_title)
             setToastDescription()
-            btnLogin.setText(R.string.register_screen_btn_register)
             btnLogin.setOnClickListener {
                 vm.handleLoginButtonClicked()
             }
-            tvLabelRegister.setText(R.string.register_screen_label_login)
-            btnRegister.setText(R.string.register_screen_btn_login)
             etPhone.editText.addTextChangedListener(phoneChangeListener)
         }
     }
@@ -98,9 +90,17 @@ class RegisterFragment : BaseFragment() {
         }
     }
 
+    private fun updateRegisButtonState(state: RegisterButtonState?) {
+        binding?.btnRegister?.isEnabled = state?.enabled ?: false
+    }
+
+    private fun updatePhoneInputState(state: RegisterPhoneInputState?) {
+        binding?.etPhone?.error = state?.error
+    }
+
     override fun onDetach() {
-        super.onDetach()
         binding?.etPhone?.editText?.removeTextChangedListener(phoneChangeListener)
         binding = null
+        super.onDetach()
     }
 }

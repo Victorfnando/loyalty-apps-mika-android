@@ -1,11 +1,11 @@
 /*
- *  Created by Andreas Oentoro on 12/19/20 5:03 PM
- *  Copyright (c) 2020 . All rights reserved.
- *  Last modified 12/19/20 5:03 PM
- *  Github Profile: https://github.com/oandrz
+ * Created by Andreas Oen on 12/27/20 10:54 AM
+ * Copyright (c) 2020 . All rights reserved.
+ * Last modified 12/26/20 7:52 PM
+ * github: https://github.com/oandrz
  */
 
-package com.dre.loyalty.features.register.presentation
+package com.dre.loyalty.features.register.presentation.ui
 
 import android.content.Context
 import android.content.Intent

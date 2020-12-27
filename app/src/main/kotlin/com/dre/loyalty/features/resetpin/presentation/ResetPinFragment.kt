@@ -7,7 +7,6 @@
 
 package com.dre.loyalty.features.resetpin.presentation
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,13 +17,7 @@ import com.dre.loyalty.databinding.FragmentResetPinBinding
 
 class ResetPinFragment : BaseFragment() {
 
-    private var listener: FragmentListener? = null
     private var binding: FragmentResetPinBinding? = null
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        listener = context as FragmentListener
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +39,6 @@ class ResetPinFragment : BaseFragment() {
     }
 
     override fun onDetach() {
-        listener = null
         binding = null
         super.onDetach()
     }
@@ -63,9 +55,5 @@ class ResetPinFragment : BaseFragment() {
         fun newInstance(): ResetPinFragment {
             return ResetPinFragment()
         }
-    }
-
-    internal interface FragmentListener {
-        fun handleBackPressed()
     }
 }

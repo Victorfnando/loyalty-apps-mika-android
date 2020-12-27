@@ -13,13 +13,9 @@ import android.view.MenuItem
 import com.dre.loyalty.core.platform.BaseActivity
 import com.dre.loyalty.core.platform.BaseFragment
 
-class ResetPinActivity : BaseActivity(), ResetPinFragment.FragmentListener {
+class ResetPinActivity : BaseActivity() {
 
     override fun fragment(): BaseFragment = ResetPinFragment.newInstance()
-
-    override fun handleBackPressed() {
-        finish()
-    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {

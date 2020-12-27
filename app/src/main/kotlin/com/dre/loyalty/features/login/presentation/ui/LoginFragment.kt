@@ -1,11 +1,11 @@
 /*
- *  Created by Andreas Oentoro on 12/19/20 5:03 PM
- *  Copyright (c) 2020 . All rights reserved.
- *  Last modified 12/19/20 5:03 PM
- *  Github Profile: https://github.com/oandrz
+ * Created by Andreas Oen on 12/27/20 10:47 AM
+ * Copyright (c) 2020 . All rights reserved.
+ * Last modified 12/27/20 10:38 AM
+ * github: https://github.com/oandrz
  */
 
-package com.dre.loyalty.features.login.presentation
+package com.dre.loyalty.features.login.presentation.ui
 
 import android.os.Bundle
 import android.text.Editable
@@ -14,12 +14,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.text.isDigitsOnly
 import com.dre.loyalty.core.extension.observe
 import com.dre.loyalty.core.extension.viewModel
 import com.dre.loyalty.core.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.databinding.FragmentLoginBinding
+import com.dre.loyalty.features.login.presentation.entity.LoginButtonState
+import com.dre.loyalty.features.login.presentation.entity.LoginPhoneInputState
 import javax.inject.Inject
 
 class LoginFragment : BaseFragment() {
@@ -39,17 +40,7 @@ class LoginFragment : BaseFragment() {
         }
 
         override fun afterTextChanged(s: Editable?) {
-            if (s.toString().length > 2) {
-                if (s?.substring(0, 3) != "62" && s?.firstOrNull() != '0') {
-                    binding?.etPhone?.error = "Not Correct Phone Number Format"
-                    return
-                }
-            }
-            if (s?.isDigitsOnly() == false) {
-                binding?.etPhone?.error = "Not Correct Phone Number Format"
-                return
-            }
-            binding?.etPhone?.error = ""
+            vm.handleTextChanged(s.toString())
         }
     }
 
@@ -60,6 +51,8 @@ class LoginFragment : BaseFragment() {
             observe(navigateMain) { _ ->
                 activity?.let { navigator.showPin(it) }
             }
+            observe(loginButtonState, ::updateLoginButtonState)
+            observe(loginPhoneInputState, ::updateLoginPhoneState)
         }
     }
 
@@ -91,9 +84,17 @@ class LoginFragment : BaseFragment() {
         }
     }
 
+    private fun updateLoginButtonState(state: LoginButtonState?) {
+        binding?.btnLogin?.isEnabled = state?.enabled ?: false
+    }
+
+    private fun updateLoginPhoneState(state: LoginPhoneInputState?) {
+        binding?.etPhone?.error = state?.error
+    }
+
     override fun onDetach() {
-        super.onDetach()
         binding?.etPhone?.editText?.removeTextChangedListener(phoneChangeListener)
         binding = null
+        super.onDetach()
     }
 }

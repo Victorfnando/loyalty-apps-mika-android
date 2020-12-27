@@ -17,10 +17,11 @@ package com.dre.loyalty.core.di.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.dre.loyalty.features.login.presentation.LoginViewModel
+import com.dre.loyalty.features.login.presentation.ui.LoginViewModel
 import com.dre.loyalty.features.movies.MovieDetailsViewModel
 import com.dre.loyalty.features.movies.MoviesViewModel
 import com.dre.loyalty.features.pin.presentation.PinViewModel
+import com.dre.loyalty.features.register.presentation.ui.RegisterViewModel
 import com.dre.loyalty.features.userdetailform.presentation.UserDetailFormViewModel
 import dagger.Binds
 import dagger.Module
@@ -35,6 +36,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(LoginViewModel::class)
     abstract fun provideLoginViewModel(vm: LoginViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(RegisterViewModel::class)
+    abstract fun provideRegisterViewModel(vm: RegisterViewModel): ViewModel
 
     @Binds
     @IntoMap

@@ -26,13 +26,13 @@ import androidx.fragment.app.FragmentActivity
 import com.dre.loyalty.core.extension.empty
 import com.dre.loyalty.features.authenticationselector.presentation.AuthenticationSelectorActivity
 import com.dre.loyalty.features.login.data.Authenticator
-import com.dre.loyalty.features.login.presentation.LoginActivity
+import com.dre.loyalty.features.login.presentation.ui.LoginActivity
 import com.dre.loyalty.features.movies.MovieDetailsActivity
 import com.dre.loyalty.features.movies.MovieView
 import com.dre.loyalty.features.movies.MoviesActivity
 import com.dre.loyalty.features.otp.OtpActivity
 import com.dre.loyalty.features.pin.presentation.PinActivity
-import com.dre.loyalty.features.register.presentation.RegisterActivity
+import com.dre.loyalty.features.register.presentation.ui.RegisterActivity
 import com.dre.loyalty.features.resetpin.presentation.ResetPinActivity
 import com.dre.loyalty.features.splash.presentation.SplashScreenActivity
 import com.dre.loyalty.features.userdetailform.presentation.UserDetailFormActivity

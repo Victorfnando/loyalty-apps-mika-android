@@ -19,8 +19,8 @@ import com.dre.loyalty.AndroidApplication
 import com.dre.loyalty.core.di.viewmodel.ViewModelModule
 import com.dre.loyalty.core.navigation.RouteActivity
 import com.dre.loyalty.features.authenticationselector.presentation.AuthenticationSelectorFragment
-import com.dre.loyalty.features.login.presentation.LoginFragment
-import com.dre.loyalty.features.register.presentation.RegisterFragment
+import com.dre.loyalty.features.login.presentation.ui.LoginFragment
+import com.dre.loyalty.features.register.presentation.ui.RegisterFragment
 import com.dre.loyalty.features.movies.MovieDetailsFragment
 import com.dre.loyalty.features.movies.MoviesFragment
 import com.dre.loyalty.features.otp.OtpFragment
