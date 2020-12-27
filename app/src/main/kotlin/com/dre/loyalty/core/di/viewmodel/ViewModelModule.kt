@@ -22,6 +22,7 @@ import com.dre.loyalty.features.movies.MovieDetailsViewModel
 import com.dre.loyalty.features.movies.MoviesViewModel
 import com.dre.loyalty.features.pin.presentation.PinViewModel
 import com.dre.loyalty.features.register.presentation.ui.RegisterViewModel
+import com.dre.loyalty.features.resetpin.presentation.ResetPinViewModel
 import com.dre.loyalty.features.userdetailform.presentation.UserDetailFormViewModel
 import dagger.Binds
 import dagger.Module
@@ -51,6 +52,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(UserDetailFormViewModel::class)
     abstract fun provideUserDetailFormViewModel(vm: UserDetailFormViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ResetPinViewModel::class)
+    abstract fun provideResetPinViewModel(vm: ResetPinViewModel): ViewModel
 
     @Binds
     @IntoMap
