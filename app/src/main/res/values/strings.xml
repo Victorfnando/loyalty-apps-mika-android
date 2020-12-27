@@ -9,4 +9,8 @@
     <string name="failure_movie_non_existent">Movie Not Existent.</string>
 
     <string name="content_description_empty">No content description.</string>
+
+    <string name="validation_failed_empty">Field Tidak Boleh Kosong</string>
+    <string name="validation_failed_format_email">Format e-mail salah</string>
+    <string name="validation_failed_format_number">Hanya boleh angka</string>
 </resources>

@@ -44,8 +44,7 @@
                 android:layout_marginTop="@dimen/space_24dp"
                 android:hint="@string/userdetailform_screen_hint_firstname"
                 android:inputType="text"
-                app:fieldLabel="@string/userdetailform_screen_label_firstname"
-                app:label="@string/userdetailform_screen_label_firstname" />
+                app:fieldLabel="@string/userdetailform_screen_label_firstname" />
 
             <com.dre.loyalty.core.view.PrefixEditTextWithLabel
                 android:id="@+id/et_form_lastname"
@@ -54,8 +53,17 @@
                 android:layout_marginTop="@dimen/space_20dp"
                 android:hint="@string/userdetailform_screen_hint_lastname"
                 android:inputType="text"
-                app:fieldLabel="@string/userdetailform_screen_label_lastname"
-                app:label="@string/userdetailform_screen_label_lastname" />
+                app:fieldLabel="@string/userdetailform_screen_label_lastname" />
+
+            <com.dre.loyalty.core.view.PrefixEditTextWithLabel
+                android:id="@+id/et_form_ktp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_20dp"
+                android:hint="@string/userdetailform_screen_hint_ktpnumber"
+                android:inputType="number"
+                android:maxLength="13"
+                app:fieldLabel="@string/userdetailform_screen_label_ktpnumber" />
 
             <com.dre.loyalty.core.view.PrefixEditTextWithLabel
                 android:id="@+id/et_form_email"
@@ -75,8 +83,7 @@
                 android:drawableEnd="@drawable/ic_expand"
                 android:inputType="none"
                 android:text="@string/userdetailform_screen_hint_gender"
-                app:fieldLabel="@string/userdetailform_screen_label_gender"
-                app:label="@string/userdetailform_screen_label_gender" />
+                app:fieldLabel="@string/userdetailform_screen_label_gender" />
 
             <com.dre.loyalty.core.view.PrefixEditTextWithLabel
                 android:id="@+id/et_form_dob"
@@ -86,8 +93,7 @@
                 android:drawableEnd="@drawable/ic_calendar"
                 android:inputType="none"
                 android:text="@string/userdetailform_screen_hint_dob"
-                app:fieldLabel="@string/userdetailform_screen_label_dob"
-                app:label="@string/userdetailform_screen_label_dob" />
+                app:fieldLabel="@string/userdetailform_screen_label_dob" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_form_tnc"

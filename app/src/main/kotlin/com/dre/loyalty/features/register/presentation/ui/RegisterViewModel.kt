@@ -10,6 +10,7 @@ package com.dre.loyalty.features.register.presentation.ui
 import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.dre.loyalty.core.functional.Event
 import com.dre.loyalty.core.platform.BaseViewModel
 import com.dre.loyalty.features.register.presentation.entity.RegisterButtonState
 import com.dre.loyalty.features.register.presentation.entity.RegisterPhoneInputState
@@ -17,8 +18,11 @@ import javax.inject.Inject
 
 class RegisterViewModel @Inject constructor() : BaseViewModel() {
 
-    private val _navigateMain: MutableLiveData<Boolean> = MutableLiveData()
-    val navigateMain: LiveData<Boolean> = _navigateMain
+    private val _navigateLogin: MutableLiveData<Event<Boolean>> = MutableLiveData()
+    val navigateLogin: LiveData<Event<Boolean>> = _navigateLogin
+
+    private val _navigateUserDetailForm: MutableLiveData<Event<Boolean>> = MutableLiveData()
+    val navigateUserDetailForm: LiveData<Event<Boolean>> = _navigateUserDetailForm
 
     private val _regisButtonState: MutableLiveData<RegisterButtonState> = MutableLiveData()
     val regisButtonState: LiveData<RegisterButtonState> = _regisButtonState
@@ -32,7 +36,11 @@ class RegisterViewModel @Inject constructor() : BaseViewModel() {
     }
 
     fun handleLoginButtonClicked() {
-        _navigateMain.value = true
+        _navigateLogin.value = Event(true)
+    }
+
+    fun handleRegisterButtonClicked() {
+        _navigateUserDetailForm.value = Event(true)
     }
 
     fun handlePhoneNumberTextChanged(text: String) {

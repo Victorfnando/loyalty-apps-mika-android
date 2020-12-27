@@ -14,14 +14,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.text.isDigitsOnly
 import com.dre.loyalty.R
 import com.dre.loyalty.core.extension.observe
 import com.dre.loyalty.core.extension.viewModel
+import com.dre.loyalty.core.functional.Event
 import com.dre.loyalty.core.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.databinding.FragmentRegisterBinding
-import com.dre.loyalty.features.login.presentation.ui.LoginViewModel
 import com.dre.loyalty.features.register.presentation.entity.RegisterButtonState
 import com.dre.loyalty.features.register.presentation.entity.RegisterPhoneInputState
 import javax.inject.Inject
@@ -51,9 +50,8 @@ class RegisterFragment : BaseFragment() {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
         vm = viewModel(viewModelFactory) {
-            observe(navigateMain) { _ ->
-                activity?.let { navigator.showLogin(it) }
-            }
+            observe(navigateLogin, ::navigateToLoginPage)
+            observe(navigateUserDetailForm, ::navigateUserDetailForm)
             observe(regisButtonState, ::updateRegisButtonState)
             observe(regisPhoneInputState, ::updatePhoneInputState)
         }
@@ -80,6 +78,9 @@ class RegisterFragment : BaseFragment() {
             btnLogin.setOnClickListener {
                 vm.handleLoginButtonClicked()
             }
+            btnRegister.setOnClickListener {
+                vm.handleRegisterButtonClicked()
+            }
             etPhone.editText.addTextChangedListener(phoneChangeListener)
         }
     }
@@ -96,6 +97,18 @@ class RegisterFragment : BaseFragment() {
 
     private fun updatePhoneInputState(state: RegisterPhoneInputState?) {
         binding?.etPhone?.error = state?.error
+    }
+
+    private fun navigateToLoginPage(flag: Event<Boolean>?) {
+        flag?.getIfNotHandled()?.let {
+            navigator.showLogin(activity!!)
+        }
+    }
+
+    private fun navigateUserDetailForm(flag: Event<Boolean>?) {
+        flag?.getIfNotHandled()?.let {
+            navigator.showUserDetailForm(activity!!)
+        }
     }
 
     override fun onDetach() {

@@ -8,6 +8,8 @@
 package com.dre.loyalty.features.userdetailform.presentation
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +23,11 @@ import com.dre.loyalty.core.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.core.view.PrefixEditTextWithLabel
 import com.dre.loyalty.databinding.FragmentUserDetailFormBinding
+import com.dre.loyalty.features.userdetailform.presentation.entity.EmailInputState
+import com.dre.loyalty.features.userdetailform.presentation.entity.FirstNameInputState
+import com.dre.loyalty.features.userdetailform.presentation.entity.KTPInputState
+import com.dre.loyalty.features.userdetailform.presentation.entity.LastNameInputState
+import com.dre.loyalty.features.userdetailform.presentation.entity.RegisterButtonState
 import javax.inject.Inject
 
 class UserDetailFormFragment : BaseFragment() {
@@ -32,12 +39,41 @@ class UserDetailFormFragment : BaseFragment() {
 
     private var binding: FragmentUserDetailFormBinding? = null
 
+    private val firstNameWatcher: TextWatcher = object : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        override fun afterTextChanged(s: Editable?) { vm.handleFirstNameTextChangedListener(s.toString()) }
+    }
+
+    private val lastNameWatcher: TextWatcher = object : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        override fun afterTextChanged(s: Editable?) { vm.handleLastNameTextChangeListener(s.toString()) }
+    }
+
+    private val emailWatcher: TextWatcher = object : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        override fun afterTextChanged(s: Editable?) { vm.handleEmailTextChangedListener(s.toString()) }
+    }
+
+    private val ktpWatcher: TextWatcher = object : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        override fun afterTextChanged(s: Editable?) { vm.handleKtpTextChangedListener(s.toString()) }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
         vm = viewModel(viewModelFactory) {
             observe(showGenderSheet, ::showGenderModal)
             observe(selectedGender, ::renderSelectedGenderText)
+            observe(firstNameInputState, ::renderFirstName)
+            observe(lastNameInputState, ::renderLastName)
+            observe(ktpInputState, ::renderKtp)
+            observe(emailInputState, ::renderEmail)
+            observe(registerButtonState, ::renderRegisterButton)
         }
     }
 
@@ -53,10 +89,18 @@ class UserDetailFormFragment : BaseFragment() {
             getString(R.string.userdetailform_screen_label_tnc),
             HtmlCompat.FROM_HTML_MODE_LEGACY
         )
+        binding?.etFormFirstname?.editText?.addTextChangedListener(firstNameWatcher)
+        binding?.etFormLastname?.editText?.addTextChangedListener(lastNameWatcher)
+        binding?.etFormEmail?.editText?.addTextChangedListener(emailWatcher)
+        binding?.etFormKtp?.editText?.addTextChangedListener(ktpWatcher)
         bindEtFormGender()
     }
 
     override fun onDetach() {
+        binding?.etFormFirstname?.editText?.removeTextChangedListener(firstNameWatcher)
+        binding?.etFormLastname?.editText?.removeTextChangedListener(lastNameWatcher)
+        binding?.etFormEmail?.editText?.removeTextChangedListener(emailWatcher)
+        binding?.etFormKtp?.editText?.removeTextChangedListener(ktpWatcher)
         binding = null
         super.onDetach()
     }
@@ -91,6 +135,46 @@ class UserDetailFormFragment : BaseFragment() {
 
     private fun renderSelectedGenderText(value: String?) {
         binding?.etFormGender?.editText?.setText(value)
+    }
+
+    private fun renderRegisterButton(state: RegisterButtonState?) {
+        binding?.btnRegister?.isEnabled = state?.isEnabled ?: false
+    }
+
+    private fun renderFirstName(state: FirstNameInputState?) {
+        if (state?.error == -1) return
+        binding?.etFormFirstname?.error = if (state?.error == null) {
+            ""
+        } else {
+            getString(state.error)
+        }
+    }
+
+    private fun renderLastName(state: LastNameInputState?) {
+        if (state?.error == -1) return
+        binding?.etFormLastname?.error = if (state?.error == null) {
+            ""
+        } else {
+            getString(state.error)
+        }
+    }
+
+    private fun renderKtp(state: KTPInputState?) {
+        if (state?.error == -1) return
+        binding?.etFormKtp?.error = if (state?.error == null) {
+            ""
+        } else {
+            getString(state.error)
+        }
+    }
+
+    private fun renderEmail(state: EmailInputState?) {
+        if (state?.error == -1) return
+        binding?.etFormEmail?.error = if (state?.error == null) {
+            ""
+        } else {
+            getString(state.error)
+        }
     }
 
     companion object {
