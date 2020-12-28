@@ -1,11 +1,11 @@
 /*
- * Created by Andreas Oen on 12/28/20 6:29 PM
+ * Created by Andreas Oen on 12/28/20 7:26 PM
  * Copyright (c) 2020 . All rights reserved.
- * Last modified 12/28/20 6:29 PM
+ * Last modified 12/28/20 7:10 PM
  * github: https://github.com/oandrz
  */
 
-package com.dre.loyalty.features.userdetailform.presentation
+package com.dre.loyalty.features.userdetailform.presentation.dialog
 
 import android.app.DatePickerDialog
 import android.app.Dialog

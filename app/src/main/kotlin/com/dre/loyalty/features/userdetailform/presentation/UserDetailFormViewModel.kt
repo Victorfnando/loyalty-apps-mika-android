@@ -29,6 +29,9 @@ class UserDetailFormViewModel @Inject constructor() : BaseViewModel() {
     private val _showDateSheet: MutableLiveData<Event<String?>> = MutableLiveData()
     val showDateSheet: LiveData<Event<String?>> = _showDateSheet
 
+    private val _showConfirmationSheet: MutableLiveData<Event<Boolean?>> = MutableLiveData()
+    val showConfirmationSheet: LiveData<Event<Boolean?>> = _showConfirmationSheet
+
     private val _selectedGender: MutableLiveData<String> = MutableLiveData()
     val selectedGender: LiveData<String> = _selectedGender
 
@@ -64,6 +67,10 @@ class UserDetailFormViewModel @Inject constructor() : BaseViewModel() {
 
     fun handleGenderFormClicked() {
         _showGenderSheet.value = Event(_selectedGender.value)
+    }
+
+    fun handleRegisterButtonClicked() {
+        _showConfirmationSheet.value = Event(true)
     }
 
     fun handleSelectedGender(selected: String) {
@@ -114,6 +121,9 @@ class UserDetailFormViewModel @Inject constructor() : BaseViewModel() {
             _emailInputState.value = EmailInputState(result.errorMessage)
         }
         checkButtonState()
+    }
+
+    fun handleConfirmationSheetConfirmButtonClicked() {
     }
 
     private fun checkButtonState() {

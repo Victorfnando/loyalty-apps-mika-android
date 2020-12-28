@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Andreas Oen on 12/28/20 7:36 PM
+  ~ Copyright (c) 2020 . All rights reserved.
+  ~ Last modified 12/28/20 7:36 PM
+  ~ github: https://github.com/oandrz
+  -->
+
+<resources>
+    <string name="confirmation_screen_title">Apakah kamu yakin data yang dimasukkan sudah benar?</string>
+    <string name="confirmation_screen_desc">Jika ada kesalahan, kamu harus menghubungi customer service udah mengubahnya.</string>
+    <string name="confirmation_screen_btn_change">Ubah data</string>
+    <string name="confirmation_screen_btn_confirm">Yakin</string>
+</resources>

@@ -21,13 +21,15 @@ import com.dre.loyalty.core.extension.viewModel
 import com.dre.loyalty.core.functional.Event
 import com.dre.loyalty.core.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
-import com.dre.loyalty.core.view.PrefixEditTextWithLabel
 import com.dre.loyalty.databinding.FragmentUserDetailFormBinding
+import com.dre.loyalty.features.userdetailform.presentation.dialog.DatePickerDialogFragment
 import com.dre.loyalty.features.userdetailform.presentation.entity.EmailInputState
 import com.dre.loyalty.features.userdetailform.presentation.entity.FirstNameInputState
 import com.dre.loyalty.features.userdetailform.presentation.entity.KTPInputState
 import com.dre.loyalty.features.userdetailform.presentation.entity.LastNameInputState
 import com.dre.loyalty.features.userdetailform.presentation.entity.RegisterButtonState
+import com.dre.loyalty.features.userdetailform.presentation.sheet.ConfirmationSheetModal
+import com.dre.loyalty.features.userdetailform.presentation.sheet.GenderSheetModal
 import javax.inject.Inject
 
 class UserDetailFormFragment : BaseFragment() {
@@ -76,6 +78,7 @@ class UserDetailFormFragment : BaseFragment() {
             observe(ktpInputState, ::renderKtp)
             observe(emailInputState, ::renderEmail)
             observe(registerButtonState, ::renderRegisterButton)
+            observe(showConfirmationSheet, ::showConfirmationSheet)
         }
     }
 
@@ -97,6 +100,9 @@ class UserDetailFormFragment : BaseFragment() {
         binding?.etFormKtp?.editText?.addTextChangedListener(ktpWatcher)
         bindEtFormGender()
         bindEtDate()
+        binding?.btnRegister?.setOnClickListener {
+            vm.handleRegisterButtonClicked()
+        }
     }
 
     override fun onDetach() {
@@ -202,6 +208,16 @@ class UserDetailFormFragment : BaseFragment() {
 
     private fun renderSelectedDate(date: String?) {
         binding?.etFormDob?.text = date
+    }
+
+    private fun showConfirmationSheet(event: Event<Boolean?>?) {
+        event?.getIfNotHandled()?.let {
+            val modal = ConfirmationSheetModal.newInstance()
+            modal.onClickListener = {
+                vm.handleConfirmationSheetConfirmButtonClicked()
+            }
+            modal.show(activity!!.supportFragmentManager, ConfirmationSheetModal.TAG)
+        }
     }
 
     companion object {
