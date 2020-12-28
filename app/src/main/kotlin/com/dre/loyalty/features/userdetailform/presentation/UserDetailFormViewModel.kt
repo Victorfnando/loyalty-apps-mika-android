@@ -26,8 +26,14 @@ class UserDetailFormViewModel @Inject constructor() : BaseViewModel() {
     private val _showGenderSheet: MutableLiveData<Event<String?>> = MutableLiveData()
     val showGenderSheet: LiveData<Event<String?>> = _showGenderSheet
 
+    private val _showDateSheet: MutableLiveData<Event<String?>> = MutableLiveData()
+    val showDateSheet: LiveData<Event<String?>> = _showDateSheet
+
     private val _selectedGender: MutableLiveData<String> = MutableLiveData()
     val selectedGender: LiveData<String> = _selectedGender
+
+    private val _selectedDate: MutableLiveData<String> = MutableLiveData()
+    val selectedDate: LiveData<String> = _selectedDate
 
     private val _firstNameInputState: MutableLiveData<FirstNameInputState> = MutableLiveData()
     val firstNameInputState: LiveData<FirstNameInputState> = _firstNameInputState
@@ -52,12 +58,21 @@ class UserDetailFormViewModel @Inject constructor() : BaseViewModel() {
         _registerButtonState.value = RegisterButtonState(false)
     }
 
+    fun handleDateOfBirthClicked() {
+        _showDateSheet.value = Event(_selectedDate.value)
+    }
+
     fun handleGenderFormClicked() {
         _showGenderSheet.value = Event(_selectedGender.value)
     }
 
     fun handleSelectedGender(selected: String) {
         _selectedGender.value = selected
+        checkButtonState()
+    }
+
+    fun handleSelectedDate(date: String) {
+        _selectedDate.value = date
         checkButtonState()
     }
 
@@ -111,4 +126,5 @@ class UserDetailFormViewModel @Inject constructor() : BaseViewModel() {
             && _ktpInputState.value?.error == null
             && _emailInputState.value?.error == null
             && _selectedGender.value != null
+            && _selectedDate.value != null
 }

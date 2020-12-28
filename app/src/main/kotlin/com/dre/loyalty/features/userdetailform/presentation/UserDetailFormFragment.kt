@@ -68,7 +68,9 @@ class UserDetailFormFragment : BaseFragment() {
         appComponent.inject(this)
         vm = viewModel(viewModelFactory) {
             observe(showGenderSheet, ::showGenderModal)
+            observe(showDateSheet, ::showDateDialog)
             observe(selectedGender, ::renderSelectedGenderText)
+            observe(selectedDate, ::renderSelectedDate)
             observe(firstNameInputState, ::renderFirstName)
             observe(lastNameInputState, ::renderLastName)
             observe(ktpInputState, ::renderKtp)
@@ -94,6 +96,7 @@ class UserDetailFormFragment : BaseFragment() {
         binding?.etFormEmail?.editText?.addTextChangedListener(emailWatcher)
         binding?.etFormKtp?.editText?.addTextChangedListener(ktpWatcher)
         bindEtFormGender()
+        bindEtDate()
     }
 
     override fun onDetach() {
@@ -123,6 +126,16 @@ class UserDetailFormFragment : BaseFragment() {
         }
     }
 
+    private fun bindEtDate() {
+        binding?.etFormDob?.editText?.run {
+            isFocusableInTouchMode = false
+            isClickable = true
+            setOnClickListener {
+                vm.handleDateOfBirthClicked()
+            }
+        }
+    }
+
     private fun showGenderModal(event: Event<String?>?) {
         event?.getIfNotHandled().let {
             val modal = GenderSheetModal.newInstance(it)
@@ -130,6 +143,16 @@ class UserDetailFormFragment : BaseFragment() {
                 vm.handleSelectedGender(selected)
             }
             modal.show(activity!!.supportFragmentManager, GenderSheetModal.TAG)
+        }
+    }
+
+    private fun showDateDialog(event: Event<String?>?) {
+        event?.getIfNotHandled().let {
+            val dialog = DatePickerDialogFragment.newInstance(it)
+            dialog.listener = { selectedDate ->
+                vm.handleSelectedDate(selectedDate)
+            }
+            dialog.show(activity!!.supportFragmentManager, DatePickerDialogFragment.TAG)
         }
     }
 
@@ -175,6 +198,10 @@ class UserDetailFormFragment : BaseFragment() {
         } else {
             getString(state.error)
         }
+    }
+
+    private fun renderSelectedDate(date: String?) {
+        binding?.etFormDob?.text = date
     }
 
     companion object {
