@@ -13,10 +13,10 @@ import com.dre.loyalty.core.extension.observe
 import com.dre.loyalty.core.extension.viewModel
 import com.dre.loyalty.core.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
-import com.dre.loyalty.databinding.FragmentPinBinding
+import com.dre.loyalty.databinding.FragmentInputPinBinding
 import javax.inject.Inject
 
-class PinFragment : BaseFragment() {
+class InputPinFragment : BaseFragment() {
 
     private val textWatcher: TextWatcher = object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -33,8 +33,8 @@ class PinFragment : BaseFragment() {
     @Inject
     lateinit var navigator: Navigator
 
-    private var binding: FragmentPinBinding? = null
-    private lateinit var vm: PinViewModel
+    private var binding: FragmentInputPinBinding? = null
+    private lateinit var vm: InputPinViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,7 +51,7 @@ class PinFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentPinBinding.inflate(inflater, container, false)
+        binding = FragmentInputPinBinding.inflate(inflater, container, false)
         return binding!!.root
     }
 
@@ -90,8 +90,8 @@ class PinFragment : BaseFragment() {
     }
 
     companion object {
-        fun newInstance(): PinFragment {
-            return PinFragment()
+        fun newInstance(): InputPinFragment {
+            return InputPinFragment()
         }
     }
 }

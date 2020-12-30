@@ -21,8 +21,8 @@ class RegisterViewModel @Inject constructor() : BaseViewModel() {
     private val _navigateLogin: MutableLiveData<Event<Boolean>> = MutableLiveData()
     val navigateLogin: LiveData<Event<Boolean>> = _navigateLogin
 
-    private val _navigateUserDetailForm: MutableLiveData<Event<Boolean>> = MutableLiveData()
-    val navigateUserDetailForm: LiveData<Event<Boolean>> = _navigateUserDetailForm
+    private val _navigateOtpScreen: MutableLiveData<Event<Boolean>> = MutableLiveData()
+    val navigateOtpScreen: LiveData<Event<Boolean>> = _navigateOtpScreen
 
     private val _regisButtonState: MutableLiveData<RegisterButtonState> = MutableLiveData()
     val regisButtonState: LiveData<RegisterButtonState> = _regisButtonState
@@ -40,7 +40,7 @@ class RegisterViewModel @Inject constructor() : BaseViewModel() {
     }
 
     fun handleRegisterButtonClicked() {
-        _navigateUserDetailForm.value = Event(true)
+        _navigateOtpScreen.value = Event(true)
     }
 
     fun handlePhoneNumberTextChanged(text: String) {

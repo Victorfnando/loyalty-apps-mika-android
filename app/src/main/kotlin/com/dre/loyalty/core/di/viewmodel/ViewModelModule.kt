@@ -17,10 +17,11 @@ package com.dre.loyalty.core.di.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.dre.loyalty.features.createpin.presentation.CreatePinViewModel
 import com.dre.loyalty.features.login.presentation.ui.LoginViewModel
 import com.dre.loyalty.features.movies.MovieDetailsViewModel
 import com.dre.loyalty.features.movies.MoviesViewModel
-import com.dre.loyalty.features.pin.presentation.PinViewModel
+import com.dre.loyalty.features.pin.presentation.InputPinViewModel
 import com.dre.loyalty.features.register.presentation.ui.RegisterViewModel
 import com.dre.loyalty.features.resetpin.presentation.ResetPinViewModel
 import com.dre.loyalty.features.userdetailform.presentation.UserDetailFormViewModel
@@ -45,13 +46,18 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(PinViewModel::class)
-    abstract fun providePinViewModel(vm: PinViewModel): ViewModel
+    @ViewModelKey(InputPinViewModel::class)
+    abstract fun providePinViewModel(vm: InputPinViewModel): ViewModel
 
     @Binds
     @IntoMap
     @ViewModelKey(UserDetailFormViewModel::class)
     abstract fun provideUserDetailFormViewModel(vm: UserDetailFormViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(CreatePinViewModel::class)
+    abstract fun provideCreatePinViewModel(vm: CreatePinViewModel): ViewModel
 
     @Binds
     @IntoMap

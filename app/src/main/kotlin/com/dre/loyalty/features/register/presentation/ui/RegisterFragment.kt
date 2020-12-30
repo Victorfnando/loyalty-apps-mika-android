@@ -51,7 +51,7 @@ class RegisterFragment : BaseFragment() {
         appComponent.inject(this)
         vm = viewModel(viewModelFactory) {
             observe(navigateLogin, ::navigateToLoginPage)
-            observe(navigateUserDetailForm, ::navigateUserDetailForm)
+            observe(navigateOtpScreen, ::navigateOtpScreen)
             observe(regisButtonState, ::updateRegisButtonState)
             observe(regisPhoneInputState, ::updatePhoneInputState)
         }
@@ -100,15 +100,11 @@ class RegisterFragment : BaseFragment() {
     }
 
     private fun navigateToLoginPage(flag: Event<Boolean>?) {
-        flag?.getIfNotHandled()?.let {
-            navigator.showLogin(activity!!)
-        }
+        navigator.showLogin(requireContext())
     }
 
-    private fun navigateUserDetailForm(flag: Event<Boolean>?) {
-        flag?.getIfNotHandled()?.let {
-            navigator.showUserDetailForm(activity!!)
-        }
+    private fun navigateOtpScreen(flag: Event<Boolean>?) {
+        navigator.showOtp(requireContext())
     }
 
     override fun onDetach() {

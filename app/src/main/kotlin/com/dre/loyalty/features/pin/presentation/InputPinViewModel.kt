@@ -14,7 +14,7 @@ import com.dre.loyalty.core.platform.BaseViewModel
 import javax.inject.Inject
 
 private const val MIN_PIN_LENGTH = 6
-class PinViewModel @Inject constructor() : BaseViewModel() {
+class InputPinViewModel @Inject constructor() : BaseViewModel() {
 
     private val _navigationMain: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
     val navigationMain: LiveData<Boolean> = _navigationMain

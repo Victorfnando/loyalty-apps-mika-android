@@ -6,9 +6,9 @@ import android.view.MenuItem
 import com.dre.loyalty.core.platform.BaseActivity
 import com.dre.loyalty.core.platform.BaseFragment
 
-class PinActivity : BaseActivity() {
+class InputPinActivity : BaseActivity() {
 
-    override fun fragment(): BaseFragment = PinFragment.newInstance()
+    override fun fragment(): BaseFragment = InputPinFragment.newInstance()
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
@@ -19,6 +19,6 @@ class PinActivity : BaseActivity() {
     }
 
     companion object {
-        fun callingIntent(context: Context) = Intent(context, PinActivity::class.java)
+        fun callingIntent(context: Context) = Intent(context, InputPinActivity::class.java)
     }
 }

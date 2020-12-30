@@ -53,6 +53,9 @@ class UserDetailFormViewModel @Inject constructor() : BaseViewModel() {
     private val _registerButtonState: MutableLiveData<RegisterButtonState> = MediatorLiveData()
     val registerButtonState: LiveData<RegisterButtonState> = _registerButtonState
 
+    private val _navigateToCreateSecurity: MutableLiveData<Event<Boolean>> = MutableLiveData()
+    val navigateToCreateSecurity: LiveData<Event<Boolean>> = _navigateToCreateSecurity
+
     init {
         _firstNameInputState.value = FirstNameInputState(-1)
         _lastNameInputState.value = LastNameInputState(-1)
@@ -124,6 +127,7 @@ class UserDetailFormViewModel @Inject constructor() : BaseViewModel() {
     }
 
     fun handleConfirmationSheetConfirmButtonClicked() {
+        _navigateToCreateSecurity.value = Event(true)
     }
 
     private fun checkButtonState() {

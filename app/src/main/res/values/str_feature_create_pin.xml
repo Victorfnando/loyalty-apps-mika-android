@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Andreas Oen on 12/28/20 8:39 PM
+  ~ Copyright (c) 2020 . All rights reserved.
+  ~ Last modified 12/28/20 8:39 PM
+  ~ github: https://github.com/oandrz
+  -->
+
+<resources>
+    <string name="createpin_screen_title_create">Buat security code</string>
+    <string name="createpin_screen_title_confirm">Konfirmasi security codee</string>
+    <string name="createpin_screen_title_reset">Buat ulang security code kamu</string>
+
+    <string name="createpin_screen_desc_create">Kami tidak menyarankan untuk menggunakan tanggal lahir sebagai security code</string>
+    <string name="createpin_screen_desc_confirm">Silahkan masukkan security code kamu kembali</string>
+
+    <string name="createpin_screen_btn_create">Buat security code</string>
+    <string name="createpin_screen_btn_confirm">Konfirmasi</string>
+
+    <string name="createpin_screen_confirm_error_differentpin">Pin tidak sesuai dengan yang dimasukkan di awal</string>
+</resources>

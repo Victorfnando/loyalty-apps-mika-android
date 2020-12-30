@@ -25,13 +25,15 @@ import androidx.core.app.ActivityOptionsCompat
 import androidx.fragment.app.FragmentActivity
 import com.dre.loyalty.core.extension.empty
 import com.dre.loyalty.features.authenticationselector.presentation.AuthenticationSelectorActivity
+import com.dre.loyalty.features.createpin.presentation.CreatePinActivity
+import com.dre.loyalty.features.createpin.presentation.enums.CreatePinType
 import com.dre.loyalty.features.login.data.Authenticator
 import com.dre.loyalty.features.login.presentation.ui.LoginActivity
 import com.dre.loyalty.features.movies.MovieDetailsActivity
 import com.dre.loyalty.features.movies.MovieView
 import com.dre.loyalty.features.movies.MoviesActivity
 import com.dre.loyalty.features.otp.OtpActivity
-import com.dre.loyalty.features.pin.presentation.PinActivity
+import com.dre.loyalty.features.pin.presentation.InputPinActivity
 import com.dre.loyalty.features.register.presentation.ui.RegisterActivity
 import com.dre.loyalty.features.resetpin.presentation.ResetPinActivity
 import com.dre.loyalty.features.splash.presentation.SplashScreenActivity
@@ -92,7 +94,7 @@ class Navigator @Inject constructor(private val authenticator: Authenticator) {
     }
 
     fun showPin(context: Context) {
-        context.startActivity(PinActivity.callingIntent(context))
+        context.startActivity(InputPinActivity.callingIntent(context))
     }
 
     fun showOtp(context: Context) {
@@ -109,6 +111,14 @@ class Navigator @Inject constructor(private val authenticator: Authenticator) {
 
     fun showResetPin(context: Context) {
         context.startActivity(ResetPinActivity.callingIntent(context))
+    }
+
+    fun showCreatePin(context: Context) {
+        context.startActivity(CreatePinActivity.callingIntent(context, CreatePinType.CREATE))
+    }
+
+    fun showCreatePinFromScratch(context: Context) {
+        context.startActivity(CreatePinActivity.callingIntent(context, CreatePinType.RESET))
     }
 
     class Extras(val transitionSharedElement: View)

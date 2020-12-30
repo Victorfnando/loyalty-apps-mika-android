@@ -79,6 +79,7 @@ class UserDetailFormFragment : BaseFragment() {
             observe(emailInputState, ::renderEmail)
             observe(registerButtonState, ::renderRegisterButton)
             observe(showConfirmationSheet, ::showConfirmationSheet)
+            observe(navigateToCreateSecurity, ::navigateCreatePinScreen)
         }
     }
 
@@ -217,6 +218,12 @@ class UserDetailFormFragment : BaseFragment() {
                 vm.handleConfirmationSheetConfirmButtonClicked()
             }
             modal.show(activity!!.supportFragmentManager, ConfirmationSheetModal.TAG)
+        }
+    }
+
+    private fun navigateCreatePinScreen(event: Event<Boolean>?) {
+        event?.getIfNotHandled()?.let {
+            navigator.showCreatePin(requireContext())
         }
     }
 

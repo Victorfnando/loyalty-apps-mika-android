@@ -44,7 +44,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
     </activity>
 
     <activity
-        android:name="com.dre.loyalty.features.pin.presentation.PinActivity"
+        android:name="com.dre.loyalty.features.pin.presentation.InputPinActivity"
         android:label="@string/pin_screen_title">
     </activity>
 
@@ -72,6 +72,10 @@ xmlns:android="http://schemas.android.com/apk/res/android">
 
   <activity
       android:name=".features.resetpin.presentation.ResetPinActivity">
+  </activity>
+
+  <activity
+      android:name=".features.createpin.presentation.CreatePinActivity">
   </activity>
 </application>
 

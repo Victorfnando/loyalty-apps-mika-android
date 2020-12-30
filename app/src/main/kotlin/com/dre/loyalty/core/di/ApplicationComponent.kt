@@ -19,12 +19,13 @@ import com.dre.loyalty.AndroidApplication
 import com.dre.loyalty.core.di.viewmodel.ViewModelModule
 import com.dre.loyalty.core.navigation.RouteActivity
 import com.dre.loyalty.features.authenticationselector.presentation.AuthenticationSelectorFragment
+import com.dre.loyalty.features.createpin.presentation.CreatePinFragment
 import com.dre.loyalty.features.login.presentation.ui.LoginFragment
 import com.dre.loyalty.features.register.presentation.ui.RegisterFragment
 import com.dre.loyalty.features.movies.MovieDetailsFragment
 import com.dre.loyalty.features.movies.MoviesFragment
 import com.dre.loyalty.features.otp.OtpFragment
-import com.dre.loyalty.features.pin.presentation.PinFragment
+import com.dre.loyalty.features.pin.presentation.InputPinFragment
 import com.dre.loyalty.features.resetpin.presentation.ResetPinFragment
 import com.dre.loyalty.features.splash.presentation.SplashScreenActivity
 import com.dre.loyalty.features.userdetailform.presentation.UserDetailFormFragment
@@ -40,11 +41,12 @@ interface ApplicationComponent {
 
     fun inject(fragment: RegisterFragment)
     fun inject(fragment: LoginFragment)
-    fun inject(fragment: PinFragment)
+    fun inject(fragmentInput: InputPinFragment)
     fun inject(fragment: AuthenticationSelectorFragment)
     fun inject(fragment: OtpFragment)
     fun inject(fragment: UserDetailFormFragment)
     fun inject(fragment: ResetPinFragment)
+    fun inject(fragment: CreatePinFragment)
     fun inject(moviesFragment: MoviesFragment)
     fun inject(movieDetailsFragment: MovieDetailsFragment)
 }
