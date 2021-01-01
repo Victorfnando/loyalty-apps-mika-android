@@ -16,10 +16,13 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.dre.loyalty.core.extension.observe
 import com.dre.loyalty.core.extension.viewModel
+import com.dre.loyalty.core.functional.Event
 import com.dre.loyalty.core.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.databinding.FragmentCreatePinBinding
 import com.dre.loyalty.features.createpin.presentation.enums.CreatePinType
+import com.dre.loyalty.features.createpin.presentation.sheet.PostCreatePinConfirmationModal
+import com.dre.loyalty.features.userdetailform.presentation.sheet.ConfirmationSheetModal
 import javax.inject.Inject
 
 class CreatePinFragment : BaseFragment() {
@@ -49,6 +52,7 @@ class CreatePinFragment : BaseFragment() {
             observe(currentType, ::renderViewBasedOnType)
             observe(showError, ::showErrorMessage)
             observe(createButtonState, ::enableDisableButton)
+            observe(showConfirmationSheet, ::showConfirmationBottomSheet)
         }
         val type = arguments?.getSerializable(TYPE_KEY) as CreatePinType
         vm.init(type)
@@ -109,6 +113,17 @@ class CreatePinFragment : BaseFragment() {
 
     private fun enableDisableButton(isEnable: Boolean?) {
         binding?.btnCreatePin?.isEnabled = isEnable ?: false
+    }
+
+    private fun showConfirmationBottomSheet(event: Event<CreatePinType>?) {
+        event?.getIfNotHandled()?.let {
+            val sheet = PostCreatePinConfirmationModal.newInstance(it)
+            sheet.onClickListener = {
+                navigator.showLogin(requireContext())
+                activity?.finish()
+            }
+            sheet.show(activity!!.supportFragmentManager, PostCreatePinConfirmationModal.TAG)
+        }
     }
 
     companion object {

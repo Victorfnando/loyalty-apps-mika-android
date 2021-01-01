@@ -77,6 +77,10 @@ xmlns:android="http://schemas.android.com/apk/res/android">
   <activity
       android:name=".features.createpin.presentation.CreatePinActivity">
   </activity>
+
+  <activity
+      android:name=".features.home.presentation.HomeActivity">
+  </activity>
 </application>
 
 </manifest>

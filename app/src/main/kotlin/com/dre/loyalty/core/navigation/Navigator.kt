@@ -27,6 +27,7 @@ import com.dre.loyalty.core.extension.empty
 import com.dre.loyalty.features.authenticationselector.presentation.AuthenticationSelectorActivity
 import com.dre.loyalty.features.createpin.presentation.CreatePinActivity
 import com.dre.loyalty.features.createpin.presentation.enums.CreatePinType
+import com.dre.loyalty.features.home.presentation.HomeActivity
 import com.dre.loyalty.features.login.data.Authenticator
 import com.dre.loyalty.features.login.presentation.ui.LoginActivity
 import com.dre.loyalty.features.movies.MovieDetailsActivity
@@ -119,6 +120,14 @@ class Navigator @Inject constructor(private val authenticator: Authenticator) {
 
     fun showCreatePinFromScratch(context: Context) {
         context.startActivity(CreatePinActivity.callingIntent(context, CreatePinType.RESET))
+    }
+
+    fun showHome(context: Context) {
+        context.startActivity(
+            HomeActivity
+                .callingActivity(context)
+                .also { it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK }
+        )
     }
 
     class Extras(val transitionSharedElement: View)

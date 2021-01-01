@@ -40,8 +40,8 @@ class InputPinFragment : BaseFragment() {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
         vm = viewModel(viewModelFactory) {
-            observe(navigationMain) {
-                
+            observe(navigateToHome) {
+                navigator.showHome(requireContext())
             }
         }
     }
@@ -64,7 +64,7 @@ class InputPinFragment : BaseFragment() {
         )
         bindInputPin()
         binding?.tvForgotpinLabel?.setOnClickListener {
-            navigator.showResetPin(activity!!)
+            navigator.showResetPin(requireContext())
         }
     }
 

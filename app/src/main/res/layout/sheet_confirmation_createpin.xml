@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Created by Andreas Oen on 12/30/20 7:27 PM
+  ~ Copyright (c) 2020 . All rights reserved.
+  ~ Last modified 12/30/20 7:27 PM
+  ~ github: https://github.com/oandrz
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="@dimen/space_16dp"
+    android:paddingTop="@dimen/space_24dp"
+    android:paddingEnd="@dimen/space_16dp"
+    android:paddingBottom="@dimen/space_24dp">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_banner"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@color/dividerColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_title"
+        style="@style/TitleText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_12dp"
+        android:text="@string/createpin_screen_reset_sheet_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_banner" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_desc"
+        style="@style/NormalText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_12dp"
+        android:layout_marginBottom="@dimen/space_32dp"
+        android:text="@string/createpin_screen_create_sheet_desc"
+        android:textColor="@color/gray"
+        app:layout_constraintBottom_toTopOf="@id/btn_login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_login"
+        style="@style/NormalButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_16dp"
+        android:layout_marginEnd="@dimen/space_16dp"
+        android:text="@string/createpin_screen_create_sheet_btn_login"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+

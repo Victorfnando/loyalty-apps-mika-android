@@ -126,4 +126,13 @@
         <item name="android:background">@color/dividerColor</item>
         <item name="android:alpha">0.08</item>
     </style>
+
+    <style name="BottomNavigationText">
+        <item name="android:textColor">@color/black_lighter</item>
+        <item name="android:textSize">@dimen/text_size_10sp</item>
+    </style>
+
+    <style name="BottomNavigationText.Bold" parent="BottomNavigationText">
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>

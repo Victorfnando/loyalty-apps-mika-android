@@ -17,5 +17,14 @@
     <string name="createpin_screen_btn_create">Buat security code</string>
     <string name="createpin_screen_btn_confirm">Konfirmasi</string>
 
-    <string name="createpin_screen_confirm_error_differentpin">Pin tidak sesuai dengan yang dimasukkan di awal</string>
+    <string name="createpin_screen_confirm_error_differentpin">Security code tidak sesuai</string>
+
+    <string name="createpin_screen_create_sheet_title">Akun kamu berhasil dibuat</string>
+    <string name="createpin_screen_create_sheet_desc">Silahkan log in untuk mulai menikmati layanan Altea Hospital Loyalty</string>
+    <string name="createpin_screen_create_sheet_btn_login">Log in</string>
+
+    <string name="createpin_screen_reset_sheet_title">Security code baru berhasil dibuat</string>
+    <string name="createpin_screen_reset_sheet_desc">Silahkan log in menggunakan security code baru kamu ya !</string>
+    <string name="createpin_screen_reset_sheet_btn_login">Log in</string>
 </resources>
+

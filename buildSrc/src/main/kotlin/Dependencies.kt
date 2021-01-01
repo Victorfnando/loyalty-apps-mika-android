@@ -43,7 +43,7 @@ object Libraries {
         const val constraintLayout = "2.0.4"
         const val recyclerView = "1.1.0"
         const val cardView = "1.0.0"
-        const val material = "1.1.0"
+        const val material = "1.2.1"
         const val lifecycle = "2.2.0"
         const val lifecycleExtensions = "2.1.0"
         const val annotations = "1.1.0"
@@ -53,6 +53,7 @@ object Libraries {
         const val okHttpLoggingInterceptor = "4.9.0"
         const val dataStore = "1.0.0-alpha05"
         const val pinView = "1.4.4"
+        const val fragment = "1.2.5"
 
         //TODO: Legacy -> WIP -> Try Hilt?
         const val dagger = "2.11"
@@ -80,6 +81,7 @@ object Libraries {
     const val okHttpLoggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.okHttpLoggingInterceptor}"
     const val dataStore                = "androidx.datastore:datastore-preferences:${Versions.dataStore}"
     const val pinView                  = "com.chaos.view:pinview:${Versions.pinView}"
+    const val fragment                 = "androidx.fragment:fragment-ktx:${Versions.fragment}"
 
     //TODO: Legacy -> WIP -> Migrate to Koin or Hilt?
     const val daggerCompiler   = "com.google.dagger:dagger-compiler:${Versions.dagger}"

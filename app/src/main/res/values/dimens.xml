@@ -18,6 +18,7 @@
     <dimen name="edittext_border_size">1dp</dimen>
 
     <!--Text Size-->
+    <dimen name="text_size_10sp">10sp</dimen>
     <dimen name="text_size_12sp">12sp</dimen>
     <dimen name="text_size_14sp">14sp</dimen>
     <dimen name="text_size_20sp">20sp</dimen>
@@ -32,6 +33,9 @@
 
     <!--Bottom Sheet-->
     <dimen name="bottom_sheet_radius">16dp</dimen>
+
+    <!--Navigation Bottom Sheet-->
+    <dimen name="navigation_bottom_sheet_shadow">8dp</dimen>
 
     <!--Margin-->
     <dimen name="space_4dp">4dp</dimen>

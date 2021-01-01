@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Andreas Oen on 12/30/20 8:43 PM
+  ~ Copyright (c) 2020 . All rights reserved.
+  ~ Last modified 12/30/20 8:43 PM
+  ~ github: https://github.com/oandrz
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_home"
+        android:title="@string/homecontainer_screen_menu_home"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/menu_invoice"
+        android:title="@string/homecontainer_screen_menu_invoice"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/menu_news"
+        android:title="@string/homecontainer_screen_menu_information"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/menu_hospital"
+        android:title="@string/homecontainer_screen_menu_hospital"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/menu_profile"
+        android:title="@string/homecontainer_screen_menu_profile"
+        app:showAsAction="always" />
+</menu>

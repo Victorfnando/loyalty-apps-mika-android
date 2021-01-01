@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Andreas Oen on 12/30/20 8:46 PM
+  ~ Copyright (c) 2020 . All rights reserved.
+  ~ Last modified 12/30/20 8:46 PM
+  ~ github: https://github.com/oandrz
+  -->
+
+<resources>
+    <string name="homecontainer_screen_menu_home">Home</string>
+    <string name="homecontainer_screen_menu_invoice">Kwitansi</string>
+    <string name="homecontainer_screen_menu_information">Informasi</string>
+    <string name="homecontainer_screen_menu_hospital">Rumah Sakit</string>
+    <string name="homecontainer_screen_menu_profile">Profil</string>
+</resources>

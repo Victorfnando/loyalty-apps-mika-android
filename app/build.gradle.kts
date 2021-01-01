@@ -67,6 +67,7 @@ dependencies {
   implementation(Libraries.okHttpLoggingInterceptor)
   implementation(Libraries.dataStore)
   implementation(Libraries.pinView)
+  implementation(Libraries.fragment)
 
   // Unit/Android tests dependencies
   testImplementation(TestLibraries.junit4)

@@ -10,6 +10,7 @@ package com.dre.loyalty.features.createpin.presentation
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dre.loyalty.R
+import com.dre.loyalty.core.functional.Event
 import com.dre.loyalty.core.platform.BaseViewModel
 import com.dre.loyalty.core.util.validator.type.ValidationType
 import com.dre.loyalty.features.createpin.presentation.enums.CreatePinType
@@ -25,6 +26,9 @@ class CreatePinViewModel @Inject constructor() : BaseViewModel() {
 
     private val _createButtonState: MutableLiveData<Boolean> = MutableLiveData()
     val createButtonState: LiveData<Boolean> = _createButtonState
+
+    private val _showConfirmationSheet: MutableLiveData<Event<CreatePinType>> = MutableLiveData()
+    val showConfirmationSheet: LiveData<Event<CreatePinType>> = _showConfirmationSheet
 
     private var cachedType: CreatePinType? = null
     private var inputPin: String? = null
@@ -45,7 +49,9 @@ class CreatePinViewModel @Inject constructor() : BaseViewModel() {
                 _showError.value = R.string.createpin_screen_confirm_error_differentpin
             }
             else -> {
-                ///TODO: Success Proces
+                cachedType?.let {
+                    _showConfirmationSheet.value = Event(it)
+                }
             }
         }
     }
