@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Andreas Oen on 1/1/21 3:27 PM
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 1/1/21 3:26 PM
+  ~ github: https://github.com/oandrz
+  -->
+
+<resources>
+    <string name="home_screen_title">Selamat Datang</string>
+    <string name="home_screen_label_medicalnumber">Nomor rekan medik saya</string>
+    <string name="home_screen_section_label_seeall">Lihat semua</string>
+
+    <string name="home_screen_item_cashback_label_invoiceId">ID Kwitansi</string>
+    <string name="home_screen_item_cashback_label_seeInvoice">Lihat kwitansi</string>
+
+    <string name="home_screen_item_cashback_btn_upload">Unggah kwitansi</string>
+    <string name="home_screen_item_upload_label">Unggah kwitansi-mu untuk mendapatkan cashback</string>
+</resources>

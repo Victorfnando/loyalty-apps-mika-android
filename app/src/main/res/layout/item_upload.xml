@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Created by Andreas Oen on 1/2/21 3:42 PM
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 1/2/21 3:42 PM
+  ~ github: https://github.com/oandrz
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/gray_5"
+    android:layout_margin="@dimen/space_16dp"
+    android:padding="@dimen/space_16dp">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_label_upload"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/space_32dp"
+        app:barrierDirection="right"
+        app:constraint_referenced_ids="btn_upload_invoice"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btn_upload_invoice"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/home_screen_item_upload_label" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_upload_invoice"
+        style="@style/NormalButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/home_screen_item_cashback_btn_upload"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

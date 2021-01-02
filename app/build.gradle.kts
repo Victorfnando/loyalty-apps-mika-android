@@ -68,6 +68,8 @@ dependencies {
   implementation(Libraries.dataStore)
   implementation(Libraries.pinView)
   implementation(Libraries.fragment)
+  implementation(Libraries.fastAdapter)
+  implementation(Libraries.fastAdapterViewBinding)
 
   // Unit/Android tests dependencies
   testImplementation(TestLibraries.junit4)

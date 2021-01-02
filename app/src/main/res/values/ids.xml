@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Andreas Oen on 1/2/21 1:21 PM
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 1/2/21 1:21 PM
+  ~ github: https://github.com/oandrz
+  -->
+
+<resources>
+    <item type="id" name="homeSection"/>
+    <item type="id" name="invoiceItem"/>
+    <item type="id" name="newsItem"/>
+    <item type="id" name="uploadItem"/>
+</resources>

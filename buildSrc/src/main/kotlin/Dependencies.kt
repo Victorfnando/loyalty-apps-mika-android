@@ -54,6 +54,7 @@ object Libraries {
         const val dataStore = "1.0.0-alpha05"
         const val pinView = "1.4.4"
         const val fragment = "1.2.5"
+        const val fastAdapter = "5.3.2"
 
         //TODO: Legacy -> WIP -> Try Hilt?
         const val dagger = "2.11"
@@ -82,6 +83,8 @@ object Libraries {
     const val dataStore                = "androidx.datastore:datastore-preferences:${Versions.dataStore}"
     const val pinView                  = "com.chaos.view:pinview:${Versions.pinView}"
     const val fragment                 = "androidx.fragment:fragment-ktx:${Versions.fragment}"
+    const val fastAdapter              = "com.mikepenz:fastadapter:${Versions.fastAdapter}"
+    const val fastAdapterViewBinding   = "com.mikepenz:fastadapter-extensions-binding:${Versions.fastAdapter}"
 
     //TODO: Legacy -> WIP -> Migrate to Koin or Hilt?
     const val daggerCompiler   = "com.google.dagger:dagger-compiler:${Versions.dagger}"

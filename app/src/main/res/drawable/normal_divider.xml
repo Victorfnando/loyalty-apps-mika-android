@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Andreas Oen on 1/2/21 4:19 PM
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 1/2/21 4:19 PM
+  ~ github: https://github.com/oandrz
+  -->
+
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <size android:height="@dimen/space_8dp" />
+    <solid android:color="@color/gray_6" />
+</shape>

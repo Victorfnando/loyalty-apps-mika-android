@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Created by Andreas Oen on 1/2/21 3:05 PM
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 1/2/21 3:05 PM
+  ~ github: https://github.com/oandrz
+  -->
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_news"
+    android:layout_width="@dimen/news_card_width"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/space_20dp"
+    android:layout_marginBottom="@dimen/space_32dp"
+    app:cardElevation="@dimen/card_elevation">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/news_card_width"
+            android:background="@color/black" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_date"
+            style="@style/NormalText.Size10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_12dp"
+            android:layout_marginTop="@dimen/space_12dp"
+            android:layout_marginEnd="@dimen/space_12dp"
+            tools:text="12 Oktober 2020" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_title"
+            style="@style/NormalText.Bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_12dp"
+            android:layout_marginTop="@dimen/space_4dp"
+            android:layout_marginEnd="@dimen/space_12dp"
+            tools:text="Rumah Imunisasi Mitra keluarga" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_desc"
+            style="@style/NormalText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_12dp"
+            android:layout_marginTop="@dimen/space_4dp"
+            android:layout_marginEnd="@dimen/space_12dp"
+            android:layout_marginBottom="@dimen/space_16dp"
+            android:ellipsize="end"
+            android:maxLines="3"
+            tools:text="Rumah Imunisasi adalah sarana yang tepat untuk menjaga kesehatan Anak di Rumah Imunisasi adalah sarana yang tepat untuk menjaga kesehatan Anak di" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.cardview.widget.CardView>
+
