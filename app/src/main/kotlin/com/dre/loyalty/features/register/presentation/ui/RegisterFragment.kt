@@ -100,14 +100,19 @@ class RegisterFragment : BaseFragment() {
     }
 
     private fun navigateToLoginPage(flag: Event<Boolean>?) {
-        navigator.showLogin(requireContext())
+        flag?.getIfNotHandled()?.let {
+            navigator.showLogin(requireContext())
+        }
     }
 
     private fun navigateOtpScreen(flag: Event<Boolean>?) {
-        navigator.showOtp(requireContext())
+        flag?.getIfNotHandled()?.let {
+            navigator.showOtp(requireContext())
+        }
     }
 
     override fun onDetach() {
+        (activity as AppCompatActivity).setSupportActionBar(null)
         binding?.etPhone?.editText?.removeTextChangedListener(phoneChangeListener)
         binding = null
         super.onDetach()

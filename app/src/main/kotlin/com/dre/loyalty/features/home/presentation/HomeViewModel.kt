@@ -18,11 +18,14 @@ class HomeViewModel @Inject constructor(): BaseViewModel() {
     private val _navigateCashBackList: MutableLiveData<Event<String>> = MutableLiveData()
     val navigateCashBackList: LiveData<Event<String>> = _navigateCashBackList
 
+    private val _navigateNewsList: MutableLiveData<Event<String>> = MutableLiveData()
+    val navigateNewsList: LiveData<Event<String>> = _navigateNewsList
+
     fun handleSeeAllCashBackClicked() {
         _navigateCashBackList.value = Event("")
     }
 
     fun handleSeeAllNewsClicked() {
-
+        _navigateNewsList.value = Event("")
     }
 }

@@ -93,6 +93,7 @@ class LoginFragment : BaseFragment() {
     }
 
     override fun onDetach() {
+        (activity as AppCompatActivity).setSupportActionBar(null)
         binding?.etPhone?.editText?.removeTextChangedListener(phoneChangeListener)
         binding = null
         super.onDetach()

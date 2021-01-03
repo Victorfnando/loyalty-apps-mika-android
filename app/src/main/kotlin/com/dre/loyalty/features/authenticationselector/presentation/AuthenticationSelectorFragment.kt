@@ -21,7 +21,7 @@ class AuthenticationSelectorFragment : BaseFragment() {
     @Inject
     lateinit var navigator: Navigator
 
-    private lateinit var binding: FragmentAuthSelectorBinding
+    private var binding: FragmentAuthSelectorBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,22 +34,23 @@ class AuthenticationSelectorFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentAuthSelectorBinding.inflate(inflater, container, false)
-        return binding.root
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.btnLogin.setOnClickListener {
-            activity?.let {
-                navigator.showLogin(it)
-            }
+        binding?.btnLogin?.setOnClickListener {
+            navigator.showLogin(requireContext())
         }
 
-        binding.btnRegister.setOnClickListener {
-            activity?.let {
-                navigator.showRegister(it)
-            }
+        binding?.btnRegister?.setOnClickListener {
+            navigator.showRegister(requireContext())
         }
+    }
+
+    override fun onDetach() {
+        binding = null
+        super.onDetach()
     }
 
     companion object {

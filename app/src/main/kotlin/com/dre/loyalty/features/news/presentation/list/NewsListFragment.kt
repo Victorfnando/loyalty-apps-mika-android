@@ -47,14 +47,17 @@ class NewsListFragment : BaseFragment() {
     }
 
     override fun onDetach() {
+        (activity as AppCompatActivity).setSupportActionBar(null)
         binding = null
         super.onDetach()
     }
 
     private fun bindToolbar() {
+        val showNavigationBack: Boolean = arguments?.getBoolean(SHOW_NAVIGATION_BACK_ARGS) ?: false
         (activity as AppCompatActivity).run {
             setSupportActionBar(binding?.toolbarLayout?.toolbar)
             supportActionBar?.title = resources.getText(R.string.newslist_screen_title)
+            supportActionBar?.setDisplayHomeAsUpEnabled(showNavigationBack)
         }
     }
 
@@ -78,8 +81,15 @@ class NewsListFragment : BaseFragment() {
     }
 
     companion object {
-        fun newInstance(): NewsListFragment {
-            return NewsListFragment()
+
+        private const val SHOW_NAVIGATION_BACK_ARGS = "SHOW_NAVIGATION_BACK_ARGS"
+
+        fun newInstance(showNavigationBack: Boolean): NewsListFragment {
+            return NewsListFragment().also {
+                val bundle = Bundle()
+                bundle.putBoolean(SHOW_NAVIGATION_BACK_ARGS, showNavigationBack)
+                it.arguments = bundle
+            }
         }
     }
 }

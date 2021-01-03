@@ -69,6 +69,7 @@ class InputPinFragment : BaseFragment() {
     }
 
     override fun onDetach() {
+        (activity as AppCompatActivity).setSupportActionBar(null)
         binding?.etPin?.removeTextChangedListener(textWatcher)
         binding = null
         super.onDetach()

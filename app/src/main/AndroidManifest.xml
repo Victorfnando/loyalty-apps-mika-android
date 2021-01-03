@@ -85,6 +85,10 @@ xmlns:android="http://schemas.android.com/apk/res/android">
   <activity
       android:name=".features.cashback.presentation.CashBackListActivity">
   </activity>
+
+  <activity
+      android:name=".features.news.presentation.list.NewsListActivity">
+  </activity>
 </application>
 
 </manifest>

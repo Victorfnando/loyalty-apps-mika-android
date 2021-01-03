@@ -111,6 +111,7 @@ class UserDetailFormFragment : BaseFragment() {
         binding?.etFormLastname?.editText?.removeTextChangedListener(lastNameWatcher)
         binding?.etFormEmail?.editText?.removeTextChangedListener(emailWatcher)
         binding?.etFormKtp?.editText?.removeTextChangedListener(ktpWatcher)
+        (activity as AppCompatActivity).setSupportActionBar(null)
         binding = null
         super.onDetach()
     }

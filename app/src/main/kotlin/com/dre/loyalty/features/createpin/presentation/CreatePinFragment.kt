@@ -77,6 +77,7 @@ class CreatePinFragment : BaseFragment() {
     }
 
     override fun onDetach() {
+        (activity as AppCompatActivity).setSupportActionBar(null)
         binding = null
         super.onDetach()
     }

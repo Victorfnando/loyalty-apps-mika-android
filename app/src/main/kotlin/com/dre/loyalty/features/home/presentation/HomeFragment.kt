@@ -65,6 +65,7 @@ class HomeFragment : BaseFragment() {
         appComponent.inject(this)
         vm = viewModel(viewModelFactory) {
             observe(navigateCashBackList, ::showCashBackListScreen)
+            observe(navigateNewsList, ::showNewsListScreen)
         }
     }
 
@@ -121,7 +122,7 @@ class HomeFragment : BaseFragment() {
                     Log.v("testing click", it)
                 }
                 it.seeAllClickListener = {
-                    Log.v("testing see all click", "see all clicked")
+                    vm.handleSeeAllNewsClicked()
                 }
                 it.snapHelper = LinearSnapHelper()
                 it.dividerItemDecoration = HorizontalSpaceDecoration(resources.getDimensionPixelSize(
@@ -149,6 +150,12 @@ class HomeFragment : BaseFragment() {
     private fun showCashBackListScreen(event: Event<String>?) {
         event?.getIfNotHandled()?.let {
             navigator.showCashBackList(requireContext())
+        }
+    }
+
+    private fun showNewsListScreen(event: Event<String>?) {
+        event?.getIfNotHandled()?.let {
+            navigator.showNewsList(requireContext())
         }
     }
 

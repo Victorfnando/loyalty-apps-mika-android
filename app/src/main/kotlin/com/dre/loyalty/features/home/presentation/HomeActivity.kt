@@ -49,7 +49,7 @@ class HomeActivity : AppCompatActivity() {
                         true
                     }
                     R.id.menu_news -> {
-                        replaceFragment(savedInstanceState, NewsListFragment.newInstance())
+                        replaceFragment(savedInstanceState, NewsListFragment.newInstance(false))
                         true
                     }
                     R.id.menu_profile -> {
