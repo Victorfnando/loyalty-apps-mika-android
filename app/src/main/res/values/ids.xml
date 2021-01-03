@@ -10,5 +10,6 @@
     <item type="id" name="homeSection"/>
     <item type="id" name="invoiceItem"/>
     <item type="id" name="newsItem"/>
+    <item type="id" name="newsItemVertical"/>
     <item type="id" name="uploadItem"/>
 </resources>

@@ -18,7 +18,7 @@ import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.databinding.ActivityHomeBinding
 import com.dre.loyalty.features.hospital.presentation.HospitalListFragment
 import com.dre.loyalty.features.invoice.presentation.InvoiceListFragment
-import com.dre.loyalty.features.news.presentation.NewsListFragment
+import com.dre.loyalty.features.news.presentation.list.NewsListFragment
 import com.dre.loyalty.features.profile.presentation.ProfileFragment
 
 class HomeActivity : AppCompatActivity() {
