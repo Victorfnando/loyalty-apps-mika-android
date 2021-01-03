@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
 import com.dre.loyalty.R
 import com.dre.loyalty.databinding.SectionHomeBinding
+import com.dre.loyalty.features.cashback.presentation.item.CashBackItem
+import com.dre.loyalty.features.news.presentation.view.NewsItem
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.binding.AbstractBindingItem

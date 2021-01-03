@@ -5,7 +5,7 @@
  * github: https://github.com/oandrz
  */
 
-package com.dre.loyalty.features.home.presentation.view
+package com.dre.loyalty.features.cashback.presentation.item
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

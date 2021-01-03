@@ -18,6 +18,7 @@ package com.dre.loyalty.core.di.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.dre.loyalty.features.createpin.presentation.CreatePinViewModel
+import com.dre.loyalty.features.home.presentation.HomeViewModel
 import com.dre.loyalty.features.login.presentation.ui.LoginViewModel
 import com.dre.loyalty.features.movies.MovieDetailsViewModel
 import com.dre.loyalty.features.movies.MoviesViewModel
@@ -63,6 +64,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ResetPinViewModel::class)
     abstract fun provideResetPinViewModel(vm: ResetPinViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(HomeViewModel::class)
+    abstract fun provideHomeViewModel(vm: HomeViewModel): ViewModel
 
     @Binds
     @IntoMap

@@ -25,11 +25,13 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_see_label"
+        style="@style/NormalText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/space_20dp"
         android:layout_marginEnd="@dimen/space_16dp"
         android:text="@string/home_screen_section_label_seeall"
+        android:textColor="@color/blue"
         app:barrierDirection="left"
         app:constraint_referenced_ids="tv_category_name"
         app:layout_constraintEnd_toEndOf="parent"

@@ -5,7 +5,7 @@
  * github: https://github.com/oandrz
  */
 
-package com.dre.loyalty.features.home.presentation.entity
+package com.dre.loyalty.features.news.presentation.entity
 
 data class News(
     val date: String,

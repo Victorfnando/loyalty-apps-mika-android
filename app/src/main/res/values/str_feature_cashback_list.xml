@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Andreas Oen on 1/3/21 2:23 PM
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 1/3/21 2:23 PM
+  ~ github: https://github.com/oandrz
+  -->
+
+<resources>
+    <string name="cashbacklist_screen_title">Casback diterima</string>
+    <string name="cashbacklist_screen_empty_label">Unggah kwitansi-mu untuk mendapatkan cashback</string>
+    <string name="cashbacklist_screen_empty_button">Unggah kwitansi</string>
+</resources>

@@ -1,17 +1,17 @@
 /*
- * Created by Andreas Oen on 1/2/21 3:03 PM
+ * Created by Andreas Oen on 1/3/21 2:18 PM
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 1/2/21 3:03 PM
+ * Last modified 1/2/21 4:14 PM
  * github: https://github.com/oandrz
  */
 
-package com.dre.loyalty.features.home.presentation.view
+package com.dre.loyalty.features.news.presentation.view
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.dre.loyalty.R
 import com.dre.loyalty.databinding.ItemNewsBinding
-import com.dre.loyalty.features.home.presentation.entity.News
+import com.dre.loyalty.features.news.presentation.entity.News
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
 
 class NewsItem(val item: News) : AbstractBindingItem<ItemNewsBinding>() {

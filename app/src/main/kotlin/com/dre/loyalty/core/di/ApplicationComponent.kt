@@ -20,6 +20,7 @@ import com.dre.loyalty.core.di.viewmodel.ViewModelModule
 import com.dre.loyalty.core.navigation.RouteActivity
 import com.dre.loyalty.features.authenticationselector.presentation.AuthenticationSelectorFragment
 import com.dre.loyalty.features.createpin.presentation.CreatePinFragment
+import com.dre.loyalty.features.home.presentation.HomeFragment
 import com.dre.loyalty.features.login.presentation.ui.LoginFragment
 import com.dre.loyalty.features.register.presentation.ui.RegisterFragment
 import com.dre.loyalty.features.movies.MovieDetailsFragment
@@ -47,6 +48,7 @@ interface ApplicationComponent {
     fun inject(fragment: UserDetailFormFragment)
     fun inject(fragment: ResetPinFragment)
     fun inject(fragment: CreatePinFragment)
+    fun inject(fragment: HomeFragment)
     fun inject(moviesFragment: MoviesFragment)
     fun inject(movieDetailsFragment: MovieDetailsFragment)
 }

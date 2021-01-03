@@ -5,9 +5,9 @@
  * github: https://github.com/oandrz
  */
 
-package com.dre.loyalty.features.home.presentation.entity
+package com.dre.loyalty.features.cashback.presentation.entity
 
-data class Invoice(
+data class CashBack(
     val id: String,
     val price: Long,
     val date: String

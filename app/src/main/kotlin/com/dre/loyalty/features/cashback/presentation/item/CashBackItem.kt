@@ -5,16 +5,16 @@
  * github: https://github.com/oandrz
  */
 
-package com.dre.loyalty.features.home.presentation.view
+package com.dre.loyalty.features.cashback.presentation.item
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.dre.loyalty.R
 import com.dre.loyalty.databinding.ItemCashbackBinding
-import com.dre.loyalty.features.home.presentation.entity.Invoice
+import com.dre.loyalty.features.cashback.presentation.entity.CashBack
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
 
-class CashBackItem(val item: Invoice) : AbstractBindingItem<ItemCashbackBinding>() {
+class CashBackItem(val item: CashBack) : AbstractBindingItem<ItemCashbackBinding>() {
     override val type: Int
         get() = R.id.invoiceItem
 

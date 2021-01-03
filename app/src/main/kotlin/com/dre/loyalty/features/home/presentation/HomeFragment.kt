@@ -13,26 +13,34 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.dre.loyalty.R
+import com.dre.loyalty.core.extension.observe
+import com.dre.loyalty.core.extension.viewModel
+import com.dre.loyalty.core.functional.Event
+import com.dre.loyalty.core.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.core.view.HorizontalSpaceDecoration
 import com.dre.loyalty.core.view.VerticalDividerDecoration
 import com.dre.loyalty.databinding.FragmentHomeBinding
-import com.dre.loyalty.features.home.presentation.entity.Invoice
-import com.dre.loyalty.features.home.presentation.entity.News
+import com.dre.loyalty.features.cashback.presentation.entity.CashBack
+import com.dre.loyalty.features.news.presentation.entity.News
 import com.dre.loyalty.features.home.presentation.view.HomeSection
-import com.dre.loyalty.features.home.presentation.view.CashBackItem
-import com.dre.loyalty.features.home.presentation.view.NewsItem
-import com.dre.loyalty.features.home.presentation.view.UploadInvoiceItem
+import com.dre.loyalty.features.cashback.presentation.item.CashBackItem
+import com.dre.loyalty.features.news.presentation.view.NewsItem
+import com.dre.loyalty.features.cashback.presentation.item.UploadInvoiceItem
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
+import javax.inject.Inject
 
 class HomeFragment : BaseFragment() {
+
+    @Inject
+    lateinit var navigator: Navigator
+
+    private lateinit var vm: HomeViewModel
 
     private var binding: FragmentHomeBinding? = null
 
@@ -52,6 +60,14 @@ class HomeFragment : BaseFragment() {
         ItemAdapter<NewsItem>()
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        appComponent.inject(this)
+        vm = viewModel(viewModelFactory) {
+            observe(navigateCashBackList, ::showCashBackListScreen)
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -65,8 +81,8 @@ class HomeFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         cashBackItem.add(
             listOf(
-                CashBackItem(Invoice("10", 10000L, "12 Desember 2020")),
-                CashBackItem(Invoice("20", 20000L, "20 Desember 2020"))
+                CashBackItem(CashBack("10", 10000L, "12 Desember 2020")),
+                CashBackItem(CashBack("20", 20000L, "20 Desember 2020"))
             )
         )
 
@@ -84,7 +100,7 @@ class HomeFragment : BaseFragment() {
         )
         homeSection.add(listOf(
             HomeSection(
-                "testing",
+                "Cashback diterima",
                 LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false),
                 listOf(cashBackItem)
             ).also {
@@ -92,12 +108,12 @@ class HomeFragment : BaseFragment() {
                     Log.v("testing click", it)
                 }
                 it.seeAllClickListener = {
-                    Log.v("testing see all click", "see all clicked")
+                    vm.handleSeeAllCashBackClicked()
                 }
                 it.dividerItemDecoration = VerticalDividerDecoration(requireContext(), RecyclerView.VERTICAL)
             },
             HomeSection(
-                "testing",
+                "Informasi",
                 LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false),
                 listOf(newsItem)
             ).also {
@@ -109,8 +125,7 @@ class HomeFragment : BaseFragment() {
                 }
                 it.snapHelper = LinearSnapHelper()
                 it.dividerItemDecoration = HorizontalSpaceDecoration(resources.getDimensionPixelSize(
-                    R.dimen.space_16dp)
-                )
+                    R.dimen.space_16dp))
             }
         ))
         binding?.rvContent?.run {
@@ -129,6 +144,12 @@ class HomeFragment : BaseFragment() {
     override fun onDetach() {
         binding = null
         super.onDetach()
+    }
+
+    private fun showCashBackListScreen(event: Event<String>?) {
+        event?.getIfNotHandled()?.let {
+            navigator.showCashBackList(requireContext())
+        }
     }
 
     companion object {
