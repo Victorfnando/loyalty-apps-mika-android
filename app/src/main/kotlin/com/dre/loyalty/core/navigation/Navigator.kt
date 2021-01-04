@@ -34,6 +34,7 @@ import com.dre.loyalty.features.login.presentation.ui.LoginActivity
 import com.dre.loyalty.features.movies.MovieDetailsActivity
 import com.dre.loyalty.features.movies.MovieView
 import com.dre.loyalty.features.movies.MoviesActivity
+import com.dre.loyalty.features.news.presentation.detail.NewsDetailActivity
 import com.dre.loyalty.features.news.presentation.list.NewsListActivity
 import com.dre.loyalty.features.otp.OtpActivity
 import com.dre.loyalty.features.pin.presentation.InputPinActivity
@@ -141,6 +142,12 @@ class Navigator @Inject constructor(private val authenticator: Authenticator) {
     fun showNewsList(context: Context) {
         context.startActivity(
             NewsListActivity.callingIntent(context)
+        )
+    }
+
+    fun showNewsDetail(context: Context) {
+        context.startActivity(
+            NewsDetailActivity.callingIntent(context)
         )
     }
 

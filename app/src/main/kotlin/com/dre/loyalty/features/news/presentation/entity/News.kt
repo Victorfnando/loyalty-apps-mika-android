@@ -11,5 +11,5 @@ data class News(
     val date: String,
     val title: String,
     val desc: String,
-    val bannerImageUrl: String
+    val bannerImageUrl: String,
 )

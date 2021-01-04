@@ -8,7 +8,6 @@
 package com.dre.loyalty.features.home.presentation
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -66,6 +65,7 @@ class HomeFragment : BaseFragment() {
         vm = viewModel(viewModelFactory) {
             observe(navigateCashBackList, ::showCashBackListScreen)
             observe(navigateNewsList, ::showNewsListScreen)
+            observe(navigateNewsDetail, ::showNewsDetailScreen)
         }
     }
 
@@ -106,7 +106,7 @@ class HomeFragment : BaseFragment() {
                 listOf(cashBackItem)
             ).also {
                 it.itemClickListener = {
-                    Log.v("testing click", it)
+                    vm.handleCashBackItemClicked()
                 }
                 it.seeAllClickListener = {
                     vm.handleSeeAllCashBackClicked()
@@ -119,7 +119,7 @@ class HomeFragment : BaseFragment() {
                 listOf(newsItem)
             ).also {
                 it.itemClickListener = {
-                    Log.v("testing click", it)
+                    vm.handleNewsItemClicked()
                 }
                 it.seeAllClickListener = {
                     vm.handleSeeAllNewsClicked()
@@ -156,6 +156,12 @@ class HomeFragment : BaseFragment() {
     private fun showNewsListScreen(event: Event<String>?) {
         event?.getIfNotHandled()?.let {
             navigator.showNewsList(requireContext())
+        }
+    }
+
+    private fun showNewsDetailScreen(event: Event<String>?) {
+        event?.getIfNotHandled()?.let {
+            navigator.showNewsDetail(requireContext())
         }
     }
 
