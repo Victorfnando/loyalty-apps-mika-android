@@ -24,6 +24,9 @@ class HomeViewModel @Inject constructor(): BaseViewModel() {
     private val _navigateNewsDetail: MutableLiveData<Event<String>> = MutableLiveData()
     val navigateNewsDetail: LiveData<Event<String>> = _navigateNewsDetail
 
+    private val _navigateToCamera: MutableLiveData<Event<String>> = MutableLiveData()
+    val navigateToCamera: LiveData<Event<String>> = _navigateToCamera
+
     fun handleCashBackItemClicked() {
     }
 
@@ -37,5 +40,9 @@ class HomeViewModel @Inject constructor(): BaseViewModel() {
 
     fun handleSeeAllNewsClicked() {
         _navigateNewsList.value = Event("")
+    }
+
+    fun handleUploadInvoiceClicked() {
+        _navigateToCamera.value = Event("")
     }
 }

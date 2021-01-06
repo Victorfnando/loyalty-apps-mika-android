@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Andreas Oen on 1/6/21 7:45 PM
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 1/6/21 7:45 PM
+  ~ github: https://github.com/oandrz
+  -->
+
+<resources>
+    <string name="upload_invoice_screen_title">Lengkapi Data Kwitansi</string>
+    <string name="upload_invoice_screen_label_branch">Cabang Mitra Keluarga</string>
+    <string name="upload_invoice_screen_label_transaction_date">Tanggal Transaksi (sesuai kwitansi)</string>
+    <string name="upload_invoice_screen_label_total_amount">Jumlah Pembayaran</string>
+    <string name="upload_invoice_screen_hint_branch">Pilih cabang Mitra Keluarga</string>
+    <string name="upload_invoice_screen_hint_transaction_date">Pilih tanggal transaksi</string>
+    <string name="upload_invoice_screen_hint_total_amount">Contoh: 200.000</string>
+    <string name="upload_invoice_screen_label_tnc"><![CDATA[Dengan menambahkan kwitansi, saya menyetujui <font color=\'blue\'> syarat dan ketentuan </font>dari Altea Hospital Loyalty.]]></string>
+    <string name="upload_invoice_screen_btn_upload">Unggah Kwitansi</string>
+</resources>

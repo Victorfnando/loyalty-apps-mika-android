@@ -41,6 +41,7 @@ import com.dre.loyalty.features.pin.presentation.InputPinActivity
 import com.dre.loyalty.features.register.presentation.ui.RegisterActivity
 import com.dre.loyalty.features.resetpin.presentation.ResetPinActivity
 import com.dre.loyalty.features.splash.presentation.SplashScreenActivity
+import com.dre.loyalty.features.uploadinvoice.presentation.UploadInvoiceActivity
 import com.dre.loyalty.features.userdetailform.presentation.UserDetailFormActivity
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -148,6 +149,12 @@ class Navigator @Inject constructor(private val authenticator: Authenticator) {
     fun showNewsDetail(context: Context) {
         context.startActivity(
             NewsDetailActivity.callingIntent(context)
+        )
+    }
+
+    fun showUploadInvoice(context: Context, imageUri: Uri) {
+        context.startActivity(
+            UploadInvoiceActivity.callingIntent(context, imageUri.toString())
         )
     }
 

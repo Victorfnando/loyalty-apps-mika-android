@@ -52,4 +52,7 @@
     <dimen name="space_28dp">28dp</dimen>
     <dimen name="space_32dp">32dp</dimen>
     <dimen name="space_48dp">48dp</dimen>
+    
+    <!--Upload Invoice-->
+    <dimen name="invoice_image_size">80dp</dimen>
 </resources>

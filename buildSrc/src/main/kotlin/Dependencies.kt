@@ -20,9 +20,11 @@ object BuildPlugins {
 
     object Versions {
         const val buildToolsVersion = "4.1.0"
+        const val mavenGradleVersion = "2.1"
         const val gradleVersion = "6.6.1"
     }
     const val androidGradlePlugin = "com.android.tools.build:gradle:${Versions.buildToolsVersion}"
+    const val mavenGradlePlugin = "com.github.dcendents:android-maven-gradle-plugin:${Versions.mavenGradleVersion}"
     const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Kotlin.standardLibrary}"
     const val androidApplication = "com.android.application"
     const val kotlinAndroid = "kotlin-android"
@@ -55,6 +57,9 @@ object Libraries {
         const val pinView = "1.4.4"
         const val fragment = "1.2.5"
         const val fastAdapter = "5.3.2"
+        const val hotChemiPermission = "4.8.0"
+        const val uCrop = "2.2.6"
+        const val imagePicker = "3.0.4"
 
         //TODO: Legacy -> WIP -> Try Hilt?
         const val dagger = "2.11"
@@ -85,6 +90,10 @@ object Libraries {
     const val fragment                 = "androidx.fragment:fragment-ktx:${Versions.fragment}"
     const val fastAdapter              = "com.mikepenz:fastadapter:${Versions.fastAdapter}"
     const val fastAdapterViewBinding   = "com.mikepenz:fastadapter-extensions-binding:${Versions.fastAdapter}"
+    const val hotchemi                 = "org.permissionsdispatcher:permissionsdispatcher:${Versions.hotChemiPermission}"
+    const val hotchemiProcessor        = "org.permissionsdispatcher:permissionsdispatcher-processor:${Versions.hotChemiPermission}"
+    const val uCrop                    = "com.github.yalantis:ucrop:${Versions.uCrop}"
+    const val imagePicker              = "com.github.jkwiecien:EasyImage:${Versions.imagePicker}"
 
     //TODO: Legacy -> WIP -> Migrate to Koin or Hilt?
     const val daggerCompiler   = "com.google.dagger:dagger-compiler:${Versions.dagger}"

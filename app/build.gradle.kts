@@ -44,6 +44,7 @@ dependencies {
   //Compile time dependencies
   kapt(Libraries.lifecycleCompiler)
   kapt(Libraries.daggerCompiler)
+  kapt(Libraries.hotchemiProcessor)
   compileOnly(Libraries.javaxAnnotation)
   compileOnly(Libraries.javaxInject)
 
@@ -70,6 +71,9 @@ dependencies {
   implementation(Libraries.fragment)
   implementation(Libraries.fastAdapter)
   implementation(Libraries.fastAdapterViewBinding)
+  implementation(Libraries.hotchemi)
+  implementation(Libraries.uCrop)
+  implementation(Libraries.imagePicker)
 
   // Unit/Android tests dependencies
   testImplementation(TestLibraries.junit4)
