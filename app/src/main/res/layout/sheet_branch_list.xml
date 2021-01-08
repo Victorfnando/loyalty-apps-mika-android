@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Created by Andreas Oen on 1/7/21 7:18 PM
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 1/7/21 7:18 PM
+  ~ github: https://github.com/oandrz
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_title"
+        style="@style/Heading6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_16dp"
+        android:layout_marginTop="@dimen/space_24dp"
+        android:layout_marginEnd="@dimen/space_16dp"
+        android:text="@string/upload_invoice_screen_sheet_title" />
+
+    <com.dre.loyalty.core.view.PrefixEditTextWithLabel
+        android:id="@+id/et_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_16dp"
+        android:layout_marginTop="@dimen/space_16dp"
+        android:layout_marginEnd="@dimen/space_16dp"
+        android:drawableEnd="@drawable/ic_search"
+        android:hint="@string/upload_invoice_screen_sheet_hint" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_hospital"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/space_16dp" />
+</LinearLayout>

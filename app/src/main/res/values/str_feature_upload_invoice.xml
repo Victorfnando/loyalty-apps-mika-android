@@ -16,4 +16,7 @@
     <string name="upload_invoice_screen_hint_total_amount">Contoh: 200.000</string>
     <string name="upload_invoice_screen_label_tnc"><![CDATA[Dengan menambahkan kwitansi, saya menyetujui <font color=\'blue\'> syarat dan ketentuan </font>dari Altea Hospital Loyalty.]]></string>
     <string name="upload_invoice_screen_btn_upload">Unggah Kwitansi</string>
+
+    <string name="upload_invoice_screen_sheet_title">Pilih cabang Mitra Keluarga</string>
+    <string name="upload_invoice_screen_sheet_hint">Cari disini</string>
 </resources>

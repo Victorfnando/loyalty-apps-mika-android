@@ -60,6 +60,7 @@ object Libraries {
         const val hotChemiPermission = "4.8.0"
         const val uCrop = "2.2.6"
         const val imagePicker = "3.0.4"
+        const val bottomSheet = "2.0.0"
 
         //TODO: Legacy -> WIP -> Try Hilt?
         const val dagger = "2.11"
@@ -94,6 +95,7 @@ object Libraries {
     const val hotchemiProcessor        = "org.permissionsdispatcher:permissionsdispatcher-processor:${Versions.hotChemiPermission}"
     const val uCrop                    = "com.github.yalantis:ucrop:${Versions.uCrop}"
     const val imagePicker              = "com.github.jkwiecien:EasyImage:${Versions.imagePicker}"
+    const val bottomSheet              = "com.github.andrefrsousa:SuperBottomSheet:${Versions.bottomSheet}"
 
     //TODO: Legacy -> WIP -> Migrate to Koin or Hilt?
     const val daggerCompiler   = "com.google.dagger:dagger-compiler:${Versions.dagger}"

@@ -74,6 +74,7 @@ dependencies {
   implementation(Libraries.hotchemi)
   implementation(Libraries.uCrop)
   implementation(Libraries.imagePicker)
+  implementation(Libraries.bottomSheet)
 
   // Unit/Android tests dependencies
   testImplementation(TestLibraries.junit4)
