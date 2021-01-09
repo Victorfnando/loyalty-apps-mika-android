@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Andreas Oen on 1/9/21 7:26 PM
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 1/9/21 7:26 PM
+  ~ github: https://github.com/oandrz
+  -->
+
+<resources>
+    <string name="hospitalList_screen_title">Rumah Sakit</string>
+    <string name="hospitalList_screen_hint_search">Type something</string>
+    <string name="hospitalList_screen_label_info">Informasi</string>
+    <string name="hospitalList_screen_label_emergency">IGD</string>
+</resources>

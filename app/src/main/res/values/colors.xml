@@ -9,6 +9,7 @@
     <color name="dividerColor">#212121</color>
 
     <color name="translucentBackground">#ED000000</color>
+
     <color name="gray">#4F4F4F</color>
     <color name="gray_3">#BDBDBD</color>
     <color name="gray_4">#828282</color>
@@ -16,12 +17,22 @@
     <color name="gray_6">#ECECEC</color>
     <color name="white">#FFFFFF</color>
     <color name="red">#EB5757</color>
+
     <color name="black">#000000</color>
     <color name="black_lighter">#333333</color>
+
     <color name="yellow">#F2C94C</color>
+
     <color name="blue">#2F80ED</color>
 
+    <color name="info_lighter">#5B8AD0</color>
     <color name="info_darker">#2C528B</color>
+
     <color name="dark2">#6B7588</color>
     <color name="dark3">#8F90A6</color>
+
+    <color name="background">#E5E5E5</color>
+    <color name="subtle">#D6EDF7</color>
+
+    <color name="light_4">#FAFAFC</color>
 </resources>

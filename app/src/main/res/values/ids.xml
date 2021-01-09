@@ -13,4 +13,5 @@
     <item type="id" name="newsItemVertical"/>
     <item type="id" name="uploadItem"/>
     <item type="id" name="selectorItem"/>
+    <item type="id" name="hospitalItem"/>
 </resources>
