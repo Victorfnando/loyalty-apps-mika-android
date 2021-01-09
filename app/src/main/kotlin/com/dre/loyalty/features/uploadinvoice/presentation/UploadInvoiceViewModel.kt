@@ -11,7 +11,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dre.loyalty.core.functional.Event
 import com.dre.loyalty.core.platform.BaseViewModel
+import com.dre.loyalty.core.util.validator.type.ValidationType
 import com.dre.loyalty.features.uploadinvoice.presentation.entity.HospitalBranchState
+import com.dre.loyalty.features.uploadinvoice.presentation.entity.TotalAmountState
+import com.dre.loyalty.features.uploadinvoice.presentation.entity.UploadButtonState
 import javax.inject.Inject
 
 class UploadInvoiceViewModel @Inject constructor() : BaseViewModel() {
@@ -27,6 +30,17 @@ class UploadInvoiceViewModel @Inject constructor() : BaseViewModel() {
 
     private val _selectedDate: MutableLiveData<String> = MutableLiveData()
     val selectedDate: LiveData<String> = _selectedDate
+
+    private val _uploadButtonState: MutableLiveData<UploadButtonState> = MutableLiveData()
+    val uploadButtonState: LiveData<UploadButtonState> = _uploadButtonState
+
+    private val _totalAmountInputState: MutableLiveData<TotalAmountState> = MutableLiveData()
+    val totalAmountInputState: LiveData<TotalAmountState> = _totalAmountInputState
+
+    init {
+        _totalAmountInputState.value = TotalAmountState(-1)
+        _uploadButtonState.value = UploadButtonState(false)
+    }
 
     fun handleTransactionDateEtClicked() {
         _showDateSelector.value = Event(_selectedDate.value)
@@ -49,9 +63,29 @@ class UploadInvoiceViewModel @Inject constructor() : BaseViewModel() {
 
     fun handleSelectedDate(selectedDate: String) {
         _selectedDate.value = selectedDate
+        validateButtonState()
     }
 
     fun handleSelectedBranch(selectedBranch: String) {
         _selectedBranch.value = selectedBranch
+        validateButtonState()
     }
+
+    fun handleTextAmountChanged(amount: String) {
+        val result = ValidationType.TOTAL_AMOUNT.strategy.validate(amount)
+        if (result.isPass) {
+            _totalAmountInputState.value = TotalAmountState(null)
+        } else {
+            _totalAmountInputState.value = TotalAmountState(result.errorMessage)
+        }
+        validateButtonState()
+    }
+
+    private fun validateButtonState() {
+        _uploadButtonState.value = UploadButtonState(isValidForm())
+    }
+
+    private fun isValidForm() = _totalAmountInputState.value?.error == null
+            && _selectedBranch.value != null
+            && _selectedDate.value != null
 }

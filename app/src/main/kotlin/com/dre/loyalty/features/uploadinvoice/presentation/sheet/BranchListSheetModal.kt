@@ -23,6 +23,7 @@ import com.dre.loyalty.databinding.SheetBranchListBinding
 import com.dre.loyalty.features.uploadinvoice.presentation.entity.HospitalBranchState
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
+import java.nio.channels.Selector
 
 class BranchListSheetModal : SuperBottomSheetFragment() {
 
@@ -42,11 +43,16 @@ class BranchListSheetModal : SuperBottomSheetFragment() {
         }
 
         override fun afterTextChanged(s: Editable?) {
+            selectorItem.filter(s.toString())
         }
     }
 
     override fun getCornerRadius(): Float {
         return resources.getDimension(R.dimen.bottom_sheet_radius)
+    }
+
+    override fun isSheetAlwaysExpanded(): Boolean {
+        return true
     }
 
     override fun onCreateView(
@@ -70,13 +76,22 @@ class BranchListSheetModal : SuperBottomSheetFragment() {
         binding?.rvHospital?.run {
             layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
             addItemDecoration(VerticalDividerDecoration(requireContext(), RecyclerView.VERTICAL))
-            adapter = FastAdapter.with(selectorItem)
+            adapter = FastAdapter.with(selectorItem).also {
+                it.onClickListener = { _, _, item, _ ->
+                    onItemClickListener?.invoke(item.text)
+                    dismiss()
+                    true
+                }
+            }
         }
         val list = state?.hospitalList?.map { item ->
             SelectorItem(item).also {
                 it.isSelected = state?.selectedItem?.isNotEmpty() ?: false && state?.selectedItem == item
             }
         } ?: emptyList()
+        selectorItem.itemFilter.filterPredicate = { item, constraint ->
+            item.text.toLowerCase().contains(constraint.toString())
+        }
         selectorItem.set(list)
     }
 

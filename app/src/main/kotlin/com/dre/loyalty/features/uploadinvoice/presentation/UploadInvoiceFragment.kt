@@ -9,11 +9,15 @@ package com.dre.loyalty.features.uploadinvoice.presentation
 
 import android.net.Uri
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.text.HtmlCompat
 import com.bumptech.glide.Glide
+import com.dre.loyalty.R
 import com.dre.loyalty.core.extension.observe
 import com.dre.loyalty.core.extension.viewModel
 import com.dre.loyalty.core.functional.Event
@@ -21,6 +25,8 @@ import com.dre.loyalty.core.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.databinding.FragmentUploadInvoiceBinding
 import com.dre.loyalty.features.uploadinvoice.presentation.entity.HospitalBranchState
+import com.dre.loyalty.features.uploadinvoice.presentation.entity.TotalAmountState
+import com.dre.loyalty.features.uploadinvoice.presentation.entity.UploadButtonState
 import com.dre.loyalty.features.uploadinvoice.presentation.sheet.BranchListSheetModal
 import com.dre.loyalty.features.userdetailform.presentation.dialog.DatePickerDialogFragment
 import javax.inject.Inject
@@ -34,12 +40,28 @@ class UploadInvoiceFragment : BaseFragment() {
 
     private var binding: FragmentUploadInvoiceBinding? = null
 
+    private val totalAmountWatcher = object : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+        }
+
+        override fun afterTextChanged(s: Editable?) {
+            vm.handleTextAmountChanged(s.toString())
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
         vm = viewModel(viewModelFactory) {
             observe(showDateSelector, ::showDateDialog)
             observe(showBranchListSheet, ::showBranchList)
+            observe(selectedBranch, ::renderSelectedBranch)
+            observe(selectedDate, ::renderSelectedDate)
+            observe(totalAmountInputState, ::updateTotalAmountState)
+            observe(uploadButtonState, ::updateUploadButtonState)
         }
     }
 
@@ -62,6 +84,8 @@ class UploadInvoiceFragment : BaseFragment() {
         bindToolbar()
         bindEtFormBranch()
         bindEtDate()
+        bindTvTnc()
+        binding?.etAmount?.editText?.addTextChangedListener(totalAmountWatcher)
     }
 
     private fun bindToolbar() {
@@ -92,6 +116,13 @@ class UploadInvoiceFragment : BaseFragment() {
         }
     }
 
+    private fun bindTvTnc() {
+        binding?.tvTnc?.text = HtmlCompat.fromHtml(
+            getString(R.string.upload_invoice_screen_label_tnc),
+            HtmlCompat.FROM_HTML_MODE_LEGACY
+        )
+    }
+
     private fun showDateDialog(event: Event<String?>?) {
         event?.getIfNotHandled().let {
             val dialog = DatePickerDialogFragment.newInstance(it)
@@ -110,6 +141,29 @@ class UploadInvoiceFragment : BaseFragment() {
             }
             sheet.show(requireActivity().supportFragmentManager, BranchListSheetModal.TAG)
         }
+    }
+
+    private fun renderSelectedDate(selected: String?) {
+        selected?.let {
+            binding?.etTransactionDate?.text = it
+        }
+    }
+
+    private fun renderSelectedBranch(selected: String?) {
+        selected?.let {
+            binding?.etFormBranch?.text = it
+        }
+    }
+
+    private fun updateTotalAmountState(state: TotalAmountState?) {
+        if (state?.error == -1) return
+        binding?.etAmount?.error = state?.error?.let {
+            getString(it)
+        } ?:  ""
+    }
+
+    private fun updateUploadButtonState(state: UploadButtonState?) {
+        binding?.btnUpload?.isEnabled = state?.isEnabled ?: false
     }
 
     companion object {

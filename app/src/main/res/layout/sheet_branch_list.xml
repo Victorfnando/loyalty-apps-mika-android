@@ -28,6 +28,9 @@
         android:layout_marginStart="@dimen/space_16dp"
         android:layout_marginTop="@dimen/space_16dp"
         android:layout_marginEnd="@dimen/space_16dp"
+        android:inputType="text"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:drawableEnd="@drawable/ic_search"
         android:hint="@string/upload_invoice_screen_sheet_hint" />
 
