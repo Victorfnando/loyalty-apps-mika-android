@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dre.loyalty.R
 import com.dre.loyalty.core.extension.observe
 import com.dre.loyalty.core.extension.viewModel
+import com.dre.loyalty.core.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.databinding.FragmentHospitalListBinding
 import com.dre.loyalty.features.hospital.presentation.entity.EmptyViewState
@@ -28,8 +29,12 @@ import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.listeners.ItemFilterListener
 import kotlinx.android.synthetic.main.fragment_movies.*
+import javax.inject.Inject
 
 class HospitalListFragment : BaseFragment() {
+
+    @Inject
+    lateinit var navigator: Navigator
 
     private lateinit var vm: HospitalListViewModel
 
@@ -129,10 +134,10 @@ class HospitalListFragment : BaseFragment() {
             hospitalListItem.add(
                 HospitalListItem(hospital).also { item ->
                     item.infoListener = {
-
+                        navigator.showDialPage(requireContext(), it)
                     }
                     item.emergencyListener = {
-
+                        navigator.showDialPage(requireContext(), it)
                     }
                 }
             )

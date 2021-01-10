@@ -18,6 +18,7 @@ package com.dre.loyalty.core.navigation
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
+import android.content.Intent.ACTION_DIAL
 import android.net.Uri
 import android.view.View
 import android.widget.ImageView
@@ -156,6 +157,13 @@ class Navigator @Inject constructor(private val authenticator: Authenticator) {
         context.startActivity(
             UploadInvoiceActivity.callingIntent(context, imageUri.toString())
         )
+    }
+
+    fun showDialPage(context: Context, phoneNumber: String) {
+        val intent = Intent(ACTION_DIAL).also {
+            it.data = Uri.parse("tel:$phoneNumber")
+        }
+        context.startActivity(intent)
     }
 
     class Extras(val transitionSharedElement: View)
