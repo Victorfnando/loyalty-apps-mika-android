@@ -11,4 +11,5 @@
     <string name="hospitalList_screen_hint_search">Type something</string>
     <string name="hospitalList_screen_label_info">Informasi</string>
     <string name="hospitalList_screen_label_emergency">IGD</string>
+    <string name="hospitalList_screen_label_empty">Rumah sakit yang kamu cari tidak ada, \n silahkan cari dengan kata kunci lain</string>
 </resources>

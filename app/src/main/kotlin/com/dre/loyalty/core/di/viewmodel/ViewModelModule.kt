@@ -19,6 +19,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.dre.loyalty.features.createpin.presentation.CreatePinViewModel
 import com.dre.loyalty.features.home.presentation.HomeViewModel
+import com.dre.loyalty.features.hospital.presentation.HospitalListViewModel
 import com.dre.loyalty.features.login.presentation.ui.LoginViewModel
 import com.dre.loyalty.features.movies.MovieDetailsViewModel
 import com.dre.loyalty.features.movies.MoviesViewModel
@@ -75,6 +76,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(UploadInvoiceViewModel::class)
     abstract fun provideUploadInvoiceVIewModel(vm: UploadInvoiceViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(HospitalListViewModel::class)
+    abstract fun provideHospitalViewModel(vm: HospitalListViewModel): ViewModel
 
     @Binds
     @IntoMap

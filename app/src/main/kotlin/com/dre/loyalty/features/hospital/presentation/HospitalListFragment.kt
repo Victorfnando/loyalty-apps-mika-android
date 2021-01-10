@@ -17,14 +17,21 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dre.loyalty.R
+import com.dre.loyalty.core.extension.observe
+import com.dre.loyalty.core.extension.viewModel
 import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.databinding.FragmentHospitalListBinding
+import com.dre.loyalty.features.hospital.presentation.entity.EmptyViewState
 import com.dre.loyalty.features.hospital.presentation.entity.Hospital
 import com.dre.loyalty.features.hospital.presentation.item.HospitalListItem
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
+import com.mikepenz.fastadapter.listeners.ItemFilterListener
+import kotlinx.android.synthetic.main.fragment_movies.*
 
 class HospitalListFragment : BaseFragment() {
+
+    private lateinit var vm: HospitalListViewModel
 
     private var binding: FragmentHospitalListBinding? = null
 
@@ -44,10 +51,18 @@ class HospitalListFragment : BaseFragment() {
         }
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        appComponent.inject(this)
+        vm = viewModel(viewModelFactory) {
+            observe(emptyViewState, ::renderEmptyViewState)
+        }
+    }
+
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHospitalListBinding.inflate(inflater, container, false)
         return binding?.root
@@ -70,7 +85,7 @@ class HospitalListFragment : BaseFragment() {
     private fun bindHospitalList() {
         binding?.rvHospital?.run {
             layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
-            adapter = FastAdapter.with(hospitalListItem)
+            adapter = FastAdapter.with(listOf(hospitalListItem))
         }
         val hospitals = listOf(
                 Hospital(
@@ -110,13 +125,13 @@ class HospitalListFragment : BaseFragment() {
                         "(021) 885333333"
                 )
         )
-        hospitals.map {
+        hospitals.map { hospital ->
             hospitalListItem.add(
-                HospitalListItem(it).also {
-                    it.infoListener = {
+                HospitalListItem(hospital).also { item ->
+                    item.infoListener = {
 
                     }
-                    it.emergencyListener = {
+                    item.emergencyListener = {
 
                     }
                 }
@@ -124,6 +139,21 @@ class HospitalListFragment : BaseFragment() {
         }
         hospitalListItem.itemFilter.filterPredicate = { item, constraint ->
             item.item.name.toLowerCase().contains(constraint.toString())
+        }
+        hospitalListItem.itemFilter.itemFilterListener = object : ItemFilterListener<HospitalListItem> {
+            override fun itemsFiltered(constraint: CharSequence?, results: List<HospitalListItem>?) {
+                vm.handleItemWereFiltered(results?.map { it.item } ?: emptyList())
+            }
+
+            override fun onReset() {
+                vm.handleListReset()
+            }
+        }
+    }
+
+    private fun renderEmptyViewState(state: EmptyViewState?) {
+        state?.visibility?.let {
+            binding?.emptyLayout?.visibility = state.visibility
         }
     }
 

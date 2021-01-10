@@ -1,38 +1,79 @@
-<?xml version="1.0" encoding="utf-8"?><!--
+<?xml version="1.0" encoding="utf-8"?>
+<!--
   ~ Created by Andreas Oen on 1/9/21 7:24 PM
   ~ Copyright (c) 2021 . All rights reserved.
   ~ Last modified 1/9/21 7:24 PM
   ~ github: https://github.com/oandrz
   -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingBottom="@dimen/space_16dp"
-    android:background="@color/light_4">
+    android:background="@color/light_4"
+    android:paddingBottom="@dimen/space_16dp">
 
     <include
         android:id="@+id/toolbar_layout"
         layout="@layout/toolbar" />
 
     <FrameLayout
-        android:layout_width="match_parent"
+        android:id="@+id/container_search"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/shadow"
-        android:padding="@dimen/space_16dp">
+        android:padding="@dimen/space_16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_layout">
 
         <com.dre.loyalty.core.view.PrefixEditTextWithLabel
             android:id="@+id/et_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
             android:drawableEnd="@drawable/ic_search"
-            android:hint="@string/hospitalList_screen_hint_search" />
+            android:hint="@string/hospitalList_screen_hint_search"
+            android:inputType="text" />
     </FrameLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_hospital"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-</LinearLayout>
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/container_search" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/empty_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="iv_empty_img, tv_empty_title"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_empty_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/space_20dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_location_empty"
+        app:layout_constraintBottom_toTopOf="@id/tv_empty_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_empty_title"
+        style="@style/BodySmall"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_16dp"
+        android:layout_marginEnd="@dimen/space_16dp"
+        android:gravity="center_horizontal"
+        android:text="@string/hospitalList_screen_label_empty"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/container_search" />
+</androidx.constraintlayout.widget.ConstraintLayout>

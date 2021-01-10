@@ -14,4 +14,5 @@
     <item type="id" name="uploadItem"/>
     <item type="id" name="selectorItem"/>
     <item type="id" name="hospitalItem"/>
+    <item type="id" name="emptyView"/>
 </resources>
