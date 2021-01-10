@@ -28,6 +28,7 @@ import com.dre.loyalty.features.movies.MovieDetailsFragment
 import com.dre.loyalty.features.movies.MoviesFragment
 import com.dre.loyalty.features.otp.OtpFragment
 import com.dre.loyalty.features.pin.presentation.InputPinFragment
+import com.dre.loyalty.features.profile.presentation.ProfileFragment
 import com.dre.loyalty.features.resetpin.presentation.ResetPinFragment
 import com.dre.loyalty.features.splash.presentation.SplashScreenActivity
 import com.dre.loyalty.features.uploadinvoice.presentation.UploadInvoiceFragment
@@ -53,6 +54,8 @@ interface ApplicationComponent {
     fun inject(fragment: HomeFragment)
     fun inject(fragment: UploadInvoiceFragment)
     fun inject(fragment: HospitalListFragment)
+    fun inject(fragment: ProfileFragment)
+
     fun inject(moviesFragment: MoviesFragment)
     fun inject(movieDetailsFragment: MovieDetailsFragment)
 }

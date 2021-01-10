@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Andreas Oen on 1/10/21 5:09 PM
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 1/10/21 5:09 PM
+  ~ github: https://github.com/oandrz
+  -->
+
+<resources>
+    <string name="profile_screen_menu_person">Ubah Profil</string>
+    <string name="profile_screen_menu_lock">Ubah Kata Sandi</string>
+    <string name="profile_screen_menu_question">Pertanyaan yang Sering Diajukan</string>
+    <string name="profile_screen_menu_contact">Kontak Kami</string>
+    <string name="profile_screen_menu_tnc">Syarat dan Ketentuan</string>
+    <string name="profile_screen_menu_logout">Keluar</string>
+    <string name="profile_screen_label_account">Akun</string>
+    <string name="profile_screen_label_about">Tentang</string>
+</resources>

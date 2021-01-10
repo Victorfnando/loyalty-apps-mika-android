@@ -1,0 +1,12 @@
+<!--
+  ~ Created by Andreas Oen on 1/10/21 4:54 PM
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 1/10/21 4:54 PM
+  ~ github: https://github.com/oandrz
+  -->
+
+<vector android:height="24dp" android:tint="#3868B0"
+    android:viewportHeight="24" android:viewportWidth="24"
+    android:width="24dp" xmlns:android="http://schemas.android.com/apk/res/android">
+    <path android:fillColor="@android:color/white" android:pathData="M10,6L8.59,7.41 13.17,12l-4.58,4.59L10,18l6,-6z"/>
+</vector>

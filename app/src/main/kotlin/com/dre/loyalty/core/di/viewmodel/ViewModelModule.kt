@@ -24,6 +24,7 @@ import com.dre.loyalty.features.login.presentation.ui.LoginViewModel
 import com.dre.loyalty.features.movies.MovieDetailsViewModel
 import com.dre.loyalty.features.movies.MoviesViewModel
 import com.dre.loyalty.features.pin.presentation.InputPinViewModel
+import com.dre.loyalty.features.profile.presentation.ProfileViewModel
 import com.dre.loyalty.features.register.presentation.ui.RegisterViewModel
 import com.dre.loyalty.features.resetpin.presentation.ResetPinViewModel
 import com.dre.loyalty.features.uploadinvoice.presentation.UploadInvoiceViewModel
@@ -81,6 +82,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(HospitalListViewModel::class)
     abstract fun provideHospitalViewModel(vm: HospitalListViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ProfileViewModel::class)
+    abstract fun provideProfileViewModel(vm: ProfileViewModel): ViewModel
 
     @Binds
     @IntoMap

@@ -42,6 +42,10 @@
     <!--Navigation Bottom Sheet-->
     <dimen name="navigation_bottom_sheet_shadow">8dp</dimen>
 
+    <!--Image Size-->
+    <dimen name="rounded_image_size">70dp</dimen>
+    <dimen name="profile_menu_image_size">24dp</dimen>
+
     <!--Margin-->
     <dimen name="space_4dp">4dp</dimen>
     <dimen name="space_12dp">12dp</dimen>

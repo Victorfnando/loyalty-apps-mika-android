@@ -15,4 +15,7 @@
     <item type="id" name="selectorItem"/>
     <item type="id" name="hospitalItem"/>
     <item type="id" name="emptyView"/>
+    <item type="id" name="profileMenuItem"/>
+    <item type="id" name="sectionMenuItem"/>
+    <item type="id" name="logoutMenuItem"/>
 </resources>

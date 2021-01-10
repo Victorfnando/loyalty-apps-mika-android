@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Created by Andreas Oen on 1/10/21 4:48 PM
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 1/10/21 4:48 PM
+  ~ github: https://github.com/oandrz
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_menu"
+        android:layout_width="@dimen/profile_menu_image_size"
+        android:layout_height="@dimen/profile_menu_image_size"
+        android:layout_marginStart="@dimen/space_16dp"
+        android:layout_marginTop="@dimen/space_20dp"
+        android:layout_marginBottom="@dimen/space_20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_menu"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="testing testing" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_chevron"
+        android:layout_width="@dimen/profile_menu_image_size"
+        android:layout_height="@dimen/profile_menu_image_size"
+        android:layout_marginEnd="@dimen/space_24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_chevron_right" />
+</androidx.constraintlayout.widget.ConstraintLayout>
