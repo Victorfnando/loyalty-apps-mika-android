@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Created by Andreas Oen on 1/11/21 6:47 PM
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 1/11/21 6:47 PM
+  ~ github: https://github.com/oandrz
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/toolbar_layout"
+        layout="@layout/toolbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.dre.loyalty.core.view.TextViewWithLabel
+                android:id="@+id/tv_fullname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_12dp"
+                android:layout_marginStart="@dimen/space_16dp"
+                android:layout_marginEnd="@dimen/space_16dp"
+                app:tvLabel="@string/updateprofile_screen_label_fullname" />
+
+            <com.dre.loyalty.core.view.TextViewWithLabel
+                android:id="@+id/tv_identification"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_16dp"
+                android:layout_marginTop="@dimen/space_12dp"
+                android:layout_marginEnd="@dimen/space_16dp"
+                app:tvLabel="@string/updateprofile_screen_label_identification" />
+
+            <com.dre.loyalty.core.view.TextViewWithLabel
+                android:id="@+id/tv_gender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_16dp"
+                android:layout_marginTop="@dimen/space_12dp"
+                android:layout_marginEnd="@dimen/space_16dp"
+                app:tvLabel="@string/updateprofile_screen_label_gender" />
+
+            <com.dre.loyalty.core.view.TextViewWithLabel
+                android:id="@+id/tv_dob"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_16dp"
+                android:layout_marginTop="@dimen/space_12dp"
+                android:layout_marginEnd="@dimen/space_16dp"
+                app:tvLabel="@string/updateprofile_screen_label_dob" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space_8dp"
+                android:layout_marginTop="@dimen/space_12dp"
+                android:layout_marginBottom="@dimen/space_12dp"
+                android:background="@drawable/normal_divider" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/SmallLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_16dp"
+                android:layout_marginEnd="@dimen/space_16dp"
+                android:layout_marginBottom="@dimen/space_8dp"
+                android:text="@string/updateprofile_screen_label_desc" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/et_description"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/et_description_height"
+                android:layout_marginStart="@dimen/space_16dp"
+                android:layout_marginEnd="@dimen/space_16dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:background="@drawable/et_description_border"
+                android:gravity="top"
+                android:inputType="textMultiLine"
+                android:scrollbars="vertical" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_error"
+                style="@style/SmallLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_16dp"
+                android:layout_marginEnd="@dimen/space_16dp"
+                android:layout_marginBottom="@dimen/space_8dp"
+                android:textColor="@color/red"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_send"
+                style="@style/NormalButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_16dp"
+                android:layout_marginTop="@dimen/space_20dp"
+                android:layout_marginEnd="@dimen/space_16dp"
+                android:text="@string/updateprofile_screen_button_send" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

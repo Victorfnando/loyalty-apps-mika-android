@@ -19,6 +19,7 @@ import com.dre.loyalty.AndroidApplication
 import com.dre.loyalty.core.di.viewmodel.ViewModelModule
 import com.dre.loyalty.core.navigation.RouteActivity
 import com.dre.loyalty.features.authenticationselector.presentation.AuthenticationSelectorFragment
+import com.dre.loyalty.features.changeprofile.presentation.UpdateProfileFragment
 import com.dre.loyalty.features.createpin.presentation.CreatePinFragment
 import com.dre.loyalty.features.home.presentation.HomeFragment
 import com.dre.loyalty.features.hospital.presentation.HospitalListFragment
@@ -55,6 +56,7 @@ interface ApplicationComponent {
     fun inject(fragment: UploadInvoiceFragment)
     fun inject(fragment: HospitalListFragment)
     fun inject(fragment: ProfileFragment)
+    fun inject(fragment: UpdateProfileFragment)
 
     fun inject(moviesFragment: MoviesFragment)
     fun inject(movieDetailsFragment: MovieDetailsFragment)

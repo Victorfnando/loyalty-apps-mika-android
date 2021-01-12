@@ -17,6 +17,7 @@ package com.dre.loyalty.core.di.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.dre.loyalty.features.changeprofile.presentation.UpdateProfileViewModel
 import com.dre.loyalty.features.createpin.presentation.CreatePinViewModel
 import com.dre.loyalty.features.home.presentation.HomeViewModel
 import com.dre.loyalty.features.hospital.presentation.HospitalListViewModel
@@ -87,6 +88,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ProfileViewModel::class)
     abstract fun provideProfileViewModel(vm: ProfileViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(UpdateProfileViewModel::class)
+    abstract fun provideUpdateProfileViewModel(vm: UpdateProfileViewModel): ViewModel
 
     @Binds
     @IntoMap

@@ -102,6 +102,10 @@ xmlns:android="http://schemas.android.com/apk/res/android">
   </activity>
 
   <activity
+      android:name=".features.changeprofile.presentation.UpdateProfileActivity">
+  </activity>
+
+  <activity
       android:name="com.yalantis.ucrop.UCropActivity"
       android:screenOrientation="portrait"
       android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>

@@ -27,6 +27,7 @@ import androidx.fragment.app.FragmentActivity
 import com.dre.loyalty.core.extension.empty
 import com.dre.loyalty.features.authenticationselector.presentation.AuthenticationSelectorActivity
 import com.dre.loyalty.features.cashback.presentation.CashBackListActivity
+import com.dre.loyalty.features.changeprofile.presentation.UpdateProfileActivity
 import com.dre.loyalty.features.createpin.presentation.CreatePinActivity
 import com.dre.loyalty.features.createpin.presentation.enums.CreatePinType
 import com.dre.loyalty.features.home.presentation.HomeActivity
@@ -164,6 +165,10 @@ class Navigator @Inject constructor(private val authenticator: Authenticator) {
             it.data = Uri.parse("tel:$phoneNumber")
         }
         context.startActivity(intent)
+    }
+
+    fun showChangeProfile(context: Context) {
+        context.startActivity(UpdateProfileActivity.callingIntent(context))
     }
 
     class Extras(val transitionSharedElement: View)

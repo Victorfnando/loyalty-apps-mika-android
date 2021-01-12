@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Andreas Oen on 1/11/21 8:22 PM
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 1/11/21 8:22 PM
+  ~ github: https://github.com/oandrz
+  -->
+
+<resources>
+    <string name="updateprofile_screen_title">Ubah Profil</string>
+    <string name="updateprofile_screen_label_desc">Data yang ingin Diubah</string>
+    <string name="updateprofile_screen_button_send">Kirim Pesan</string>
+    <string name="updateprofile_screen_label_fullname">Nama Lengkap</string>
+    <string name="updateprofile_screen_label_identification">Nomor KTP</string>
+    <string name="updateprofile_screen_label_gender">Gender</string>
+    <string name="updateprofile_screen_label_dob">Tanggal Lahir</string>
+</resources>

@@ -19,6 +19,7 @@ import com.dre.loyalty.R
 import com.dre.loyalty.core.extension.observe
 import com.dre.loyalty.core.extension.viewModel
 import com.dre.loyalty.core.functional.Event
+import com.dre.loyalty.core.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.core.view.VerticalDividerDecoration
 import com.dre.loyalty.databinding.FragmentProfileBinding
@@ -28,8 +29,12 @@ import com.dre.loyalty.features.profile.presentation.item.ProfileMenuItem
 import com.dre.loyalty.features.profile.presentation.item.ProfileMenuSection
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
+import javax.inject.Inject
 
 class ProfileFragment : BaseFragment() {
+
+    @Inject
+    lateinit var navigator: Navigator
 
     private var binding: FragmentProfileBinding? = null
 
@@ -147,7 +152,7 @@ class ProfileFragment : BaseFragment() {
 
     private fun navigateChangeProfileScreen(event: Event<Boolean>?) {
         event?.getIfNotHandled()?.let {
-            Toast.makeText(requireContext(), "change profile", Toast.LENGTH_SHORT).show()
+            navigator.showChangeProfile(requireContext())
         }
     }
 
