@@ -28,6 +28,7 @@ import com.dre.loyalty.features.pin.presentation.InputPinViewModel
 import com.dre.loyalty.features.profile.presentation.ProfileViewModel
 import com.dre.loyalty.features.register.presentation.ui.RegisterViewModel
 import com.dre.loyalty.features.resetpin.presentation.ResetPinViewModel
+import com.dre.loyalty.features.updatepassword.presentation.UpdatePasswordViewModel
 import com.dre.loyalty.features.uploadinvoice.presentation.UploadInvoiceViewModel
 import com.dre.loyalty.features.userdetailform.presentation.UserDetailFormViewModel
 import dagger.Binds
@@ -93,6 +94,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(UpdateProfileViewModel::class)
     abstract fun provideUpdateProfileViewModel(vm: UpdateProfileViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(UpdatePasswordViewModel::class)
+    abstract fun provideUpdatePasswordViewModel(vm: UpdatePasswordViewModel): ViewModel
 
     @Binds
     @IntoMap

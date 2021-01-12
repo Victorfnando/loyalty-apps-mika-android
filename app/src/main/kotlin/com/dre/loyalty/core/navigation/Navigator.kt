@@ -43,6 +43,7 @@ import com.dre.loyalty.features.pin.presentation.InputPinActivity
 import com.dre.loyalty.features.register.presentation.ui.RegisterActivity
 import com.dre.loyalty.features.resetpin.presentation.ResetPinActivity
 import com.dre.loyalty.features.splash.presentation.SplashScreenActivity
+import com.dre.loyalty.features.updatepassword.presentation.UpdatePasswordActivity
 import com.dre.loyalty.features.uploadinvoice.presentation.UploadInvoiceActivity
 import com.dre.loyalty.features.userdetailform.presentation.UserDetailFormActivity
 import javax.inject.Inject
@@ -169,6 +170,10 @@ class Navigator @Inject constructor(private val authenticator: Authenticator) {
 
     fun showChangeProfile(context: Context) {
         context.startActivity(UpdateProfileActivity.callingIntent(context))
+    }
+
+    fun showUpdatePasswordActivity(context: Context) {
+        context.startActivity(UpdatePasswordActivity.callingIntent(context))
     }
 
     class Extras(val transitionSharedElement: View)

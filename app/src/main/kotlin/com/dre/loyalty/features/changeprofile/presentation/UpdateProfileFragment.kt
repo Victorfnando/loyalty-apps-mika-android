@@ -59,6 +59,7 @@ class UpdateProfileFragment : BaseFragment() {
     }
 
     override fun onDetach() {
+        binding?.etDescription?.removeTextChangedListener(descWatcher)
         binding = null
         super.onDetach()
     }

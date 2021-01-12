@@ -146,7 +146,7 @@ class ProfileFragment : BaseFragment() {
 
     private fun navigateChangePasswordScreen(event: Event<Boolean>?) {
         event?.getIfNotHandled()?.let {
-            Toast.makeText(requireContext(), "change password", Toast.LENGTH_SHORT).show()
+            navigator.showUpdatePasswordActivity(requireContext())
         }
     }
 

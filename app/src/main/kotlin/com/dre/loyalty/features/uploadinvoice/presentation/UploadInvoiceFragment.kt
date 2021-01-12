@@ -88,6 +88,12 @@ class UploadInvoiceFragment : BaseFragment() {
         binding?.etAmount?.editText?.addTextChangedListener(totalAmountWatcher)
     }
 
+    override fun onDetach() {
+        binding?.etAmount?.editText?.removeTextChangedListener(totalAmountWatcher)
+        binding = null
+        super.onDetach()
+    }
+
     private fun bindToolbar() {
         (activity as AppCompatActivity).run {
             setSupportActionBar(binding?.toolbarLayout?.toolbar)

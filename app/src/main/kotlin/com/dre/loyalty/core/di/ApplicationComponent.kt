@@ -32,6 +32,7 @@ import com.dre.loyalty.features.pin.presentation.InputPinFragment
 import com.dre.loyalty.features.profile.presentation.ProfileFragment
 import com.dre.loyalty.features.resetpin.presentation.ResetPinFragment
 import com.dre.loyalty.features.splash.presentation.SplashScreenActivity
+import com.dre.loyalty.features.updatepassword.presentation.UpdatePasswordFragment
 import com.dre.loyalty.features.uploadinvoice.presentation.UploadInvoiceFragment
 import com.dre.loyalty.features.userdetailform.presentation.UserDetailFormFragment
 import dagger.Component
@@ -57,6 +58,7 @@ interface ApplicationComponent {
     fun inject(fragment: HospitalListFragment)
     fun inject(fragment: ProfileFragment)
     fun inject(fragment: UpdateProfileFragment)
+    fun inject(fragment: UpdatePasswordFragment)
 
     fun inject(moviesFragment: MoviesFragment)
     fun inject(movieDetailsFragment: MovieDetailsFragment)

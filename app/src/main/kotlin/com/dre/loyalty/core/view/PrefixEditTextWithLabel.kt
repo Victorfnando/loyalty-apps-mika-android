@@ -82,6 +82,12 @@ class PrefixEditTextWithLabel @JvmOverloads constructor(
             editText.setDrawableEnd(drawableEnd)
         }
 
+    var drawableEndClickListener: OnClickListener? = null
+        set(value) {
+            field = value
+            editText.setDrawableEndOnClickListener(drawableEndClickListener)
+        }
+
     var text: CharSequence? = null
         set(value) {
             field = value

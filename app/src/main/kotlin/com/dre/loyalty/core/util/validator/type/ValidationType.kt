@@ -13,4 +13,5 @@ enum class ValidationType(val strategy: ValidationStrategy) {
     KTP(KtpValidation()),
     PHONE(PhoneValidation()),
     TOTAL_AMOUNT(TotalAmountValidation()),
+    PASSWORD(PasswordValidation()),
 }

@@ -172,6 +172,7 @@
         <item name="android:textColor">@color/colorTextPrimary</item>
         <item name="android:textColorHint">@color/gray_3</item>
         <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">end</item>
         <item name="android:background">@drawable/rectangle</item>
         <item name="android:paddingTop">@dimen/space_16dp</item>
         <item name="android:paddingBottom">@dimen/space_16dp</item>
