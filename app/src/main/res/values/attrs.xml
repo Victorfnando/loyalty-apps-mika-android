@@ -51,4 +51,14 @@
         <attr name="tvLabel" format="string" />
         <attr name="tvText" format="string" />
     </declare-styleable>
+    <declare-styleable name="StickyFooterButton">
+        <attr name="footerLabel" format="string" />
+        <attr name="footerButtonText" format="string" />
+        <attr name="footerButtonEnable" format="boolean" />
+        <attr name="footerLabelVisibility">
+            <enum name="visible" value="0" />
+            <enum name="invisible" value="1" />
+            <enum name="gone" value="2" />
+        </attr>
+    </declare-styleable>
 </resources>

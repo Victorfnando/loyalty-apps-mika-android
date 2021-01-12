@@ -117,7 +117,7 @@ class UploadInvoiceFragment : BaseFragment() {
     }
 
     private fun bindTvTnc() {
-        binding?.tvTnc?.text = HtmlCompat.fromHtml(
+        binding?.stickyButton?.tvFooterText = HtmlCompat.fromHtml(
             getString(R.string.upload_invoice_screen_label_tnc),
             HtmlCompat.FROM_HTML_MODE_LEGACY
         )
@@ -163,7 +163,7 @@ class UploadInvoiceFragment : BaseFragment() {
     }
 
     private fun updateUploadButtonState(state: UploadButtonState?) {
-        binding?.btnUpload?.isEnabled = state?.isEnabled ?: false
+        binding?.stickyButton?.isButtonEnabled = state?.isEnabled ?: false
     }
 
     companion object {

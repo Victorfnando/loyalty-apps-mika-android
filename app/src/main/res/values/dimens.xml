@@ -6,6 +6,7 @@
     <!-- Card view. -->
     <dimen name="card_corner_radius">4dp</dimen>
     <dimen name="card_elevation">4dp</dimen>
+    <dimen name="footer_card_elevation">20dp</dimen>
     <dimen name="card_id_height">160dp</dimen>
 
     <dimen name="news_card_width">224dp</dimen>
