@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Created by Andreas Oen on 1/13/21 7:50 PM
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 1/13/21 7:50 PM
+  ~ github: https://github.com/oandrz
+  -->
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:layout_marginStart="@dimen/space_16dp"
+    android:layout_marginEnd="@dimen/space_16dp"
+    android:padding="@dimen/space_12dp">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_content"
+        style="@style/BodySmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</FrameLayout>

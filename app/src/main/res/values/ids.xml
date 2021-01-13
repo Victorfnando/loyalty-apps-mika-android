@@ -18,4 +18,6 @@
     <item type="id" name="profileMenuItem"/>
     <item type="id" name="sectionMenuItem"/>
     <item type="id" name="logoutMenuItem"/>
+    <item type="id" name="faqExpandableItem"/>
+    <item type="id" name="faqItem"/>
 </resources>

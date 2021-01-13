@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Andreas Oen on 1/13/21 9:04 PM
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 1/13/21 9:04 PM
+  ~ github: https://github.com/oandrz
+  -->
+
+<resources>
+    <string name="faq_screen_title">Pertanyaan yang Sering Diajukan</string>
+</resources>

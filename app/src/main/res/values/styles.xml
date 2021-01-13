@@ -88,6 +88,11 @@
         <item name="android:textSize">@dimen/text_size_14sp</item>
     </style>
 
+    <style name="NormalLabel">
+        <item name="android:textColor">@color/dark1</item>
+        <item name="android:textSize">@dimen/text_size_14sp</item>
+    </style>
+
     <style name="SmallLabel">
         <item name="android:textColor">@color/dark3</item>
         <item name="android:textSize">@dimen/text_size_12sp</item>

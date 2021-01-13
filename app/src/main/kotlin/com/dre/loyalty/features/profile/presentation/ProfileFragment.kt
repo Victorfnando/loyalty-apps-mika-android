@@ -158,7 +158,7 @@ class ProfileFragment : BaseFragment() {
 
     private fun navigateFaqScreen(event: Event<Boolean>?) {
         event?.getIfNotHandled()?.let {
-            Toast.makeText(requireContext(), "faq", Toast.LENGTH_SHORT).show()
+            navigator.showFaqActivity(requireContext())
         }
     }
 

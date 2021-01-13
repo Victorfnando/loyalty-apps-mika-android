@@ -70,6 +70,7 @@ dependencies {
   implementation(Libraries.pinView)
   implementation(Libraries.fragment)
   implementation(Libraries.fastAdapter)
+  implementation(Libraries.fastAdapterExpandable)
   implementation(Libraries.fastAdapterViewBinding)
   implementation(Libraries.hotchemi)
   implementation(Libraries.uCrop)

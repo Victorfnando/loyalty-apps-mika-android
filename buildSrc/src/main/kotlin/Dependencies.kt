@@ -90,6 +90,7 @@ object Libraries {
     const val pinView                  = "com.chaos.view:pinview:${Versions.pinView}"
     const val fragment                 = "androidx.fragment:fragment-ktx:${Versions.fragment}"
     const val fastAdapter              = "com.mikepenz:fastadapter:${Versions.fastAdapter}"
+    const val fastAdapterExpandable    = "com.mikepenz:fastadapter-extensions-expandable:${Versions.fastAdapter}"
     const val fastAdapterViewBinding   = "com.mikepenz:fastadapter-extensions-binding:${Versions.fastAdapter}"
     const val hotchemi                 = "org.permissionsdispatcher:permissionsdispatcher:${Versions.hotChemiPermission}"
     const val hotchemiProcessor        = "org.permissionsdispatcher:permissionsdispatcher-processor:${Versions.hotChemiPermission}"
