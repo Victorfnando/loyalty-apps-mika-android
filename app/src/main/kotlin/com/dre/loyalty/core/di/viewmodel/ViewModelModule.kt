@@ -18,6 +18,7 @@ package com.dre.loyalty.core.di.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.dre.loyalty.features.changeprofile.presentation.UpdateProfileViewModel
+import com.dre.loyalty.features.contactus.presentation.ContactUsViewModel
 import com.dre.loyalty.features.createpin.presentation.CreatePinViewModel
 import com.dre.loyalty.features.home.presentation.HomeViewModel
 import com.dre.loyalty.features.hospital.presentation.HospitalListViewModel
@@ -99,6 +100,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(UpdatePasswordViewModel::class)
     abstract fun provideUpdatePasswordViewModel(vm: UpdatePasswordViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ContactUsViewModel::class)
+    abstract fun provideContactUsViewModel(vm: ContactUsViewModel): ViewModel
 
     @Binds
     @IntoMap

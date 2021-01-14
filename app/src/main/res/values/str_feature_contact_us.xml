@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Andreas Oen on 1/14/21 7:42 PM
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 1/14/21 7:42 PM
+  ~ github: https://github.com/oandrz
+  -->
+
+<resources>
+    <string name="contactUs_screen_title">Kontak Kami</string>
+    <string name="contactUs_screen_label_category">Kategori Pesan</string>
+    <string name="contactUs_screen_hint_category">Kategori Pesan</string>
+    <string name="contactUs_screen_label_message">Pesan</string>
+    <string name="contactUs_screen_hint_message">Masukkan isi pesan</string>
+    <string name="contactUs_screen_button_send">Kirim Pesan</string>
+    <string name="contactUs_screen_button_contact">Telepon</string>
+    <string name="contactUs_screen_label_resolutionCenter">Pusat Informasi</string>
+    <string name="contactUs_screen_label_resolutionCenterPhone">021–9999-9999</string>
+</resources>

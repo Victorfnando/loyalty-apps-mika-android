@@ -28,6 +28,7 @@ import com.dre.loyalty.core.extension.empty
 import com.dre.loyalty.features.authenticationselector.presentation.AuthenticationSelectorActivity
 import com.dre.loyalty.features.cashback.presentation.CashBackListActivity
 import com.dre.loyalty.features.changeprofile.presentation.UpdateProfileActivity
+import com.dre.loyalty.features.contactus.presentation.ContactUsActivity
 import com.dre.loyalty.features.createpin.presentation.CreatePinActivity
 import com.dre.loyalty.features.createpin.presentation.enums.CreatePinType
 import com.dre.loyalty.features.faq.presentation.FaqActivity
@@ -179,6 +180,10 @@ class Navigator @Inject constructor(private val authenticator: Authenticator) {
 
     fun showFaqActivity(context: Context) {
         context.startActivity(FaqActivity.callingIntent(context))
+    }
+
+    fun showContactUs(context: Context) {
+        context.startActivity(ContactUsActivity.callingIntent(context))
     }
 
     class Extras(val transitionSharedElement: View)

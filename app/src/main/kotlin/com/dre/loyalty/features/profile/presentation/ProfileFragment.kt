@@ -164,7 +164,7 @@ class ProfileFragment : BaseFragment() {
 
     private fun navigateContactScreen(event: Event<Boolean>?) {
         event?.getIfNotHandled()?.let {
-            Toast.makeText(requireContext(), "contact", Toast.LENGTH_SHORT).show()
+            navigator.showContactUs(requireContext())
         }
     }
 
