@@ -62,4 +62,9 @@
     
     <!--Upload Invoice-->
     <dimen name="invoice_image_size">80dp</dimen>
+
+    <!--Invoice List-->
+    <dimen name="invoice_list_image_width">87dp</dimen>
+    <dimen name="invoice_list_image_height">117dp</dimen>
+
 </resources>

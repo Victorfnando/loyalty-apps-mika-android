@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Andreas Oen on 1/16/21 3:37 PM
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 1/16/21 3:37 PM
+  ~ github: https://github.com/oandrz
+  -->
+
+<resources>
+    <string name="invoice_list_button_upload">Unggah kwitansi baru</string>
+    <string name="invoice_list_title">Kwitansi</string>
+    <string-array name="invoice_list_tab_title">
+        <item>Semua</item>
+        <item>Diproses</item>
+        <item>Diterima</item>
+        <item>Ditolak</item>
+    </string-array>
+</resources>

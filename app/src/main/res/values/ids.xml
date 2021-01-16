@@ -20,4 +20,5 @@
     <item type="id" name="logoutMenuItem"/>
     <item type="id" name="faqExpandableItem"/>
     <item type="id" name="faqItem"/>
+    <item type="id" name="invoiceListItem"/>
 </resources>
