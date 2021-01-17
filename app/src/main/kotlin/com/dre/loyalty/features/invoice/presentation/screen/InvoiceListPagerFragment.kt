@@ -7,6 +7,9 @@
 
 package com.dre.loyalty.features.invoice.presentation.screen
 
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -24,6 +27,7 @@ import com.dre.loyalty.core.view.VerticalSpaceDecoration
 import com.dre.loyalty.core.view.sheet.SheetListModal
 import com.dre.loyalty.core.view.sheet.SheetListState
 import com.dre.loyalty.databinding.FragmentPagerInvoiceListBinding
+import com.dre.loyalty.features.camera.CameraActivity
 import com.dre.loyalty.features.invoice.presentation.entity.Invoice
 import com.dre.loyalty.features.invoice.presentation.item.InvoiceListItem
 import com.mikepenz.fastadapter.FastAdapter
@@ -49,6 +53,7 @@ class InvoiceListPagerFragment : BaseFragment() {
         vm = viewModel(viewModelFactory) {
             observe(invoiceList, ::renderInvoice)
             observe(sortOrder, ::showSortSheet)
+            observe(buttonUploadClicked, ::showCamera)
         }
     }
 
@@ -69,6 +74,16 @@ class InvoiceListPagerFragment : BaseFragment() {
         vm.init(position)
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK && requestCode == CameraActivity.REQUEST_CODE_CAMERA) {
+            val uri = data?.extras?.getString(CameraActivity.EXTRA_URI)
+            uri?.let {
+                navigator.showUploadInvoice(requireContext(), Uri.parse(it))
+            }
+        }
+    }
+
     override fun onDetach() {
         binding = null
         super.onDetach()
@@ -76,7 +91,7 @@ class InvoiceListPagerFragment : BaseFragment() {
 
     private fun bindHeader() {
         binding?.btnUploadInvoice?.setOnClickListener {
-            Toast.makeText(requireContext(), "to camera", Toast.LENGTH_SHORT).show()
+            vm.handleButtonUploadClicked()
         }
         binding?.btnSort?.setOnClickListener {
             vm.handleSortClicked()
@@ -106,6 +121,12 @@ class InvoiceListPagerFragment : BaseFragment() {
                 vm.handleSelectedSort(it)
             }
             sheet.show(requireActivity().supportFragmentManager, SheetListModal.TAG)
+        }
+    }
+
+    private fun showCamera(event: Event<Boolean>?) {
+        event?.getIfNotHandled()?.let {
+            startActivityForResult(CameraActivity.callingIntent(requireContext()), CameraActivity.REQUEST_CODE_CAMERA)
         }
     }
     

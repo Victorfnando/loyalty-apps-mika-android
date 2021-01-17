@@ -27,6 +27,9 @@ class InvoiceListPagerViewModel @Inject constructor() : BaseViewModel() {
     private val _sortOrder: MutableLiveData<Event<SheetListState>> = MutableLiveData()
     val sortOrder: LiveData<Event<SheetListState>> = _sortOrder
 
+    private val _buttonUploadClicked: MutableLiveData<Event<Boolean>> = MutableLiveData()
+    val buttonUploadClicked: LiveData<Event<Boolean>> = _buttonUploadClicked
+
     private var originOrderInvoiceList: List<Invoice> = listOf()
     private var selectedSortOrder: SortOrder = SortOrder.ASC
     private lateinit var invoiceType: InvoiceType
@@ -83,5 +86,9 @@ class InvoiceListPagerViewModel @Inject constructor() : BaseViewModel() {
             _invoiceList.value = _invoiceList.value?.reversed()
         }
         selectedSortOrder = newOrder
+    }
+
+    fun handleButtonUploadClicked() {
+        _buttonUploadClicked.value = Event(true)
     }
 }
