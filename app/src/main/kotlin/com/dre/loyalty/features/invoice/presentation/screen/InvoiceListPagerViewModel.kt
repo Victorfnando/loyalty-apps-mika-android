@@ -9,16 +9,26 @@ package com.dre.loyalty.features.invoice.presentation.screen
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.dre.loyalty.R
+import com.dre.loyalty.core.functional.Event
 import com.dre.loyalty.core.platform.BaseViewModel
+import com.dre.loyalty.core.view.sheet.SheetListState
 import com.dre.loyalty.features.invoice.presentation.entity.Invoice
 import com.dre.loyalty.features.invoice.presentation.enumtype.InvoiceType
+import com.dre.loyalty.features.invoice.presentation.enumtype.SortOrder
 import javax.inject.Inject
 
+private const val SORT_SHEET_TITLE = "Urutkan berdasarkan waktu unggah kwitansi"
 class InvoiceListPagerViewModel @Inject constructor() : BaseViewModel() {
 
     private val _invoiceList: MutableLiveData<List<Invoice>> = MutableLiveData()
     val invoiceList: LiveData<List<Invoice>> = _invoiceList
 
+    private val _sortOrder: MutableLiveData<Event<SheetListState>> = MutableLiveData()
+    val sortOrder: LiveData<Event<SheetListState>> = _sortOrder
+
+    private var originOrderInvoiceList: List<Invoice> = listOf()
+    private var selectedSortOrder: SortOrder = SortOrder.ASC
     private lateinit var invoiceType: InvoiceType
 
     fun init(position: Int) {
@@ -37,7 +47,7 @@ class InvoiceListPagerViewModel @Inject constructor() : BaseViewModel() {
                 Invoice("", "2", 30_000L, "21 Desember 2020", "Jakarta", InvoiceType.ACCEPTED),
                 Invoice("", "2", 30_000L, "21 Desember 2020", "Jakarta", InvoiceType.ACCEPTED),
                 Invoice("", "2", 30_000L, "21 Desember 2020", "Jakarta", InvoiceType.ACCEPTED),
-                Invoice("", "2", 30_000L, "21 Desember 2020", "Jakarta", InvoiceType.ACCEPTED),
+                Invoice("", "2", 30_000L, "27 Desember 2020", "Jakarta", InvoiceType.ACCEPTED),
 
                 )
             }
@@ -53,5 +63,25 @@ class InvoiceListPagerViewModel @Inject constructor() : BaseViewModel() {
             }
             else -> throw IllegalStateException()
         }
+    }
+
+    fun handleSortClicked() {
+        _sortOrder.value = Event(SheetListState(
+            SORT_SHEET_TITLE,
+            SortOrder.values().map { it.sort }.filter { it.isNotEmpty() },
+            selectedSortOrder.sort,
+            R.dimen.invoice_list_sort_sheet_height
+        ))
+    }
+
+    fun handleSelectedSort(selected: String) {
+        val newOrder = SortOrder.fromValue(selected)
+        if (selectedSortOrder == SortOrder.UNKNOWN) {
+            selectedSortOrder = newOrder
+        }
+        if (selectedSortOrder != newOrder) {
+            _invoiceList.value = _invoiceList.value?.reversed()
+        }
+        selectedSortOrder = newOrder
     }
 }

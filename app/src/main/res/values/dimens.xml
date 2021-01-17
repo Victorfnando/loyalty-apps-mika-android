@@ -66,5 +66,6 @@
     <!--Invoice List-->
     <dimen name="invoice_list_image_width">87dp</dimen>
     <dimen name="invoice_list_image_height">117dp</dimen>
+    <dimen name="invoice_list_sort_sheet_height">219dp</dimen>
 
 </resources>

@@ -42,6 +42,19 @@ class SheetListModal : SuperBottomSheetFragment() {
         return false
     }
 
+    override fun getPeekHeight(): Int {
+        return if (state?.peekHeight == null) {
+            super.getPeekHeight()
+        } else {
+            resources.getDimensionPixelSize(state?.peekHeight ?: -1)
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        state = arguments?.getParcelable(SHEET_LIST_STATE_ARGS)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -54,9 +67,15 @@ class SheetListModal : SuperBottomSheetFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        state = arguments?.getParcelable(SHEET_LIST_STATE_ARGS)
         binding?.tvCategory?.text = state?.title.orEmpty()
         bindList()
+    }
+
+    override fun onDetach() {
+        binding?.tvCategory?.text = null
+        selectorItem.clear()
+        binding = null
+        super.onDetach()
     }
 
     private fun bindList() {

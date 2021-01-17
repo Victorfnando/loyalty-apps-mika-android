@@ -8,11 +8,13 @@
 package com.dre.loyalty.core.view.sheet
 
 import android.os.Parcelable
+import androidx.annotation.DimenRes
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class SheetListState(
     val title: String,
     val listContent: List<String>,
-    val selectedItem: String?
+    val selectedItem: String?,
+    @DimenRes val peekHeight: Int? = null
 ) : Parcelable

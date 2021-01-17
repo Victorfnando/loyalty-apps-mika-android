@@ -11,20 +11,29 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dre.loyalty.R
 import com.dre.loyalty.core.extension.observe
 import com.dre.loyalty.core.extension.viewModel
+import com.dre.loyalty.core.functional.Event
+import com.dre.loyalty.core.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.core.view.VerticalSpaceDecoration
+import com.dre.loyalty.core.view.sheet.SheetListModal
+import com.dre.loyalty.core.view.sheet.SheetListState
 import com.dre.loyalty.databinding.FragmentPagerInvoiceListBinding
 import com.dre.loyalty.features.invoice.presentation.entity.Invoice
 import com.dre.loyalty.features.invoice.presentation.item.InvoiceListItem
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
+import javax.inject.Inject
 
 class InvoiceListPagerFragment : BaseFragment() {
+
+    @Inject
+    lateinit var navigator: Navigator
 
     private var binding: FragmentPagerInvoiceListBinding? = null
 
@@ -39,6 +48,7 @@ class InvoiceListPagerFragment : BaseFragment() {
         appComponent.inject(this)
         vm = viewModel(viewModelFactory) {
             observe(invoiceList, ::renderInvoice)
+            observe(sortOrder, ::showSortSheet)
         }
     }
 
@@ -54,6 +64,7 @@ class InvoiceListPagerFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         bindList()
+        bindHeader()
         val position = arguments?.getInt(ARGS_TYPE) ?: -1
         vm.init(position)
     }
@@ -61,6 +72,15 @@ class InvoiceListPagerFragment : BaseFragment() {
     override fun onDetach() {
         binding = null
         super.onDetach()
+    }
+
+    private fun bindHeader() {
+        binding?.btnUploadInvoice?.setOnClickListener {
+            Toast.makeText(requireContext(), "to camera", Toast.LENGTH_SHORT).show()
+        }
+        binding?.btnSort?.setOnClickListener {
+            vm.handleSortClicked()
+        }
     }
 
     private fun bindList() {
@@ -72,11 +92,21 @@ class InvoiceListPagerFragment : BaseFragment() {
     }
 
     private fun renderInvoice(invoices: List<Invoice>?) {
-        invoiceListItemAdapter.add(
+        invoiceListItemAdapter.set(
             invoices?.map {
                 InvoiceListItem(it)
             } ?: emptyList()
         )
+    }
+
+    private fun showSortSheet(event: Event<SheetListState>?) {
+        event?.getIfNotHandled()?.let { state ->
+            val sheet = SheetListModal.newInstance(state)
+            sheet.onItemClickListener = {
+                vm.handleSelectedSort(it)
+            }
+            sheet.show(requireActivity().supportFragmentManager, SheetListModal.TAG)
+        }
     }
     
     companion object {
