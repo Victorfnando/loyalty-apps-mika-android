@@ -14,5 +14,5 @@ val LOCALE_ID = Locale("in", "ID", "")
 val CURRENCY_FORMATTER: NumberFormat = NumberFormat.getCurrencyInstance(LOCALE_ID)
 
 fun Any.formatToCurrency(): String {
-    return "Rp ${CURRENCY_FORMATTER.format(this)}"
+    return CURRENCY_FORMATTER.format(this)
 }

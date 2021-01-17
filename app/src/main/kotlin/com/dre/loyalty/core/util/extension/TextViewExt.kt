@@ -12,6 +12,7 @@ import android.graphics.Paint
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.RectShape
 import android.widget.TextView
+import com.dre.loyalty.R
 
 fun TextView.addBorder(
     color : Int = Color.GRAY,
@@ -21,17 +22,22 @@ fun TextView.addBorder(
     val drawable = ShapeDrawable().apply {
         // specify the shape of shape drawable
         shape = RectShape()
-
-        paint.apply {
+        paint.let {
             // specify the border color of shape
-            this.color = color
+            it.color = color
             // set the border width
-            strokeWidth = width
+            it.strokeWidth = width
             // specify the style is a Stroke
-            style = Paint.Style.STROKE
+            it.style = Paint.Style.STROKE
         }
     }
     // finally, add the shape drawable background to text view
+    setPadding(
+        resources.getDimensionPixelSize(R.dimen.space_8dp),
+        resources.getDimensionPixelSize(R.dimen.space_4dp),
+        resources.getDimensionPixelSize(R.dimen.space_8dp),
+        resources.getDimensionPixelSize(R.dimen.space_4dp)
+    )
     background = drawable
     setTextColor(color)
 }

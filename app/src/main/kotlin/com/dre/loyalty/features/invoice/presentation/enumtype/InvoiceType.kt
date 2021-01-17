@@ -7,12 +7,19 @@
 
 package com.dre.loyalty.features.invoice.presentation.enumtype
 
-enum class InvoiceType(val position: Int) {
-    ALL(0),
-    PROCESS(1),
-    ACCEPTED(2),
-    DENIED(3),
-    UNKNOWN(-1);
+import androidx.annotation.ColorRes
+import com.dre.loyalty.R
+
+enum class InvoiceType(
+    val position: Int,
+    val status: String,
+    @ColorRes val borderColor: Int
+) {
+    ALL(0, "Semua", R.color.white),
+    PROCESS(1, "Diproses", R.color.warning_darker),
+    ACCEPTED(2, "Diterima", R.color.success_darker),
+    DENIED(3, "Ditolak", R.color.error_darker),
+    UNKNOWN(-1, "Unknown", R.color.white);
 
     companion object {
         fun fromValue(position: Int) : InvoiceType {

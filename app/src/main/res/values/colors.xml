@@ -34,6 +34,10 @@
     <color name="dark2">#6B7588</color>
     <color name="dark3">#8F90A6</color>
 
+    <color name="success_darker">#05A660</color>
+    <color name="error_darker">#D12B2B</color>
+    <color name="warning_darker">#E5B800</color>
+
     <color name="background">#E5E5E5</color>
     <color name="subtle">#D6EDF7</color>
 
