@@ -22,7 +22,10 @@ import javax.inject.Inject
 class InvoiceDetailViewModel @Inject constructor() : ViewModel() {
 
     private val _invoiceDetail: MutableLiveData<List<VerticalFieldLabelState>> = MutableLiveData()
-    val invoiceDetail: MutableLiveData<List<VerticalFieldLabelState>> = _invoiceDetail
+    val invoiceDetail: LiveData<List<VerticalFieldLabelState>> = _invoiceDetail
+
+    private val _bannerImage: MutableLiveData<String> = MutableLiveData()
+    val bannerImage: LiveData<String> = _bannerImage
 
     private val _photoView: MutableLiveData<Event<String>> = MutableLiveData()
     val photoView: LiveData<Event<String>> = _photoView
@@ -30,7 +33,8 @@ class InvoiceDetailViewModel @Inject constructor() : ViewModel() {
     fun init(id: String) {
         when {
             id.contains("red") -> {
-                val invoice = Invoice("", "4", 50_000L, "23 Desember 2020", "Depok", InvoiceType.DENIED)
+                val invoice = Invoice("https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg", "4", 50_000L, "23 Desember 2020", "Depok", InvoiceType.DENIED)
+                _bannerImage.value = invoice.imageUrl
                 _invoiceDetail.value = listOf(
                     VerticalFieldLabelState(R.string.invoiceDetail_label_id, invoice.invoiceId),
                     VerticalFieldLabelState(R.string.invoiceDetail_label_status, invoice.status.status, VerticalValueType.STATUS, invoice.status.borderColor),
@@ -43,7 +47,8 @@ class InvoiceDetailViewModel @Inject constructor() : ViewModel() {
                 )
             }
             id.contains("yel") -> {
-                val invoice = Invoice("", "3", 420_000L, "22 Desember 2020", "Planet", InvoiceType.PROCESS)
+                val invoice = Invoice("https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg", "3", 420_000L, "22 Desember 2020", "Planet", InvoiceType.PROCESS)
+                _bannerImage.value = invoice.imageUrl
                 _invoiceDetail.value = listOf(
                     VerticalFieldLabelState(R.string.invoiceDetail_label_id, invoice.invoiceId),
                     VerticalFieldLabelState(R.string.invoiceDetail_label_status, invoice.status.status, VerticalValueType.STATUS, invoice.status.borderColor),
@@ -56,7 +61,8 @@ class InvoiceDetailViewModel @Inject constructor() : ViewModel() {
                 )
             }
             id.contains("gre") -> {
-                val invoice = Invoice("", "2", 30_000L, "21 Desember 2020", "Jakarta", InvoiceType.ACCEPTED)
+                val invoice = Invoice("https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg", "2", 30_000L, "21 Desember 2020", "Jakarta", InvoiceType.ACCEPTED)
+                _bannerImage.value = invoice.imageUrl
                 _invoiceDetail.value = listOf(
                     VerticalFieldLabelState(R.string.invoiceDetail_label_id, invoice.invoiceId),
                     VerticalFieldLabelState(R.string.invoiceDetail_label_status, invoice.status.status, VerticalValueType.STATUS, invoice.status.borderColor),

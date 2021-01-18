@@ -58,6 +58,7 @@ class InvoiceDetailFragment : BaseFragment() {
         vm = viewModel(viewModelFactory) {
             observe(invoiceDetail, ::renderInvoiceDetail)
             observe(photoView, ::showPhotoView)
+            observe(bannerImage, ::renderBanner)
         }
     }
 
@@ -110,8 +111,6 @@ class InvoiceDetailFragment : BaseFragment() {
     }
 
     private fun renderInvoiceDetail(state: List<VerticalFieldLabelState>?) {
-        bannerImageAdapter.set(listOf(BannerImageItem("")))
-        dividerAdapter.set(listOf(DividerItem()))
         state?.let { viewState ->
             verticalFieldLabelAdapter.set(
                 viewState.map { VerticalFieldLabelItem(it) }
@@ -121,8 +120,15 @@ class InvoiceDetailFragment : BaseFragment() {
 
     private fun showPhotoView(event: Event<String>?) {
         event?.getIfNotHandled()?.let {
-            TODO("Go to photo view")
+            navigator.showPhotoView(requireContext(), it)
         }
+    }
+
+    private fun renderBanner(url: String?) {
+        url?.let {
+            bannerImageAdapter.set(listOf(BannerImageItem(it)))
+        }
+        dividerAdapter.set(listOf(DividerItem()))
     }
 
     companion object {

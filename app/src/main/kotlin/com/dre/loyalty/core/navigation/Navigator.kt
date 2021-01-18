@@ -42,6 +42,7 @@ import com.dre.loyalty.features.movies.MoviesActivity
 import com.dre.loyalty.features.news.presentation.detail.NewsDetailActivity
 import com.dre.loyalty.features.news.presentation.list.NewsListActivity
 import com.dre.loyalty.features.otp.OtpActivity
+import com.dre.loyalty.features.photoview.PhotoViewActivity
 import com.dre.loyalty.features.pin.presentation.InputPinActivity
 import com.dre.loyalty.features.register.presentation.ui.RegisterActivity
 import com.dre.loyalty.features.resetpin.presentation.ResetPinActivity
@@ -189,6 +190,10 @@ class Navigator @Inject constructor(private val authenticator: Authenticator) {
 
     fun showInvoiceDetail(context: Context, id: String) {
         context.startActivity(InvoiceDetailActivity.callingIntent(context, id))
+    }
+
+    fun showPhotoView(context: Context, url: String) {
+        context.startActivity(PhotoViewActivity.callingIntent(context, url))
     }
 
     class Extras(val transitionSharedElement: View)

@@ -76,6 +76,7 @@ dependencies {
   implementation(Libraries.uCrop)
   implementation(Libraries.imagePicker)
   implementation(Libraries.bottomSheet)
+  implementation(Libraries.photoView)
 
   // Unit/Android tests dependencies
   testImplementation(TestLibraries.junit4)

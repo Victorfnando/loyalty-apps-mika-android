@@ -9,6 +9,7 @@ package com.dre.loyalty.features.invoicedetail.presentation.item
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
 import com.dre.loyalty.R
 import com.dre.loyalty.databinding.ItemBannerBinding
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
@@ -24,9 +25,13 @@ class BannerImageItem(val imageUrl: String) : AbstractBindingItem<ItemBannerBind
 
     override fun bindView(binding: ItemBannerBinding, payloads: List<Any>) {
         super.bindView(binding, payloads)
+        Glide.with(binding.ivBanner.context)
+            .load(imageUrl)
+            .into(binding.ivBanner)
     }
 
     override fun unbindView(binding: ItemBannerBinding) {
         super.unbindView(binding)
+        Glide.with(binding.ivBanner.context).clear(binding.ivBanner)
     }
 }
