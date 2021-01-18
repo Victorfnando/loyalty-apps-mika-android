@@ -33,6 +33,7 @@ import com.dre.loyalty.features.createpin.presentation.CreatePinActivity
 import com.dre.loyalty.features.createpin.presentation.enums.CreatePinType
 import com.dre.loyalty.features.faq.presentation.FaqActivity
 import com.dre.loyalty.features.home.presentation.HomeActivity
+import com.dre.loyalty.features.invoicedetail.presentation.InvoiceDetailActivity
 import com.dre.loyalty.features.login.data.Authenticator
 import com.dre.loyalty.features.login.presentation.ui.LoginActivity
 import com.dre.loyalty.features.movies.MovieDetailsActivity
@@ -184,6 +185,10 @@ class Navigator @Inject constructor(private val authenticator: Authenticator) {
 
     fun showContactUs(context: Context) {
         context.startActivity(ContactUsActivity.callingIntent(context))
+    }
+
+    fun showInvoiceDetail(context: Context, id: String) {
+        context.startActivity(InvoiceDetailActivity.callingIntent(context, id))
     }
 
     class Extras(val transitionSharedElement: View)

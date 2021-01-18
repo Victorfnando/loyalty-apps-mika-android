@@ -30,7 +30,9 @@ class InvoiceListPagerViewModel @Inject constructor() : BaseViewModel() {
     private val _buttonUploadClicked: MutableLiveData<Event<Boolean>> = MutableLiveData()
     val buttonUploadClicked: LiveData<Event<Boolean>> = _buttonUploadClicked
 
-    private var originOrderInvoiceList: List<Invoice> = listOf()
+    private val _selectedItem: MutableLiveData<Event<String>> = MutableLiveData()
+    val selectedItem: LiveData<Event<String>> = _selectedItem
+
     private var selectedSortOrder: SortOrder = SortOrder.ASC
     private lateinit var invoiceType: InvoiceType
 
@@ -39,29 +41,28 @@ class InvoiceListPagerViewModel @Inject constructor() : BaseViewModel() {
         _invoiceList.value = when(invoiceType) {
             InvoiceType.ALL -> {
                listOf(
-                   Invoice("", "1", 20_000L, "20 Desember 2020", "Bekasi Timur", InvoiceType.ACCEPTED)
+                   Invoice("", "gre-1", 20_000L, "20 Desember 2020", "Bekasi Timur", InvoiceType.ACCEPTED)
                )
             }
             InvoiceType.ACCEPTED -> {
                 listOf(
-                    Invoice("", "2", 30_000L, "21 Desember 2020", "Jakarta", InvoiceType.ACCEPTED),
-                    Invoice("", "2", 30_000L, "21 Desember 2020", "Jakarta", InvoiceType.ACCEPTED),
-                            Invoice("", "2", 30_000L, "21 Desember 2020", "Jakarta", InvoiceType.ACCEPTED),
-                Invoice("", "2", 30_000L, "21 Desember 2020", "Jakarta", InvoiceType.ACCEPTED),
-                Invoice("", "2", 30_000L, "21 Desember 2020", "Jakarta", InvoiceType.ACCEPTED),
-                Invoice("", "2", 30_000L, "21 Desember 2020", "Jakarta", InvoiceType.ACCEPTED),
-                Invoice("", "2", 30_000L, "27 Desember 2020", "Jakarta", InvoiceType.ACCEPTED),
-
+                    Invoice("", "gre-2", 30_000L, "21 Desember 2020", "Jakarta", InvoiceType.ACCEPTED),
+                    Invoice("", "gre-2", 30_000L, "21 Desember 2020", "Jakarta", InvoiceType.ACCEPTED),
+                    Invoice("", "gre-2", 30_000L, "21 Desember 2020", "Jakarta", InvoiceType.ACCEPTED),
+                    Invoice("", "gre-2", 30_000L, "21 Desember 2020", "Jakarta", InvoiceType.ACCEPTED),
+                    Invoice("", "gre-2", 30_000L, "21 Desember 2020", "Jakarta", InvoiceType.ACCEPTED),
+                    Invoice("", "gre-2", 30_000L, "21 Desember 2020", "Jakarta", InvoiceType.ACCEPTED),
+                    Invoice("", "gre-2", 30_000L, "27 Desember 2020", "Jakarta", InvoiceType.ACCEPTED),
                 )
             }
             InvoiceType.PROCESS -> {
                 listOf(
-                    Invoice("", "3", 420_000L, "22 Desember 2020", "Planet", InvoiceType.PROCESS)
+                    Invoice("", "yel-3", 420_000L, "22 Desember 2020", "Planet", InvoiceType.PROCESS)
                 )
             }
             InvoiceType.DENIED -> {
                 listOf(
-                    Invoice("", "4", 50_000L, "23 Desember 2020", "Depok", InvoiceType.DENIED)
+                    Invoice("", "red-4", 50_000L, "23 Desember 2020", "Depok", InvoiceType.DENIED)
                 )
             }
             else -> throw IllegalStateException()
@@ -90,5 +91,9 @@ class InvoiceListPagerViewModel @Inject constructor() : BaseViewModel() {
 
     fun handleButtonUploadClicked() {
         _buttonUploadClicked.value = Event(true)
+    }
+
+    fun handleItemClicked(selectedId: String) {
+        _selectedItem.value = Event(selectedId)
     }
 }

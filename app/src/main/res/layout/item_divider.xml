@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Created by Andreas Oen on 1/18/21 4:39 PM
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 1/18/21 4:38 PM
+  ~ github: https://github.com/oandrz
+  -->
+
+<View xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/space_8dp"
+    android:background="@drawable/normal_divider" />

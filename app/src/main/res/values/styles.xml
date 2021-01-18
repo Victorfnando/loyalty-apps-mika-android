@@ -120,7 +120,7 @@
     </style>
 
     <style name="NormalText">
-        <item name="android:textColor">@color/gray</item>
+        <item name="android:textColor">@color/dark3</item>
         <item name="android:textSize">@dimen/text_size_12sp</item>
     </style>
 

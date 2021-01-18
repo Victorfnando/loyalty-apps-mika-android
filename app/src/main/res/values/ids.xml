@@ -21,4 +21,7 @@
     <item type="id" name="faqExpandableItem"/>
     <item type="id" name="faqItem"/>
     <item type="id" name="invoiceListItem"/>
+    <item type="id" name="bannerItem"/>
+    <item type="id" name="dividerItem"/>
+    <item type="id" name="verticalFieldLabelItem"/>
 </resources>

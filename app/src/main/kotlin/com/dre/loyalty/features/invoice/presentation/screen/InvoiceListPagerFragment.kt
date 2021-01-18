@@ -8,6 +8,7 @@
 package com.dre.loyalty.features.invoice.presentation.screen
 
 import android.app.Activity
+import android.content.ClipData
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -31,6 +32,7 @@ import com.dre.loyalty.features.camera.CameraActivity
 import com.dre.loyalty.features.invoice.presentation.entity.Invoice
 import com.dre.loyalty.features.invoice.presentation.item.InvoiceListItem
 import com.mikepenz.fastadapter.FastAdapter
+import com.mikepenz.fastadapter.IAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import javax.inject.Inject
 
@@ -54,6 +56,7 @@ class InvoiceListPagerFragment : BaseFragment() {
             observe(invoiceList, ::renderInvoice)
             observe(sortOrder, ::showSortSheet)
             observe(buttonUploadClicked, ::showCamera)
+            observe(selectedItem, ::showInvoiceDetail)
         }
     }
 
@@ -102,7 +105,12 @@ class InvoiceListPagerFragment : BaseFragment() {
         binding?.rvListInvoice?.run {
             addItemDecoration(VerticalSpaceDecoration(resources.getDimensionPixelSize(R.dimen.space_8dp)))
             layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
-            adapter = FastAdapter.with(invoiceListItemAdapter)
+            adapter = FastAdapter.with(invoiceListItemAdapter).also {
+                it.onClickListener = { _, _, item, _ ->
+                    vm.handleItemClicked(item.invoice.invoiceId)
+                    true
+                }
+            }
         }
     }
 
@@ -127,6 +135,12 @@ class InvoiceListPagerFragment : BaseFragment() {
     private fun showCamera(event: Event<Boolean>?) {
         event?.getIfNotHandled()?.let {
             startActivityForResult(CameraActivity.callingIntent(requireContext()), CameraActivity.REQUEST_CODE_CAMERA)
+        }
+    }
+
+    private fun showInvoiceDetail(event: Event<String>?) {
+        event?.getIfNotHandled()?.let {
+            navigator.showInvoiceDetail(requireContext(), it)
         }
     }
     

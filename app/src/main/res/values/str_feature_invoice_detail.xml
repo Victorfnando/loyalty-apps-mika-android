@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Andreas Oen on 1/18/21 5:02 PM
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 1/18/21 5:02 PM
+  ~ github: https://github.com/oandrz
+  -->
+
+<resources>
+    <string name="invoiceDetail_title">Detail Kwitansi</string>
+    <string name="invoiceDetail_label_id">ID</string>
+    <string name="invoiceDetail_label_status">Status</string>
+    <string name="invoiceDetail_label_cashback">Cashback Diterima</string>
+    <string name="invoiceDetail_label_eWallet">Gopay</string>
+    <string name="invoiceDetail_label_phone">No HP</string>
+    <string name="invoiceDetail_label_transactionAmount">Jumlah Transaksi</string>
+    <string name="invoiceDetail_label_transactionDate">Tanggal Transaksi</string>
+    <string name="invoiceDetail_label_branch">Cabang Rumah Sakit</string>
+    <string name="invoiceDetail_label_reason">Alasan</string>
+</resources>

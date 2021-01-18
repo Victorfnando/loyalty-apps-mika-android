@@ -23,6 +23,7 @@ import com.dre.loyalty.features.createpin.presentation.CreatePinViewModel
 import com.dre.loyalty.features.home.presentation.HomeViewModel
 import com.dre.loyalty.features.hospital.presentation.HospitalListViewModel
 import com.dre.loyalty.features.invoice.presentation.screen.InvoiceListPagerViewModel
+import com.dre.loyalty.features.invoicedetail.presentation.InvoiceDetailViewModel
 import com.dre.loyalty.features.login.presentation.ui.LoginViewModel
 import com.dre.loyalty.features.movies.MovieDetailsViewModel
 import com.dre.loyalty.features.movies.MoviesViewModel
@@ -111,6 +112,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(InvoiceListPagerViewModel::class)
     abstract fun provideInvoiceListPagerViewModel(vm: InvoiceListPagerViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(InvoiceDetailViewModel::class)
+    abstract fun provideInvoiceDetailViewModel(vm: InvoiceDetailViewModel): ViewModel
 
     @Binds
     @IntoMap

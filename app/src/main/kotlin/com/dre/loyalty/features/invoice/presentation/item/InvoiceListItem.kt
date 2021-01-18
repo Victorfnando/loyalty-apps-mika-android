@@ -17,7 +17,7 @@ import com.dre.loyalty.databinding.ItemInvoiceBinding
 import com.dre.loyalty.features.invoice.presentation.entity.Invoice
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
 
-class InvoiceListItem(private val invoice: Invoice) : AbstractBindingItem<ItemInvoiceBinding>() {
+class InvoiceListItem(val invoice: Invoice) : AbstractBindingItem<ItemInvoiceBinding>() {
 
     override val type: Int
         get() = R.id.invoiceListItem

@@ -13,6 +13,10 @@ import java.util.*
 val LOCALE_ID = Locale("in", "ID", "")
 val CURRENCY_FORMATTER: NumberFormat = NumberFormat.getCurrencyInstance(LOCALE_ID)
 
-fun Any.formatToCurrency(): String {
-    return CURRENCY_FORMATTER.format(this)
+fun Any.formatToCurrency(isCashBack: Boolean? = false): String {
+    return if (isCashBack == true) {
+        "+ ${CURRENCY_FORMATTER.format(this)}"
+    } else {
+        CURRENCY_FORMATTER.format(this)
+    }
 }
