@@ -7,6 +7,8 @@
 
 package com.dre.loyalty.features.uploadinvoice.presentation
 
+import android.app.Activity.RESULT_OK
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
@@ -24,6 +26,8 @@ import com.dre.loyalty.core.functional.Event
 import com.dre.loyalty.core.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.databinding.FragmentUploadInvoiceBinding
+import com.dre.loyalty.features.camera.CameraActivity
+import com.dre.loyalty.features.camera.CameraActivity.Companion.EXTRA_URI
 import com.dre.loyalty.features.uploadinvoice.presentation.entity.HospitalBranchState
 import com.dre.loyalty.features.uploadinvoice.presentation.entity.TotalAmountState
 import com.dre.loyalty.features.uploadinvoice.presentation.entity.UploadButtonState
@@ -62,6 +66,7 @@ class UploadInvoiceFragment : BaseFragment() {
             observe(selectedDate, ::renderSelectedDate)
             observe(totalAmountInputState, ::updateTotalAmountState)
             observe(uploadButtonState, ::updateUploadButtonState)
+            observe(changePhotoClicked, ::showPhotoScreen)
         }
     }
 
@@ -77,18 +82,29 @@ class UploadInvoiceFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         arguments?.getString(ARGS_IMAGE_URI)?.let {
-            Glide.with(this)
-                .load(Uri.parse(it))
-                .into(binding!!.ivInvoice)
+            renderPhoto(it)
         }
         bindToolbar()
         bindEtFormBranch()
         bindEtDate()
         bindTvTnc()
         binding?.etAmount?.editText?.addTextChangedListener(totalAmountWatcher)
+        binding?.tvChangePhoto?.setOnClickListener {
+            vm.handleChangePhotoClicked()
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == RESULT_OK && requestCode == CameraActivity.REQUEST_CODE_CAMERA) {
+            data?.extras?.getString(EXTRA_URI)?.let {
+                renderPhoto(it)
+            }
+        }
     }
 
     override fun onDetach() {
+        binding?.ivInvoice?.let { Glide.with(this).clear(it) }
         binding?.etAmount?.editText?.removeTextChangedListener(totalAmountWatcher)
         binding = null
         super.onDetach()
@@ -170,6 +186,22 @@ class UploadInvoiceFragment : BaseFragment() {
 
     private fun updateUploadButtonState(state: UploadButtonState?) {
         binding?.stickyButton?.isButtonEnabled = state?.isEnabled ?: false
+    }
+
+    private fun showPhotoScreen(event: Event<Boolean>?) {
+        event?.getIfNotHandled()?.let {
+            startActivityForResult(
+                CameraActivity.callingIntent(requireContext()), CameraActivity.REQUEST_CODE_CAMERA
+            )
+        }
+    }
+
+    private fun renderPhoto(uri: String) {
+        binding?.ivInvoice?.let {
+            Glide.with(this)
+                .load(Uri.parse(uri))
+                .into(it)
+        }
     }
 
     companion object {

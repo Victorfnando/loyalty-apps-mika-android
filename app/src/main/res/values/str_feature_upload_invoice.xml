@@ -11,6 +11,7 @@
     <string name="upload_invoice_screen_label_branch">Cabang Mitra Keluarga</string>
     <string name="upload_invoice_screen_label_transaction_date">Tanggal Transaksi (sesuai kwitansi)</string>
     <string name="upload_invoice_screen_label_total_amount">Jumlah Pembayaran</string>
+    <string name="upload_invoice_screen_label_updatePhoto">Ubah foto</string>
     <string name="upload_invoice_screen_hint_branch">Pilih cabang Mitra Keluarga</string>
     <string name="upload_invoice_screen_hint_transaction_date">Pilih tanggal transaksi</string>
     <string name="upload_invoice_screen_hint_total_amount">Contoh: 200.000</string>

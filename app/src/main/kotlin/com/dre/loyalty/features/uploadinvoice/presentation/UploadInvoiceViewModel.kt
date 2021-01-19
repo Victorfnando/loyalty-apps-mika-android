@@ -37,6 +37,9 @@ class UploadInvoiceViewModel @Inject constructor() : BaseViewModel() {
     private val _totalAmountInputState: MutableLiveData<TotalAmountState> = MutableLiveData()
     val totalAmountInputState: LiveData<TotalAmountState> = _totalAmountInputState
 
+    private val _changePhotoClicked: MutableLiveData<Event<Boolean>> = MutableLiveData()
+    val changePhotoClicked: LiveData<Event<Boolean>> = _changePhotoClicked
+
     init {
         _totalAmountInputState.value = TotalAmountState(-1)
         _uploadButtonState.value = UploadButtonState(false)
@@ -79,6 +82,10 @@ class UploadInvoiceViewModel @Inject constructor() : BaseViewModel() {
             _totalAmountInputState.value = TotalAmountState(result.errorMessage)
         }
         validateButtonState()
+    }
+
+    fun handleChangePhotoClicked() {
+        _changePhotoClicked.value = Event(true)
     }
 
     private fun validateButtonState() {

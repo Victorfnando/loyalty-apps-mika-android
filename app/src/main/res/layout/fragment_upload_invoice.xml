@@ -54,6 +54,18 @@
                     android:scaleType="centerCrop" />
             </FrameLayout>
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_change_photo"
+                style="@style/SmallLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_8dp"
+                android:layout_marginStart="@dimen/space_16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:textColor="@color/info"
+                android:text="@string/upload_invoice_screen_label_updatePhoto"
+                app:layout_constraintTop_toBottomOf="@id/container_iv_invoice" />
+
             <com.dre.loyalty.core.view.PrefixEditTextWithLabel
                 android:id="@+id/et_form_branch"
                 android:layout_width="0dp"
@@ -67,7 +79,7 @@
                 app:fieldLabel="@string/upload_invoice_screen_label_branch"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/container_iv_invoice" />
+                app:layout_constraintTop_toBottomOf="@id/tv_change_photo" />
 
             <com.dre.loyalty.core.view.PrefixEditTextWithLabel
                 android:id="@+id/et_transaction_date"
