@@ -30,7 +30,7 @@ import com.dre.loyalty.features.movies.MoviesViewModel
 import com.dre.loyalty.features.pin.presentation.InputPinViewModel
 import com.dre.loyalty.features.profile.presentation.ProfileViewModel
 import com.dre.loyalty.features.register.presentation.ui.RegisterViewModel
-import com.dre.loyalty.features.resetpin.presentation.ResetPinViewModel
+import com.dre.loyalty.features.resetpassword.presentation.ResetPasswordViewModel
 import com.dre.loyalty.features.updatepassword.presentation.UpdatePasswordViewModel
 import com.dre.loyalty.features.uploadinvoice.presentation.UploadInvoiceViewModel
 import com.dre.loyalty.features.userdetailform.presentation.UserDetailFormViewModel
@@ -70,8 +70,8 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(ResetPinViewModel::class)
-    abstract fun provideResetPinViewModel(vm: ResetPinViewModel): ViewModel
+    @ViewModelKey(ResetPasswordViewModel::class)
+    abstract fun provideResetPinViewModel(vm: ResetPasswordViewModel): ViewModel
 
     @Binds
     @IntoMap

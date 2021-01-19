@@ -8,10 +8,10 @@
 
 <resources>
     <string name="resetpin_screen_title">Atur ulang security code</string>
-    <string name="resetpin_screen_label_desc">Silahkan masukkan nomor HP kamu, kami akan mengirimkan kode OTP untuk mengatur ulang security code kamu</string>
+    <string name="resetpin_screen_label_desc">Silahkan masukkan email kamu, kami akan mengirimkan link untuk mengatur ulang kata sandi kamu</string>
     <string name="resetpin_screen_label_phone">Nomor telfon</string>
     <string name="resetpin_screen_label_note">Catatan</string>
-    <string name="resetpin_screen_label_notedesc">Kamu hanya bisa mendapatkan kode sebanyak 5 kali, setelah itu kamu harus menunggu selama 2 Jam untuk mendapatkan kode lagi</string>
+    <string name="resetpin_screen_label_notedesc">Kamu hanya bisa mendapatkan link sebanyak 5 kali, setelah itu kamu harus menunggu selama 2 Jam untuk mendapatkan link lagi</string>
     <string name="resetpin_screen_et_hint">Cth:8123412678</string>
     <string name="resetpin_screen_btn_label">Atur ulang</string>
 </resources>

@@ -7,6 +7,8 @@
 
 package com.dre.loyalty.features.register.presentation.entity
 
-class RegisterPhoneInputState(
-    val error: String?
+import androidx.annotation.StringRes
+
+class RegisterEmailInputState(
+    @StringRes val error: Int?
 )

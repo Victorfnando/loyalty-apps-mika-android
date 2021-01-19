@@ -45,7 +45,7 @@ import com.dre.loyalty.features.otp.OtpActivity
 import com.dre.loyalty.features.photoview.PhotoViewActivity
 import com.dre.loyalty.features.pin.presentation.InputPinActivity
 import com.dre.loyalty.features.register.presentation.ui.RegisterActivity
-import com.dre.loyalty.features.resetpin.presentation.ResetPinActivity
+import com.dre.loyalty.features.resetpassword.presentation.ResetPinActivity
 import com.dre.loyalty.features.splash.presentation.SplashScreenActivity
 import com.dre.loyalty.features.updatepassword.presentation.UpdatePasswordActivity
 import com.dre.loyalty.features.uploadinvoice.presentation.UploadInvoiceActivity

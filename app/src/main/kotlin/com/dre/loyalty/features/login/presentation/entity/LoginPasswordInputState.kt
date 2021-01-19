@@ -7,6 +7,9 @@
 
 package com.dre.loyalty.features.login.presentation.entity
 
-data class LoginPhoneInputState(
-    var error: String? = null
+import androidx.annotation.StringRes
+
+data class LoginPasswordInputState(
+    @StringRes var error: Int? = null,
+    var isShowingPassword: Boolean = false
 )

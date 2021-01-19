@@ -5,8 +5,8 @@
  * github: https://github.com/oandrz
  */
 
-package com.dre.loyalty.features.resetpin.presentation.entity
+package com.dre.loyalty.features.resetpassword.presentation.entity
 
-data class ResetPinPhoneNumberInputState(
-    val error: String?
+data class ResetPinButtonState(
+    var isEnable: Boolean
 )

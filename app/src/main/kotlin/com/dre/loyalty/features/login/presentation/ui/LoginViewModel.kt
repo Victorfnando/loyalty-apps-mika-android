@@ -7,46 +7,83 @@
 
 package com.dre.loyalty.features.login.presentation.ui
 
-import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.dre.loyalty.core.functional.Event
 import com.dre.loyalty.core.platform.BaseViewModel
+import com.dre.loyalty.core.util.validator.type.ValidationType
 import com.dre.loyalty.features.login.presentation.entity.LoginButtonState
-import com.dre.loyalty.features.login.presentation.entity.LoginPhoneInputState
+import com.dre.loyalty.features.login.presentation.entity.LoginEmailInputState
+import com.dre.loyalty.features.login.presentation.entity.LoginPasswordInputState
 import javax.inject.Inject
 
 class LoginViewModel @Inject constructor() : BaseViewModel() {
 
-    private val _navigateMain: MutableLiveData<Boolean> = MutableLiveData()
-    val navigateMain: LiveData<Boolean> = _navigateMain
+    private val _navigateMain: MutableLiveData<Event<Boolean>> = MutableLiveData()
+    val navigateMain: LiveData<Event<Boolean>> = _navigateMain
+
+    private val _navigateResetPassword: MutableLiveData<Event<Boolean>> = MutableLiveData()
+    val navigateResetPassword: LiveData<Event<Boolean>> = _navigateResetPassword
 
     private val _loginButtonState: MutableLiveData<LoginButtonState> = MutableLiveData()
     val loginButtonState: LiveData<LoginButtonState> = _loginButtonState
 
-    private val _loginPhoneInputState: MutableLiveData<LoginPhoneInputState> = MutableLiveData()
-    val loginPhoneInputState: LiveData<LoginPhoneInputState> = _loginPhoneInputState
+    private val _loginEmailInputState: MutableLiveData<LoginEmailInputState> = MutableLiveData()
+    val loginEmailInputState: LiveData<LoginEmailInputState> = _loginEmailInputState
+
+    private val _loginPasswordInputState: MutableLiveData<LoginPasswordInputState> = MutableLiveData()
+    val loginPasswordInputState: LiveData<LoginPasswordInputState> = _loginPasswordInputState
 
     init {
-        _loginPhoneInputState.value = LoginPhoneInputState(null)
+        _loginEmailInputState.value = LoginEmailInputState(-1)
+        _loginPasswordInputState.value = LoginPasswordInputState(-1, false)
         _loginButtonState.value = LoginButtonState(false)
     }
 
-    fun handleLoginButtonClicked() {
-        _navigateMain.value = true
+    fun handleEmailChanged(text: String) {
+        val result = ValidationType.EMAIL.strategy.validate(text)
+        if (result.isPass) {
+            _loginEmailInputState.value = LoginEmailInputState(null)
+        } else {
+            _loginEmailInputState.value = LoginEmailInputState(result.errorMessage)
+        }
+        updateButtonState()
     }
 
-    fun handleTextChanged(text: String) {
-        if (text.isEmpty()) {
-            _loginPhoneInputState.value = LoginPhoneInputState(null)
-            _loginButtonState.value = LoginButtonState(false)
-            return
+    fun handlePasswordChanged(text: String) {
+        val result = ValidationType.PASSWORD.strategy.validate(text)
+        if (result.isPass) {
+            _loginPasswordInputState.value = LoginPasswordInputState(
+                null,
+                _loginPasswordInputState.value?.isShowingPassword ?: false
+            )
+        } else {
+            _loginPasswordInputState.value = LoginPasswordInputState(
+                result.errorMessage,
+                _loginPasswordInputState.value?.isShowingPassword ?: false
+            )
         }
-        if (!text.isDigitsOnly()) {
-            _loginPhoneInputState.value = LoginPhoneInputState("Number Only")
-            _loginButtonState.value = LoginButtonState(false)
-            return
-        }
-        _loginPhoneInputState.value = LoginPhoneInputState(null)
-        _loginButtonState.value = LoginButtonState(true)
+        updateButtonState()
+    }
+
+    fun handleShowHidePasswordClicked() {
+        _loginPasswordInputState.value = _loginPasswordInputState.value?.copy(
+            isShowingPassword = !(_loginPasswordInputState.value?.isShowingPassword ?: false)
+        )
+    }
+
+    fun handleLoginButtonClicked() {
+        _navigateMain.value = Event(true)
+    }
+
+    fun handleTvFooterClicked() {
+        _navigateResetPassword.value = Event(true)
+    }
+
+    private fun updateButtonState() {
+        _loginButtonState.value = LoginButtonState(
+            _loginEmailInputState.value?.error == null
+                    && _loginPasswordInputState.value?.error == null
+        )
     }
 }

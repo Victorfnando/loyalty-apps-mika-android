@@ -7,13 +7,13 @@
 
 package com.dre.loyalty.features.register.presentation.ui
 
-import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dre.loyalty.core.functional.Event
 import com.dre.loyalty.core.platform.BaseViewModel
+import com.dre.loyalty.core.util.validator.type.ValidationType
 import com.dre.loyalty.features.register.presentation.entity.RegisterButtonState
-import com.dre.loyalty.features.register.presentation.entity.RegisterPhoneInputState
+import com.dre.loyalty.features.register.presentation.entity.RegisterEmailInputState
 import javax.inject.Inject
 
 class RegisterViewModel @Inject constructor() : BaseViewModel() {
@@ -27,11 +27,11 @@ class RegisterViewModel @Inject constructor() : BaseViewModel() {
     private val _regisButtonState: MutableLiveData<RegisterButtonState> = MutableLiveData()
     val regisButtonState: LiveData<RegisterButtonState> = _regisButtonState
 
-    private val _regisPhoneInputState: MutableLiveData<RegisterPhoneInputState> = MutableLiveData()
-    val regisPhoneInputState: LiveData<RegisterPhoneInputState> = _regisPhoneInputState
+    private val _emailInputState: MutableLiveData<RegisterEmailInputState> = MutableLiveData()
+    val emailInputState: LiveData<RegisterEmailInputState> = _emailInputState
 
     init {
-        _regisPhoneInputState.value = RegisterPhoneInputState(null)
+        _emailInputState.value = RegisterEmailInputState(-1)
         _regisButtonState.value = RegisterButtonState(false)
     }
 
@@ -43,18 +43,13 @@ class RegisterViewModel @Inject constructor() : BaseViewModel() {
         _navigateOtpScreen.value = Event(true)
     }
 
-    fun handlePhoneNumberTextChanged(text: String) {
-        if (text.isEmpty()) {
-            _regisPhoneInputState.value = RegisterPhoneInputState(null)
-            _regisButtonState.value = RegisterButtonState(false)
-            return
+    fun handleEmailTextChanged(text: String) {
+        val result = ValidationType.EMAIL.strategy.validate(text)
+        _emailInputState.value = if (result.isPass) {
+            RegisterEmailInputState(null)
+        } else {
+            RegisterEmailInputState(result.errorMessage)
         }
-        if (!text.isDigitsOnly()) {
-            _regisPhoneInputState.value = RegisterPhoneInputState("Number Only")
-            _regisButtonState.value = RegisterButtonState(false)
-            return
-        }
-        _regisPhoneInputState.value = RegisterPhoneInputState(null)
-        _regisButtonState.value = RegisterButtonState(true)
+        _regisButtonState.value = RegisterButtonState(_emailInputState.value?.error == null)
     }
 }

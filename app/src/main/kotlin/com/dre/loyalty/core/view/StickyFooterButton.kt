@@ -9,6 +9,7 @@ package com.dre.loyalty.core.view
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.widget.LinearLayoutCompat
@@ -74,5 +75,9 @@ class StickyFooterButton @JvmOverloads constructor(
         tvFooterText = attribute.getText(R.styleable.StickyFooterButton_footerLabel)
         tvFooterVisibility = attribute.getInt(R.styleable.StickyFooterButton_footerLabelVisibility, View.VISIBLE)
         attribute.recycle()
+    }
+
+    fun setFooterGravity(gravity: Int) {
+        binding.tvFooter.gravity = gravity
     }
 }

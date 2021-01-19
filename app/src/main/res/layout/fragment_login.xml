@@ -12,7 +12,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/activity_vertical_margin"
-        app:layout_constraintBottom_toTopOf="@id/tv_label_register"
+        app:layout_constraintBottom_toTopOf="@id/btn_login_sticky"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar_layout">
@@ -23,7 +23,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_login"
-                style="@style/TitleText"
+                style="@style/Heading5"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/activity_horizontal_margin"
@@ -35,7 +35,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_description"
-                style="@style/NormalText"
+                style="@style/BodySmall"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/activity_horizontal_margin"
@@ -45,63 +45,46 @@
                 android:textColor="@color/gray"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_login" />
+                app:layout_constraintTop_toBottomOf="@id/tv_login"
+                app:layout_constraintBottom_toTopOf="@id/et_mail"/>
 
             <com.dre.loyalty.core.view.PrefixEditTextWithLabel
-                android:id="@+id/et_phone"
+                android:id="@+id/et_mail"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/activity_horizontal_margin"
                 android:layout_marginTop="@dimen/space_20dp"
                 android:layout_marginEnd="@dimen/activity_horizontal_margin"
                 android:hint="@string/login_screen_et_hint"
-                android:inputType="phone"
-                android:maxLength="13"
-                app:fieldLabel="@string/login_screen_label_phone"
+                android:inputType="textEmailAddress"
+                app:fieldLabel="@string/login_screen_label_email"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_description"
-                app:prefixText="+62" />
+                app:layout_constraintTop_toBottomOf="@id/tv_description" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_login"
-                style="@style/NormalButton"
+            <com.dre.loyalty.core.view.PrefixEditTextWithLabel
+                android:id="@+id/et_pass"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/activity_horizontal_margin"
-                android:layout_marginTop="@dimen/space_20dp"
-                android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                android:text="@string/login_screen_btn_login"
+                android:layout_marginStart="@dimen/space_16dp"
+                android:layout_marginTop="@dimen/space_16dp"
+                android:layout_marginEnd="@dimen/space_16dp"
+                android:drawableEnd="@drawable/ic_password_hide"
+                android:inputType="textPassword"
+                android:hint="@string/login_screen_hint_passsword"
+                app:fieldLabel="@string/login_screen_label_password"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/et_phone" />
+                app:layout_constraintTop_toBottomOf="@id/et_mail" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_label_register"
-        style="@style/NormalText"
+    <com.dre.loyalty.core.view.StickyFooterButton
+        android:id="@+id/btn_login_sticky"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/space_16dp"
-        android:layout_marginEnd="@dimen/space_16dp"
-        android:layout_marginBottom="@dimen/space_12dp"
-        android:gravity="center"
-        android:text="@string/login_screen_label_register"
-        app:layout_constraintBottom_toTopOf="@id/btn_register"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_register"
-        style="@style/NormalGhostButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:layout_marginEnd="@dimen/activity_horizontal_margin"
-        android:layout_marginBottom="@dimen/space_24dp"
-        android:text="@string/login_screen_btn_register"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:footerButtonText="@string/login_screen_btn_login"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

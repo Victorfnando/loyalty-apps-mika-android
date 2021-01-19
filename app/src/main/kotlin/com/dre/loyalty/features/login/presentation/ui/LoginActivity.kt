@@ -14,7 +14,7 @@ import com.dre.loyalty.core.platform.BaseActivity
 
 class LoginActivity : BaseActivity() {
 
-    override fun fragment() = LoginFragment()
+    override fun fragment() = LoginFragment.newInstance()
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {

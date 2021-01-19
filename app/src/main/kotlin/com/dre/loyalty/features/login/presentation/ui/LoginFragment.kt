@@ -10,17 +10,26 @@ package com.dre.loyalty.features.login.presentation.ui
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
+import android.text.method.TransformationMethod
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.text.HtmlCompat
+import com.dre.loyalty.R
 import com.dre.loyalty.core.extension.observe
 import com.dre.loyalty.core.extension.viewModel
+import com.dre.loyalty.core.functional.Event
 import com.dre.loyalty.core.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.databinding.FragmentLoginBinding
 import com.dre.loyalty.features.login.presentation.entity.LoginButtonState
-import com.dre.loyalty.features.login.presentation.entity.LoginPhoneInputState
+import com.dre.loyalty.features.login.presentation.entity.LoginEmailInputState
+import com.dre.loyalty.features.login.presentation.entity.LoginPasswordInputState
+import com.dre.loyalty.features.updatepassword.presentation.entity.PasswordInputState
 import javax.inject.Inject
 
 class LoginFragment : BaseFragment() {
@@ -32,7 +41,7 @@ class LoginFragment : BaseFragment() {
 
     private var binding: FragmentLoginBinding? = null
 
-    private val phoneChangeListener: TextWatcher = object : TextWatcher {
+    private val emailChangeListener: TextWatcher = object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
         }
 
@@ -40,7 +49,19 @@ class LoginFragment : BaseFragment() {
         }
 
         override fun afterTextChanged(s: Editable?) {
-            vm.handleTextChanged(s.toString())
+            vm.handleEmailChanged(s.toString())
+        }
+    }
+
+    private val passwordChangeListener: TextWatcher = object : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+        }
+
+        override fun afterTextChanged(s: Editable?) {
+            vm.handlePasswordChanged(s.toString())
         }
     }
 
@@ -48,11 +69,11 @@ class LoginFragment : BaseFragment() {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
         vm = viewModel(viewModelFactory) {
-            observe(navigateMain) { _ ->
-                activity?.let { navigator.showPin(it) }
-            }
+            observe(navigateMain, ::showHomePage)
+            observe(navigateResetPassword, ::showResetPassword)
             observe(loginButtonState, ::updateLoginButtonState)
-            observe(loginPhoneInputState, ::updateLoginPhoneState)
+            observe(loginEmailInputState, ::updateEmailInput)
+            observe(loginPasswordInputState, ::updatePasswordInput)
         }
     }
 
@@ -68,12 +89,19 @@ class LoginFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         bindToolbar()
+        bindStickyButton()
+        binding?.etMail?.editText?.addTextChangedListener(emailChangeListener)
+        bindEtPassword()
+    }
+
+    override fun onDetach() {
+        (activity as AppCompatActivity).setSupportActionBar(null)
         binding?.run {
-            btnLogin.setOnClickListener {
-                vm.handleLoginButtonClicked()
-            }
-            etPhone.editText.addTextChangedListener(phoneChangeListener)
+            etMail.editText.removeTextChangedListener(emailChangeListener)
+            etPass.editText.removeTextChangedListener(passwordChangeListener)
         }
+        binding = null
+        super.onDetach()
     }
 
     private fun bindToolbar() {
@@ -84,18 +112,79 @@ class LoginFragment : BaseFragment() {
         }
     }
 
+    private fun bindEtPassword() {
+        binding?.etPass?.run {
+            editText.addTextChangedListener(passwordChangeListener)
+            drawableEndClickListener = View.OnClickListener {
+                vm.handleShowHidePasswordClicked()
+            }
+        }
+    }
+
+    private fun bindStickyButton() {
+        binding?.btnLoginSticky?.run {
+            setFooterGravity(Gravity.CENTER)
+            tvFooterClickListener = {
+                vm.handleTvFooterClicked()
+            }
+            tvFooterText = HtmlCompat.fromHtml(getString(R.string.login_screen_label_reset), HtmlCompat.FROM_HTML_MODE_LEGACY)
+            buttonClickListener = {
+                vm.handleLoginButtonClicked()
+            }
+        }
+    }
+
     private fun updateLoginButtonState(state: LoginButtonState?) {
-        binding?.btnLogin?.isEnabled = state?.enabled ?: false
+        binding?.btnLoginSticky?.isButtonEnabled = state?.enabled ?: false
     }
 
-    private fun updateLoginPhoneState(state: LoginPhoneInputState?) {
-        binding?.etPhone?.error = state?.error
+    private fun updateEmailInput(state: LoginEmailInputState?) {
+        val errorMessage = state?.error
+        binding?.etMail?.error = if (errorMessage != null && state.error != -1) {
+            getString(errorMessage)
+        } else {
+            ""
+        }
     }
 
-    override fun onDetach() {
-        (activity as AppCompatActivity).setSupportActionBar(null)
-        binding?.etPhone?.editText?.removeTextChangedListener(phoneChangeListener)
-        binding = null
-        super.onDetach()
+    private fun updatePasswordInput(state: LoginPasswordInputState?) {
+        binding?.etPass?.run {
+            editText.let {
+                it.transformationMethod = getInputTransformation(state)
+                it.setSelection(it.text?.length ?: 0)
+            }
+            val errorMessage = state?.error
+            error = if (errorMessage != null && state.error != -1) {
+                getString(errorMessage)
+            } else {
+                ""
+            }
+        }
+    }
+
+    private fun getInputTransformation(state: LoginPasswordInputState?): TransformationMethod {
+        return if (state?.isShowingPassword == true) {
+            HideReturnsTransformationMethod.getInstance()
+        } else {
+            PasswordTransformationMethod.getInstance()
+        }
+    }
+
+    private fun showHomePage(event: Event<Boolean>?) {
+        event?.getIfNotHandled()?.let {
+            navigator.showHome(requireContext())
+        }
+    }
+
+    private fun showResetPassword(event: Event<Boolean>?) {
+        event?.getIfNotHandled()?.let {
+            navigator.showResetPin(requireContext())
+        }
+    }
+
+    companion object {
+        fun newInstance(): LoginFragment {
+            return LoginFragment()
+        }
     }
 }

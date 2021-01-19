@@ -5,7 +5,7 @@
  * github: https://github.com/oandrz
  */
 
-package com.dre.loyalty.features.resetpin.presentation
+package com.dre.loyalty.features.resetpassword.presentation
 
 import android.content.Context
 import android.content.Intent
@@ -15,7 +15,7 @@ import com.dre.loyalty.core.platform.BaseFragment
 
 class ResetPinActivity : BaseActivity() {
 
-    override fun fragment(): BaseFragment = ResetPinFragment.newInstance()
+    override fun fragment(): BaseFragment = ResetPasswordFragment.newInstance()
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {

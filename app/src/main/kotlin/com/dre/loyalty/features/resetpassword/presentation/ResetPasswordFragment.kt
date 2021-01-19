@@ -5,7 +5,7 @@
  * github: https://github.com/oandrz
  */
 
-package com.dre.loyalty.features.resetpin.presentation
+package com.dre.loyalty.features.resetpassword.presentation
 
 import android.os.Bundle
 import android.text.Editable
@@ -18,12 +18,12 @@ import com.dre.loyalty.core.extension.observe
 import com.dre.loyalty.core.extension.viewModel
 import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.databinding.FragmentResetPinBinding
-import com.dre.loyalty.features.resetpin.presentation.entity.ResetPinButtonState
-import com.dre.loyalty.features.resetpin.presentation.entity.ResetPinPhoneNumberInputState
+import com.dre.loyalty.features.resetpassword.presentation.entity.ResetPinButtonState
+import com.dre.loyalty.features.resetpassword.presentation.entity.ResetPinPhoneNumberInputState
 
-class ResetPinFragment : BaseFragment() {
+class ResetPasswordFragment : BaseFragment() {
 
-    private lateinit var vm: ResetPinViewModel
+    private lateinit var vm: ResetPasswordViewModel
 
     private var binding: FragmentResetPinBinding? = null
 
@@ -44,7 +44,7 @@ class ResetPinFragment : BaseFragment() {
         appComponent.inject(this)
         vm = viewModel(viewModelFactory) {
             observe(resetPinButtonState, ::updateResetPinButtonState)
-            observe(phoneInputState, ::updatePhoneInputState)
+            observe(mailInputState, ::updateEmailInputState)
         }
     }
 
@@ -52,15 +52,15 @@ class ResetPinFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         binding = FragmentResetPinBinding.inflate(inflater, container, false)
-        return binding!!.root
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         bindToolbar()
-        binding?.etPhone?.editText?.addTextChangedListener(phoneChangeListener)
+        binding?.etMail?.editText?.addTextChangedListener(phoneChangeListener)
     }
 
     override fun onDetach() {
@@ -81,13 +81,17 @@ class ResetPinFragment : BaseFragment() {
         binding?.btnReset?.isEnabled = state?.isEnable ?: false
     }
 
-    private fun updatePhoneInputState(state: ResetPinPhoneNumberInputState?) {
-        binding?.etPhone?.error = state?.error
+    private fun updateEmailInputState(state: ResetPinPhoneNumberInputState?) {
+        binding?.etMail?.error = if (state?.error != null && state.error != -1) {
+            getString(state.error)
+        } else {
+            ""
+        }
     }
 
     companion object {
-        fun newInstance(): ResetPinFragment {
-            return ResetPinFragment()
+        fun newInstance(): ResetPasswordFragment {
+            return ResetPasswordFragment()
         }
     }
 }

@@ -14,7 +14,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import com.dre.loyalty.R
 import com.dre.loyalty.core.extension.observe
 import com.dre.loyalty.core.extension.viewModel
 import com.dre.loyalty.core.functional.Event
@@ -22,7 +21,7 @@ import com.dre.loyalty.core.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.databinding.FragmentRegisterBinding
 import com.dre.loyalty.features.register.presentation.entity.RegisterButtonState
-import com.dre.loyalty.features.register.presentation.entity.RegisterPhoneInputState
+import com.dre.loyalty.features.register.presentation.entity.RegisterEmailInputState
 import javax.inject.Inject
 
 class RegisterFragment : BaseFragment() {
@@ -34,7 +33,7 @@ class RegisterFragment : BaseFragment() {
 
     private var binding: FragmentRegisterBinding? = null
 
-    private val phoneChangeListener: TextWatcher = object : TextWatcher {
+    private val emailChangedListener: TextWatcher = object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
         }
 
@@ -42,7 +41,7 @@ class RegisterFragment : BaseFragment() {
         }
 
         override fun afterTextChanged(s: Editable?) {
-            vm.handlePhoneNumberTextChanged(s.toString())
+            vm.handleEmailTextChanged(s.toString())
         }
     }
 
@@ -53,7 +52,7 @@ class RegisterFragment : BaseFragment() {
             observe(navigateLogin, ::navigateToLoginPage)
             observe(navigateOtpScreen, ::navigateOtpScreen)
             observe(regisButtonState, ::updateRegisButtonState)
-            observe(regisPhoneInputState, ::updatePhoneInputState)
+            observe(emailInputState, ::updateEmailInputState)
         }
     }
 
@@ -68,26 +67,23 @@ class RegisterFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as AppCompatActivity).run {
-            setSupportActionBar(binding?.toolbarLayout?.toolbar)
-            supportActionBar?.setDisplayShowTitleEnabled(false)
-            supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        }
+        bindToolbar()
         binding?.run {
-            setToastDescription()
             btnLogin.setOnClickListener {
                 vm.handleLoginButtonClicked()
             }
             btnRegister.setOnClickListener {
                 vm.handleRegisterButtonClicked()
             }
-            etPhone.editText.addTextChangedListener(phoneChangeListener)
+            etMail.editText.addTextChangedListener(emailChangedListener)
         }
     }
 
-    private fun setToastDescription() {
-        binding?.run {
-            tvDescription.fromHtml(getString(R.string.register_screen_toast_desc))
+    private fun bindToolbar() {
+        (activity as AppCompatActivity).run {
+            setSupportActionBar(binding?.toolbarLayout?.toolbar)
+            supportActionBar?.setDisplayShowTitleEnabled(false)
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
     }
 
@@ -95,8 +91,12 @@ class RegisterFragment : BaseFragment() {
         binding?.btnRegister?.isEnabled = state?.enabled ?: false
     }
 
-    private fun updatePhoneInputState(state: RegisterPhoneInputState?) {
-        binding?.etPhone?.error = state?.error
+    private fun updateEmailInputState(state: RegisterEmailInputState?) {
+        binding?.etMail?.error = if (state?.error != null && state.error != -1) {
+            getString(state.error)
+        } else {
+            ""
+        }
     }
 
     private fun navigateToLoginPage(flag: Event<Boolean>?) {
@@ -113,7 +113,7 @@ class RegisterFragment : BaseFragment() {
 
     override fun onDetach() {
         (activity as AppCompatActivity).setSupportActionBar(null)
-        binding?.etPhone?.editText?.removeTextChangedListener(phoneChangeListener)
+        binding?.etMail?.editText?.removeTextChangedListener(emailChangedListener)
         binding = null
         super.onDetach()
     }
