@@ -23,13 +23,13 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_footer"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/space_16dp"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_submit"
             style="@style/NormalButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/space_16dp" />
+            android:layout_height="wrap_content" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

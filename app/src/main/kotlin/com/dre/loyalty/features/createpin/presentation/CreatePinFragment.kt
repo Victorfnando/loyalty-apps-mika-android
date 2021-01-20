@@ -123,7 +123,7 @@ class CreatePinFragment : BaseFragment() {
                 navigator.showLogin(requireContext())
                 activity?.finish()
             }
-            sheet.show(activity!!.supportFragmentManager, PostCreatePinConfirmationModal.TAG)
+            sheet.show(requireActivity().supportFragmentManager, PostCreatePinConfirmationModal.TAG)
         }
     }
 

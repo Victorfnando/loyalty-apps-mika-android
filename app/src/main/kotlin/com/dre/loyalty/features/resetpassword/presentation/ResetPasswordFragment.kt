@@ -16,16 +16,23 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.dre.loyalty.core.extension.observe
 import com.dre.loyalty.core.extension.viewModel
+import com.dre.loyalty.core.functional.Event
+import com.dre.loyalty.core.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
-import com.dre.loyalty.databinding.FragmentResetPinBinding
+import com.dre.loyalty.databinding.FragmentResetPasswordBinding
+import com.dre.loyalty.features.passwordinput.presentation.enumtype.InputPasswordType
 import com.dre.loyalty.features.resetpassword.presentation.entity.ResetPinButtonState
 import com.dre.loyalty.features.resetpassword.presentation.entity.ResetPinPhoneNumberInputState
+import javax.inject.Inject
 
 class ResetPasswordFragment : BaseFragment() {
 
+    @Inject
+    lateinit var navigator: Navigator
+
     private lateinit var vm: ResetPasswordViewModel
 
-    private var binding: FragmentResetPinBinding? = null
+    private var binding: FragmentResetPasswordBinding? = null
 
     private val phoneChangeListener: TextWatcher = object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -45,6 +52,7 @@ class ResetPasswordFragment : BaseFragment() {
         vm = viewModel(viewModelFactory) {
             observe(resetPinButtonState, ::updateResetPinButtonState)
             observe(mailInputState, ::updateEmailInputState)
+            observe(navigatePasswordInput, ::showPasswordInput)
         }
     }
 
@@ -53,7 +61,7 @@ class ResetPasswordFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentResetPinBinding.inflate(inflater, container, false)
+        binding = FragmentResetPasswordBinding.inflate(inflater, container, false)
         return binding?.root
     }
 
@@ -78,7 +86,12 @@ class ResetPasswordFragment : BaseFragment() {
     }
 
     private fun updateResetPinButtonState(state: ResetPinButtonState?) {
-        binding?.btnReset?.isEnabled = state?.isEnable ?: false
+        binding?.btnReset?.run {
+            isEnabled = state?.isEnable ?: false
+            setOnClickListener {
+                vm.handleButtonClicked(binding?.etMail?.text.toString())
+            }
+        }
     }
 
     private fun updateEmailInputState(state: ResetPinPhoneNumberInputState?) {
@@ -86,6 +99,12 @@ class ResetPasswordFragment : BaseFragment() {
             getString(state.error)
         } else {
             ""
+        }
+    }
+
+    private fun showPasswordInput(event: Event<Boolean>?) {
+        event?.getIfNotHandled()?.let {
+            navigator.showInputPasswordScreen(requireContext(), InputPasswordType.RESET)
         }
     }
 

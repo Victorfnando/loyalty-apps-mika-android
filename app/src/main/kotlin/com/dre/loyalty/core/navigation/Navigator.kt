@@ -42,6 +42,8 @@ import com.dre.loyalty.features.movies.MoviesActivity
 import com.dre.loyalty.features.news.presentation.detail.NewsDetailActivity
 import com.dre.loyalty.features.news.presentation.list.NewsListActivity
 import com.dre.loyalty.features.otp.OtpActivity
+import com.dre.loyalty.features.passwordinput.presentation.enumtype.InputPasswordType
+import com.dre.loyalty.features.passwordinput.presentation.screen.InputPasswordActivity
 import com.dre.loyalty.features.photoview.PhotoViewActivity
 import com.dre.loyalty.features.pin.presentation.InputPinActivity
 import com.dre.loyalty.features.register.presentation.ui.RegisterActivity
@@ -194,6 +196,10 @@ class Navigator @Inject constructor(private val authenticator: Authenticator) {
 
     fun showPhotoView(context: Context, url: String) {
         context.startActivity(PhotoViewActivity.callingIntent(context, url))
+    }
+
+    fun showInputPasswordScreen(context: Context, passwordType: InputPasswordType) {
+        context.startActivity(InputPasswordActivity.callingIntent(context, passwordType))
     }
 
     class Extras(val transitionSharedElement: View)

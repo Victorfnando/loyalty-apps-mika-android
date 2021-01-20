@@ -22,6 +22,7 @@ import com.dre.loyalty.core.functional.Event
 import com.dre.loyalty.core.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.databinding.FragmentUserDetailFormBinding
+import com.dre.loyalty.features.passwordinput.presentation.enumtype.InputPasswordType
 import com.dre.loyalty.features.userdetailform.presentation.dialog.DatePickerDialogFragment
 import com.dre.loyalty.features.userdetailform.presentation.entity.EmailInputState
 import com.dre.loyalty.features.userdetailform.presentation.entity.FirstNameInputState
@@ -150,7 +151,7 @@ class UserDetailFormFragment : BaseFragment() {
             modal.onItemClickListener = { selected ->
                 vm.handleSelectedGender(selected)
             }
-            modal.show(activity!!.supportFragmentManager, GenderSheetModal.TAG)
+            modal.show(requireActivity().supportFragmentManager, GenderSheetModal.TAG)
         }
     }
 
@@ -160,7 +161,7 @@ class UserDetailFormFragment : BaseFragment() {
             dialog.listener = { selectedDate ->
                 vm.handleSelectedDate(selectedDate)
             }
-            dialog.show(activity!!.supportFragmentManager, DatePickerDialogFragment.TAG)
+            dialog.show(requireActivity().supportFragmentManager, DatePickerDialogFragment.TAG)
         }
     }
 
@@ -218,13 +219,13 @@ class UserDetailFormFragment : BaseFragment() {
             modal.onClickListener = {
                 vm.handleConfirmationSheetConfirmButtonClicked()
             }
-            modal.show(activity!!.supportFragmentManager, ConfirmationSheetModal.TAG)
+            modal.show(requireActivity().supportFragmentManager, ConfirmationSheetModal.TAG)
         }
     }
 
     private fun navigateCreatePinScreen(event: Event<Boolean>?) {
         event?.getIfNotHandled()?.let {
-            navigator.showCreatePin(requireContext())
+            navigator.showInputPasswordScreen(requireContext(), InputPasswordType.CREATE)
         }
     }
 

@@ -31,6 +31,7 @@ import com.dre.loyalty.features.register.presentation.ui.RegisterFragment
 import com.dre.loyalty.features.movies.MovieDetailsFragment
 import com.dre.loyalty.features.movies.MoviesFragment
 import com.dre.loyalty.features.otp.OtpFragment
+import com.dre.loyalty.features.passwordinput.presentation.screen.InputPasswordFragment
 import com.dre.loyalty.features.pin.presentation.InputPinFragment
 import com.dre.loyalty.features.profile.presentation.ProfileFragment
 import com.dre.loyalty.features.resetpassword.presentation.ResetPasswordFragment
@@ -65,6 +66,7 @@ interface ApplicationComponent {
     fun inject(fragment: ContactUsFragment)
     fun inject(fragment: InvoiceListPagerFragment)
     fun inject(fragment: InvoiceDetailFragment)
+    fun inject(passwordFragment: InputPasswordFragment)
 
     fun inject(moviesFragment: MoviesFragment)
     fun inject(movieDetailsFragment: MovieDetailsFragment)

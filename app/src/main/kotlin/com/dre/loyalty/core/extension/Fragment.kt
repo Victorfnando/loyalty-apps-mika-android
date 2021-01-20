@@ -36,6 +36,15 @@ inline fun <reified T : ViewModel> Fragment.viewModel(factory: ViewModelProvider
     return vm
 }
 
+inline fun <reified T : ViewModel> Fragment.viewModel(
+    factory: ViewModelProvider.Factory,
+    classReference: Class<T>,
+    body: T.() -> Unit): T {
+    val vm = ViewModelProviders.of(this, factory)[classReference]
+    vm.body()
+    return vm
+}
+
 fun BaseFragment.close() = fragmentManager?.popBackStack()
 
 val BaseFragment.viewContainer: View get() = (activity as BaseActivity).fragmentContainer

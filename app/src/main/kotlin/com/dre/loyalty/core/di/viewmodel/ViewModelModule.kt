@@ -27,6 +27,8 @@ import com.dre.loyalty.features.invoicedetail.presentation.InvoiceDetailViewMode
 import com.dre.loyalty.features.login.presentation.ui.LoginViewModel
 import com.dre.loyalty.features.movies.MovieDetailsViewModel
 import com.dre.loyalty.features.movies.MoviesViewModel
+import com.dre.loyalty.features.passwordinput.presentation.screen.create.InputPasswordCreateViewModel
+import com.dre.loyalty.features.passwordinput.presentation.screen.reset.InputPasswordResetViewModel
 import com.dre.loyalty.features.pin.presentation.InputPinViewModel
 import com.dre.loyalty.features.profile.presentation.ProfileViewModel
 import com.dre.loyalty.features.register.presentation.ui.RegisterViewModel
@@ -117,6 +119,16 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(InvoiceDetailViewModel::class)
     abstract fun provideInvoiceDetailViewModel(vm: InvoiceDetailViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(InputPasswordCreateViewModel::class)
+    abstract fun provideInputPasswordCreateViewModel(vm: InputPasswordCreateViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(InputPasswordResetViewModel::class)
+    abstract fun provideInputPasswordResetViewModel(vm: InputPasswordResetViewModel): ViewModel
 
     @Binds
     @IntoMap
