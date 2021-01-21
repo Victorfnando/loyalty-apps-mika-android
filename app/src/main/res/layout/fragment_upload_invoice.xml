@@ -119,5 +119,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:footerButtonText="@string/upload_invoice_screen_btn_upload"/>
+        app:footerButtonText="@string/upload_invoice_screen_btn_next"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

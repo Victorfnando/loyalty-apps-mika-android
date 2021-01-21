@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Created by Andreas Oen on 1/21/21 4:05 PM
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 1/21/21 4:05 PM
+  ~ github: https://github.com/oandrz
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <include
+        android:id="@+id/toolbar_layout"
+        layout="@layout/toolbar" />
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_layout">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_title"
+                style="@style/Heading5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginEnd="@dimen/space_16dp"
+                android:text="@string/ewallet_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_description"
+                style="@style/SmallLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:layout_marginEnd="@dimen/space_16dp"
+                android:text="@string/ewallet_label_description"
+                app:layout_constraintBottom_toTopOf="@id/et_eWallet"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+            <com.dre.loyalty.core.view.PrefixEditTextWithLabel
+                android:id="@+id/et_phone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="@dimen/space_20dp"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:hint="@string/ewallet_hint_phone"
+                android:inputType="phone"
+                app:fieldLabel="@string/ewallet_label_phone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_eWallet" />
+
+            <com.dre.loyalty.core.view.PrefixEditTextWithLabel
+                android:id="@+id/et_eWallet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_16dp"
+                android:layout_marginTop="@dimen/space_16dp"
+                android:layout_marginEnd="@dimen/space_16dp"
+                android:drawableEnd="@drawable/ic_expand"
+                android:inputType="none"
+                android:text="@string/ewallet_hint_eWallet"
+                app:fieldLabel="@string/ewallet_label_eWallet"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_description" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_upload"
+                style="@style/NormalButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="@dimen/space_20dp"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:text="@string/ewallet_button_upload"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_phone" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

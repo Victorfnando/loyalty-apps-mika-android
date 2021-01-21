@@ -31,6 +31,7 @@ import com.dre.loyalty.features.changeprofile.presentation.UpdateProfileActivity
 import com.dre.loyalty.features.contactus.presentation.ContactUsActivity
 import com.dre.loyalty.features.createpin.presentation.CreatePinActivity
 import com.dre.loyalty.features.createpin.presentation.enums.CreatePinType
+import com.dre.loyalty.features.ewallet.presentation.screen.EWalletActivity
 import com.dre.loyalty.features.faq.presentation.FaqActivity
 import com.dre.loyalty.features.home.presentation.HomeActivity
 import com.dre.loyalty.features.invoicedetail.presentation.InvoiceDetailActivity
@@ -200,6 +201,10 @@ class Navigator @Inject constructor(private val authenticator: Authenticator) {
 
     fun showInputPasswordScreen(context: Context, passwordType: InputPasswordType) {
         context.startActivity(InputPasswordActivity.callingIntent(context, passwordType))
+    }
+
+    fun showWalletScreen(context: Context) {
+        context.startActivity(EWalletActivity.callingIntent(context))
     }
 
     class Extras(val transitionSharedElement: View)

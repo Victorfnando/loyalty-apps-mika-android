@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Created by Andreas Oen on 1/21/21 4:07 PM
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 1/21/21 4:07 PM
+  ~ github: https://github.com/oandrz
+  -->
+
+<resources>
+    <string name="ewallet_title">Masukkan Nomor Ewalletmu</string>
+    <string name="ewallet_label_description">Silahkan pilih e-wallet kamu yang aktif agar kami bisa mengirimkan cashback</string>
+    <string name="ewallet_label_eWallet">Ewallet</string>
+    <string name="ewallet_label_phone">No HP</string>
+    <string name="ewallet_hint_eWallet">Pilih ewallet</string>
+    <string name="ewallet_hint_phone">Contoh: 0891232123</string>
+    <string name="ewallet_button_upload">Unggah Kwitansi</string>
+
+    <string name="ewallet_sheet_title">Jenis Ewallet</string>
+</resources>

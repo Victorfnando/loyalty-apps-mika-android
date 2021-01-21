@@ -20,6 +20,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.dre.loyalty.features.changeprofile.presentation.UpdateProfileViewModel
 import com.dre.loyalty.features.contactus.presentation.ContactUsViewModel
 import com.dre.loyalty.features.createpin.presentation.CreatePinViewModel
+import com.dre.loyalty.features.ewallet.presentation.screen.EWalletViewModel
 import com.dre.loyalty.features.home.presentation.HomeViewModel
 import com.dre.loyalty.features.hospital.presentation.HospitalListViewModel
 import com.dre.loyalty.features.invoice.presentation.screen.InvoiceListPagerViewModel
@@ -129,6 +130,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(InputPasswordResetViewModel::class)
     abstract fun provideInputPasswordResetViewModel(vm: InputPasswordResetViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(EWalletViewModel::class)
+    abstract fun provideEWalletViewModel(vm: EWalletViewModel): ViewModel
 
     @Binds
     @IntoMap
