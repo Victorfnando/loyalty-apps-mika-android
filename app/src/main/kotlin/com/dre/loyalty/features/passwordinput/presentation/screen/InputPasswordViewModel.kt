@@ -9,24 +9,29 @@ package com.dre.loyalty.features.passwordinput.presentation.screen
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.dre.loyalty.R
 import com.dre.loyalty.core.platform.BaseViewModel
-import com.dre.loyalty.features.passwordinput.presentation.entity.InputPasswordPasswordState
+import com.dre.loyalty.core.util.validator.type.ValidationType
+import com.dre.loyalty.features.passwordinput.presentation.entity.InputPasswordState
 import com.dre.loyalty.features.passwordinput.presentation.entity.InputPasswordSubmitState
 import com.dre.loyalty.features.passwordinput.presentation.entity.InputPasswordTitleState
+import com.dre.loyalty.features.updatepassword.presentation.entity.PasswordInputState
 
 abstract class InputPasswordViewModel : BaseViewModel() {
 
     protected val _titleState: MutableLiveData<InputPasswordTitleState> = MutableLiveData()
     val titleState: LiveData<InputPasswordTitleState> = _titleState
 
-    protected val _inputPasswordState: MutableLiveData<InputPasswordPasswordState> = MutableLiveData()
-    val inputPasswordState: LiveData<InputPasswordPasswordState> = _inputPasswordState
+    protected val _inputPasswordState: MutableLiveData<InputPasswordState> = MutableLiveData()
+    val inputPasswordState: LiveData<InputPasswordState> = _inputPasswordState
 
-    protected val _inputPasswordConfirmationState: MutableLiveData<InputPasswordPasswordState> = MutableLiveData()
-    val inputPasswordConfirmationState: LiveData<InputPasswordPasswordState> = _inputPasswordConfirmationState
+    protected val _inputPasswordConfirmationState: MutableLiveData<InputPasswordState> = MutableLiveData()
+    val inputPasswordConfirmationState: LiveData<InputPasswordState> = _inputPasswordConfirmationState
 
     protected val _submitButtonState: MutableLiveData<InputPasswordSubmitState> = MutableLiveData()
     val submitButtonState: LiveData<InputPasswordSubmitState> = _submitButtonState
+
+    private var password: Pair<String?, String?> = Pair(null, null)
 
     fun handleInputPasswordDrawableEndClicked() {
         _inputPasswordState.value = _inputPasswordState.value?.copy(
@@ -37,6 +42,45 @@ abstract class InputPasswordViewModel : BaseViewModel() {
     fun handleConfirmInputPasswordDrawableEndClicked() {
         _inputPasswordConfirmationState.value = _inputPasswordState.value?.copy(
             isShowing = !(_inputPasswordConfirmationState.value?.isShowing ?: false)
+        )
+    }
+
+    fun handleInputPasswordTextChanged(text: String) {
+        password = password.copy(first = text)
+        val result = ValidationType.PASSWORD.strategy.validate(text)
+        if (result.isPass) {
+            _inputPasswordState.value = _inputPasswordState.value?.copy(error = null)
+        } else {
+            _inputPasswordState.value = _inputPasswordState.value?.copy(error = result.errorMessage)
+        }
+        checkButtonState()
+    }
+
+    fun handleConfirmInputPasswordTextChanged(text: String) {
+        password = password.copy(second = text)
+        val result = ValidationType.PASSWORD.strategy.validate(text)
+        if (password.first != text) {
+            _inputPasswordConfirmationState.value = _inputPasswordState.value?.copy(
+                error = R.string.validation_failed_password_confirm
+            )
+            return
+        }
+        if (result.isPass) {
+            _inputPasswordConfirmationState.value = _inputPasswordConfirmationState.value?.copy(
+                error = null
+            )
+        } else {
+            _inputPasswordConfirmationState.value = _inputPasswordConfirmationState.value?.copy(
+                error = result.errorMessage
+            )
+        }
+        checkButtonState()
+    }
+
+    private fun checkButtonState() {
+        _submitButtonState.value = _submitButtonState.value?.copy(
+            isEnabled = _inputPasswordState.value?.error == null
+                    && _inputPasswordConfirmationState.value?.error == null
         )
     }
 

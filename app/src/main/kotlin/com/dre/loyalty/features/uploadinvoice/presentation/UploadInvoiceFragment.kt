@@ -68,6 +68,7 @@ class UploadInvoiceFragment : BaseFragment() {
             observe(totalAmountInputState, ::updateTotalAmountState)
             observe(uploadButtonState, ::updateUploadButtonState)
             observe(changePhotoClicked, ::showPhotoScreen)
+            observe(nextButtonClicked, ::showWalletScreen)
         }
     }
 
@@ -92,6 +93,9 @@ class UploadInvoiceFragment : BaseFragment() {
         binding?.etAmount?.editText?.addTextChangedListener(totalAmountWatcher)
         binding?.tvChangePhoto?.setOnClickListener {
             vm.handleChangePhotoClicked()
+        }
+        binding?.stickyButton?.buttonClickListener = {
+            vm.handleNextButtonClicked()
         }
     }
 
@@ -203,6 +207,12 @@ class UploadInvoiceFragment : BaseFragment() {
             Glide.with(this)
                 .load(Uri.parse(uri))
                 .into(it)
+        }
+    }
+
+    private fun showWalletScreen(event: Event<Boolean>?) {
+        event?.getIfNotHandled()?.let {
+            navigator.showWalletScreen(requireContext())
         }
     }
 

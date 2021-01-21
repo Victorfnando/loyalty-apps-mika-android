@@ -9,7 +9,7 @@ package com.dre.loyalty.features.passwordinput.presentation.entity
 
 import androidx.annotation.StringRes
 
-data class InputPasswordPasswordState(
+data class InputPasswordState(
     @StringRes val label: Int,
     @StringRes val hint: Int,
     val isShowing: Boolean,

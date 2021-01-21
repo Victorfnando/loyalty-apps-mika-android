@@ -8,6 +8,8 @@
 package com.dre.loyalty.features.passwordinput.presentation.screen
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.text.method.TransformationMethod
@@ -19,7 +21,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.dre.loyalty.core.extension.observe
 import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.databinding.FragmentInputPasswordBinding
-import com.dre.loyalty.features.passwordinput.presentation.entity.InputPasswordPasswordState
+import com.dre.loyalty.features.passwordinput.presentation.entity.InputPasswordState
 import com.dre.loyalty.features.passwordinput.presentation.entity.InputPasswordSubmitState
 import com.dre.loyalty.features.passwordinput.presentation.entity.InputPasswordTitleState
 import com.dre.loyalty.features.passwordinput.presentation.enumtype.InputPasswordType
@@ -29,6 +31,18 @@ class InputPasswordFragment : BaseFragment() {
     private var binding: FragmentInputPasswordBinding? = null
 
     private lateinit var vm: InputPasswordViewModel
+
+    private val passwordWatcher: TextWatcher = object : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        override fun afterTextChanged(s: Editable?) { vm.handleInputPasswordTextChanged(s.toString()) }
+    }
+
+    private val confirmPasswordWatcher: TextWatcher = object : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        override fun afterTextChanged(s: Editable?) { vm.handleConfirmInputPasswordTextChanged(s.toString()) }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,6 +69,8 @@ class InputPasswordFragment : BaseFragment() {
 
     override fun onDetach() {
         (activity as AppCompatActivity).setSupportActionBar(null)
+        binding?.etPass?.editText?.removeTextChangedListener(passwordWatcher)
+        binding?.etConfirmPass?.editText?.removeTextChangedListener(confirmPasswordWatcher)
         binding = null
         super.onDetach()
     }
@@ -68,14 +84,20 @@ class InputPasswordFragment : BaseFragment() {
     }
 
     private fun bindEtPassword() {
-        binding?.etPass?.drawableEndClickListener = View.OnClickListener {
-            vm.handleInputPasswordDrawableEndClicked()
+        binding?.etPass?.run {
+            drawableEndClickListener = View.OnClickListener {
+                vm.handleInputPasswordDrawableEndClicked()
+            }
+            editText.addTextChangedListener(passwordWatcher)
         }
     }
 
     private fun bindEtConfirmPassword() {
-        binding?.etConfirmPass?.drawableEndClickListener = View.OnClickListener {
-            vm.handleConfirmInputPasswordDrawableEndClicked()
+        binding?.etConfirmPass?.run {
+            drawableEndClickListener = View.OnClickListener {
+                vm.handleConfirmInputPasswordDrawableEndClicked()
+            }
+            editText.addTextChangedListener(confirmPasswordWatcher)
         }
     }
 
@@ -95,7 +117,7 @@ class InputPasswordFragment : BaseFragment() {
         }
     }
 
-    private fun renderPassword(statePassword: InputPasswordPasswordState?) {
+    private fun renderPassword(statePassword: InputPasswordState?) {
         binding?.etPass?.run {
             hint = getString(statePassword?.label ?: 0)
             label = getString(statePassword?.label ?: 0)
@@ -109,7 +131,7 @@ class InputPasswordFragment : BaseFragment() {
         }
     }
 
-    private fun renderConfirmationPassword(statePassword: InputPasswordPasswordState?) {
+    private fun renderConfirmationPassword(statePassword: InputPasswordState?) {
         binding?.etConfirmPass?.run {
             hint = getString(statePassword?.label ?: 0)
             label = getString(statePassword?.label ?: 0)
@@ -127,10 +149,11 @@ class InputPasswordFragment : BaseFragment() {
         binding?.btnSubmit?.run {
             tvFooterVisibility = View.GONE
             buttonText = getString(statePassword?.text ?: -1)
+            isButtonEnabled = statePassword?.isEnabled ?: false
         }
     }
 
-    private fun getInputTransformation(statePassword: InputPasswordPasswordState?): TransformationMethod {
+    private fun getInputTransformation(statePassword: InputPasswordState?): TransformationMethod {
         return if (statePassword?.isShowing == true) {
             HideReturnsTransformationMethod.getInstance()
         } else {
