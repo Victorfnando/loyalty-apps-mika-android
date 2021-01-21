@@ -28,6 +28,7 @@ import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.databinding.FragmentUploadInvoiceBinding
 import com.dre.loyalty.features.camera.CameraActivity
 import com.dre.loyalty.features.camera.CameraActivity.Companion.EXTRA_URI
+import com.dre.loyalty.features.camera.CameraRequestType
 import com.dre.loyalty.features.uploadinvoice.presentation.entity.HospitalBranchState
 import com.dre.loyalty.features.uploadinvoice.presentation.entity.TotalAmountState
 import com.dre.loyalty.features.uploadinvoice.presentation.entity.UploadButtonState
@@ -191,7 +192,8 @@ class UploadInvoiceFragment : BaseFragment() {
     private fun showPhotoScreen(event: Event<Boolean>?) {
         event?.getIfNotHandled()?.let {
             startActivityForResult(
-                CameraActivity.callingIntent(requireContext()), CameraActivity.REQUEST_CODE_CAMERA
+                CameraActivity.callingIntent(requireContext(), CameraRequestType.CAMERA),
+                CameraActivity.REQUEST_CODE_CAMERA
             )
         }
     }

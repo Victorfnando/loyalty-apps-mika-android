@@ -68,4 +68,7 @@
     <dimen name="invoice_list_image_height">117dp</dimen>
     <dimen name="invoice_list_sort_sheet_height">219dp</dimen>
 
+    <!--Profile-->
+    <dimen name="profile_imageSelector_sheet_height">198dp</dimen>
+
 </resources>

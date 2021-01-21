@@ -33,7 +33,7 @@
                 android:layout_marginStart="@dimen/space_16dp"
                 android:layout_marginTop="@dimen/space_16dp"
                 android:layout_marginBottom="@dimen/space_16dp"
-                android:background="@color/black"
+                android:scaleType="centerCrop"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -44,17 +44,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/space_16dp"
-                app:layout_constraintBottom_toTopOf="@id/tv_phone"
+                android:textColor="@color/info"
+                app:layout_constraintBottom_toTopOf="@id/tv_mail"
                 app:layout_constraintStart_toEndOf="@id/iv_profile"
                 tools:text="Name Person" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_phone"
+                android:id="@+id/tv_mail"
                 style="@style/SmallLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/space_16dp"
                 android:layout_marginTop="@dimen/space_4dp"
+                android:textColor="@color/info_darker"
                 app:layout_constraintBottom_toBottomOf="@id/iv_profile"
                 app:layout_constraintStart_toEndOf="@id/iv_profile"
                 app:layout_constraintTop_toTopOf="@id/iv_profile"

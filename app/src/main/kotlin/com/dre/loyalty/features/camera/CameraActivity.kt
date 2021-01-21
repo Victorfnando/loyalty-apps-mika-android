@@ -13,11 +13,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import com.dre.loyalty.core.platform.BaseActivity
-import com.dre.loyalty.core.platform.BaseFragment
 import com.yalantis.ucrop.UCrop
 import com.yalantis.ucrop.UCropActivity
 import permissions.dispatcher.NeedsPermission
@@ -40,7 +36,12 @@ class CameraActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        showCameraWithPermissionCheck()
+        val type = intent.extras?.getSerializable(EXTRA_REQUEST_TYPE) as CameraRequestType
+        if (type == CameraRequestType.CAMERA) {
+            showCameraWithPermissionCheck()
+        } else if (type == CameraRequestType.GALLERY) {
+            showGalleryWithPermissionCheck()
+        }
     }
 
     override fun onRequestPermissionsResult(
@@ -70,6 +71,11 @@ class CameraActivity : AppCompatActivity() {
     @NeedsPermission(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
     fun showCamera() {
         easyImage.openCameraForImage(this)
+    }
+
+    @NeedsPermission(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    fun showGallery() {
+        easyImage.openGallery(this)
     }
 
     private fun onCancelled() {
@@ -116,6 +122,11 @@ class CameraActivity : AppCompatActivity() {
     companion object {
         const val EXTRA_URI = "EXTRA_URI"
         const val REQUEST_CODE_CAMERA = 101
-        fun callingIntent(context: Context): Intent = Intent(context, CameraActivity::class.java)
+        private const val EXTRA_REQUEST_TYPE = "EXTRA_REQUEST_TYPE"
+
+        fun callingIntent(context: Context, requestType: CameraRequestType): Intent =
+            Intent(context, CameraActivity::class.java).also {
+                it.putExtra(EXTRA_REQUEST_TYPE, requestType)
+            }
     }
 }

@@ -15,4 +15,8 @@
     <string name="profile_screen_menu_logout">Keluar</string>
     <string name="profile_screen_label_account">Akun</string>
     <string name="profile_screen_label_about">Tentang</string>
+
+    <string name="profile_sheet_title_photo">Pilih Foto Profil</string>
+    <string name="profile_sheet_label_camera">Buka Kamera</string>
+    <string name="profile_sheet_label_gallery">Buka Galeri</string>
 </resources>

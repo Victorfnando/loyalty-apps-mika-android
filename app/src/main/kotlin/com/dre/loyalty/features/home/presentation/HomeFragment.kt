@@ -28,6 +28,7 @@ import com.dre.loyalty.core.view.HorizontalSpaceDecoration
 import com.dre.loyalty.core.view.VerticalDividerDecoration
 import com.dre.loyalty.databinding.FragmentHomeBinding
 import com.dre.loyalty.features.camera.CameraActivity
+import com.dre.loyalty.features.camera.CameraRequestType
 import com.dre.loyalty.features.news.presentation.entity.News
 import com.dre.loyalty.features.home.presentation.view.HomeSection
 import com.dre.loyalty.features.cashback.presentation.item.CashBackItem
@@ -190,7 +191,10 @@ class HomeFragment : BaseFragment() {
 
     fun showCamera(event: Event<String>?) {
         event?.getIfNotHandled()?.let {
-            startActivityForResult(CameraActivity.callingIntent(requireContext()), CameraActivity.REQUEST_CODE_CAMERA)
+            startActivityForResult(
+                CameraActivity.callingIntent(requireContext(), CameraRequestType.CAMERA),
+                CameraActivity.REQUEST_CODE_CAMERA
+            )
         }
     }
 

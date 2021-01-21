@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Created by Andreas Oen on 1/21/21 1:43 PM
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 1/21/21 1:43 PM
+  ~ github: https://github.com/oandrz
+  -->
+
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_title"
+        style="@style/Heading6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/space_16dp"
+        android:paddingEnd="@dimen/space_16dp"
+        android:paddingTop="@dimen/space_28dp"
+        android:textColor="@color/info_darker"
+        android:text="@string/profile_sheet_title_photo" />
+
+    <View
+        style="@style/Divider"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_height"
+        android:layout_marginTop="@dimen/space_16dp" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_camera"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_camera"
+        android:drawablePadding="@dimen/space_12dp"
+        android:padding="@dimen/space_16dp"
+        android:textSize="@dimen/text_size_16sp"
+        android:textColor="@color/info_darker"
+        android:text="@string/profile_sheet_label_camera" />
+
+    <View
+        style="@style/Divider"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_height"
+        android:background="@color/dividerColor" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_gallery"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_gallery"
+        android:drawablePadding="@dimen/space_12dp"
+        android:padding="@dimen/space_16dp"
+        android:textSize="@dimen/text_size_16sp"
+        android:textColor="@color/info_darker"
+        android:text="@string/profile_sheet_label_gallery" />
+
+    <View
+        style="@style/Divider"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_height"
+        android:background="@color/dividerColor" />
+</androidx.appcompat.widget.LinearLayoutCompat>
+

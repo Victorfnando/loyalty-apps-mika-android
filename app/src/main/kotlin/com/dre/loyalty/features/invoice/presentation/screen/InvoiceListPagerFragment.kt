@@ -29,6 +29,7 @@ import com.dre.loyalty.core.view.sheet.SheetListModal
 import com.dre.loyalty.core.view.sheet.SheetListState
 import com.dre.loyalty.databinding.FragmentPagerInvoiceListBinding
 import com.dre.loyalty.features.camera.CameraActivity
+import com.dre.loyalty.features.camera.CameraRequestType
 import com.dre.loyalty.features.invoice.presentation.entity.Invoice
 import com.dre.loyalty.features.invoice.presentation.item.InvoiceListItem
 import com.mikepenz.fastadapter.FastAdapter
@@ -134,7 +135,10 @@ class InvoiceListPagerFragment : BaseFragment() {
 
     private fun showCamera(event: Event<Boolean>?) {
         event?.getIfNotHandled()?.let {
-            startActivityForResult(CameraActivity.callingIntent(requireContext()), CameraActivity.REQUEST_CODE_CAMERA)
+            startActivityForResult(
+                CameraActivity.callingIntent(requireContext(), CameraRequestType.CAMERA),
+                CameraActivity.REQUEST_CODE_CAMERA
+            )
         }
     }
 

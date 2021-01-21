@@ -30,6 +30,13 @@ class ProfileViewModel @Inject constructor() : BaseViewModel() {
     private val _navigateTnc: MutableLiveData<Event<Boolean>> = MutableLiveData()
     val navigateTnc: LiveData<Event<Boolean>> = _navigateTnc
 
+    private val _profilePictureClickedEvent: MutableLiveData<Event<Boolean>> = MutableLiveData()
+    val profilePictureClickedEvent: LiveData<Event<Boolean>> = _profilePictureClickedEvent
+
+    fun handleProfilePictureClicked() {
+        _profilePictureClickedEvent.value = Event(true)
+    }
+
     fun handleChangeProfileMenuClicked() {
         _navigateChangeProfile.value = Event(true)
     }

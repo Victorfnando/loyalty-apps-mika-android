@@ -7,6 +7,9 @@
 
 package com.dre.loyalty.features.profile.presentation
 
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +18,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.dre.loyalty.R
 import com.dre.loyalty.core.extension.observe
 import com.dre.loyalty.core.extension.viewModel
@@ -23,10 +27,13 @@ import com.dre.loyalty.core.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.core.view.VerticalDividerDecoration
 import com.dre.loyalty.databinding.FragmentProfileBinding
+import com.dre.loyalty.features.camera.CameraActivity
+import com.dre.loyalty.features.camera.CameraRequestType
 import com.dre.loyalty.features.profile.presentation.entity.Menu
 import com.dre.loyalty.features.profile.presentation.item.LogoutMenuItem
 import com.dre.loyalty.features.profile.presentation.item.ProfileMenuItem
 import com.dre.loyalty.features.profile.presentation.item.ProfileMenuSection
+import com.dre.loyalty.features.profile.presentation.sheet.PhotoProfileSelectorModal
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import javax.inject.Inject
@@ -65,6 +72,7 @@ class ProfileFragment : BaseFragment() {
             observe(navigateContact, ::navigateContactScreen)
             observe(navigateFaq, ::navigateFaqScreen)
             observe(navigateTnc, ::navigateTnCScreen)
+            observe(profilePictureClickedEvent, ::showProfilePictureSelectorModal)
         }
     }
 
@@ -79,7 +87,60 @@ class ProfileFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        bindProfilePicture()
         bindList()
+        binding?.tvName?.text = "Batman"
+        binding?.tvMail?.text = "Batman@gmail.com"
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK && requestCode == CameraActivity.REQUEST_CODE_CAMERA) {
+            data?.extras?.getString(CameraActivity.EXTRA_URI)?.let {
+                renderPhoto(it)
+            }
+        }
+    }
+
+    private fun renderPhoto(uri: String) {
+        binding?.ivProfile?.let {
+            Glide.with(this)
+                .load(Uri.parse(uri))
+                .circleCrop()
+                .into(it)
+        }
+    }
+
+    private fun showProfilePictureSelectorModal(event: Event<Boolean>?) {
+        event?.getIfNotHandled()?.let {
+            val sheet = PhotoProfileSelectorModal.newInstance()
+            sheet.cameraClickedListener = {
+                startActivityForResult(
+                    CameraActivity.callingIntent(requireContext(), CameraRequestType.CAMERA),
+                    CameraActivity.REQUEST_CODE_CAMERA
+                )
+            }
+            sheet.galleryClickedListener = {
+                startActivityForResult(
+                    CameraActivity.callingIntent(requireContext(), CameraRequestType.GALLERY),
+                    CameraActivity.REQUEST_CODE_CAMERA
+                )
+            }
+            sheet.show(requireActivity().supportFragmentManager, PhotoProfileSelectorModal.TAG)
+        }
+    }
+
+    private fun bindProfilePicture() {
+        binding?.ivProfile?.setOnClickListener {
+            vm.handleProfilePictureClicked()
+        }
+        binding?.ivProfile?.let {
+            Glide.with(this)
+                .load(R.mipmap.ic_batman)
+                .circleCrop()
+                .into(it)
+        }
     }
 
     private fun bindList() {
