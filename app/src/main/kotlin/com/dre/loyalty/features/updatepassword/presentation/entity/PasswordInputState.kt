@@ -9,7 +9,7 @@ package com.dre.loyalty.features.updatepassword.presentation.entity
 
 import androidx.annotation.StringRes
 
-class PasswordInputState(
-    val isHidePassword: Boolean,
+data class PasswordInputState(
+    val isShowPassword: Boolean,
     @StringRes val error: Int? = null
 )

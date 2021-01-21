@@ -127,7 +127,7 @@ class UpdatePasswordFragment : BaseFragment() {
         if (state?.error != null && state.error != -1) {
             binding?.etOldPass?.error = getString(state.error)
         } else {
-            binding?.etOldPass?.error = null
+            binding?.etOldPass?.error = ""
         }
     }
 
@@ -139,7 +139,7 @@ class UpdatePasswordFragment : BaseFragment() {
         if (state?.error != null && state.error != -1) {
             binding?.etNewPass?.error = getString(state.error)
         } else {
-            binding?.etNewPass?.error = null
+            binding?.etNewPass?.error = ""
         }
     }
 
@@ -151,7 +151,7 @@ class UpdatePasswordFragment : BaseFragment() {
         if (state?.error != null && state.error != -1) {
             binding?.etNewPassConfirm?.error = getString(state.error)
         } else {
-            binding?.etNewPassConfirm?.error = null
+            binding?.etNewPassConfirm?.error = ""
         }
     }
 
@@ -160,10 +160,10 @@ class UpdatePasswordFragment : BaseFragment() {
     }
 
     private fun getInputTransformation(state: PasswordInputState?): TransformationMethod {
-        return if (state?.isHidePassword == true) {
-            PasswordTransformationMethod.getInstance()
-        } else {
+        return if (state?.isShowPassword == true) {
             HideReturnsTransformationMethod.getInstance()
+        } else {
+            PasswordTransformationMethod.getInstance()
         }
     }
 

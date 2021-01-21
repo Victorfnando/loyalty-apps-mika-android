@@ -33,33 +33,27 @@ class UpdatePasswordViewModel @Inject constructor() : BaseViewModel() {
     private var password: Triple<String?, String?, String?> = Triple(null, null, null)
 
     init {
-        _oldPasswordInputState.value = PasswordInputState(true, -1)
-        _newPasswordInputState.value = PasswordInputState(true, -1)
-        _confirmPasswordInputState.value = PasswordInputState(true, -1)
+        _oldPasswordInputState.value = PasswordInputState(false, -1)
+        _newPasswordInputState.value = PasswordInputState(false, -1)
+        _confirmPasswordInputState.value = PasswordInputState(false, -1)
     }
 
     fun handleOldPasswordHidePasswordClicked() {
-        if (_oldPasswordInputState.value?.isHidePassword == true) {
-            _oldPasswordInputState.value = PasswordInputState(false)
-        } else {
-            _oldPasswordInputState.value = PasswordInputState(true)
-        }
+        _oldPasswordInputState.value = _oldPasswordInputState.value?.copy(
+            isShowPassword = !(_oldPasswordInputState.value?.isShowPassword ?: false)
+        )
     }
 
     fun handleNewPasswordHidePasswordClicked() {
-        if (_newPasswordInputState.value?.isHidePassword == true) {
-            _newPasswordInputState.value = PasswordInputState(false)
-        } else {
-            _newPasswordInputState.value = PasswordInputState(true)
-        }
+        _newPasswordInputState.value = _newPasswordInputState.value?.copy(
+            isShowPassword = !(_newPasswordInputState.value?.isShowPassword ?: false)
+        )
     }
 
     fun handleConfirmPasswordHidePasswordClicked() {
-        if (_confirmPasswordInputState.value?.isHidePassword == true) {
-            _confirmPasswordInputState.value = PasswordInputState(false)
-        } else {
-            _confirmPasswordInputState.value = PasswordInputState(true)
-        }
+        _confirmPasswordInputState.value = _confirmPasswordInputState.value?.copy(
+            isShowPassword = !(_confirmPasswordInputState.value?.isShowPassword ?: false)
+        )
     }
 
     fun handleOldPasswordChanged(text: String) {
@@ -67,12 +61,12 @@ class UpdatePasswordViewModel @Inject constructor() : BaseViewModel() {
         val result = ValidationType.PASSWORD.strategy.validate(text)
         if (result.isPass) {
             _oldPasswordInputState.value = PasswordInputState(
-                _oldPasswordInputState.value?.isHidePassword ?: false,
+                _oldPasswordInputState.value?.isShowPassword ?: false,
                 null
             )
         } else {
             _oldPasswordInputState.value = PasswordInputState(
-                _oldPasswordInputState.value?.isHidePassword ?: false,
+                _oldPasswordInputState.value?.isShowPassword ?: false,
                 result.errorMessage
             )
         }
@@ -84,19 +78,19 @@ class UpdatePasswordViewModel @Inject constructor() : BaseViewModel() {
         val result = ValidationType.PASSWORD.strategy.validate(text)
         if (password.first == text) {
             _newPasswordInputState.value = PasswordInputState(
-                _oldPasswordInputState.value?.isHidePassword ?: false,
+                _newPasswordInputState.value?.isShowPassword ?: false,
                 R.string.validation_failed_password
             )
             return
         }
         if (result.isPass) {
             _newPasswordInputState.value = PasswordInputState(
-                _oldPasswordInputState.value?.isHidePassword ?: false,
+                _newPasswordInputState.value?.isShowPassword ?: false,
                 null
             )
         } else {
             _newPasswordInputState.value = PasswordInputState(
-                _oldPasswordInputState.value?.isHidePassword ?: false,
+                _newPasswordInputState.value?.isShowPassword ?: false,
                 result.errorMessage
             )
         }
@@ -108,19 +102,19 @@ class UpdatePasswordViewModel @Inject constructor() : BaseViewModel() {
         val result = ValidationType.PASSWORD.strategy.validate(text)
         if (password.second != text) {
             _confirmPasswordInputState.value = PasswordInputState(
-                _oldPasswordInputState.value?.isHidePassword ?: false,
+                _confirmPasswordInputState.value?.isShowPassword ?: false,
                 R.string.validation_failed_password_confirm
             )
             return
         }
         if (result.isPass) {
             _confirmPasswordInputState.value = PasswordInputState(
-                _oldPasswordInputState.value?.isHidePassword ?: false,
+                _confirmPasswordInputState.value?.isShowPassword ?: false,
                 null
             )
         } else {
             _confirmPasswordInputState.value = PasswordInputState(
-                _oldPasswordInputState.value?.isHidePassword ?: false,
+                _confirmPasswordInputState.value?.isShowPassword ?: false,
                 result.errorMessage
             )
         }
