@@ -19,6 +19,8 @@ import com.dre.loyalty.core.extension.viewModel
 import com.dre.loyalty.core.functional.Event
 import com.dre.loyalty.core.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
+import com.dre.loyalty.core.util.enumtype.ConfirmationSheetType
+import com.dre.loyalty.core.view.sheet.ConfirmationSheetModal
 import com.dre.loyalty.databinding.FragmentResetPasswordBinding
 import com.dre.loyalty.features.passwordinput.presentation.enumtype.InputPasswordType
 import com.dre.loyalty.features.resetpassword.presentation.entity.ResetPinButtonState
@@ -69,6 +71,9 @@ class ResetPasswordFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         bindToolbar()
         binding?.etMail?.editText?.addTextChangedListener(phoneChangeListener)
+        binding?.btnReset?.setOnClickListener {
+
+        }
     }
 
     override fun onDetach() {
@@ -102,9 +107,13 @@ class ResetPasswordFragment : BaseFragment() {
         }
     }
 
-    private fun showPasswordInput(event: Event<Boolean>?) {
+    private fun showPasswordInput(event: Event<ConfirmationSheetType>?) {
         event?.getIfNotHandled()?.let {
-            navigator.showInputPasswordScreen(requireContext(), InputPasswordType.RESET)
+            val modal = ConfirmationSheetModal.newInstance(it)
+            modal.primaryButtonClickListener = {
+                navigator.showInputPasswordScreen(requireContext(), InputPasswordType.RESET)
+            }
+            modal.show(requireActivity().supportFragmentManager, ConfirmationSheetModal.TAG)
         }
     }
 

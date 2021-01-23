@@ -19,14 +19,23 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import com.dre.loyalty.core.extension.observe
+import com.dre.loyalty.core.functional.Event
+import com.dre.loyalty.core.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
+import com.dre.loyalty.core.util.enumtype.ConfirmationSheetType
+import com.dre.loyalty.core.view.sheet.ConfirmationSheetModal
 import com.dre.loyalty.databinding.FragmentInputPasswordBinding
 import com.dre.loyalty.features.passwordinput.presentation.entity.InputPasswordState
 import com.dre.loyalty.features.passwordinput.presentation.entity.InputPasswordSubmitState
 import com.dre.loyalty.features.passwordinput.presentation.entity.InputPasswordTitleState
 import com.dre.loyalty.features.passwordinput.presentation.enumtype.InputPasswordType
+import kotlinx.android.synthetic.main.activity_home.*
+import javax.inject.Inject
 
 class InputPasswordFragment : BaseFragment() {
+
+    @Inject
+    lateinit var navigator: Navigator
 
     private var binding: FragmentInputPasswordBinding? = null
 
@@ -65,6 +74,12 @@ class InputPasswordFragment : BaseFragment() {
         bindEtPassword()
         bindEtConfirmPassword()
         vm.bindInitialValue()
+        binding?.btnSubmit?.buttonClickListener = {
+            vm.handleResetButtonClicked(
+                binding?.etPass?.text.toString(),
+                binding?.etConfirmPass?.text.toString()
+            )
+        }
     }
 
     override fun onDetach() {
@@ -108,6 +123,7 @@ class InputPasswordFragment : BaseFragment() {
             observe(inputPasswordState, ::renderPassword)
             observe(inputPasswordConfirmationState, ::renderConfirmationPassword)
             observe(submitButtonState, ::renderSubmitButton)
+            observe(submitButtonClicked, ::showSuccessSheet)
         }
     }
 
@@ -158,6 +174,17 @@ class InputPasswordFragment : BaseFragment() {
             HideReturnsTransformationMethod.getInstance()
         } else {
             PasswordTransformationMethod.getInstance()
+        }
+    }
+
+    private fun showSuccessSheet(event: Event<ConfirmationSheetType>?) {
+        event?.getIfNotHandled()?.let {
+            val modal = ConfirmationSheetModal.newInstance(it)
+            modal.primaryButtonClickListener = {
+                navigator.showLogin(requireContext())
+                requireActivity().finish()
+            }
+            modal.show(requireActivity().supportFragmentManager, ConfirmationSheetModal.TAG)
         }
     }
 

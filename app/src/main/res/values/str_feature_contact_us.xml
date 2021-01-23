@@ -16,4 +16,8 @@
     <string name="contactUs_screen_button_contact">Telepon</string>
     <string name="contactUs_screen_label_resolutionCenter">Pusat Informasi</string>
     <string name="contactUs_screen_label_resolutionCenterPhone">021–9999-9999</string>
+
+    <string name="contactUs_sheet_label_title">Pesan berhasil dikirim !</string>
+    <string name="contactUs_sheet_label_description">Tunggu ya, admin akan segera memberikan balasan!</string>
+    <string name="contactUs_sheet_button_ok">OK</string>
 </resources>

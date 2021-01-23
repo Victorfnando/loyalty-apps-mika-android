@@ -11,6 +11,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dre.loyalty.core.functional.Event
+import com.dre.loyalty.core.util.enumtype.ConfirmationSheetType
 import com.dre.loyalty.core.util.validator.type.ValidationType
 import com.dre.loyalty.features.resetpassword.presentation.entity.ResetPinButtonState
 import com.dre.loyalty.features.resetpassword.presentation.entity.ResetPinPhoneNumberInputState
@@ -24,8 +25,8 @@ class ResetPasswordViewModel @Inject constructor() : ViewModel() {
     private val _mailInputState: MutableLiveData<ResetPinPhoneNumberInputState> = MutableLiveData()
     val mailInputState: LiveData<ResetPinPhoneNumberInputState> = _mailInputState
 
-    private val _navigatePasswordInput: MutableLiveData<Event<Boolean>> = MutableLiveData()
-    val navigatePasswordInput: LiveData<Event<Boolean>> = _navigatePasswordInput
+    private val _navigatePasswordInput: MutableLiveData<Event<ConfirmationSheetType>> = MutableLiveData()
+    val navigatePasswordInput: LiveData<Event<ConfirmationSheetType>> = _navigatePasswordInput
 
     init {
         _resetPinButtonState.value = ResetPinButtonState(false)
@@ -43,6 +44,6 @@ class ResetPasswordViewModel @Inject constructor() : ViewModel() {
     }
 
     fun handleButtonClicked(text: String) {
-        _navigatePasswordInput.value = Event(false)
+        _navigatePasswordInput.value = Event(ConfirmationSheetType.RESET_PASSWORD_LINK_SHEET)
     }
 }

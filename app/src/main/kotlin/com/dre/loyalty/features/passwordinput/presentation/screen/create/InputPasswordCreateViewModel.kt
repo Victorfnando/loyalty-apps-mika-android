@@ -8,6 +8,7 @@
 package com.dre.loyalty.features.passwordinput.presentation.screen.create
 
 import com.dre.loyalty.R
+import com.dre.loyalty.core.util.enumtype.ConfirmationSheetType
 import com.dre.loyalty.features.passwordinput.presentation.entity.InputPasswordState
 import com.dre.loyalty.features.passwordinput.presentation.entity.InputPasswordSubmitState
 import com.dre.loyalty.features.passwordinput.presentation.entity.InputPasswordTitleState
@@ -33,4 +34,7 @@ class InputPasswordCreateViewModel @Inject constructor() : InputPasswordViewMode
             R.string.inputPassword_label_button_create, false
         )
     }
+
+    override fun getSuccessSheetType(): ConfirmationSheetType =
+        ConfirmationSheetType.INPUT_PASSWORD_CREATE_SUCCESS_SHEET
 }

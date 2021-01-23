@@ -19,4 +19,9 @@
     <string name="profile_sheet_title_photo">Pilih Foto Profil</string>
     <string name="profile_sheet_label_camera">Buka Kamera</string>
     <string name="profile_sheet_label_gallery">Buka Galeri</string>
+
+    <string name="profile_sheet_logout_label_title">Apakah anda yakin ingin keluar?</string>
+    <string name="profile_sheet_logout_label_description">Anda harus log in lagi jika ingin menikmati layanan Altea Hospital Loyaty</string>
+    <string name="profile_sheet_logout_button_exit">Keluar</string>
+    <string name="profile_sheet_logout_button_no">Tidak</string>
 </resources>

@@ -15,4 +15,8 @@
     <string name="ewallet_button_upload">Unggah Kwitansi</string>
 
     <string name="ewallet_sheet_title">Jenis Ewallet</string>
+
+    <string name="ewallet_sheet_success_label_title">Kwitansi berhasil diunggah</string>
+    <string name="ewallet_sheet_success_label_description">Kami akan segera memproses kwitansi-mu maksimal 3 hari kerja </string>
+    <string name="ewallet_sheet_success_button_ok">OK</string>
 </resources>

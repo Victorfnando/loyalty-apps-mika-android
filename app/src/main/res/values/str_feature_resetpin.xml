@@ -16,4 +16,7 @@
     <string name="resetPassword_screen_btn_label">Atur ulang</string>
 
     <string name="resetPassword_format_chance">Sisa percobaan %d kali</string>
+    <string name="resetPassword_sheet_label_title">Link atur ulang kata sandi sudah ada di email-mu</string>
+    <string name="resetPassword_sheet_label_description">Periksa email kamu untuk mendapatkan link atur ulang kata sandi</string>
+    <string name="resetPassword_sheet_button_ok">OK</string>
 </resources>

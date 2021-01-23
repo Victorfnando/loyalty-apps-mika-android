@@ -10,7 +10,9 @@ package com.dre.loyalty.features.passwordinput.presentation.screen
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dre.loyalty.R
+import com.dre.loyalty.core.functional.Event
 import com.dre.loyalty.core.platform.BaseViewModel
+import com.dre.loyalty.core.util.enumtype.ConfirmationSheetType
 import com.dre.loyalty.core.util.validator.type.ValidationType
 import com.dre.loyalty.features.passwordinput.presentation.entity.InputPasswordState
 import com.dre.loyalty.features.passwordinput.presentation.entity.InputPasswordSubmitState
@@ -30,6 +32,9 @@ abstract class InputPasswordViewModel : BaseViewModel() {
 
     protected val _submitButtonState: MutableLiveData<InputPasswordSubmitState> = MutableLiveData()
     val submitButtonState: LiveData<InputPasswordSubmitState> = _submitButtonState
+
+    private val _submitButtonClicked: MutableLiveData<Event<ConfirmationSheetType>> = MutableLiveData()
+    val submitButtonClicked: LiveData<Event<ConfirmationSheetType>> = _submitButtonClicked
 
     private var password: Pair<String?, String?> = Pair(null, null)
 
@@ -77,6 +82,10 @@ abstract class InputPasswordViewModel : BaseViewModel() {
         checkButtonState()
     }
 
+    fun handleResetButtonClicked(pass: String, confirmPass: String) {
+        _submitButtonClicked.value = Event(getSuccessSheetType())
+    }
+
     private fun checkButtonState() {
         _submitButtonState.value = _submitButtonState.value?.copy(
             isEnabled = _inputPasswordState.value?.error == null
@@ -85,4 +94,6 @@ abstract class InputPasswordViewModel : BaseViewModel() {
     }
 
     abstract fun bindInitialValue()
+
+    abstract fun getSuccessSheetType(): ConfirmationSheetType
 }
