@@ -63,6 +63,7 @@
                 android:layout_marginEnd="@dimen/activity_horizontal_margin"
                 android:hint="@string/ewallet_hint_phone"
                 android:inputType="phone"
+                android:maxLength="13"
                 app:fieldLabel="@string/ewallet_label_phone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -70,7 +71,7 @@
 
             <com.dre.loyalty.core.view.PrefixEditTextWithLabel
                 android:id="@+id/et_eWallet"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/space_16dp"
                 android:layout_marginTop="@dimen/space_16dp"

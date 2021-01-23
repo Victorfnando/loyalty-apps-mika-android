@@ -7,11 +7,20 @@
 
 package com.dre.loyalty.core.util.validator.type
 
+import androidx.core.text.isDigitsOnly
+import com.dre.loyalty.R
 import com.dre.loyalty.core.util.validator.ValidationResult
 import javax.inject.Inject
 
 class PhoneValidation @Inject constructor() : ValidationStrategy {
     override fun validate(text: String): ValidationResult {
-        return ValidationResult(false)
+        if (text.isEmpty()) {
+            return ValidationResult(false, R.string.validation_failed_empty)
+        } else if (!isValidPhoneNumber(text)) {
+            return ValidationResult(false, R.string.validation_failed_format_number)
+        }
+        return ValidationResult(true)
     }
+
+    private fun isValidPhoneNumber(text: String) = text.isDigitsOnly()
 }
