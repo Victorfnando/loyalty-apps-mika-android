@@ -21,6 +21,7 @@ import com.dre.loyalty.core.extension.viewModel
 import com.dre.loyalty.core.functional.Event
 import com.dre.loyalty.core.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
+import com.dre.loyalty.core.util.enumtype.ConfirmationSheetType
 import com.dre.loyalty.databinding.FragmentUserDetailFormBinding
 import com.dre.loyalty.features.passwordinput.presentation.enumtype.InputPasswordType
 import com.dre.loyalty.features.userdetailform.presentation.dialog.DatePickerDialogFragment
@@ -29,7 +30,7 @@ import com.dre.loyalty.features.userdetailform.presentation.entity.FirstNameInpu
 import com.dre.loyalty.features.userdetailform.presentation.entity.KTPInputState
 import com.dre.loyalty.features.userdetailform.presentation.entity.LastNameInputState
 import com.dre.loyalty.features.userdetailform.presentation.entity.RegisterButtonState
-import com.dre.loyalty.features.userdetailform.presentation.sheet.ConfirmationSheetModal
+import com.dre.loyalty.core.view.sheet.ConfirmationSheetModal
 import com.dre.loyalty.features.userdetailform.presentation.sheet.GenderSheetModal
 import javax.inject.Inject
 
@@ -215,8 +216,8 @@ class UserDetailFormFragment : BaseFragment() {
 
     private fun showConfirmationSheet(event: Event<Boolean?>?) {
         event?.getIfNotHandled()?.let {
-            val modal = ConfirmationSheetModal.newInstance()
-            modal.onClickListener = {
+            val modal = ConfirmationSheetModal.newInstance(ConfirmationSheetType.USER_DETAIL_FORM_CONFIRM)
+            modal.primaryButtonClickListener = {
                 vm.handleConfirmationSheetConfirmButtonClicked()
             }
             modal.show(requireActivity().supportFragmentManager, ConfirmationSheetModal.TAG)

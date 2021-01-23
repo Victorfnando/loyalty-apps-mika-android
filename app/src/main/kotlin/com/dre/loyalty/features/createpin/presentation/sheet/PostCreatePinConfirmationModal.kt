@@ -12,9 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.dre.loyalty.databinding.SheetConfirmationCreatepinBinding
-import com.dre.loyalty.databinding.SheetConfirmationProfileBinding
 import com.dre.loyalty.features.createpin.presentation.enums.CreatePinType
-import com.dre.loyalty.features.userdetailform.presentation.sheet.ConfirmationSheetModal
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class PostCreatePinConfirmationModal : BottomSheetDialogFragment() {

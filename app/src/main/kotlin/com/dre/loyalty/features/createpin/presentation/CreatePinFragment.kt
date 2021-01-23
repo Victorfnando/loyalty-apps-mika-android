@@ -22,7 +22,6 @@ import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.databinding.FragmentCreatePinBinding
 import com.dre.loyalty.features.createpin.presentation.enums.CreatePinType
 import com.dre.loyalty.features.createpin.presentation.sheet.PostCreatePinConfirmationModal
-import com.dre.loyalty.features.userdetailform.presentation.sheet.ConfirmationSheetModal
 import javax.inject.Inject
 
 class CreatePinFragment : BaseFragment() {
