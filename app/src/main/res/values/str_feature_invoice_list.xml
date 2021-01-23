@@ -16,4 +16,6 @@
         <item>Ditolak</item>
     </string-array>
     <string name="invoice_list_format_id">ID: %s</string>
+
+    <string name="invoice_list_label_empty">Kamu tidak memiliki kwitansi\nyang diterima</string>
 </resources>

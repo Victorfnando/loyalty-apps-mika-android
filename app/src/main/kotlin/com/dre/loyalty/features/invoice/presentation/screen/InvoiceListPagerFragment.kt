@@ -116,11 +116,16 @@ class InvoiceListPagerFragment : BaseFragment() {
     }
 
     private fun renderInvoice(invoices: List<Invoice>?) {
-        invoiceListItemAdapter.set(
-            invoices?.map {
-                InvoiceListItem(it)
-            } ?: emptyList()
-        )
+        if (invoices?.isNotEmpty() == true) {
+            binding?.emptyLayout?.visibility = View.GONE
+            invoiceListItemAdapter.set(
+                invoices.map {
+                    InvoiceListItem(it)
+                }
+            )
+        } else if (invoiceListItemAdapter.adapterItemCount == 0) {
+            binding?.emptyLayout?.visibility = View.VISIBLE
+        }
     }
 
     private fun showSortSheet(event: Event<SheetListState>?) {

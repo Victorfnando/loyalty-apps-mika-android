@@ -31,7 +31,7 @@ class PlayMovie
 ) : UseCase<None, Params>() {
 
     override suspend fun run(params: Params): Either<Failure, None> {
-        navigator.openVideo(context, params.url)
+//        navigator.openVideo(context, params.url)
         return Right(None())
     }
 

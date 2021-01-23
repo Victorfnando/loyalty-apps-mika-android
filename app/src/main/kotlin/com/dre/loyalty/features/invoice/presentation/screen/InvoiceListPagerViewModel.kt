@@ -41,7 +41,6 @@ class InvoiceListPagerViewModel @Inject constructor() : BaseViewModel() {
         _invoiceList.value = when(invoiceType) {
             InvoiceType.ALL -> {
                listOf(
-                   Invoice("", "gre-1", 20_000L, "20 Desember 2020", "Bekasi Timur", InvoiceType.ACCEPTED)
                )
             }
             InvoiceType.ACCEPTED -> {
