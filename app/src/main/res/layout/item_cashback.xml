@@ -18,13 +18,13 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_label_invoice"
-            style="@style/NormalText"
+            style="@style/ExtraSmallLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/home_screen_item_cashback_label_invoiceId"
             android:textColor="@color/gray_3"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Dikirim ke: Gopay" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_invoice"
@@ -43,23 +43,25 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space_12dp"
             android:text="@string/home_screen_item_cashback_label_seeInvoice"
+            android:textColor="@color/blue"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_invoice" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_price"
-            style="@style/NormalText.Bold"
+            style="@style/Heading6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/mainColor"
             app:layout_constraintBottom_toBottomOf="@id/tv_invoice"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/tv_invoice"
-            tools:text="Rp 20.000" />
+            tools:text="+ Rp 20.000" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_date"
-            style="@style/NormalText.Size10"
+            style="@style/ExtraSmallLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/ic_time"
@@ -68,7 +70,5 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/tv_see_invoice_label"
             tools:text="23 Desember 2020" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </androidx.cardview.widget.CardView>

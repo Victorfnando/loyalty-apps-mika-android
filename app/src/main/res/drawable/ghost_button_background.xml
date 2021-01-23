@@ -23,7 +23,7 @@
         <shape android:shape="rectangle">
             <stroke
                 android:width="@dimen/button_ghost_border_width_clicked"
-                android:color="@color/opaque_darker" />
+                android:color="@color/mainColor_darker" />
             <corners android:radius= "@dimen/button_radius" />
         </shape>
     </item>
@@ -35,7 +35,7 @@
             <corners android:radius="@dimen/button_radius" />
             <stroke
                 android:width="@dimen/button_ghost_border_width"
-                android:color="@color/opaque" />
+                android:color="@color/mainColor" />
         </shape>
     </item>
 
@@ -44,7 +44,7 @@
             <corners android:radius="@dimen/button_radius" />
             <stroke
                 android:width="@dimen/button_ghost_border_width"
-                android:color="@color/opaque" />
+                android:color="@color/mainColor" />
         </shape>
     </item>
 </selector>

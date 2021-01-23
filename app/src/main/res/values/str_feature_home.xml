@@ -12,7 +12,8 @@
     <string name="home_screen_section_label_seeall">Lihat semua</string>
 
     <string name="home_screen_item_cashback_label_invoiceId">ID Kwitansi</string>
-    <string name="home_screen_item_cashback_label_seeInvoice">Lihat kwitansi</string>
+    <string name="home_screen_item_cashback_label_seeInvoice">Lihat detail kwitansi</string>
+    <string name="home_screen_item_cashback_format_seeInvoice">Dikirim ke: %s</string>
 
     <string name="home_screen_item_cashback_btn_upload">Unggah kwitansi</string>
     <string name="home_screen_item_upload_label">Unggah kwitansi-mu untuk mendapatkan cashback</string>

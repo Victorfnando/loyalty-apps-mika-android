@@ -8,8 +8,8 @@
     <color name="colorTextSecondary">#7f1a18</color>
     <color name="dividerColor">#212121</color>
 
-    <color name="opaque">#61C7B5</color>
-    <color name="opaque_darker">#309e86</color>
+    <color name="mainColor">#61C7B5</color>
+    <color name="mainColor_darker">#3E8CB9</color>
 
     <color name="translucentBackground">#ED000000</color>
 
@@ -26,13 +26,11 @@
 
     <color name="yellow">#FDED72</color>
 
-    <color name="blue">#2F80ED</color>
+    <color name="blue">#3E8CB9</color>
 
     <color name="info">#3868B0</color>
     <color name="info_lighter">#5B8AD0</color>
     <color name="info_darker">#2C528B</color>
-
-    <color name="main_color_darker">#3E8CB9</color>
 
     <color name="dark1">#3A3A3C</color>
     <color name="dark2">#6B7588</color>

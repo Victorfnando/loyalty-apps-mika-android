@@ -29,6 +29,7 @@ import com.dre.loyalty.core.view.VerticalDividerDecoration
 import com.dre.loyalty.databinding.FragmentHomeBinding
 import com.dre.loyalty.features.camera.CameraActivity
 import com.dre.loyalty.features.camera.CameraRequestType
+import com.dre.loyalty.features.cashback.presentation.entity.CashBack
 import com.dre.loyalty.features.news.presentation.entity.News
 import com.dre.loyalty.features.home.presentation.view.HomeSection
 import com.dre.loyalty.features.cashback.presentation.item.CashBackItem
@@ -64,14 +65,6 @@ class HomeFragment : BaseFragment() {
         ItemAdapter<NewsItem>()
     }
 
-    private val easyImage: EasyImage by lazy {
-        EasyImage.Builder(requireContext())
-            .setCopyImagesToPublicGalleryFolder(true)
-            .setFolderName("Loyalty App")
-            .allowMultiple(true)
-            .build()
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
@@ -94,12 +87,12 @@ class HomeFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        cashBackItem.add(
-//            listOf(
-//                CashBackItem(CashBack("10", 10000L, "12 Desember 2020")),
-//                CashBackItem(CashBack("20", 20000L, "20 Desember 2020"))
-//            )
-//        )
+        cashBackItem.add(
+            listOf(
+                CashBackItem(CashBack("10", 10000L, "12 Desember 2020")),
+                CashBackItem(CashBack("20", 20000L, "20 Desember 2020"))
+            )
+        )
 
         uploadInvoiceItem.add(
             UploadInvoiceItem {

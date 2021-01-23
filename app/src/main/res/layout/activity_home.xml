@@ -26,7 +26,7 @@
         android:background="@color/white"
         android:clipChildren="false"
         app:elevation="@dimen/navigation_bottom_sheet_shadow"
-        app:itemIconTint="@color/black"
+        app:itemIconTint="@color/navigation_bar_color_selector"
         app:itemTextAppearanceInactive="@style/BottomNavigationText"
         app:itemTextAppearanceActive="@style/BottomNavigationText.Bold"
         app:labelVisibilityMode="labeled"
