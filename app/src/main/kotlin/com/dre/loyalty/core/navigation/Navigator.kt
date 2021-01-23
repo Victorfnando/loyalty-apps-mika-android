@@ -26,7 +26,7 @@ import androidx.core.app.ActivityOptionsCompat
 import androidx.fragment.app.FragmentActivity
 import com.dre.loyalty.core.extension.empty
 import com.dre.loyalty.features.authenticationselector.presentation.AuthenticationSelectorActivity
-import com.dre.loyalty.features.cashback.presentation.CashBackListActivity
+import com.dre.loyalty.features.cashback.presentation.screen.CashBackListActivity
 import com.dre.loyalty.features.changeprofile.presentation.UpdateProfileActivity
 import com.dre.loyalty.features.contactus.presentation.ContactUsActivity
 import com.dre.loyalty.features.createpin.presentation.CreatePinActivity

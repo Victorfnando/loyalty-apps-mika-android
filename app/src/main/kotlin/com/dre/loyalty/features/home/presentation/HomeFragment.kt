@@ -73,6 +73,7 @@ class HomeFragment : BaseFragment() {
             observe(navigateNewsList, ::showNewsListScreen)
             observe(navigateNewsDetail, ::showNewsDetailScreen)
             observe(navigateToCamera, ::showCamera)
+            observe(navigateInvoiceDetail, ::showInvoiceDetail)
         }
     }
 
@@ -89,8 +90,8 @@ class HomeFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         cashBackItem.add(
             listOf(
-                CashBackItem(CashBack("10", 10000L, "12 Desember 2020")),
-                CashBackItem(CashBack("20", 20000L, "20 Desember 2020"))
+                CashBackItem(CashBack("gre-1", 10000L, "12 Desember 2020")),
+                CashBackItem(CashBack("gre-1", 20000L, "20 Desember 2020"))
             )
         )
 
@@ -113,7 +114,7 @@ class HomeFragment : BaseFragment() {
                 listOf(cashBackItem, uploadInvoiceItem)
             ).also {
                 it.itemClickListener = {
-                    vm.handleCashBackItemClicked()
+                    vm.handleCashBackItemClicked(it)
                 }
                 it.seeAllClickListener = {
                     vm.handleSeeAllCashBackClicked()
@@ -126,7 +127,7 @@ class HomeFragment : BaseFragment() {
                 listOf(newsItem)
             ).also {
                 it.itemClickListener = {
-                    vm.handleNewsItemClicked()
+                    vm.handleNewsItemClicked(it)
                 }
                 it.seeAllClickListener = {
                     vm.handleSeeAllNewsClicked()
@@ -182,12 +183,18 @@ class HomeFragment : BaseFragment() {
         }
     }
 
-    fun showCamera(event: Event<String>?) {
+    private fun showCamera(event: Event<String>?) {
         event?.getIfNotHandled()?.let {
             startActivityForResult(
                 CameraActivity.callingIntent(requireContext(), CameraRequestType.CAMERA),
                 CameraActivity.REQUEST_CODE_CAMERA
             )
+        }
+    }
+
+    private fun showInvoiceDetail(event: Event<String>?) {
+        event?.getIfNotHandled()?.let {
+            navigator.showInvoiceDetail(requireContext(), it)
         }
     }
 

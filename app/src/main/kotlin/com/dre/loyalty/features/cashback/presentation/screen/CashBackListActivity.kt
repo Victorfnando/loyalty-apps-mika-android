@@ -5,7 +5,7 @@
  * github: https://github.com/oandrz
  */
 
-package com.dre.loyalty.features.cashback.presentation
+package com.dre.loyalty.features.cashback.presentation.screen
 
 import android.content.Context
 import android.content.Intent

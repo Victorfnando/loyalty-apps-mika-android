@@ -22,6 +22,9 @@ class ContactUsViewModel @Inject constructor() : BaseViewModel() {
     private val _selectedContactCategory: MutableLiveData<String> = MutableLiveData()
     val selectedContactCategory: LiveData<String> = _selectedContactCategory
 
+    private val _phoneButtonClicked: MutableLiveData<Event<String>> = MutableLiveData()
+    val phoneButtonClicked: LiveData<Event<String>> = _phoneButtonClicked
+
     fun handleCategoryClicked() {
         _showContactCategorySheet.value = Event(
             SheetListState(
@@ -34,5 +37,9 @@ class ContactUsViewModel @Inject constructor() : BaseViewModel() {
 
     fun handleSelectedCategory(selected: String) {
         _selectedContactCategory.value = selected
+    }
+
+    fun handlePhoneButtonClicked() {
+        _phoneButtonClicked.value = Event("081221123213131")
     }
 }

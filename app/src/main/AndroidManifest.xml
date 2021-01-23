@@ -87,7 +87,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
   </activity>
 
   <activity
-      android:name=".features.cashback.presentation.CashBackListActivity">
+      android:name=".features.cashback.presentation.screen.CashBackListActivity">
   </activity>
 
   <activity

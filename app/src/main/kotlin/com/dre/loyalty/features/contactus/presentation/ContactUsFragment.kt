@@ -16,12 +16,17 @@ import com.dre.loyalty.R
 import com.dre.loyalty.core.extension.observe
 import com.dre.loyalty.core.extension.viewModel
 import com.dre.loyalty.core.functional.Event
+import com.dre.loyalty.core.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.core.view.sheet.SheetListModal
 import com.dre.loyalty.core.view.sheet.SheetListState
 import com.dre.loyalty.databinding.FragmentContactUsBinding
+import javax.inject.Inject
 
 class ContactUsFragment : BaseFragment() {
+
+    @Inject
+    lateinit var navigator: Navigator
 
     private var binding: FragmentContactUsBinding? = null
 
@@ -33,6 +38,7 @@ class ContactUsFragment : BaseFragment() {
         vm = viewModel(viewModelFactory) {
             observe(showContactCategorySheet, ::showCategorySheet)
             observe(selectedContactCategory, ::updateCategoryEt)
+            observe(phoneButtonClicked, ::showDial)
         }
     }
 
@@ -49,9 +55,13 @@ class ContactUsFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         bindToolbar()
         bindEtCategory()
+        binding?.btnCall?.setOnClickListener {
+            vm.handlePhoneButtonClicked()
+        }
     }
 
     override fun onDetach() {
+        binding?.btnCall?.setOnClickListener(null)
         binding = null
         super.onDetach()
     }
@@ -88,6 +98,12 @@ class ContactUsFragment : BaseFragment() {
             setSupportActionBar(binding?.toolbarLayout?.toolbar)
             supportActionBar?.setTitle(R.string.contactUs_screen_title)
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        }
+    }
+
+    private fun showDial(event: Event<String>?) {
+        event?.getIfNotHandled()?.let {
+            navigator.showDialPage(requireContext(), it)
         }
     }
 

@@ -8,6 +8,6 @@
 
 <resources>
     <string name="cashbacklist_screen_title">Casback diterima</string>
-    <string name="cashbacklist_screen_empty_label">Unggah kwitansi-mu untuk mendapatkan cashback</string>
+    <string name="cashbacklist_screen_empty_label">Unggah kwitansi-mu\nuntuk mendapatkan cashback</string>
     <string name="cashbacklist_screen_empty_button">Unggah kwitansi</string>
 </resources>

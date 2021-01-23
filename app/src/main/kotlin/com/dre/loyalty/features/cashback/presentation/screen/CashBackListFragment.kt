@@ -5,8 +5,11 @@
  * github: https://github.com/oandrz
  */
 
-package com.dre.loyalty.features.cashback.presentation
+package com.dre.loyalty.features.cashback.presentation.screen
 
+import android.app.Activity.RESULT_OK
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,15 +18,25 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dre.loyalty.R
+import com.dre.loyalty.core.extension.observe
+import com.dre.loyalty.core.extension.viewModel
+import com.dre.loyalty.core.functional.Event
+import com.dre.loyalty.core.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.core.view.VerticalDividerDecoration
 import com.dre.loyalty.databinding.FragmentCasbackListBinding
+import com.dre.loyalty.features.camera.CameraActivity
+import com.dre.loyalty.features.camera.CameraRequestType
 import com.dre.loyalty.features.cashback.presentation.entity.CashBack
 import com.dre.loyalty.features.cashback.presentation.item.CashBackItem
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
+import javax.inject.Inject
 
 class CashBackListFragment : BaseFragment() {
+
+    @Inject
+    lateinit var navigator: Navigator
 
     private var binding: FragmentCasbackListBinding? = null
 
@@ -31,8 +44,14 @@ class CashBackListFragment : BaseFragment() {
         ItemAdapter<CashBackItem>()
     }
 
+    private lateinit var vm: CashBackListViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        appComponent.inject(this)
+        vm = viewModel(viewModelFactory) {
+            observe(uploadInvoiceClicked, ::showUploadInvoice)
+        }
     }
 
     override fun onCreateView(
@@ -48,9 +67,21 @@ class CashBackListFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         bindToolbar()
         bindList()
+        binding?.btnUploadInvoice?.setOnClickListener {
+            vm.handleUploadInvoiceClicked()
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == RESULT_OK && requestCode == CameraActivity.REQUEST_CODE_CAMERA) {
+            val uri = data?.extras?.getString(CameraActivity.EXTRA_URI)
+            navigator.showUploadInvoice(requireContext(), Uri.parse(uri))
+        }
     }
 
     override fun onDetach() {
+        (activity as AppCompatActivity).setSupportActionBar(null)
         binding = null
         super.onDetach()
     }
@@ -92,6 +123,15 @@ class CashBackListFragment : BaseFragment() {
             adapter = FastAdapter.with(cashBackItem)
         }
 
+    }
+
+    private fun showUploadInvoice(event: Event<Boolean>?) {
+        event?.getIfNotHandled()?.let {
+            startActivityForResult(
+                CameraActivity.callingIntent(requireContext(), CameraRequestType.CAMERA),
+                CameraActivity.REQUEST_CODE_CAMERA
+            )
+        }
     }
 
     companion object {

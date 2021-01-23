@@ -17,6 +17,7 @@ package com.dre.loyalty.core.di.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.dre.loyalty.features.cashback.presentation.screen.CashBackListViewModel
 import com.dre.loyalty.features.changeprofile.presentation.UpdateProfileViewModel
 import com.dre.loyalty.features.contactus.presentation.ContactUsViewModel
 import com.dre.loyalty.features.createpin.presentation.CreatePinViewModel
@@ -135,6 +136,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(EWalletViewModel::class)
     abstract fun provideEWalletViewModel(vm: EWalletViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(CashBackListViewModel::class)
+    abstract fun provideCashBackListViewModel(vm: CashBackListViewModel): ViewModel
 
     @Binds
     @IntoMap

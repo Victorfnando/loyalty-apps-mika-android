@@ -8,8 +8,8 @@
 package com.dre.loyalty.features.invoice.presentation.enumtype
 
 enum class SortOrder(val sort: String) {
-    ASC("Terbaru ke Terlama"),
-    DESC("Terlama ke Terbaru"),
+    DESC("Terbaru ke Terlama"),
+    ASC("Terlama ke Terbaru"),
     UNKNOWN("");
 
     companion object {
