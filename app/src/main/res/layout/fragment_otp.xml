@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/white">
 
     <include
@@ -11,7 +12,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_pin_title"
-        style="@style/TitleText"
+        style="@style/Heading5"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/activity_horizontal_margin"
@@ -24,16 +25,17 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_phone"
-        style="@style/NormalText"
+        style="@style/SmallLabel"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/activity_horizontal_margin"
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:layout_marginEnd="@dimen/space_16dp"
-        android:textColor="@color/gray"
+        android:textColor="@color/dark2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_pin_title" />
+        app:layout_constraintTop_toBottomOf="@id/tv_pin_title"
+        tools:text="Masukkan kode verifikasi yang sudah kami kirim ke email kamu (adeandreansyah99@gmail.com)"/>
 
     <com.chaos.view.PinView
         android:id="@+id/et_pin"
@@ -54,7 +56,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_codeNoFound_label"
-        style="@style/NormalText"
+        style="@style/SmallLabel"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/activity_horizontal_margin"
@@ -62,7 +64,7 @@
         android:layout_marginEnd="@dimen/activity_horizontal_margin"
         android:gravity="center"
         android:text="@string/otp_screen_label_codenotfound"
-        android:textColor="@color/gray"
+        android:textColor="@color/dark1"
         app:layout_constraintBottom_toTopOf="@id/btn_resend"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

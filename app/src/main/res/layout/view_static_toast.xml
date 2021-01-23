@@ -6,23 +6,28 @@
   -->
 
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/yellow"
-    android:padding="@dimen/space_16dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="@dimen/space_16dp">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_toast_label"
-        style="@style/NormalText.Bold"
+        style="@style/Heading7"
+        android:textColor="@color/dark1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        tools:text="Testing" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_toast_desc"
-        style="@style/NormalText"
+        style="@style/SmallLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/space_4dp"/>
+        android:layout_marginTop="@dimen/space_4dp"
+        android:textColor="@color/gray"
+        tools:text="kamussd sdfsdiofn sdiofsdionfoisdfnsdofnon sdifndsiofn" />
 </androidx.appcompat.widget.LinearLayoutCompat>

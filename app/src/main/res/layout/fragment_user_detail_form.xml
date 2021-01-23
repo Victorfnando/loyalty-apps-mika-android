@@ -24,14 +24,15 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_form_title"
-                style="@style/TitleText"
+                style="@style/Heading5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/userdetailform_screen_title" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_form_desc"
-                style="@style/NormalText"
+                style="@style/SmallLabel"
+                android:textColor="@color/dark2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_12dp"
