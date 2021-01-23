@@ -8,6 +8,9 @@
     <color name="colorTextSecondary">#7f1a18</color>
     <color name="dividerColor">#212121</color>
 
+    <color name="opaque">#61C7B5</color>
+    <color name="opaque_darker">#309e86</color>
+
     <color name="translucentBackground">#ED000000</color>
 
     <color name="gray">#4F4F4F</color>

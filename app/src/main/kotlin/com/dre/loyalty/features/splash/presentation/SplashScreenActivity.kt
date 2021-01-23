@@ -45,7 +45,7 @@ class SplashScreenActivity : AppCompatActivity() {
     }
 
     companion object {
-        private const val SPLASH_DISPLAY_LENGTH = 1000L
+        private const val SPLASH_DISPLAY_LENGTH = 2000L
 
         fun callingIntent(context: Context) = Intent(context, SplashScreenActivity::class.java)
     }

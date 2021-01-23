@@ -7,6 +7,8 @@
   -->
 
 <resources>
-    <string name="authselector_screen_label_hospital">Altea Hospital</string>
-
+    <string name="authselector_screen_label_hospital">Altea Loyalty Platform</string>
+    <string name="authSelector_button_register">Register</string>
+    <string name="authSelector_button_login">Log In</string>
+    <string name="authSelector_button_description">Kamu bisa mendapatkan cashback dengan cara mengunggah kwitansi transaksi di rumah sakit mitra</string>
 </resources>

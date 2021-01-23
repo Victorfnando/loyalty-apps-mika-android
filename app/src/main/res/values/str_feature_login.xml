@@ -2,7 +2,6 @@
     <string name="login_screen_title">Log in</string>
     <string name="login_screen_btn_login">Log in</string>
     <string name="login_screen_subdescription">Silahkan masuk dengan email kamu yang terdaftar</string>
-    <string name="login_screen_btn_register">Daftar</string>
     <string name="login_screen_label_email">Email</string>
     <string name="login_screen_label_reset"><![CDATA[Lupa kata sandi? <font color=\'blue\'>Atur ulang</font>]]></string>
     <string name="login_screen_et_hint">Contoh: namakamu@email.com</string>

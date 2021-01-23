@@ -62,7 +62,7 @@ class Navigator @Inject constructor(private val authenticator: Authenticator) {
 
     fun showMain(context: Context) {
         when (authenticator.userLoggedIn()) {
-            true -> showMovies(context)
+            true -> showHome(context)
             false -> showAuthSelector(context)
         }
     }
