@@ -62,7 +62,7 @@
         android:layout_marginBottom="@dimen/space_20dp"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_location_empty"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/container_search"
         app:layout_constraintBottom_toTopOf="@id/tv_empty_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
