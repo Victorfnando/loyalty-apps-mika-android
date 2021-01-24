@@ -35,7 +35,7 @@ import com.dre.loyalty.features.movies.MoviesFragment
 import com.dre.loyalty.features.otp.OtpFragment
 import com.dre.loyalty.features.passwordinput.presentation.screen.InputPasswordFragment
 import com.dre.loyalty.features.pin.presentation.InputPinFragment
-import com.dre.loyalty.features.profile.presentation.ProfileFragment
+import com.dre.loyalty.features.profile.presentation.screen.ProfileFragment
 import com.dre.loyalty.features.resetpassword.presentation.ResetPasswordFragment
 import com.dre.loyalty.features.splash.presentation.SplashScreenActivity
 import com.dre.loyalty.features.updatepassword.presentation.UpdatePasswordFragment

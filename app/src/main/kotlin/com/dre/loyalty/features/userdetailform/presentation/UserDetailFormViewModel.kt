@@ -12,7 +12,6 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import com.dre.loyalty.core.functional.Event
 import com.dre.loyalty.core.platform.BaseViewModel
-import com.dre.loyalty.core.util.validator.ValidationResult
 import com.dre.loyalty.core.util.validator.type.ValidationType
 import com.dre.loyalty.features.userdetailform.presentation.entity.EmailInputState
 import com.dre.loyalty.features.userdetailform.presentation.entity.FirstNameInputState
@@ -87,7 +86,7 @@ class UserDetailFormViewModel @Inject constructor() : BaseViewModel() {
     }
 
     fun handleFirstNameTextChangedListener(text: String) {
-        val result = ValidationType.NAME.strategy.validate(text)
+        val result = ValidationType.EMPTY.strategy.validate(text)
         if (result.isPass) {
             _firstNameInputState.value = FirstNameInputState(null)
         } else {
@@ -97,7 +96,7 @@ class UserDetailFormViewModel @Inject constructor() : BaseViewModel() {
     }
 
     fun handleLastNameTextChangeListener(text: String) {
-        val result = ValidationType.NAME.strategy.validate(text)
+        val result = ValidationType.EMPTY.strategy.validate(text)
         if (result.isPass) {
             _lastNameInputState.value = LastNameInputState(null)
         } else {

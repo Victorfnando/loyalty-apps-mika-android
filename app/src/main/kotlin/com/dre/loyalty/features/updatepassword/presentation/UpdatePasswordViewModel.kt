@@ -10,6 +10,7 @@ package com.dre.loyalty.features.updatepassword.presentation
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dre.loyalty.R
+import com.dre.loyalty.core.functional.Event
 import com.dre.loyalty.core.platform.BaseViewModel
 import com.dre.loyalty.core.util.validator.type.ValidationType
 import com.dre.loyalty.features.updatepassword.presentation.entity.PasswordInputState
@@ -29,6 +30,12 @@ class UpdatePasswordViewModel @Inject constructor() : BaseViewModel() {
 
     private val _submitButtonState: MutableLiveData<SubmitButtonState> = MutableLiveData()
     val submitButtonState: LiveData<SubmitButtonState> = _submitButtonState
+
+    private val _submitButtonClicked: MutableLiveData<Event<Boolean>> = MutableLiveData()
+    val submitButtonClicked: LiveData<Event<Boolean>> = _submitButtonClicked
+
+    private val _tvFooterClicked: MutableLiveData<Event<Boolean>> = MutableLiveData()
+    val tvFooterClicked: LiveData<Event<Boolean>> = _tvFooterClicked
 
     private var password: Triple<String?, String?, String?> = Triple(null, null, null)
 
@@ -119,6 +126,14 @@ class UpdatePasswordViewModel @Inject constructor() : BaseViewModel() {
             )
         }
         checkButtonState()
+    }
+
+    fun handleSubmitButtonClicked() {
+        _submitButtonClicked.value = Event(true)
+    }
+
+    fun handleFooterTextClicked() {
+        _tvFooterClicked.value = Event(true)
     }
 
     private fun checkButtonState() {

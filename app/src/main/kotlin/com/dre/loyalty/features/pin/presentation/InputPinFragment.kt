@@ -64,7 +64,7 @@ class InputPinFragment : BaseFragment() {
         )
         bindInputPin()
         binding?.tvForgotpinLabel?.setOnClickListener {
-            navigator.showResetPin(requireContext())
+            navigator.showResetPasswordScreen(requireContext())
         }
     }
 

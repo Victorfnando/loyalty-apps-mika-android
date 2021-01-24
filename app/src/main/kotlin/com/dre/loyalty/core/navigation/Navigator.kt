@@ -15,16 +15,11 @@
  */
 package com.dre.loyalty.core.navigation
 
-import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.content.Intent.ACTION_DIAL
 import android.net.Uri
 import android.view.View
-import android.widget.ImageView
-import androidx.core.app.ActivityOptionsCompat
-import androidx.fragment.app.FragmentActivity
-import com.dre.loyalty.core.extension.empty
 import com.dre.loyalty.features.authenticationselector.presentation.AuthenticationSelectorActivity
 import com.dre.loyalty.features.cashback.presentation.screen.CashBackListActivity
 import com.dre.loyalty.features.changeprofile.presentation.UpdateProfileActivity
@@ -37,9 +32,6 @@ import com.dre.loyalty.features.home.presentation.HomeActivity
 import com.dre.loyalty.features.invoicedetail.presentation.InvoiceDetailActivity
 import com.dre.loyalty.features.login.data.Authenticator
 import com.dre.loyalty.features.login.presentation.ui.LoginActivity
-import com.dre.loyalty.features.movies.MovieDetailsActivity
-import com.dre.loyalty.features.movies.MovieView
-import com.dre.loyalty.features.movies.MoviesActivity
 import com.dre.loyalty.features.news.presentation.detail.NewsDetailActivity
 import com.dre.loyalty.features.news.presentation.list.NewsListActivity
 import com.dre.loyalty.features.otp.OtpActivity
@@ -48,7 +40,7 @@ import com.dre.loyalty.features.passwordinput.presentation.screen.InputPasswordA
 import com.dre.loyalty.features.photoview.PhotoViewActivity
 import com.dre.loyalty.features.pin.presentation.InputPinActivity
 import com.dre.loyalty.features.register.presentation.ui.RegisterActivity
-import com.dre.loyalty.features.resetpassword.presentation.ResetPinActivity
+import com.dre.loyalty.features.resetpassword.presentation.ResetPasswordActivity
 import com.dre.loyalty.features.splash.presentation.SplashScreenActivity
 import com.dre.loyalty.features.updatepassword.presentation.UpdatePasswordActivity
 import com.dre.loyalty.features.uploadinvoice.presentation.UploadInvoiceActivity
@@ -89,8 +81,8 @@ class Navigator @Inject constructor(private val authenticator: Authenticator) {
         context.startActivity(UserDetailFormActivity.callingIntent(context))
     }
 
-    fun showResetPin(context: Context) {
-        context.startActivity(ResetPinActivity.callingIntent(context))
+    fun showResetPasswordScreen(context: Context) {
+        context.startActivity(ResetPasswordActivity.callingIntent(context))
     }
 
     fun showCreatePin(context: Context) {

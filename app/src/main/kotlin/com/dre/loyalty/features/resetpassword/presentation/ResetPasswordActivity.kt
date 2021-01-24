@@ -13,7 +13,7 @@ import android.view.MenuItem
 import com.dre.loyalty.core.platform.BaseActivity
 import com.dre.loyalty.core.platform.BaseFragment
 
-class ResetPinActivity : BaseActivity() {
+class ResetPasswordActivity : BaseActivity() {
 
     override fun fragment(): BaseFragment = ResetPasswordFragment.newInstance()
 
@@ -26,6 +26,6 @@ class ResetPinActivity : BaseActivity() {
     }
 
     companion object {
-        fun callingIntent(context: Context) = Intent(context, ResetPinActivity::class.java)
+        fun callingIntent(context: Context) = Intent(context, ResetPasswordActivity::class.java)
     }
 }

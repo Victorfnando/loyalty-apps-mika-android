@@ -15,6 +15,8 @@
     <string name="updateprofile_screen_label_gender">Gender</string>
     <string name="updateprofile_screen_label_dob">Tanggal Lahir</string>
 
+    <string name="updateProfile_hint_desc">Contoh: Ade Andreansyah menjadi Ade Andriansyah </string>
+
     <string name="updateProfile_sheet_label_title">Pesan ubah profil berhasil dikirim !</string>
     <string name="updateProfile_sheet_label_description">Admin akan segera mengubah data pada profil kamu.</string>
     <string name="updateProfile_sheet_button_ok">OK</string>

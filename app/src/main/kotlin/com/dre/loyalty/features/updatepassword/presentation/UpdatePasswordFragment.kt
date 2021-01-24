@@ -13,18 +13,31 @@ import android.text.TextWatcher
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.text.method.TransformationMethod
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.text.HtmlCompat
+import com.dre.loyalty.R
 import com.dre.loyalty.core.extension.observe
 import com.dre.loyalty.core.extension.viewModel
+import com.dre.loyalty.core.functional.Event
+import com.dre.loyalty.core.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
+import com.dre.loyalty.core.util.enumtype.ConfirmationSheetType
+import com.dre.loyalty.core.util.enumtype.ConfirmationSheetType.UPDATE_PASSWORD_SUCCESS_SHEET
+import com.dre.loyalty.core.view.sheet.ConfirmationSheetModal
 import com.dre.loyalty.databinding.FragmentUpdatePasswordBinding
+import com.dre.loyalty.features.passwordinput.presentation.enumtype.InputPasswordType
 import com.dre.loyalty.features.updatepassword.presentation.entity.PasswordInputState
 import com.dre.loyalty.features.updatepassword.presentation.entity.SubmitButtonState
+import javax.inject.Inject
 
 class UpdatePasswordFragment : BaseFragment() {
+
+    @Inject
+    lateinit var navigator: Navigator
 
     private var binding: FragmentUpdatePasswordBinding? = null
 
@@ -56,6 +69,8 @@ class UpdatePasswordFragment : BaseFragment() {
             observe(newPasswordInputState, ::updateNewPasswordState)
             observe(confirmPasswordInputState, ::updateConfirmPasswordState)
             observe(submitButtonState, ::updateSubmitButtonState)
+            observe(submitButtonClicked, ::showSuccessUpdatePasswordSheet)
+            observe(tvFooterClicked, ::navigateResetPassword)
         }
     }
 
@@ -74,6 +89,7 @@ class UpdatePasswordFragment : BaseFragment() {
         bindEtOldPass()
         bindEtNewPass()
         bindEtConfirmPass()
+        bindFooter()
     }
 
     override fun onDetach() {
@@ -164,6 +180,38 @@ class UpdatePasswordFragment : BaseFragment() {
             HideReturnsTransformationMethod.getInstance()
         } else {
             PasswordTransformationMethod.getInstance()
+        }
+    }
+
+    private fun bindFooter() {
+        binding?.stickyButton?.run {
+            setFooterGravity(Gravity.CENTER)
+            tvFooterText = HtmlCompat.fromHtml(
+                getString(R.string.updatePassword_label_reset),
+                HtmlCompat.FROM_HTML_MODE_LEGACY
+            )
+            tvFooterClickListener = {
+                vm.handleFooterTextClicked()
+            }
+            buttonClickListener = {
+                vm.handleSubmitButtonClicked()
+            }
+        }
+    }
+
+    private fun navigateResetPassword(event: Event<Boolean>?) {
+        event?.getIfNotHandled()?.let {
+            navigator.showResetPasswordScreen(requireContext())
+        }
+    }
+
+    private fun showSuccessUpdatePasswordSheet(event: Event<Boolean>?) {
+        event?.getIfNotHandled()?.let {
+            val modal = ConfirmationSheetModal.newInstance(UPDATE_PASSWORD_SUCCESS_SHEET)
+            modal.primaryButtonClickListener = {
+                requireActivity().finish()
+            }
+            modal.show(requireActivity().supportFragmentManager, ConfirmationSheetModal.TAG)
         }
     }
 

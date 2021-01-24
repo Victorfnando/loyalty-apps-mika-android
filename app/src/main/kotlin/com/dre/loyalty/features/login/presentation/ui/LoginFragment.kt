@@ -29,7 +29,6 @@ import com.dre.loyalty.databinding.FragmentLoginBinding
 import com.dre.loyalty.features.login.presentation.entity.LoginButtonState
 import com.dre.loyalty.features.login.presentation.entity.LoginEmailInputState
 import com.dre.loyalty.features.login.presentation.entity.LoginPasswordInputState
-import com.dre.loyalty.features.updatepassword.presentation.entity.PasswordInputState
 import javax.inject.Inject
 
 class LoginFragment : BaseFragment() {
@@ -178,7 +177,7 @@ class LoginFragment : BaseFragment() {
 
     private fun showResetPassword(event: Event<Boolean>?) {
         event?.getIfNotHandled()?.let {
-            navigator.showResetPin(requireContext())
+            navigator.showResetPasswordScreen(requireContext())
         }
     }
 

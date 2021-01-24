@@ -31,7 +31,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_date"
-            style="@style/NormalText.Size10"
+            style="@style/ExtraSmallLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/space_12dp"
@@ -43,20 +43,21 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_title"
-            style="@style/NormalText.Bold"
-            android:layout_width="wrap_content"
+            style="@style/Heading6"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/space_12dp"
             android:layout_marginTop="@dimen/space_4dp"
             android:layout_marginEnd="@dimen/space_12dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_date"
             tools:text="Rumah Imunisasi Mitra keluarga" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_desc"
-            style="@style/NormalText"
-            android:layout_width="wrap_content"
+            style="@style/SmallLabel"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/space_12dp"
             android:layout_marginTop="@dimen/space_4dp"
@@ -65,6 +66,7 @@
             android:ellipsize="end"
             android:maxLines="3"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_title"
             tools:text="Rumah Imunisasi adalah sarana yang tepat untuk menjaga kesehatan Anak di Rumah Imunisasi adalah sarana yang tepat untuk menjaga kesehatan Anak di" />

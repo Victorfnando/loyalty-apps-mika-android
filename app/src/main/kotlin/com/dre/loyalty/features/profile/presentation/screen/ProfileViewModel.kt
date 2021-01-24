@@ -5,7 +5,7 @@
  * github: https://github.com/oandrz
  */
 
-package com.dre.loyalty.features.profile.presentation
+package com.dre.loyalty.features.profile.presentation.screen
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -29,6 +29,9 @@ class ProfileViewModel @Inject constructor() : BaseViewModel() {
 
     private val _navigateTnc: MutableLiveData<Event<Boolean>> = MutableLiveData()
     val navigateTnc: LiveData<Event<Boolean>> = _navigateTnc
+
+    private val _navigateLogout: MutableLiveData<Event<Boolean>> = MutableLiveData()
+    val navigateLogout: LiveData<Event<Boolean>> = _navigateLogout
 
     private val _profilePictureClickedEvent: MutableLiveData<Event<Boolean>> = MutableLiveData()
     val profilePictureClickedEvent: LiveData<Event<Boolean>> = _profilePictureClickedEvent
@@ -58,6 +61,10 @@ class ProfileViewModel @Inject constructor() : BaseViewModel() {
     }
 
     fun handleLogoutMenuClicked() {
+        _navigateLogout.value = Event(true)
+    }
+
+    fun handleLogoutConfirmationClicked() {
 
     }
 }

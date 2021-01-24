@@ -26,47 +26,61 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar_layout">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:descendantFocusability="beforeDescendants"
             android:focusableInTouchMode="true"
             android:padding="@dimen/space_16dp">
 
             <com.dre.loyalty.core.view.PrefixEditTextWithLabel
                 android:id="@+id/et_category"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:drawableEnd="@drawable/ic_expand"
                 android:inputType="none"
                 android:text="@string/contactUs_screen_hint_category"
-                app:fieldLabel="@string/contactUs_screen_label_category" />
+                app:fieldLabel="@string/contactUs_screen_label_category"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_label"
                 style="@style/SmallLabel"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_20dp"
                 android:layout_marginBottom="@dimen/space_8dp"
-                android:text="@string/contactUs_screen_label_message" />
+                android:text="@string/contactUs_screen_label_message"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_category" />
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/et_message"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="@dimen/et_description_height"
                 android:background="@drawable/et_description_border"
                 android:gravity="top"
                 android:hint="@string/contactUs_screen_hint_message"
                 android:inputType="textMultiLine"
-                android:scrollbars="vertical" />
+                android:padding="@dimen/space_16dp"
+                android:scrollbars="vertical"
+                android:textSize="@dimen/text_size_14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_label" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_error"
+                android:id="@+id/tv_message_error"
                 style="@style/SmallLabel"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textColor="@color/red" />
+                android:textColor="@color/red"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_message" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_send"
@@ -74,8 +88,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_20dp"
-                android:text="@string/contactUs_screen_button_send" />
-        </androidx.appcompat.widget.LinearLayoutCompat>
+                android:text="@string/contactUs_screen_button_send"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_message_error" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
     <androidx.constraintlayout.widget.ConstraintLayout

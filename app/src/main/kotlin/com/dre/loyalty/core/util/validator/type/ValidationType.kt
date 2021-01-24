@@ -9,7 +9,7 @@ package com.dre.loyalty.core.util.validator.type
 
 enum class ValidationType(val strategy: ValidationStrategy) {
     EMAIL(EmailValidation()),
-    NAME(NameValidation()),
+    EMPTY(EmptyTextValidation()),
     KTP(KtpValidation()),
     PHONE(PhoneValidation()),
     TOTAL_AMOUNT(TotalAmountValidation()),

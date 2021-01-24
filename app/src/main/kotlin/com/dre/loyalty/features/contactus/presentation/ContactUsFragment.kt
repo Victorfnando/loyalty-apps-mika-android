@@ -8,6 +8,8 @@
 package com.dre.loyalty.features.contactus.presentation
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,9 +20,13 @@ import com.dre.loyalty.core.extension.viewModel
 import com.dre.loyalty.core.functional.Event
 import com.dre.loyalty.core.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
+import com.dre.loyalty.core.util.enumtype.ConfirmationSheetType.CONTACT_US_SUCCESS_SHEET
+import com.dre.loyalty.core.view.sheet.ConfirmationSheetModal
 import com.dre.loyalty.core.view.sheet.SheetListModal
 import com.dre.loyalty.core.view.sheet.SheetListState
 import com.dre.loyalty.databinding.FragmentContactUsBinding
+import com.dre.loyalty.features.contactus.presentation.entity.InputMessageState
+import com.dre.loyalty.features.contactus.presentation.entity.SendMessageButtonState
 import javax.inject.Inject
 
 class ContactUsFragment : BaseFragment() {
@@ -32,6 +38,16 @@ class ContactUsFragment : BaseFragment() {
 
     private lateinit var vm: ContactUsViewModel
 
+    private val messageTextWatcher: TextWatcher = object : TextWatcher {
+        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+        override fun afterTextChanged(text: Editable?) {
+            vm.handleMessageChanged(text.toString())
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
@@ -39,6 +55,9 @@ class ContactUsFragment : BaseFragment() {
             observe(showContactCategorySheet, ::showCategorySheet)
             observe(selectedContactCategory, ::updateCategoryEt)
             observe(phoneButtonClicked, ::showDial)
+            observe(submitMessageClicked, ::showSuccessSendMessageSheet)
+            observe(inputMessageState, ::updateInputMessage)
+            observe(sendButtonState, ::updateSendButtonState)
         }
     }
 
@@ -55,12 +74,13 @@ class ContactUsFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         bindToolbar()
         bindEtCategory()
-        binding?.btnCall?.setOnClickListener {
-            vm.handlePhoneButtonClicked()
-        }
+        bindEtMessage()
+        bindPhoneCallButton()
+        bindSubmitMessageButton()
     }
 
     override fun onDetach() {
+        binding?.etMessage?.removeTextChangedListener(messageTextWatcher)
         binding?.btnCall?.setOnClickListener(null)
         binding = null
         super.onDetach()
@@ -73,6 +93,22 @@ class ContactUsFragment : BaseFragment() {
             setOnClickListener {
                 vm.handleCategoryClicked()
             }
+        }
+    }
+
+    private fun bindEtMessage() {
+        binding?.etMessage?.addTextChangedListener(messageTextWatcher)
+    }
+
+    private fun bindPhoneCallButton() {
+        binding?.btnCall?.setOnClickListener {
+            vm.handlePhoneButtonClicked()
+        }
+    }
+
+    private fun bindSubmitMessageButton() {
+        binding?.btnSend?.setOnClickListener {
+            vm.handleSubmitMessageClicked()
         }
     }
 
@@ -105,6 +141,29 @@ class ContactUsFragment : BaseFragment() {
         event?.getIfNotHandled()?.let {
             navigator.showDialPage(requireContext(), it)
         }
+    }
+
+    private fun showSuccessSendMessageSheet(event: Event<Boolean>?) {
+        event?.getIfNotHandled()?.let {
+            val modal = ConfirmationSheetModal.newInstance(CONTACT_US_SUCCESS_SHEET)
+            modal.primaryButtonClickListener = {
+                requireActivity().finish()
+            }
+            modal.show(requireActivity().supportFragmentManager, ConfirmationSheetModal.TAG)
+        }
+    }
+
+    private fun updateInputMessage(state: InputMessageState?) {
+        binding?.tvMessageError?.visibility = View.VISIBLE
+        binding?.tvMessageError?.text = if (state?.error != null && state.error != -1) {
+            getString(state.error)
+        } else {
+            ""
+        }
+    }
+
+    private fun updateSendButtonState(state: SendMessageButtonState?) {
+        binding?.btnSend?.isEnabled = state?.isEnabled ?: false
     }
 
     companion object {

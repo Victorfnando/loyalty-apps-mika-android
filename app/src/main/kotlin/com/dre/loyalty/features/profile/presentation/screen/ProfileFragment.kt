@@ -5,7 +5,7 @@
  * github: https://github.com/oandrz
  */
 
-package com.dre.loyalty.features.profile.presentation
+package com.dre.loyalty.features.profile.presentation.screen
 
 import android.app.Activity
 import android.content.Intent
@@ -25,7 +25,9 @@ import com.dre.loyalty.core.extension.viewModel
 import com.dre.loyalty.core.functional.Event
 import com.dre.loyalty.core.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
+import com.dre.loyalty.core.util.enumtype.ConfirmationSheetType
 import com.dre.loyalty.core.view.VerticalDividerDecoration
+import com.dre.loyalty.core.view.sheet.ConfirmationSheetModal
 import com.dre.loyalty.databinding.FragmentProfileBinding
 import com.dre.loyalty.features.camera.CameraActivity
 import com.dre.loyalty.features.camera.CameraRequestType
@@ -72,6 +74,7 @@ class ProfileFragment : BaseFragment() {
             observe(navigateContact, ::navigateContactScreen)
             observe(navigateFaq, ::navigateFaqScreen)
             observe(navigateTnc, ::navigateTnCScreen)
+            observe(navigateLogout, ::showLogoutConfirmationSheet)
             observe(profilePictureClickedEvent, ::showProfilePictureSelectorModal)
         }
     }
@@ -91,7 +94,6 @@ class ProfileFragment : BaseFragment() {
         bindList()
         binding?.tvName?.text = "Batman"
         binding?.tvMail?.text = "Batman@gmail.com"
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -159,7 +161,7 @@ class ProfileFragment : BaseFragment() {
         populateAboutSection()
         populateMenuSection()
         logoutMenuAdapter.add(LogoutMenuItem {
-            Toast.makeText(requireContext(), "Logout", Toast.LENGTH_SHORT).show()
+            vm.handleLogoutMenuClicked()
         })
     }
 
@@ -232,6 +234,16 @@ class ProfileFragment : BaseFragment() {
     private fun navigateTnCScreen(event: Event<Boolean>?) {
         event?.getIfNotHandled()?.let {
             Toast.makeText(requireContext(), "tnc", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun showLogoutConfirmationSheet(event: Event<Boolean>?) {
+        event?.getIfNotHandled()?.let {
+            val sheet = ConfirmationSheetModal.newInstance(ConfirmationSheetType.LOGOUT_CONFIRMATION_SHEET)
+            sheet.primaryButtonClickListener = {
+                vm.handleLogoutConfirmationClicked()
+            }
+            sheet.show(requireActivity().supportFragmentManager, ConfirmationSheetModal.TAG)
         }
     }
 

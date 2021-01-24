@@ -17,7 +17,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.dre.loyalty.R
 import com.dre.loyalty.core.extension.observe
 import com.dre.loyalty.core.extension.viewModel
+import com.dre.loyalty.core.functional.Event
 import com.dre.loyalty.core.platform.BaseFragment
+import com.dre.loyalty.core.util.enumtype.ConfirmationSheetType
+import com.dre.loyalty.core.view.sheet.ConfirmationSheetModal
 import com.dre.loyalty.databinding.FragmentChangeProfileBinding
 import com.dre.loyalty.features.changeprofile.presentation.entity.DescriptionEtState
 import com.dre.loyalty.features.changeprofile.presentation.entity.SendButtonState
@@ -40,6 +43,7 @@ class UpdateProfileFragment : BaseFragment() {
         vm = viewModel(viewModelFactory) {
             observe(descInputState, ::updateDescriptionEtState)
             observe(sendButtonState, ::updateSendButtonState)
+            observe(buttonSubmitClicked, ::showEditProfileSuccessModal)
         }
     }
 
@@ -56,6 +60,7 @@ class UpdateProfileFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         bindToolbar()
         binding?.etDescription?.addTextChangedListener(descWatcher)
+        bindSubmitButton()
     }
 
     override fun onDetach() {
@@ -72,6 +77,12 @@ class UpdateProfileFragment : BaseFragment() {
         }
     }
 
+    private fun bindSubmitButton() {
+        binding?.btnSend?.setOnClickListener {
+            vm.handleSubmitButtonClicked()
+        }
+    }
+
     private fun updateDescriptionEtState(state: DescriptionEtState?) {
         if (state?.error != null && state.error != -1) {
             binding?.tvError?.run {
@@ -85,6 +96,16 @@ class UpdateProfileFragment : BaseFragment() {
 
     private fun updateSendButtonState(state: SendButtonState?) {
         binding?.btnSend?.isEnabled = state?.isEnable ?: false
+    }
+
+    private fun showEditProfileSuccessModal(event: Event<Boolean>?) {
+        event?.getIfNotHandled()?.let {
+            val modal = ConfirmationSheetModal.newInstance(ConfirmationSheetType.CHANGE_PROFILE_SUCCESS_SHEET)
+            modal.primaryButtonClickListener = {
+                requireActivity().finish()
+            }
+            modal.show(requireActivity().supportFragmentManager, ConfirmationSheetModal.TAG)
+        }
     }
 
     companion object {

@@ -9,6 +9,7 @@ package com.dre.loyalty.features.changeprofile.presentation
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.dre.loyalty.core.functional.Event
 import com.dre.loyalty.core.platform.BaseViewModel
 import com.dre.loyalty.core.util.validator.type.ValidationType
 import com.dre.loyalty.features.changeprofile.presentation.entity.DescriptionEtState
@@ -23,19 +24,26 @@ class UpdateProfileViewModel @Inject constructor() : BaseViewModel() {
     private val _sendButtonState: MutableLiveData<SendButtonState> = MutableLiveData()
     val sendButtonState: LiveData<SendButtonState> = _sendButtonState
 
+    private val _buttonSubmitClicked: MutableLiveData<Event<Boolean>> = MutableLiveData()
+    val buttonSubmitClicked: LiveData<Event<Boolean>> = _buttonSubmitClicked
+
     init {
         _descInputState.value = DescriptionEtState(-1)
         _sendButtonState.value = SendButtonState(false)
     }
 
     fun handleEtDescriptionChanged(text: String) {
-        val result = ValidationType.NAME.strategy.validate(text)
+        val result = ValidationType.EMPTY.strategy.validate(text)
         if (result.isPass) {
             _descInputState.value = DescriptionEtState(null)
         } else {
             _descInputState.value = DescriptionEtState(result.errorMessage)
         }
         checkButtonState()
+    }
+
+    fun handleSubmitButtonClicked() {
+        _buttonSubmitClicked.value = Event(true)
     }
 
     private fun checkButtonState() {

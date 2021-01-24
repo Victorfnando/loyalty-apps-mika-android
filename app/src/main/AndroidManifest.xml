@@ -75,7 +75,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
   </activity>
 
   <activity
-      android:name=".features.resetpassword.presentation.ResetPinActivity">
+      android:name=".features.resetpassword.presentation.ResetPasswordActivity">
   </activity>
 
   <activity

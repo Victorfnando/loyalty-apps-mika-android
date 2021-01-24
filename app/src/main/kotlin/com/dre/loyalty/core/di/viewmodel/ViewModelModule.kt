@@ -32,7 +32,7 @@ import com.dre.loyalty.features.movies.MoviesViewModel
 import com.dre.loyalty.features.passwordinput.presentation.screen.create.InputPasswordCreateViewModel
 import com.dre.loyalty.features.passwordinput.presentation.screen.reset.InputPasswordResetViewModel
 import com.dre.loyalty.features.pin.presentation.InputPinViewModel
-import com.dre.loyalty.features.profile.presentation.ProfileViewModel
+import com.dre.loyalty.features.profile.presentation.screen.ProfileViewModel
 import com.dre.loyalty.features.register.presentation.ui.RegisterViewModel
 import com.dre.loyalty.features.resetpassword.presentation.ResetPasswordViewModel
 import com.dre.loyalty.features.updatepassword.presentation.UpdatePasswordViewModel

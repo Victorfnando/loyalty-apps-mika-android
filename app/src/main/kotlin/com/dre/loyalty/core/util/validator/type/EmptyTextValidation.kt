@@ -11,7 +11,7 @@ import com.dre.loyalty.R
 import com.dre.loyalty.core.util.validator.ValidationResult
 import javax.inject.Inject
 
-class NameValidation @Inject constructor() : ValidationStrategy {
+class EmptyTextValidation @Inject constructor() : ValidationStrategy {
     override fun validate(text: String): ValidationResult {
         if (text.isEmpty()) {
             return ValidationResult(false, R.string.validation_failed_empty)
