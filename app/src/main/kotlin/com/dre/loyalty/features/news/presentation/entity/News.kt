@@ -8,6 +8,7 @@
 package com.dre.loyalty.features.news.presentation.entity
 
 data class News(
+    val id: String,
     val date: String,
     val title: String,
     val desc: String,

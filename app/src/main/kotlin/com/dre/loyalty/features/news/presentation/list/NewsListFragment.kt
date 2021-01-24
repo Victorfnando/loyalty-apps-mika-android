@@ -15,6 +15,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dre.loyalty.R
+import com.dre.loyalty.core.extension.observe
+import com.dre.loyalty.core.extension.viewModel
+import com.dre.loyalty.core.functional.Event
+import com.dre.loyalty.core.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.core.view.VerticalSpaceDecoration
 import com.dre.loyalty.databinding.FragmentNewsListBinding
@@ -22,13 +26,27 @@ import com.dre.loyalty.features.news.presentation.entity.News
 import com.dre.loyalty.features.news.presentation.view.VerticalNewsItem
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
+import javax.inject.Inject
 
 class NewsListFragment : BaseFragment() {
 
+    @Inject
+    lateinit var navigator: Navigator
+
     private var binding: FragmentNewsListBinding? = null
+
+    private lateinit var vm: NewsListViewModel
 
     private val newsItem: ItemAdapter<VerticalNewsItem> by lazy {
         ItemAdapter<VerticalNewsItem>()
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        appComponent.inject(this)
+        vm = viewModel(viewModelFactory) {
+            observe(newsItemClicked, ::showNewsDetail)
+        }
     }
 
     override fun onCreateView(
@@ -64,11 +82,10 @@ class NewsListFragment : BaseFragment() {
     private fun bindList() {
         newsItem.add(
             listOf(
-                VerticalNewsItem(News("12 Desember 2020", "Rumah Imunisasi Mitra Keluarga Bekasi", "Rumah Imunisasi Mitra Keluarga Bekasi Rumah Imunisasi Mitra Keluarga Bekasi", "")),
-                VerticalNewsItem(News("20 Desember 2020", "Rumah Imunisasi Mitra Keluarga Jakarta", "Rumah Imunisasi Mitra Keluarga Bekasi Rumah Imunisasi Mitra Keluarga Bekasi", "")),
-                VerticalNewsItem(News("12 Desember 2020", "Rumah Imunisasi Mitra Keluarga Bekasi", "Rumah Imunisasi Mitra Keluarga Bekasi Rumah Imunisasi Mitra Keluarga Bekasi", "")),
-                VerticalNewsItem(News("20 Desember 2020", "Rumah Imunisasi Mitra Keluarga Jakarta", "Rumah Imunisasi Mitra Keluarga Bekasi Rumah Imunisasi Mitra Keluarga Bekasi", ""))
-
+                VerticalNewsItem(News("id", "12 Desember 2020", "Rumah Imunisasi Mitra Keluarga Bekasi", "Rumah Imunisasi Mitra Keluarga Bekasi Rumah Imunisasi Mitra Keluarga Bekasi", "")),
+                VerticalNewsItem(News("id", "20 Desember 2020", "Rumah Imunisasi Mitra Keluarga Jakarta", "Rumah Imunisasi Mitra Keluarga Bekasi Rumah Imunisasi Mitra Keluarga Bekasi", "")),
+                VerticalNewsItem(News("id", "12 Desember 2020", "Rumah Imunisasi Mitra Keluarga Bekasi", "Rumah Imunisasi Mitra Keluarga Bekasi Rumah Imunisasi Mitra Keluarga Bekasi", "")),
+                VerticalNewsItem(News("id", "20 Desember 2020", "Rumah Imunisasi Mitra Keluarga Jakarta", "Rumah Imunisasi Mitra Keluarga Bekasi Rumah Imunisasi Mitra Keluarga Bekasi", ""))
             )
         )
         binding?.rvNews?.run {
@@ -76,7 +93,18 @@ class NewsListFragment : BaseFragment() {
             addItemDecoration(
                 VerticalSpaceDecoration(resources.getDimensionPixelSize(R.dimen.space_16dp))
             )
-            adapter = FastAdapter.with(newsItem)
+            adapter = FastAdapter.with(newsItem).also {
+                it.onClickListener = { _, _, item, _ ->
+                    vm.handleNewsItemClicked(item.item.id)
+                    true
+                }
+            }
+        }
+    }
+
+    private fun showNewsDetail(event: Event<String>?) {
+        event?.getIfNotHandled()?.let {
+            navigator.showNewsDetail(requireContext())
         }
     }
 
