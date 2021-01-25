@@ -22,7 +22,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.dre.loyalty.AndroidApplication
 import com.dre.loyalty.R.color
-import com.dre.loyalty.core.di.ApplicationComponent
+import com.dre.loyalty.core.di.component.ApplicationComponent
 import com.dre.loyalty.core.extension.appContext
 import com.dre.loyalty.core.extension.viewContainer
 import com.google.android.material.snackbar.Snackbar

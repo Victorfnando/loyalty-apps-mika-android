@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.dre.loyalty.core.di
+package com.dre.loyalty.core.di.component
 
 import com.dre.loyalty.AndroidApplication
-import com.dre.loyalty.core.di.viewmodel.ViewModelModule
+import com.dre.loyalty.core.di.module.*
 import com.dre.loyalty.core.navigation.RouteActivity
 import com.dre.loyalty.features.authenticationselector.presentation.AuthenticationSelectorFragment
 import com.dre.loyalty.features.cashback.presentation.screen.CashBackListFragment
@@ -24,7 +24,7 @@ import com.dre.loyalty.features.changeprofile.presentation.UpdateProfileFragment
 import com.dre.loyalty.features.contactus.presentation.ContactUsFragment
 import com.dre.loyalty.features.createpin.presentation.CreatePinFragment
 import com.dre.loyalty.features.ewallet.presentation.screen.EWalletFragment
-import com.dre.loyalty.features.home.presentation.HomeFragment
+import com.dre.loyalty.features.home.presentation.screen.HomeFragment
 import com.dre.loyalty.features.hospital.presentation.HospitalListFragment
 import com.dre.loyalty.features.invoice.presentation.screen.InvoiceListPagerFragment
 import com.dre.loyalty.features.invoicedetail.presentation.InvoiceDetailFragment
@@ -46,7 +46,13 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [ApplicationModule::class, ViewModelModule::class])
+@Component(modules = [
+    ApplicationModule::class,
+    ViewModelModule::class,
+    ServiceModule::class,
+    RepositoryModule::class,
+    DataSourceModule::class
+])
 interface ApplicationComponent {
     fun inject(application: AndroidApplication)
     fun inject(routeActivity: RouteActivity)

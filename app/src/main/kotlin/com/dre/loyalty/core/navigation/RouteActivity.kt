@@ -18,7 +18,7 @@ package com.dre.loyalty.core.navigation
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.dre.loyalty.AndroidApplication
-import com.dre.loyalty.core.di.ApplicationComponent
+import com.dre.loyalty.core.di.component.ApplicationComponent
 import javax.inject.Inject
 
 class RouteActivity : AppCompatActivity() {

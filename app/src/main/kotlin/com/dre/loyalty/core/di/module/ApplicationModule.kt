@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.dre.loyalty.core.di
+package com.dre.loyalty.core.di.module
 
 import android.content.Context
 import com.dre.loyalty.AndroidApplication
@@ -30,11 +30,15 @@ import javax.inject.Singleton
 @Module
 class ApplicationModule(private val application: AndroidApplication) {
 
-    @Provides @Singleton fun provideApplicationContext(): Context = application
+    @Provides
+    @Singleton
+    fun provideApplicationContext(): Context = application
 
-    @Provides @Singleton fun provideRetrofit(): Retrofit {
+    @Provides
+    @Singleton
+    fun provideRetrofit(): Retrofit {
         return Retrofit.Builder()
-                .baseUrl("https://raw.githubusercontent.com/android10/Sample-Data/master/Android-CleanArchitecture-Kotlin/")
+                .baseUrl("https://443c2858-d57a-43ce-8ab9-4372283dfca8.mock.pstmn.io/")
                 .client(createClient())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
@@ -49,5 +53,7 @@ class ApplicationModule(private val application: AndroidApplication) {
         return okHttpClientBuilder.build()
     }
 
-    @Provides @Singleton fun provideMoviesRepository(dataSource: MoviesRepository.Network): MoviesRepository = dataSource
+    @Provides
+    @Singleton
+    fun provideMoviesRepository(dataSource: MoviesRepository.Network): MoviesRepository = dataSource
 }

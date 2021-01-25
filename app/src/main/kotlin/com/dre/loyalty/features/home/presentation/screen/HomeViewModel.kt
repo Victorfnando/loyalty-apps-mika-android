@@ -5,15 +5,20 @@
  * github: https://github.com/oandrz
  */
 
-package com.dre.loyalty.features.home.presentation
+package com.dre.loyalty.features.home.presentation.screen
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.dre.loyalty.core.exception.Failure
 import com.dre.loyalty.core.functional.Event
+import com.dre.loyalty.core.model.Home
 import com.dre.loyalty.core.platform.BaseViewModel
+import com.dre.loyalty.features.home.domain.usecase.GetHomeDataUseCase
 import javax.inject.Inject
 
-class HomeViewModel @Inject constructor(): BaseViewModel() {
+class HomeViewModel @Inject constructor(
+    private val getHomeDataUseCase: GetHomeDataUseCase
+): BaseViewModel() {
 
     private val _navigateCashBackList: MutableLiveData<Event<String>> = MutableLiveData()
     val navigateCashBackList: LiveData<Event<String>> = _navigateCashBackList
@@ -29,6 +34,17 @@ class HomeViewModel @Inject constructor(): BaseViewModel() {
 
     private val _navigateInvoiceDetail: MutableLiveData<Event<String>> = MutableLiveData()
     val navigateInvoiceDetail: LiveData<Event<String>> = _navigateInvoiceDetail
+
+    fun init() {
+        getHomeDataUseCase(GetHomeDataUseCase.Param("test", "tes")) {
+            it.fold(::handleFailure, ::handleSuccessGetHome)
+        }
+    }
+
+    private fun handleSuccessGetHome(response: Home) {
+        val result = response
+        print(result)
+    }
 
     fun handleCashBackItemClicked(id: String) {
         _navigateInvoiceDetail.value = Event(id)

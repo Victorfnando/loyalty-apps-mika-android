@@ -83,7 +83,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
   </activity>
 
   <activity
-      android:name=".features.home.presentation.HomeActivity">
+      android:name=".features.home.presentation.screen.HomeActivity">
   </activity>
 
   <activity

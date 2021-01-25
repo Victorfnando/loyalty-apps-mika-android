@@ -13,16 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.dre.loyalty.core.di.viewmodel
+package com.dre.loyalty.core.di.module
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.dre.loyalty.core.di.viewmodel.ViewModelFactory
+import com.dre.loyalty.core.di.viewmodel.ViewModelKey
 import com.dre.loyalty.features.cashback.presentation.screen.CashBackListViewModel
 import com.dre.loyalty.features.changeprofile.presentation.UpdateProfileViewModel
 import com.dre.loyalty.features.contactus.presentation.ContactUsViewModel
 import com.dre.loyalty.features.createpin.presentation.CreatePinViewModel
 import com.dre.loyalty.features.ewallet.presentation.screen.EWalletViewModel
-import com.dre.loyalty.features.home.presentation.HomeViewModel
+import com.dre.loyalty.features.home.presentation.screen.HomeViewModel
 import com.dre.loyalty.features.hospital.presentation.HospitalListViewModel
 import com.dre.loyalty.features.invoice.presentation.screen.InvoiceListPagerViewModel
 import com.dre.loyalty.features.invoicedetail.presentation.InvoiceDetailViewModel

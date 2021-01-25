@@ -13,7 +13,7 @@ import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import com.dre.loyalty.AndroidApplication
-import com.dre.loyalty.core.di.ApplicationComponent
+import com.dre.loyalty.core.di.component.ApplicationComponent
 import com.dre.loyalty.core.navigation.Navigator
 import com.dre.loyalty.databinding.ActivitySplashScreenBinding
 import javax.inject.Inject

@@ -5,7 +5,7 @@
  * github: https://github.com/oandrz
  */
 
-package com.dre.loyalty.features.home.presentation
+package com.dre.loyalty.features.home.presentation.screen
 
 import android.app.Activity.RESULT_OK
 import android.content.Intent
@@ -37,7 +37,6 @@ import com.dre.loyalty.features.news.presentation.view.NewsItem
 import com.dre.loyalty.features.cashback.presentation.item.UploadInvoiceItem
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
-import pl.aprilapps.easyphotopicker.EasyImage
 import javax.inject.Inject
 
 class HomeFragment : BaseFragment() {
@@ -88,6 +87,7 @@ class HomeFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        vm.init()
         cashBackItem.add(
             listOf(
                 CashBackItem(CashBack("gre-1", 10000L, "12 Desember 2020")),

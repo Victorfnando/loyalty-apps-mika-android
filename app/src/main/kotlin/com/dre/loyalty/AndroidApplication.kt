@@ -16,9 +16,9 @@
 package com.dre.loyalty
 
 import android.app.Application
-import com.dre.loyalty.core.di.ApplicationComponent
-import com.dre.loyalty.core.di.ApplicationModule
-import com.dre.loyalty.core.di.DaggerApplicationComponent
+import com.dre.loyalty.core.di.component.ApplicationComponent
+import com.dre.loyalty.core.di.component.DaggerApplicationComponent
+import com.dre.loyalty.core.di.module.ApplicationModule
 
 class AndroidApplication : Application() {
 
