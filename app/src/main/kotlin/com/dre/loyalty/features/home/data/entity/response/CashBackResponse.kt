@@ -3,7 +3,7 @@ package com.dre.loyalty.features.home.data.entity.response
 import com.google.gson.annotations.SerializedName
 
 data class CashBackResponse(
-    @SerializedName("id")
+    @SerializedName("receiptId")
     val id: String,
     @SerializedName("cashback")
     val cashBack: Long,

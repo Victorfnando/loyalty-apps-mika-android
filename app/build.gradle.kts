@@ -77,6 +77,8 @@ dependencies {
   implementation(Libraries.imagePicker)
   implementation(Libraries.bottomSheet)
   implementation(Libraries.photoView)
+  implementation(Libraries.stetho)
+  implementation(Libraries.stethoOkHTTP)
 
   // Unit/Android tests dependencies
   testImplementation(TestLibraries.junit4)

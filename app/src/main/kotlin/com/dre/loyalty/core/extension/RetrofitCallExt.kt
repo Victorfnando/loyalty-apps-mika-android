@@ -12,6 +12,7 @@ fun <T, R> Call<T>.request(transform: (T) -> R): Either<Failure, R> {
             false -> Either.Left(Failure.ServerError)
         }
     } catch (exception: Throwable) {
+        exception.printStackTrace()
         Either.Left(Failure.ServerError)
     }
 }

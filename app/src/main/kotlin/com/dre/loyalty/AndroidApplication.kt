@@ -19,6 +19,7 @@ import android.app.Application
 import com.dre.loyalty.core.di.component.ApplicationComponent
 import com.dre.loyalty.core.di.component.DaggerApplicationComponent
 import com.dre.loyalty.core.di.module.ApplicationModule
+import com.facebook.stetho.Stetho
 
 class AndroidApplication : Application() {
 
@@ -31,6 +32,9 @@ class AndroidApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        if (BuildConfig.DEBUG) {
+            Stetho.initializeWithDefaults(this)
+        }
         injectMembers()
     }
 

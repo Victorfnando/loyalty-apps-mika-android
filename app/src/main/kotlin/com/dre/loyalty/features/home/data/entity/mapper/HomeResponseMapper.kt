@@ -7,9 +7,9 @@ import javax.inject.Inject
 class HomeResponseMapper @Inject constructor() {
     fun transform(response: BaseResponse<HomeResponse>): Home {
         return Home(
-            transform(response.data.cardResponse),
-            transform(response.data.cashBackResponse),
-            transform(response.data.newsResponse)
+            transform(response.data.cardResponse.first()),
+            response.data.cashBackResponse.map { transform(it)},
+            response.data.newsResponse.map { transform(it) }
         )
     }
 

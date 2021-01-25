@@ -19,6 +19,7 @@ import android.content.Context
 import com.dre.loyalty.AndroidApplication
 import com.dre.loyalty.BuildConfig
 import com.dre.loyalty.features.movies.MoviesRepository
+import com.facebook.stetho.okhttp3.StethoInterceptor
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -50,7 +51,9 @@ class ApplicationModule(private val application: AndroidApplication) {
             val loggingInterceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC)
             okHttpClientBuilder.addInterceptor(loggingInterceptor)
         }
-        return okHttpClientBuilder.build()
+        return okHttpClientBuilder
+            .addNetworkInterceptor(StethoInterceptor())
+            .build()
     }
 
     @Provides

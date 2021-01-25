@@ -11,7 +11,7 @@ data class NewsResponse(
     val title: String,
     @SerializedName("description")
     val description: String,
-    @SerializedName("dateTime")
+    @SerializedName("date")
     val dateTime: String,
     @SerializedName("imgUrl")
     val imgUrl: String
