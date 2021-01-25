@@ -22,6 +22,9 @@ import com.dre.loyalty.R
 import com.dre.loyalty.core.extension.observe
 import com.dre.loyalty.core.extension.viewModel
 import com.dre.loyalty.core.functional.Event
+import com.dre.loyalty.core.model.Card
+import com.dre.loyalty.core.model.CashBack
+import com.dre.loyalty.core.model.News
 import com.dre.loyalty.core.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.core.view.HorizontalSpaceDecoration
@@ -29,8 +32,6 @@ import com.dre.loyalty.core.view.VerticalDividerDecoration
 import com.dre.loyalty.databinding.FragmentHomeBinding
 import com.dre.loyalty.features.camera.CameraActivity
 import com.dre.loyalty.features.camera.CameraRequestType
-import com.dre.loyalty.features.cashback.presentation.entity.CashBack
-import com.dre.loyalty.features.news.presentation.entity.News
 import com.dre.loyalty.features.home.presentation.view.HomeSection
 import com.dre.loyalty.features.cashback.presentation.item.CashBackItem
 import com.dre.loyalty.features.news.presentation.view.NewsItem
@@ -73,6 +74,10 @@ class HomeFragment : BaseFragment() {
             observe(navigateNewsDetail, ::showNewsDetailScreen)
             observe(navigateToCamera, ::showCamera)
             observe(navigateInvoiceDetail, ::showInvoiceDetail)
+            observe(cardState, ::updateCard)
+            observe(cashBackSection, ::updateCashBackSection)
+            observe(newsSection, ::updateNewsSection)
+            observe(loading, ::renderLoading)
         }
     }
 
@@ -88,66 +93,7 @@ class HomeFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         vm.init()
-        cashBackItem.add(
-            listOf(
-                CashBackItem(CashBack("gre-1", 10000L, "12 Desember 2020")),
-                CashBackItem(CashBack("gre-1", 20000L, "20 Desember 2020"))
-            )
-        )
-
-        uploadInvoiceItem.add(
-            UploadInvoiceItem {
-                vm.handleUploadInvoiceClicked()
-            }
-        )
-
-        newsItem.add(
-            listOf(
-                NewsItem(News("id","12 Desember 2020", "Rumah Imunisasi Mitra Keluarga Bekasi", "Rumah Imunisasi Mitra Keluarga Bekasi Rumah Imunisasi Mitra Keluarga Bekasi", "")),
-                NewsItem(News("id", "20 Desember 2020", "Rumah Imunisasi Mitra Keluarga Jakarta", "Rumah Imunisasi Mitra Keluarga Bekasi Rumah Imunisasi Mitra Keluarga Bekasi", ""))
-            )
-        )
-        homeSection.add(listOf(
-            HomeSection(
-                "Cashback diterima",
-                LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false),
-                listOf(cashBackItem, uploadInvoiceItem)
-            ).also {
-                it.itemClickListener = {
-                    vm.handleCashBackItemClicked(it)
-                }
-                it.seeAllClickListener = {
-                    vm.handleSeeAllCashBackClicked()
-                }
-                it.dividerItemDecoration = VerticalDividerDecoration(requireContext(), RecyclerView.VERTICAL)
-            },
-            HomeSection(
-                "Informasi",
-                LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false),
-                listOf(newsItem)
-            ).also {
-                it.itemClickListener = {
-                    vm.handleNewsItemClicked(it)
-                }
-                it.seeAllClickListener = {
-                    vm.handleSeeAllNewsClicked()
-                }
-                it.snapHelper = LinearSnapHelper()
-                it.dividerItemDecoration = HorizontalSpaceDecoration(resources.getDimensionPixelSize(
-                    R.dimen.space_16dp))
-            }
-        ))
-        binding?.rvContent?.run {
-            layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
-            addItemDecoration(
-                VerticalDividerDecoration(requireContext(), RecyclerView.VERTICAL).also {
-                    ContextCompat.getDrawable(requireContext(), R.drawable.normal_divider)?.let { divider ->
-                        it.setDrawable(divider)
-                    }
-                }
-            )
-            adapter = FastAdapter.with(homeSection)
-        }
+        bindList()
     }
 
     override fun onDetach() {
@@ -162,6 +108,20 @@ class HomeFragment : BaseFragment() {
             uri?.let {
                 navigator.showUploadInvoice(requireContext(), Uri.parse(it))
             }
+        }
+    }
+
+    private fun bindList() {
+        binding?.rvContent?.run {
+            layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
+            addItemDecoration(
+                VerticalDividerDecoration(requireContext(), RecyclerView.VERTICAL).also {
+                    ContextCompat.getDrawable(requireContext(), R.drawable.normal_divider)?.let { divider ->
+                        it.setDrawable(divider)
+                    }
+                }
+            )
+            adapter = FastAdapter.with(homeSection)
         }
     }
 
@@ -196,6 +156,84 @@ class HomeFragment : BaseFragment() {
         event?.getIfNotHandled()?.let {
             navigator.showInvoiceDetail(requireContext(), it)
         }
+    }
+
+    private fun updateCard(state: Card?) {
+        state?.let {
+            binding?.cardMedicalNumber?.name = state.name
+            binding?.cardMedicalNumber?.medicalNumber = state.id
+        }
+    }
+
+    private fun updateCashBackSection(cashBackList: List<CashBack>?) {
+        addCashBackSectionIfNeeded()
+        if (cashBackList != null && cashBackList.isNotEmpty()) {
+            if (uploadInvoiceItem.adapterItemCount > 0) {
+                uploadInvoiceItem.remove(0)
+            }
+            cashBackItem.add(
+                cashBackList.map { CashBackItem(it) }
+            )
+        } else {
+            uploadInvoiceItem.add(
+                UploadInvoiceItem {
+                    vm.handleUploadInvoiceClicked()
+                }
+            )
+        }
+    }
+
+    private fun addCashBackSectionIfNeeded() {
+        val section = homeSection.adapterItems.firstOrNull { it.categoryName == getString(R.string.home_label_section_cashBack) }
+        if (section != null) return
+        homeSection.add(
+            HomeSection(
+                getString(R.string.home_label_section_cashBack),
+                LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false),
+                listOf(cashBackItem, uploadInvoiceItem)
+            ).also {
+                it.itemClickListener = { selectedItem ->
+                    vm.handleCashBackItemClicked(selectedItem)
+                }
+                it.seeAllClickListener = {
+                    vm.handleSeeAllCashBackClicked()
+                }
+                it.dividerItemDecoration = VerticalDividerDecoration(requireContext(), RecyclerView.VERTICAL)
+            }
+        )
+    }
+
+    private fun updateNewsSection(newsList: List<News>?) {
+        addNewsSectionIfNeeded()
+        newsItem.add(
+            newsList?.map { NewsItem(it) } ?: emptyList()
+        )
+    }
+
+    private fun addNewsSectionIfNeeded() {
+        val section = homeSection.adapterItems.firstOrNull { it.categoryName == getString(R.string.home_label_section_information) }
+        if (section != null) return
+        homeSection.add(
+            HomeSection(
+                getString(R.string.home_label_section_information),
+                LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false),
+                listOf(newsItem)
+            ).also {
+                it.itemClickListener = { selectedItem ->
+                    vm.handleNewsItemClicked(selectedItem)
+                }
+                it.seeAllClickListener = {
+                    vm.handleSeeAllNewsClicked()
+                }
+                it.snapHelper = LinearSnapHelper()
+                it.dividerItemDecoration = HorizontalSpaceDecoration(resources.getDimensionPixelSize(
+                    R.dimen.space_16dp))
+            }
+        )
+    }
+
+    private fun renderLoading(visibility: Int?) {
+        binding?.progress?.visibility = visibility ?: View.GONE
     }
 
     companion object {

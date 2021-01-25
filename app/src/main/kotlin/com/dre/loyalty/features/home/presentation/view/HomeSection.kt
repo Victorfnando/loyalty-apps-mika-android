@@ -21,7 +21,7 @@ import com.mikepenz.fastadapter.binding.AbstractBindingItem
 import com.mikepenz.fastadapter.binding.BindingViewHolder
 
 class HomeSection(
-    private val categoryName: String,
+    val categoryName: String,
     private val injectedLayoutManager: RecyclerView.LayoutManager,
     private val body: List<ItemAdapter<*>>
 ) : AbstractBindingItem<SectionHomeBinding>() {

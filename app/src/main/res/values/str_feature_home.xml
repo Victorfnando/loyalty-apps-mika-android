@@ -17,4 +17,7 @@
 
     <string name="home_screen_item_cashback_btn_upload">Unggah kwitansi</string>
     <string name="home_screen_item_upload_label">Unggah kwitansi-mu untuk mendapatkan cashback</string>
+
+    <string name="home_label_section_cashBack">Cashback diterima</string>
+    <string name="home_label_section_information">Informasi</string>
 </resources>

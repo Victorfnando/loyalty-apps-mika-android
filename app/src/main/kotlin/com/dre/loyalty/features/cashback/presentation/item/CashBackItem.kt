@@ -10,8 +10,9 @@ package com.dre.loyalty.features.cashback.presentation.item
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.dre.loyalty.R
+import com.dre.loyalty.core.model.CashBack
+import com.dre.loyalty.core.util.extension.formatToCurrency
 import com.dre.loyalty.databinding.ItemCashbackBinding
-import com.dre.loyalty.features.cashback.presentation.entity.CashBack
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
 
 class CashBackItem(val item: CashBack) : AbstractBindingItem<ItemCashbackBinding>() {
@@ -26,7 +27,7 @@ class CashBackItem(val item: CashBack) : AbstractBindingItem<ItemCashbackBinding
         super.bindView(binding, payloads)
         binding.run {
             tvInvoice.text = item.id
-            tvPrice.text = item.price.toString()
+            tvPrice.text = item.amount.formatToCurrency(true)
             tvDate.text = item.date
         }
     }

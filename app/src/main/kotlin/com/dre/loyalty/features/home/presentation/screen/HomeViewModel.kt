@@ -7,11 +7,15 @@
 
 package com.dre.loyalty.features.home.presentation.screen
 
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dre.loyalty.core.exception.Failure
 import com.dre.loyalty.core.functional.Event
+import com.dre.loyalty.core.model.Card
+import com.dre.loyalty.core.model.CashBack
 import com.dre.loyalty.core.model.Home
+import com.dre.loyalty.core.model.News
 import com.dre.loyalty.core.platform.BaseViewModel
 import com.dre.loyalty.features.home.domain.usecase.GetHomeDataUseCase
 import javax.inject.Inject
@@ -19,6 +23,15 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val getHomeDataUseCase: GetHomeDataUseCase
 ): BaseViewModel() {
+
+    private val _cardState: MutableLiveData<Card> = MutableLiveData()
+    val cardState: LiveData<Card> = _cardState
+
+    private val _cashBackSection: MutableLiveData<List<CashBack>> = MutableLiveData()
+    val cashBackSection: LiveData<List<CashBack>> = _cashBackSection
+
+    private val _newsSection: MutableLiveData<List<News>> = MutableLiveData()
+    val newsSection: LiveData<List<News>> = _newsSection
 
     private val _navigateCashBackList: MutableLiveData<Event<String>> = MutableLiveData()
     val navigateCashBackList: LiveData<Event<String>> = _navigateCashBackList
@@ -36,14 +49,17 @@ class HomeViewModel @Inject constructor(
     val navigateInvoiceDetail: LiveData<Event<String>> = _navigateInvoiceDetail
 
     fun init() {
+        _loading.value = View.VISIBLE
         getHomeDataUseCase(GetHomeDataUseCase.Param("test", "tes")) {
             it.fold(::handleFailure, ::handleSuccessGetHome)
         }
     }
 
     private fun handleSuccessGetHome(response: Home) {
-        val result = response
-        print(result)
+        _loading.value = View.GONE
+        _cardState.value = response.card
+        _cashBackSection.value = response.cashBack
+        _newsSection.value = response.news
     }
 
     fun handleCashBackItemClicked(id: String) {

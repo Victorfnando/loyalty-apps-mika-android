@@ -9,9 +9,10 @@ package com.dre.loyalty.features.news.presentation.view
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
 import com.dre.loyalty.R
+import com.dre.loyalty.core.model.News
 import com.dre.loyalty.databinding.ItemNewsBinding
-import com.dre.loyalty.features.news.presentation.entity.News
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
 
 class NewsItem(val item: News) : AbstractBindingItem<ItemNewsBinding>() {
@@ -29,6 +30,9 @@ class NewsItem(val item: News) : AbstractBindingItem<ItemNewsBinding>() {
             tvDate.text = item.date
             tvDesc.text = item.desc
             tvTitle.text = item.title
+            Glide.with(ivBanner.context)
+                .load(item.imageUrl)
+                .into(ivBanner)
         }
     }
 
@@ -37,5 +41,7 @@ class NewsItem(val item: News) : AbstractBindingItem<ItemNewsBinding>() {
         binding.tvDate.text = null
         binding.tvDesc.text = null
         binding.tvTitle.text = null
+        Glide.with(binding.ivBanner.context)
+            .clear(binding.ivBanner)
     }
 }

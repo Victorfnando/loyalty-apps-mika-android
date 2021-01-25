@@ -21,13 +21,14 @@ import com.dre.loyalty.R
 import com.dre.loyalty.core.extension.observe
 import com.dre.loyalty.core.extension.viewModel
 import com.dre.loyalty.core.functional.Event
+import com.dre.loyalty.core.model.CashBack
+import com.dre.loyalty.core.model.Hospital
 import com.dre.loyalty.core.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.core.view.VerticalDividerDecoration
 import com.dre.loyalty.databinding.FragmentCasbackListBinding
 import com.dre.loyalty.features.camera.CameraActivity
 import com.dre.loyalty.features.camera.CameraRequestType
-import com.dre.loyalty.features.cashback.presentation.entity.CashBack
 import com.dre.loyalty.features.cashback.presentation.item.CashBackItem
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
@@ -97,22 +98,22 @@ class CashBackListFragment : BaseFragment() {
     private fun bindList() {
         cashBackItem.add(
             listOf(
-                CashBackItem(CashBack("10", 10000L, "12 Desember 2020")),
-                CashBackItem(CashBack("20", 20000L, "20 Desember 2020")),
-                CashBackItem(CashBack("30", 30000L, "21 Desember 2020")),
-                CashBackItem(CashBack("40", 40000L, "22 Desember 2020")),
-                CashBackItem(CashBack("50", 50000L, "12 Desember 2020")),
-                CashBackItem(CashBack("60", 60000L, "20 Desember 2020")),
-                CashBackItem(CashBack("70", 70000L, "21 Desember 2020")),
-                CashBackItem(CashBack("80", 80000L, "22 Desember 2020")),
-                CashBackItem(CashBack("10", 10000L, "12 Desember 2020")),
-                CashBackItem(CashBack("20", 20000L, "20 Desember 2020")),
-                CashBackItem(CashBack("30", 30000L, "21 Desember 2020")),
-                CashBackItem(CashBack("40", 40000L, "22 Desember 2020")),
-                CashBackItem(CashBack("50", 50000L, "12 Desember 2020")),
-                CashBackItem(CashBack("60", 60000L, "20 Desember 2020")),
-                CashBackItem(CashBack("70", 70000L, "21 Desember 2020")),
-                CashBackItem(CashBack("80", 80000L, "22 Desember 2020"))
+                CashBackItem(CashBack("10", 10000L, "12 Desember 2020", Hospital("", ""))),
+                CashBackItem(CashBack("20", 20000L, "20 Desember 2020", Hospital("", ""))),
+                CashBackItem(CashBack("30", 30000L, "21 Desember 2020", Hospital("", ""))),
+                CashBackItem(CashBack("40", 40000L, "22 Desember 2020", Hospital("", ""))),
+                CashBackItem(CashBack("50", 50000L, "12 Desember 2020", Hospital("", ""))),
+                CashBackItem(CashBack("60", 60000L, "20 Desember 2020", Hospital("", ""))),
+                CashBackItem(CashBack("70", 70000L, "21 Desember 2020", Hospital("", ""))),
+                CashBackItem(CashBack("80", 80000L, "22 Desember 2020", Hospital("", ""))),
+                CashBackItem(CashBack("10", 10000L, "12 Desember 2020", Hospital("", ""))),
+                CashBackItem(CashBack("20", 20000L, "20 Desember 2020", Hospital("", ""))),
+                CashBackItem(CashBack("30", 30000L, "21 Desember 2020", Hospital("", ""))),
+                CashBackItem(CashBack("40", 40000L, "22 Desember 2020", Hospital("", ""))),
+                CashBackItem(CashBack("50", 50000L, "12 Desember 2020", Hospital("", ""))),
+                CashBackItem(CashBack("60", 60000L, "20 Desember 2020", Hospital("", ""))),
+                CashBackItem(CashBack("70", 70000L, "21 Desember 2020", Hospital("", ""))),
+                CashBackItem(CashBack("80", 80000L, "22 Desember 2020", Hospital("", "")))
             )
         )
         binding?.rvCashback?.run {
