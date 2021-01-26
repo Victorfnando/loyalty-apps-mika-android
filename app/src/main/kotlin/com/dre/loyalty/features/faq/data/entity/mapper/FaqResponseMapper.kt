@@ -3,7 +3,7 @@ package com.dre.loyalty.features.faq.data.entity.mapper
 import com.dre.loyalty.features.faq.data.entity.response.FaqDataResponse
 import com.dre.loyalty.features.faq.data.entity.response.FaqResponse
 import com.dre.loyalty.features.faq.domain.entity.FrequentlyAskedQuestion
-import com.dre.loyalty.features.home.data.entity.response.BaseResponse
+import com.dre.loyalty.core.response.BaseResponse
 import javax.inject.Inject
 
 class FaqResponseMapper @Inject constructor() {

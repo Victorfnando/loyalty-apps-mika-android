@@ -3,6 +3,7 @@ package com.dre.loyalty.core.di.module
 import com.dre.loyalty.core.service.FaqService
 import com.dre.loyalty.core.service.HomeService
 import com.dre.loyalty.core.service.HospitalService
+import com.dre.loyalty.core.service.NewsService
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -26,5 +27,11 @@ class ServiceModule {
     @Singleton
     fun provideHospitalService(retrofit: Retrofit): HospitalService {
         return retrofit.create(HospitalService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideNewsService(retrofit: Retrofit): NewsService {
+        return retrofit.create(NewsService::class.java)
     }
 }

@@ -2,7 +2,7 @@ package com.dre.loyalty.core.service
 
 import com.dre.loyalty.features.faq.data.entity.response.FaqDataResponse
 import com.dre.loyalty.features.faq.domain.usecase.GetFaqQuestion.Param
-import com.dre.loyalty.features.home.data.entity.response.BaseResponse
+import com.dre.loyalty.core.response.BaseResponse
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST

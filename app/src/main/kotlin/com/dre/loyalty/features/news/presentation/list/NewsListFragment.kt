@@ -18,11 +18,11 @@ import com.dre.loyalty.R
 import com.dre.loyalty.core.extension.observe
 import com.dre.loyalty.core.extension.viewModel
 import com.dre.loyalty.core.functional.Event
+import com.dre.loyalty.core.model.News
 import com.dre.loyalty.core.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.core.view.VerticalSpaceDecoration
 import com.dre.loyalty.databinding.FragmentNewsListBinding
-import com.dre.loyalty.features.news.presentation.entity.News
 import com.dre.loyalty.features.news.presentation.view.VerticalNewsItem
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
@@ -46,6 +46,8 @@ class NewsListFragment : BaseFragment() {
         appComponent.inject(this)
         vm = viewModel(viewModelFactory) {
             observe(newsItemClicked, ::showNewsDetail)
+            observe(newsList, ::renderNewsList)
+            observe(loading, ::renderLoading)
         }
     }
 
@@ -62,6 +64,7 @@ class NewsListFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         bindToolbar()
         bindList()
+        vm.init()
     }
 
     override fun onDetach() {
@@ -80,19 +83,9 @@ class NewsListFragment : BaseFragment() {
     }
 
     private fun bindList() {
-        newsItem.add(
-            listOf(
-                VerticalNewsItem(News("id", "12 Desember 2020", "Rumah Imunisasi Mitra Keluarga Bekasi", "Rumah Imunisasi Mitra Keluarga Bekasi Rumah Imunisasi Mitra Keluarga Bekasi", "")),
-                VerticalNewsItem(News("id", "20 Desember 2020", "Rumah Imunisasi Mitra Keluarga Jakarta", "Rumah Imunisasi Mitra Keluarga Bekasi Rumah Imunisasi Mitra Keluarga Bekasi", "")),
-                VerticalNewsItem(News("id", "12 Desember 2020", "Rumah Imunisasi Mitra Keluarga Bekasi", "Rumah Imunisasi Mitra Keluarga Bekasi Rumah Imunisasi Mitra Keluarga Bekasi", "")),
-                VerticalNewsItem(News("id", "20 Desember 2020", "Rumah Imunisasi Mitra Keluarga Jakarta", "Rumah Imunisasi Mitra Keluarga Bekasi Rumah Imunisasi Mitra Keluarga Bekasi", ""))
-            )
-        )
         binding?.rvNews?.run {
             layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
-            addItemDecoration(
-                VerticalSpaceDecoration(resources.getDimensionPixelSize(R.dimen.space_16dp))
-            )
+            addItemDecoration(VerticalSpaceDecoration(resources.getDimensionPixelSize(R.dimen.space_16dp)))
             adapter = FastAdapter.with(newsItem).also {
                 it.onClickListener = { _, _, item, _ ->
                     vm.handleNewsItemClicked(item.item.id)
@@ -106,6 +99,14 @@ class NewsListFragment : BaseFragment() {
         event?.getIfNotHandled()?.let {
             navigator.showNewsDetail(requireContext())
         }
+    }
+
+    private fun renderNewsList(list: List<News>?) {
+        newsItem.add(list?.map { VerticalNewsItem(it) } ?: emptyList())
+    }
+
+    private fun renderLoading(visibility: Int?) {
+        binding?.progress?.visibility = visibility ?: View.GONE
     }
 
     companion object {

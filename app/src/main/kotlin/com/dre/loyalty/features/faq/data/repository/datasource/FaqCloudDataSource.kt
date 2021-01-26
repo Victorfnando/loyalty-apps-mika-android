@@ -3,7 +3,7 @@ package com.dre.loyalty.features.faq.data.repository.datasource
 import com.dre.loyalty.core.service.FaqService
 import com.dre.loyalty.features.faq.data.entity.response.FaqDataResponse
 import com.dre.loyalty.features.faq.domain.usecase.GetFaqQuestion
-import com.dre.loyalty.features.home.data.entity.response.BaseResponse
+import com.dre.loyalty.core.response.BaseResponse
 import retrofit2.Call
 import javax.inject.Inject
 

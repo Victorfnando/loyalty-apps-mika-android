@@ -15,10 +15,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dre.loyalty.R
+import com.dre.loyalty.core.model.News
 import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.core.view.VerticalSpaceDecoration
 import com.dre.loyalty.databinding.FragmentNewsDetailBinding
-import com.dre.loyalty.features.news.presentation.entity.News
 import com.dre.loyalty.features.news.presentation.view.VerticalNewsItem
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter

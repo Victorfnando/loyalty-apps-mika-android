@@ -10,8 +10,8 @@ package com.dre.loyalty.features.news.presentation.view
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.dre.loyalty.R
+import com.dre.loyalty.core.model.News
 import com.dre.loyalty.databinding.ItemNewsVerticalBinding
-import com.dre.loyalty.features.news.presentation.entity.News
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
 
 class VerticalNewsItem(val item: News) : AbstractBindingItem<ItemNewsVerticalBinding>() {

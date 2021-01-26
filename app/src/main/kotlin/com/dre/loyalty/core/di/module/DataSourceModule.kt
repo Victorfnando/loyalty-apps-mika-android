@@ -8,6 +8,8 @@ import com.dre.loyalty.features.home.data.repository.datasource.local.HomeLocalD
 import com.dre.loyalty.features.home.data.repository.datasource.local.HomeLocalDataSourceContract
 import com.dre.loyalty.features.hospital.data.repository.datasource.HospitalListCloudDataSource
 import com.dre.loyalty.features.hospital.data.repository.datasource.HospitalListCloudDataSourceContract
+import com.dre.loyalty.features.news.data.repository.datasource.NewsCloudDataSource
+import com.dre.loyalty.features.news.data.repository.datasource.NewsCloudDataSourceContract
 import dagger.Binds
 import dagger.Module
 import javax.inject.Singleton
@@ -30,4 +32,8 @@ abstract class DataSourceModule {
     @Binds
     @Singleton
     abstract fun provideHospitalListDataSource(dataSource: HospitalListCloudDataSource): HospitalListCloudDataSourceContract
+
+    @Binds
+    @Singleton
+    abstract fun provideNewsDataSource(dataSource: NewsCloudDataSource): NewsCloudDataSourceContract
 }
