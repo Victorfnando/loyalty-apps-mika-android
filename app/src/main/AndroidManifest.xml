@@ -111,7 +111,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
   </activity>
 
   <activity
-      android:name=".features.faq.presentation.FaqActivity">
+      android:name=".features.faq.presentation.screen.FaqActivity">
   </activity>
 
   <activity

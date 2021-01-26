@@ -18,6 +18,7 @@ import com.dre.loyalty.core.model.Home
 import com.dre.loyalty.core.model.News
 import com.dre.loyalty.core.platform.BaseViewModel
 import com.dre.loyalty.features.home.domain.usecase.GetHomeDataUseCase
+import com.dre.loyalty.features.home.domain.usecase.GetHomeDataUseCase.Param
 import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(
@@ -50,7 +51,7 @@ class HomeViewModel @Inject constructor(
 
     fun init() {
         _loading.value = View.VISIBLE
-        getHomeDataUseCase(GetHomeDataUseCase.Param("test", "tes")) {
+        getHomeDataUseCase(Param("test", "tes")) {
             it.fold(::handleFailure, ::handleSuccessGetHome)
         }
     }

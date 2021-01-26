@@ -24,6 +24,7 @@ import com.dre.loyalty.features.changeprofile.presentation.UpdateProfileViewMode
 import com.dre.loyalty.features.contactus.presentation.ContactUsViewModel
 import com.dre.loyalty.features.createpin.presentation.CreatePinViewModel
 import com.dre.loyalty.features.ewallet.presentation.screen.EWalletViewModel
+import com.dre.loyalty.features.faq.presentation.screen.FaqViewModel
 import com.dre.loyalty.features.home.presentation.screen.HomeViewModel
 import com.dre.loyalty.features.hospital.presentation.HospitalListViewModel
 import com.dre.loyalty.features.invoice.presentation.screen.InvoiceListPagerViewModel
@@ -149,6 +150,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(NewsListViewModel::class)
     abstract fun provideNewsListViewModel(vm: NewsListViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(FaqViewModel::class)
+    abstract fun provideFaqViewModel(vm: FaqViewModel): ViewModel
 
     @Binds
     @IntoMap

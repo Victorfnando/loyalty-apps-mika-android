@@ -5,7 +5,7 @@
  * github: https://github.com/oandrz
  */
 
-package com.dre.loyalty.features.faq.presentation
+package com.dre.loyalty.features.faq.presentation.screen
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,9 +15,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dre.loyalty.R
+import com.dre.loyalty.core.extension.observe
+import com.dre.loyalty.core.extension.viewModel
 import com.dre.loyalty.core.platform.BaseFragment
-import com.dre.loyalty.core.view.VerticalSpaceDecoration
 import com.dre.loyalty.databinding.FragmentFaqBinding
+import com.dre.loyalty.features.faq.domain.entity.FrequentlyAskedQuestion
 import com.dre.loyalty.features.faq.presentation.item.FaqExpandableItem
 import com.dre.loyalty.features.faq.presentation.item.FaqItem
 import com.mikepenz.fastadapter.FastAdapter
@@ -27,9 +29,19 @@ import com.mikepenz.fastadapter.expandable.getExpandableExtension
 class FaqFragment : BaseFragment() {
 
     private var binding: FragmentFaqBinding? = null
+    private lateinit var vm: FaqViewModel
 
     private val faqExpandableItemAdapter: ItemAdapter<FaqExpandableItem> by lazy {
         ItemAdapter<FaqExpandableItem>()
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        appComponent.inject(this)
+        vm = viewModel(viewModelFactory) {
+            observe(faqList, ::renderList)
+            observe(loading, ::renderLoading)
+        }
     }
 
     override fun onCreateView(
@@ -45,6 +57,7 @@ class FaqFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         bindToolbar()
         bindList()
+        vm.init()
     }
 
     override fun onDetach() {
@@ -67,34 +80,20 @@ class FaqFragment : BaseFragment() {
                 it.getExpandableExtension()
             }
         }
+    }
+
+    private fun renderList(faq: List<FrequentlyAskedQuestion>?) {
         faqExpandableItemAdapter.add(
-            listOf(
-                FaqExpandableItem("testing 1").also {
-                    it.subItems = mutableListOf(FaqItem("testint content 1"))
-                },
-                FaqExpandableItem("testing 2").also {
-                    it.subItems = mutableListOf(FaqItem("testint content 1"))
-                },
-                FaqExpandableItem("testing 3").also {
-                    it.subItems = mutableListOf(FaqItem("testint content 1"))
-                },
-                FaqExpandableItem("testing 4").also {
-                    it.subItems = mutableListOf(FaqItem("testint content 1"))
-                },
-                FaqExpandableItem("testing 5").also {
-                    it.subItems = mutableListOf(FaqItem("testint content 1"))
-                },
-                FaqExpandableItem("testing 6").also {
-                    it.subItems = mutableListOf(FaqItem("testint content 1"))
-                },
-                FaqExpandableItem("testing 7").also {
-                    it.subItems = mutableListOf(FaqItem("testint content 1"))
-                },
-                FaqExpandableItem("testing 8").also {
-                    it.subItems = mutableListOf(FaqItem("testint content 1"))
+            faq?.map {
+                FaqExpandableItem(it.question).also { item ->
+                    item.subItems = mutableListOf(FaqItem(it.answer))
                 }
-            )
+            } ?: emptyList()
         )
+    }
+
+    private fun renderLoading(visibility: Int?) {
+        binding?.progress?.visibility = visibility ?: View.GONE
     }
 
     companion object {

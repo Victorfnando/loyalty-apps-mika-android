@@ -1,5 +1,7 @@
 package com.dre.loyalty.core.di.module
 
+import com.dre.loyalty.features.faq.data.repository.datasource.FaqCloudDataSource
+import com.dre.loyalty.features.faq.data.repository.datasource.FaqCloudDataSourceContract
 import com.dre.loyalty.features.home.data.repository.datasource.cloud.HomeCloudDataSource
 import com.dre.loyalty.features.home.data.repository.datasource.cloud.HomeCloudDataSourceContract
 import com.dre.loyalty.features.home.data.repository.datasource.local.HomeLocalDataSource
@@ -18,4 +20,8 @@ abstract class DataSourceModule {
     @Binds
     @Singleton
     abstract fun provideHomeLocalDataSource(dataSource: HomeLocalDataSource): HomeLocalDataSourceContract
+
+    @Binds
+    @Singleton
+    abstract fun provideFaqDataSource(dataSource: FaqCloudDataSource): FaqCloudDataSourceContract
 }
