@@ -7,7 +7,7 @@
 
 package com.dre.loyalty.features.invoice.presentation.entity
 
-import com.dre.loyalty.features.invoice.presentation.enumtype.InvoiceType
+import com.dre.loyalty.features.invoice.presentation.list.enumtype.InvoiceType
 
 data class Invoice(
     val imageUrl: String,

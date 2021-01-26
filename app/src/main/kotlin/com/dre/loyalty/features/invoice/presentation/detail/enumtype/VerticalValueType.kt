@@ -5,7 +5,7 @@
  * github: https://github.com/oandrz
  */
 
-package com.dre.loyalty.features.invoicedetail.presentation.enumtype
+package com.dre.loyalty.features.invoice.presentation.detail.enumtype
 
 enum class VerticalValueType {
     NORMAL,

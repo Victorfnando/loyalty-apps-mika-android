@@ -5,7 +5,7 @@
  * github: https://github.com/oandrz
  */
 
-package com.dre.loyalty.features.invoice.presentation.screen
+package com.dre.loyalty.features.invoice.presentation.list.screen
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -14,8 +14,8 @@ import com.dre.loyalty.core.functional.Event
 import com.dre.loyalty.core.platform.BaseViewModel
 import com.dre.loyalty.core.view.sheet.SheetListState
 import com.dre.loyalty.features.invoice.presentation.entity.Invoice
-import com.dre.loyalty.features.invoice.presentation.enumtype.InvoiceType
-import com.dre.loyalty.features.invoice.presentation.enumtype.SortOrder
+import com.dre.loyalty.features.invoice.presentation.list.enumtype.InvoiceType
+import com.dre.loyalty.features.invoice.presentation.list.enumtype.SortOrder
 import javax.inject.Inject
 
 private const val SORT_SHEET_TITLE = "Urutkan berdasarkan waktu unggah kwitansi"

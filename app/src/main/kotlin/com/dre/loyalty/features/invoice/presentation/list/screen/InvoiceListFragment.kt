@@ -5,7 +5,7 @@
  * github: https://github.com/oandrz
  */
 
-package com.dre.loyalty.features.invoice.presentation.screen
+package com.dre.loyalty.features.invoice.presentation.list.screen
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.dre.loyalty.R
 import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.databinding.FragmentInvoiceListBinding
-import com.dre.loyalty.features.invoice.presentation.adapter.InvoicePagingAdapter
+import com.dre.loyalty.features.invoice.presentation.list.adapter.InvoicePagingAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 
 class InvoiceListFragment : BaseFragment() {

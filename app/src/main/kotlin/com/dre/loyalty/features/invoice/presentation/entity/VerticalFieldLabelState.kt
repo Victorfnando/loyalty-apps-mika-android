@@ -5,11 +5,11 @@
  * github: https://github.com/oandrz
  */
 
-package com.dre.loyalty.features.invoicedetail.presentation.entity
+package com.dre.loyalty.features.invoice.presentation.entity
 
 import androidx.annotation.ColorRes
 import androidx.annotation.StringRes
-import com.dre.loyalty.features.invoicedetail.presentation.enumtype.VerticalValueType
+import com.dre.loyalty.features.invoice.presentation.detail.enumtype.VerticalValueType
 
 class VerticalFieldLabelState (
     @StringRes val label: Int,

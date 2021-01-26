@@ -123,7 +123,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
   </activity>
 
   <activity
-      android:name=".features.invoicedetail.presentation.InvoiceDetailActivity">
+      android:name=".features.invoice.presentation.detail.screen.InvoiceDetailActivity">
   </activity>
 
   <activity

@@ -5,17 +5,15 @@
  * github: https://github.com/oandrz
  */
 
-package com.dre.loyalty.features.invoice.presentation.screen
+package com.dre.loyalty.features.invoice.presentation.list.screen
 
 import android.app.Activity
-import android.content.ClipData
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dre.loyalty.R
@@ -31,9 +29,8 @@ import com.dre.loyalty.databinding.FragmentPagerInvoiceListBinding
 import com.dre.loyalty.features.camera.CameraActivity
 import com.dre.loyalty.features.camera.CameraRequestType
 import com.dre.loyalty.features.invoice.presentation.entity.Invoice
-import com.dre.loyalty.features.invoice.presentation.item.InvoiceListItem
+import com.dre.loyalty.features.invoice.presentation.list.item.InvoiceListItem
 import com.mikepenz.fastadapter.FastAdapter
-import com.mikepenz.fastadapter.IAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import javax.inject.Inject
 

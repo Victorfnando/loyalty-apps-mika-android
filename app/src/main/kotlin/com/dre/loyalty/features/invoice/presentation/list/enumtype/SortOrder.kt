@@ -5,7 +5,7 @@
  * github: https://github.com/oandrz
  */
 
-package com.dre.loyalty.features.invoice.presentation.enumtype
+package com.dre.loyalty.features.invoice.presentation.list.enumtype
 
 enum class SortOrder(val sort: String) {
     DESC("Terbaru ke Terlama"),

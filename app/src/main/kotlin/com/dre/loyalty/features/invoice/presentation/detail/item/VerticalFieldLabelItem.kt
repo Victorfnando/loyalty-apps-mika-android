@@ -5,7 +5,7 @@
  * github: https://github.com/oandrz
  */
 
-package com.dre.loyalty.features.invoicedetail.presentation.item
+package com.dre.loyalty.features.invoice.presentation.detail.item
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -14,8 +14,8 @@ import com.dre.loyalty.R
 import com.dre.loyalty.core.util.extension.addBorder
 import com.dre.loyalty.core.util.extension.showIfNotEmpty
 import com.dre.loyalty.databinding.ItemVerticalFieldLabelBinding
-import com.dre.loyalty.features.invoicedetail.presentation.entity.VerticalFieldLabelState
-import com.dre.loyalty.features.invoicedetail.presentation.enumtype.VerticalValueType
+import com.dre.loyalty.features.invoice.presentation.entity.VerticalFieldLabelState
+import com.dre.loyalty.features.invoice.presentation.detail.enumtype.VerticalValueType
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
 
 class VerticalFieldLabelItem(

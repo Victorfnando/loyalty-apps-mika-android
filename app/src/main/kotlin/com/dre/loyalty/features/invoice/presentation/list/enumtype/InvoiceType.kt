@@ -5,7 +5,7 @@
  * github: https://github.com/oandrz
  */
 
-package com.dre.loyalty.features.invoice.presentation.enumtype
+package com.dre.loyalty.features.invoice.presentation.list.enumtype
 
 import androidx.annotation.ColorRes
 import com.dre.loyalty.R

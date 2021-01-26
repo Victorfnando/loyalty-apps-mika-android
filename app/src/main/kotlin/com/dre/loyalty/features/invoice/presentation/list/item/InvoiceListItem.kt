@@ -5,7 +5,7 @@
  * github: https://github.com/oandrz
  */
 
-package com.dre.loyalty.features.invoice.presentation.item
+package com.dre.loyalty.features.invoice.presentation.list.item
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

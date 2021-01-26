@@ -5,11 +5,11 @@
  * github: https://github.com/oandrz
  */
 
-package com.dre.loyalty.features.invoice.presentation.adapter
+package com.dre.loyalty.features.invoice.presentation.list.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.dre.loyalty.features.invoice.presentation.screen.InvoiceListPagerFragment
+import com.dre.loyalty.features.invoice.presentation.list.screen.InvoiceListPagerFragment
 
 class InvoicePagingAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 

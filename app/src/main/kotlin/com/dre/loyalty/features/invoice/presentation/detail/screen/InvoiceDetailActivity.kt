@@ -5,7 +5,7 @@
  * github: https://github.com/oandrz
  */
 
-package com.dre.loyalty.features.invoicedetail.presentation
+package com.dre.loyalty.features.invoice.presentation.detail.screen
 
 import android.content.Context
 import android.content.Intent

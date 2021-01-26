@@ -5,7 +5,7 @@
  * github: https://github.com/oandrz
  */
 
-package com.dre.loyalty.features.invoicedetail.presentation
+package com.dre.loyalty.features.invoice.presentation.detail.screen
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -22,11 +22,10 @@ import com.dre.loyalty.core.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.core.view.VerticalDividerDecoration
 import com.dre.loyalty.databinding.FragmentInvoiceDetailBinding
-import com.dre.loyalty.features.invoice.presentation.entity.Invoice
-import com.dre.loyalty.features.invoicedetail.presentation.entity.VerticalFieldLabelState
-import com.dre.loyalty.features.invoicedetail.presentation.item.BannerImageItem
-import com.dre.loyalty.features.invoicedetail.presentation.item.DividerItem
-import com.dre.loyalty.features.invoicedetail.presentation.item.VerticalFieldLabelItem
+import com.dre.loyalty.features.invoice.presentation.entity.VerticalFieldLabelState
+import com.dre.loyalty.features.invoice.presentation.detail.item.BannerImageItem
+import com.dre.loyalty.features.invoice.presentation.detail.item.DividerItem
+import com.dre.loyalty.features.invoice.presentation.detail.item.VerticalFieldLabelItem
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import javax.inject.Inject

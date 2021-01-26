@@ -29,7 +29,7 @@ import com.dre.loyalty.features.createpin.presentation.enums.CreatePinType
 import com.dre.loyalty.features.ewallet.presentation.screen.EWalletActivity
 import com.dre.loyalty.features.faq.presentation.screen.FaqActivity
 import com.dre.loyalty.features.home.presentation.screen.HomeActivity
-import com.dre.loyalty.features.invoicedetail.presentation.InvoiceDetailActivity
+import com.dre.loyalty.features.invoice.presentation.detail.screen.InvoiceDetailActivity
 import com.dre.loyalty.features.login.data.Authenticator
 import com.dre.loyalty.features.login.presentation.ui.LoginActivity
 import com.dre.loyalty.features.news.presentation.detail.NewsDetailActivity
