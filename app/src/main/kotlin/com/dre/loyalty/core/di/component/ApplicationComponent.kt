@@ -26,7 +26,7 @@ import com.dre.loyalty.features.createpin.presentation.CreatePinFragment
 import com.dre.loyalty.features.ewallet.presentation.screen.EWalletFragment
 import com.dre.loyalty.features.faq.presentation.screen.FaqFragment
 import com.dre.loyalty.features.home.presentation.screen.HomeFragment
-import com.dre.loyalty.features.hospital.presentation.HospitalListFragment
+import com.dre.loyalty.features.hospital.presentation.screen.HospitalListFragment
 import com.dre.loyalty.features.invoice.presentation.screen.InvoiceListPagerFragment
 import com.dre.loyalty.features.invoicedetail.presentation.InvoiceDetailFragment
 import com.dre.loyalty.features.login.presentation.ui.LoginFragment

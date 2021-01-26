@@ -16,7 +16,7 @@ import com.dre.loyalty.R
 import com.dre.loyalty.core.extension.inTransaction
 import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.databinding.ActivityHomeBinding
-import com.dre.loyalty.features.hospital.presentation.HospitalListFragment
+import com.dre.loyalty.features.hospital.presentation.screen.HospitalListFragment
 import com.dre.loyalty.features.invoice.presentation.screen.InvoiceListFragment
 import com.dre.loyalty.features.news.presentation.list.NewsListFragment
 import com.dre.loyalty.features.profile.presentation.screen.ProfileFragment

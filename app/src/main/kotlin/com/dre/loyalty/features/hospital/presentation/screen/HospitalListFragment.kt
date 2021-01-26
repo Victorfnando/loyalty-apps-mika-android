@@ -5,7 +5,7 @@
  * github: https://github.com/oandrz
  */
 
-package com.dre.loyalty.features.hospital.presentation
+package com.dre.loyalty.features.hospital.presentation.screen
 
 import android.os.Bundle
 import android.text.Editable
@@ -17,13 +17,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dre.loyalty.R
+import com.dre.loyalty.core.exception.Failure
 import com.dre.loyalty.core.extension.observe
 import com.dre.loyalty.core.extension.viewModel
 import com.dre.loyalty.core.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.databinding.FragmentHospitalListBinding
 import com.dre.loyalty.features.hospital.presentation.entity.EmptyViewState
-import com.dre.loyalty.features.hospital.presentation.entity.Hospital
+import com.dre.loyalty.core.model.Hospital
 import com.dre.loyalty.features.hospital.presentation.item.HospitalListItem
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
@@ -61,6 +62,9 @@ class HospitalListFragment : BaseFragment() {
         appComponent.inject(this)
         vm = viewModel(viewModelFactory) {
             observe(emptyViewState, ::renderEmptyViewState)
+            observe(hospitalList, ::renderHospitalList)
+            observe(failure, ::renderError)
+            observe(loading, ::renderLoading)
         }
     }
 
@@ -78,6 +82,7 @@ class HospitalListFragment : BaseFragment() {
         bindToolbar()
         binding?.etSearch?.editText?.addTextChangedListener(hospitalListener)
         bindHospitalList()
+        vm.init()
     }
 
     private fun bindToolbar() {
@@ -92,44 +97,34 @@ class HospitalListFragment : BaseFragment() {
             layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
             adapter = FastAdapter.with(listOf(hospitalListItem))
         }
-        val hospitals = listOf(
-                Hospital(
-                        "Mitra Keluarga Bekasi",
-                        "Jl. Jendral Ahmad Yani, Kayuringin Jaya, Kota Bekasi, Jawa Barat 17144",
-                        "(021) 885333333",
-                        "(021) 885333333"
-                ),
-                Hospital(
-                        "Mitra Keluarga Bekasi Timur",
-                        "Jl. Jendral Ahmad Yani, Kayuringin Jaya, Kota Bekasi, Jawa Barat 17144",
-                        "(021) 885333333",
-                        "(021) 885333333"
-                ),
-                Hospital(
-                        "Mitra Keluarga Bekasi Bintaro",
-                        "Jl. Jendral Ahmad Yani, Kayuringin Jaya, Kota Bekasi, Jawa Barat 17144",
-                        "(021) 885333333",
-                        "(021) 885333333"
-                ),
-                Hospital(
-                        "Mitra Keluarga Bekasi",
-                        "Jl. Jendral Ahmad Yani, Kayuringin Jaya, Kota Bekasi, Jawa Barat 17144",
-                        "(021) 885333333",
-                        "(021) 885333333"
-                ),
-                Hospital(
-                        "Mitra Keluarga Bekasi Timur",
-                        "Jl. Jendral Ahmad Yani, Kayuringin Jaya, Kota Bekasi, Jawa Barat 17144",
-                        "(021) 885333333",
-                        "(021) 885333333"
-                ),
-                Hospital(
-                        "Mitra Keluarga Bekasi Bintaro",
-                        "Jl. Jendral Ahmad Yani, Kayuringin Jaya, Kota Bekasi, Jawa Barat 17144",
-                        "(021) 885333333",
-                        "(021) 885333333"
-                )
-        )
+
+        hospitalListItem.itemFilter.filterPredicate = { item, constraint ->
+            item.item.name.toLowerCase().contains(constraint.toString())
+        }
+        hospitalListItem.itemFilter.itemFilterListener = object : ItemFilterListener<HospitalListItem> {
+            override fun itemsFiltered(constraint: CharSequence?, results: List<HospitalListItem>?) {
+                vm.handleItemWereFiltered(results?.map { it.item } ?: emptyList())
+            }
+
+            override fun onReset() {
+                vm.handleListReset(hospitalListItem.adapterItemCount)
+            }
+        }
+    }
+
+    private fun renderEmptyViewState(state: EmptyViewState?) {
+        state?.visibility?.let {
+            binding?.emptyLayout?.visibility = state.visibility
+        }
+    }
+
+    private fun renderHospitalList(hospitals: List<Hospital>?) {
+        if (hospitals == null || hospitals.isEmpty()) {
+            if (hospitalListItem.adapterItemCount == 0) {
+                renderEmptyViewState(EmptyViewState(View.VISIBLE))
+            }
+            return
+        }
         hospitals.map { hospital ->
             hospitalListItem.add(
                 HospitalListItem(hospital).also { item ->
@@ -142,24 +137,15 @@ class HospitalListFragment : BaseFragment() {
                 }
             )
         }
-        hospitalListItem.itemFilter.filterPredicate = { item, constraint ->
-            item.item.name.toLowerCase().contains(constraint.toString())
-        }
-        hospitalListItem.itemFilter.itemFilterListener = object : ItemFilterListener<HospitalListItem> {
-            override fun itemsFiltered(constraint: CharSequence?, results: List<HospitalListItem>?) {
-                vm.handleItemWereFiltered(results?.map { it.item } ?: emptyList())
-            }
-
-            override fun onReset() {
-                vm.handleListReset()
-            }
-        }
     }
 
-    private fun renderEmptyViewState(state: EmptyViewState?) {
-        state?.visibility?.let {
-            binding?.emptyLayout?.visibility = state.visibility
-        }
+    private fun renderError(error: Failure?) {
+        if (error == null) return
+        renderEmptyViewState(EmptyViewState(View.VISIBLE))
+    }
+
+    private fun renderLoading(visibility: Int?) {
+        binding?.progress?.visibility = visibility ?: View.GONE
     }
 
     companion object {

@@ -11,7 +11,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.dre.loyalty.R
 import com.dre.loyalty.databinding.ItemHospitalBinding
-import com.dre.loyalty.features.hospital.presentation.entity.Hospital
+import com.dre.loyalty.core.model.Hospital
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
 
 class HospitalListItem(val item: Hospital) : AbstractBindingItem<ItemHospitalBinding>() {
@@ -30,14 +30,18 @@ class HospitalListItem(val item: Hospital) : AbstractBindingItem<ItemHospitalBin
         super.bindView(binding, payloads)
         binding.run {
             tvHospitalName.text = item.name
-            tvHospitalAddress.text = item.address
-            tvInfo.text = item.contactInfo
+            tvHospitalAddress.text = item.detail?.address
+            tvInfo.text = item.detail?.contactInfo
             tvInfo.setOnClickListener {
-                infoListener?.invoke(item.contactInfo)
+                item.detail?.contactInfo?.let { phone ->
+                    infoListener?.invoke(phone)
+                }
             }
-            tvEmergency.text = item.contactEmergency
+            tvEmergency.text = item.detail?.contactEmergency
             tvEmergency.setOnClickListener {
-                emergencyListener?.invoke(item.contactEmergency)
+                item.detail?.contactEmergency?.let { phone ->
+                    emergencyListener?.invoke(phone)
+                }
             }
         }
     }
