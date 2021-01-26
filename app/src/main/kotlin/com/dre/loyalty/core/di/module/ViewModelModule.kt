@@ -32,6 +32,7 @@ import com.dre.loyalty.features.invoice.presentation.detail.screen.InvoiceDetail
 import com.dre.loyalty.features.login.presentation.ui.LoginViewModel
 import com.dre.loyalty.features.movies.MovieDetailsViewModel
 import com.dre.loyalty.features.movies.MoviesViewModel
+import com.dre.loyalty.features.news.presentation.detail.NewsDetailViewModel
 import com.dre.loyalty.features.news.presentation.list.NewsListViewModel
 import com.dre.loyalty.features.passwordinput.presentation.screen.create.InputPasswordCreateViewModel
 import com.dre.loyalty.features.passwordinput.presentation.screen.reset.InputPasswordResetViewModel
@@ -155,6 +156,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(FaqViewModel::class)
     abstract fun provideFaqViewModel(vm: FaqViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(NewsDetailViewModel::class)
+    abstract fun provideNewsDetailViewModel(vm: NewsDetailViewModel): ViewModel
 
     @Binds
     @IntoMap

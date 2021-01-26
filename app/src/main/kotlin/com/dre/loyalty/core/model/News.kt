@@ -5,5 +5,6 @@ data class News(
     val title: String,
     val desc: String,
     val date: String,
-    val imageUrl: String
+    val imageUrl: String,
+    val relatedNews: List<News>? = null
 )

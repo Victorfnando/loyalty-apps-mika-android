@@ -33,6 +33,7 @@ import com.dre.loyalty.features.login.presentation.ui.LoginFragment
 import com.dre.loyalty.features.register.presentation.ui.RegisterFragment
 import com.dre.loyalty.features.movies.MovieDetailsFragment
 import com.dre.loyalty.features.movies.MoviesFragment
+import com.dre.loyalty.features.news.presentation.detail.NewsDetailFragment
 import com.dre.loyalty.features.news.presentation.list.NewsListFragment
 import com.dre.loyalty.features.otp.OtpFragment
 import com.dre.loyalty.features.passwordinput.presentation.screen.InputPasswordFragment
@@ -81,6 +82,7 @@ interface ApplicationComponent {
     fun inject(fragment: CashBackListFragment)
     fun inject(fragment: NewsListFragment)
     fun inject(fragment: FaqFragment)
+    fun inject(fragment: NewsDetailFragment)
 
     fun inject(moviesFragment: MoviesFragment)
     fun inject(movieDetailsFragment: MovieDetailsFragment)

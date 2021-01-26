@@ -13,8 +13,10 @@ package com.dre.loyalty.features.news.domain
 import com.dre.loyalty.core.exception.Failure
 import com.dre.loyalty.core.functional.Either
 import com.dre.loyalty.core.model.News
+import com.dre.loyalty.features.news.domain.usecase.GetNewsDetailUseCase
 import com.dre.loyalty.features.news.domain.usecase.GetNewsListUseCase.Param
 
 interface NewsRepositoryContract {
     fun getNewsList(param: Param): Either<Failure, List<News>>
+    fun getNewsDetail(param: GetNewsDetailUseCase.Param): Either<Failure, News>
 }

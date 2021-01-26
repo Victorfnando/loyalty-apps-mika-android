@@ -18,6 +18,7 @@ import com.dre.loyalty.core.platform.NetworkHandler
 import com.dre.loyalty.features.news.data.entity.mapper.NewsResponseMapper
 import com.dre.loyalty.features.news.data.repository.datasource.NewsCloudDataSourceContract
 import com.dre.loyalty.features.news.domain.NewsRepositoryContract
+import com.dre.loyalty.features.news.domain.usecase.GetNewsDetailUseCase
 import com.dre.loyalty.features.news.domain.usecase.GetNewsListUseCase
 import javax.inject.Inject
 
@@ -30,6 +31,17 @@ class NewsRepository @Inject constructor(
         return when(networkHandler.isNetworkAvailable()) {
             true -> {
                 cloud.getNews(param).request {
+                    responseMapper.transform(it)
+                }
+            }
+            false -> Either.Left(Failure.NetworkConnection)
+        }
+    }
+
+    override fun getNewsDetail(param: GetNewsDetailUseCase.Param): Either<Failure, News> {
+        return when(networkHandler.isNetworkAvailable()) {
+            true -> {
+                cloud.getNewsDetail(param).request {
                     responseMapper.transform(it)
                 }
             }

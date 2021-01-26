@@ -12,7 +12,9 @@ package com.dre.loyalty.features.news.data.repository.datasource
 
 import com.dre.loyalty.core.service.NewsService
 import com.dre.loyalty.core.response.BaseResponse
+import com.dre.loyalty.features.news.data.entity.response.NewsDetailResponse
 import com.dre.loyalty.features.news.data.entity.response.NewsListResponse
+import com.dre.loyalty.features.news.domain.usecase.GetNewsDetailUseCase
 import com.dre.loyalty.features.news.domain.usecase.GetNewsListUseCase
 import retrofit2.Call
 import javax.inject.Inject
@@ -22,5 +24,9 @@ class NewsCloudDataSource @Inject constructor(
 ) : NewsCloudDataSourceContract {
     override fun getNews(param: GetNewsListUseCase.Param): Call<BaseResponse<NewsListResponse>> {
         return service.getNewsList(param)
+    }
+
+    override fun getNewsDetail(param: GetNewsDetailUseCase.Param): Call<BaseResponse<NewsDetailResponse>> {
+        return service.getNewsDetail(param)
     }
 }

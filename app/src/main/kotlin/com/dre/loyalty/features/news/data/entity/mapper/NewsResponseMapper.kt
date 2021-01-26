@@ -12,6 +12,7 @@ package com.dre.loyalty.features.news.data.entity.mapper
 
 import com.dre.loyalty.core.model.News
 import com.dre.loyalty.core.response.BaseResponse
+import com.dre.loyalty.features.news.data.entity.response.NewsDetailResponse
 import com.dre.loyalty.features.news.data.entity.response.NewsListResponse
 import com.dre.loyalty.features.news.data.entity.response.NewsResponse
 import javax.inject.Inject
@@ -19,6 +20,17 @@ import javax.inject.Inject
 class NewsResponseMapper @Inject constructor() {
     fun transform(response: BaseResponse<NewsListResponse>): List<News> {
         return response.data.content.map { transform(it) }
+    }
+
+    fun transform(response: BaseResponse<NewsDetailResponse>): News {
+        return News(
+            response.data.news.id,
+            response.data.news.title,
+            response.data.news.desc,
+            response.data.news.date,
+            response.data.news.imageUrl,
+            response.data.relatedNews.map { transform(it) },
+        )
     }
 
     private fun transform(response: NewsResponse): News {
