@@ -108,7 +108,7 @@ class HospitalListFragment : BaseFragment() {
             }
 
             override fun onReset() {
-                vm.handleListReset(hospitalListItem.adapterItemCount)
+                vm.handleListReset()
             }
         }
     }

@@ -45,9 +45,9 @@ class HospitalListViewModel @Inject constructor(
         checkEmptyView(results)
     }
 
-    fun handleListReset(adapterCount: Int) {
+    fun handleListReset() {
         viewModelScope.launch(Dispatchers.Main) {
-            _emptyViewState.value = if (adapterCount == 0) {
+            _emptyViewState.value = if (_hospitalList.value != null && _hospitalList.value?.size == 0) {
                 EmptyViewState(View.VISIBLE)
             } else {
                 EmptyViewState(View.GONE)
