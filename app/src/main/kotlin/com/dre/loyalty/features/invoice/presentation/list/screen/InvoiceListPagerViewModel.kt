@@ -13,13 +13,16 @@ import com.dre.loyalty.R
 import com.dre.loyalty.core.functional.Event
 import com.dre.loyalty.core.platform.BaseViewModel
 import com.dre.loyalty.core.view.sheet.SheetListState
+import com.dre.loyalty.features.invoice.domain.usecase.GetInvoiceUseCase
 import com.dre.loyalty.features.invoice.presentation.entity.Invoice
 import com.dre.loyalty.features.invoice.presentation.list.enumtype.InvoiceType
 import com.dre.loyalty.features.invoice.presentation.list.enumtype.SortOrder
 import javax.inject.Inject
 
 private const val SORT_SHEET_TITLE = "Urutkan berdasarkan waktu unggah kwitansi"
-class InvoiceListPagerViewModel @Inject constructor() : BaseViewModel() {
+class InvoiceListPagerViewModel @Inject constructor(
+    private val getInvoiceUseCase: GetInvoiceUseCase
+) : BaseViewModel() {
 
     private val _invoiceList: MutableLiveData<List<Invoice>> = MutableLiveData()
     val invoiceList: LiveData<List<Invoice>> = _invoiceList

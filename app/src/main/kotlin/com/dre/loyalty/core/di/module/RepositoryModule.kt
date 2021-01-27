@@ -6,6 +6,8 @@ import com.dre.loyalty.features.home.data.repository.HomeRepository
 import com.dre.loyalty.features.home.domain.HomeRepositoryContract
 import com.dre.loyalty.features.hospital.data.repository.HospitalListRepository
 import com.dre.loyalty.features.hospital.domain.HospitalListRepositoryContract
+import com.dre.loyalty.features.invoice.data.repository.InvoiceRepository
+import com.dre.loyalty.features.invoice.domain.InvoiceRepositoryContract
 import com.dre.loyalty.features.news.data.repository.NewsRepository
 import com.dre.loyalty.features.news.domain.NewsRepositoryContract
 import dagger.Binds
@@ -29,4 +31,8 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun provideNewsRepository(repository: NewsRepository): NewsRepositoryContract
+
+    @Binds
+    @Singleton
+    abstract fun provideInvoiceRepository(repository: InvoiceRepository): InvoiceRepositoryContract
 }
