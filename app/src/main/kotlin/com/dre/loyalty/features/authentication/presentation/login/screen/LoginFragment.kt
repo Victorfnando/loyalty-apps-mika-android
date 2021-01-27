@@ -5,7 +5,7 @@
  * github: https://github.com/oandrz
  */
 
-package com.dre.loyalty.features.authentication.presentation.login.presentation.ui
+package com.dre.loyalty.features.authentication.presentation.login.screen
 
 import android.os.Bundle
 import android.text.Editable
@@ -26,9 +26,9 @@ import com.dre.loyalty.core.functional.Event
 import com.dre.loyalty.core.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.databinding.FragmentLoginBinding
-import com.dre.loyalty.features.authentication.presentation.login.presentation.entity.LoginButtonState
-import com.dre.loyalty.features.authentication.presentation.login.presentation.entity.LoginEmailInputState
-import com.dre.loyalty.features.authentication.presentation.login.presentation.entity.LoginPasswordInputState
+import com.dre.loyalty.features.authentication.presentation.login.entity.LoginButtonState
+import com.dre.loyalty.features.authentication.presentation.login.entity.LoginEmailInputState
+import com.dre.loyalty.features.authentication.presentation.login.entity.LoginPasswordInputState
 import javax.inject.Inject
 
 class LoginFragment : BaseFragment() {

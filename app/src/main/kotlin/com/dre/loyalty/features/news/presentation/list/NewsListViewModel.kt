@@ -20,7 +20,7 @@ class NewsListViewModel @Inject constructor(
     private val _newsItemClicked: MutableLiveData<Event<String>> = MutableLiveData()
     val newsItemClicked: LiveData<Event<String>> = _newsItemClicked
 
-    fun init() {
+    fun loadData() {
         _loading.value = View.VISIBLE
         getNewsListUseCase(Param("test", "test")) {
             it.fold(::handleFailure, ::handleSuccessGetNews)

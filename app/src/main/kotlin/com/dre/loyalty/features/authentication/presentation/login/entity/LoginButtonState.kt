@@ -5,7 +5,7 @@
  * github: https://github.com/oandrz
  */
 
-package com.dre.loyalty.features.authentication.presentation.login.presentation.entity
+package com.dre.loyalty.features.authentication.presentation.login.entity
 
 data class LoginButtonState(
     val enabled: Boolean

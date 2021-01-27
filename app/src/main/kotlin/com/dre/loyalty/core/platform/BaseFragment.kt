@@ -21,10 +21,17 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.dre.loyalty.AndroidApplication
+import com.dre.loyalty.R
 import com.dre.loyalty.R.color
 import com.dre.loyalty.core.di.component.ApplicationComponent
+import com.dre.loyalty.core.exception.Failure
+import com.dre.loyalty.core.exception.Failure.NetworkConnection
+import com.dre.loyalty.core.exception.Failure.ServerError
 import com.dre.loyalty.core.extension.appContext
 import com.dre.loyalty.core.extension.viewContainer
+import com.dre.loyalty.core.util.enumtype.ConfirmationSheetType
+import com.dre.loyalty.core.view.sheet.ConfirmationSheetModal
+import com.dre.loyalty.features.movies.MovieFailure
 import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
 
@@ -53,5 +60,13 @@ abstract class BaseFragment : Fragment() {
         snackBar.setAction(actionText) { _ -> action.invoke() }
         snackBar.setActionTextColor(ContextCompat.getColor(appContext, color.colorTextPrimary))
         snackBar.show()
+    }
+
+    protected fun getNetworkErrorSheet(failure: Failure): ConfirmationSheetModal? {
+        return when (failure) {
+            is NetworkConnection -> ConfirmationSheetModal.newInstance(ConfirmationSheetType.NO_INTERNET_CONNECTION_SHEET)
+            is ServerError -> ConfirmationSheetModal.newInstance(ConfirmationSheetType.NO_INTERNET_CONNECTION_SHEET)
+            else -> null
+        }
     }
 }

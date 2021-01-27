@@ -29,7 +29,7 @@ import com.dre.loyalty.features.home.presentation.screen.HomeViewModel
 import com.dre.loyalty.features.hospital.presentation.screen.HospitalListViewModel
 import com.dre.loyalty.features.invoice.presentation.list.screen.InvoiceListPagerViewModel
 import com.dre.loyalty.features.invoice.presentation.detail.screen.InvoiceDetailViewModel
-import com.dre.loyalty.features.authentication.presentation.login.presentation.ui.LoginViewModel
+import com.dre.loyalty.features.authentication.presentation.login.screen.LoginViewModel
 import com.dre.loyalty.features.movies.MovieDetailsViewModel
 import com.dre.loyalty.features.movies.MoviesViewModel
 import com.dre.loyalty.features.news.presentation.detail.NewsDetailViewModel

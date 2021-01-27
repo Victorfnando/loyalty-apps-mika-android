@@ -19,6 +19,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.Intent.ACTION_DIAL
 import android.net.Uri
+import android.provider.Settings
 import android.view.View
 import com.dre.loyalty.features.authenticationselector.presentation.AuthenticationSelectorActivity
 import com.dre.loyalty.features.cashback.presentation.screen.CashBackListActivity
@@ -30,8 +31,8 @@ import com.dre.loyalty.features.ewallet.presentation.screen.EWalletActivity
 import com.dre.loyalty.features.faq.presentation.screen.FaqActivity
 import com.dre.loyalty.features.home.presentation.screen.HomeActivity
 import com.dre.loyalty.features.invoice.presentation.detail.screen.InvoiceDetailActivity
-import com.dre.loyalty.features.authentication.presentation.login.data.Authenticator
-import com.dre.loyalty.features.authentication.presentation.login.presentation.ui.LoginActivity
+import com.dre.loyalty.features.authentication.data.repository.Authenticator
+import com.dre.loyalty.features.authentication.presentation.login.screen.LoginActivity
 import com.dre.loyalty.features.news.presentation.detail.NewsDetailActivity
 import com.dre.loyalty.features.news.presentation.list.NewsListActivity
 import com.dre.loyalty.features.authentication.presentation.otp.screen.OtpActivity
@@ -162,6 +163,10 @@ class Navigator @Inject constructor(private val authenticator: Authenticator) {
 
     fun showWalletScreen(context: Context) {
         context.startActivity(EWalletActivity.callingIntent(context))
+    }
+
+    fun showSetting(context: Context) {
+        context.startActivity(Intent(Settings.ACTION_SETTINGS))
     }
 
     class Extras(val transitionSharedElement: View)

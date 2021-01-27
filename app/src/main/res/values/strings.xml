@@ -15,4 +15,14 @@
     <string name="validation_failed_password_confirm">Password Belum Sesuai</string>
     <string name="validation_failed_format_email">Format e-mail salah</string>
     <string name="validation_failed_format_number">Hanya boleh angka</string>
+
+    <string name="sheet_noInternet_title">Yah, Internet kamu mati</string>
+    <string name="sheet_noInternet_desc">Silahkan cek wifi atau kuota internet kamu</string>
+    <string name="sheet_noInternet_button_primary">Coba lagi</string>
+    <string name="sheet_noInternet_button_secondary">Cek Pengaturan</string>
+
+    <string name="sheet_responseError_title">Opps, Terjadi kesalahan</string>
+    <string name="sheet_responseError_desc">Aplikasi gagal memuat data dengan benar</string>
+    <string name="sheet_responseError_button_primary">Coba lagi</string>
+    <string name="sheet_responseError_button_secondary">Cek Pengaturan</string>
 </resources>

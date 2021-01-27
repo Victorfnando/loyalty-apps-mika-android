@@ -15,9 +15,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dre.loyalty.R
+import com.dre.loyalty.core.exception.Failure
 import com.dre.loyalty.core.extension.observe
 import com.dre.loyalty.core.extension.viewModel
+import com.dre.loyalty.core.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
+import com.dre.loyalty.core.view.sheet.ConfirmationSheetModal
 import com.dre.loyalty.databinding.FragmentFaqBinding
 import com.dre.loyalty.features.faq.domain.entity.FrequentlyAskedQuestion
 import com.dre.loyalty.features.faq.presentation.item.FaqExpandableItem
@@ -25,8 +28,12 @@ import com.dre.loyalty.features.faq.presentation.item.FaqItem
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.expandable.getExpandableExtension
+import javax.inject.Inject
 
 class FaqFragment : BaseFragment() {
+
+    @Inject
+    lateinit var navigator: Navigator
 
     private var binding: FragmentFaqBinding? = null
     private lateinit var vm: FaqViewModel
@@ -41,6 +48,7 @@ class FaqFragment : BaseFragment() {
         vm = viewModel(viewModelFactory) {
             observe(faqList, ::renderList)
             observe(loading, ::renderLoading)
+            observe(failure, ::showFailureSheet)
         }
     }
 
@@ -94,6 +102,19 @@ class FaqFragment : BaseFragment() {
 
     private fun renderLoading(visibility: Int?) {
         binding?.progress?.visibility = visibility ?: View.GONE
+    }
+
+    private fun showFailureSheet(failure: Failure?) {
+        if (failure == null) return
+        val sheet = getNetworkErrorSheet(failure)?.also {
+            it.primaryButtonClickListener = {
+                vm.init()
+            }
+            it.secondaryButtonClickListener = {
+                navigator.showSetting(requireContext())
+            }
+        }
+        sheet?.show(requireActivity().supportFragmentManager, ConfirmationSheetModal.TAG)
     }
 
     companion object {

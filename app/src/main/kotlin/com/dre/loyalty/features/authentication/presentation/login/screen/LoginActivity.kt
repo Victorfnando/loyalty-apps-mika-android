@@ -5,7 +5,7 @@
  * github: https://github.com/oandrz
  */
 
-package com.dre.loyalty.features.authentication.presentation.login.presentation.ui
+package com.dre.loyalty.features.authentication.presentation.login.screen
 
 import android.content.Context
 import android.content.Intent

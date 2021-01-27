@@ -14,7 +14,7 @@ import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 
 @Keep
-data class BaseResponse<T>(
+data class Response<T>(
     @SerializedName("statusMessage")
     val statusMessage: String,
     @SerializedName("statusCode")

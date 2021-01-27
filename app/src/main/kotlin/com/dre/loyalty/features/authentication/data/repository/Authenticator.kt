@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.dre.loyalty.features.authentication.presentation.login.data
+package com.dre.loyalty.features.authentication.data.repository
 
 import javax.inject.Inject
 import javax.inject.Singleton

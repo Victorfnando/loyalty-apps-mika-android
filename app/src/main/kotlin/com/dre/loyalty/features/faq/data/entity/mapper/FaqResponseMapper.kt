@@ -1,15 +1,14 @@
 package com.dre.loyalty.features.faq.data.entity.mapper
 
-import com.dre.loyalty.features.faq.data.entity.response.FaqDataResponse
 import com.dre.loyalty.features.faq.data.entity.response.FaqResponse
 import com.dre.loyalty.features.faq.domain.entity.FrequentlyAskedQuestion
-import com.dre.loyalty.core.response.BaseResponse
+import com.dre.loyalty.core.response.Response
 import javax.inject.Inject
 
 class FaqResponseMapper @Inject constructor() {
 
-    fun transform(response: BaseResponse<FaqDataResponse>): List<FrequentlyAskedQuestion> {
-        return response.data.content.map { transform(it) }
+    fun transform(response: Response<List<FaqResponse>>): List<FrequentlyAskedQuestion> {
+        return response.data.map { transform(it) }
     }
 
     private fun transform(response: FaqResponse) : FrequentlyAskedQuestion {

@@ -5,10 +5,11 @@
  * github: https://github.com/oandrz
  */
 
-package com.dre.loyalty.features.authentication.presentation.login.presentation.entity
+package com.dre.loyalty.features.authentication.presentation.login.entity
 
 import androidx.annotation.StringRes
 
-data class LoginEmailInputState(
-    @StringRes var error: Int? = null
+data class LoginPasswordInputState(
+    @StringRes var error: Int? = null,
+    var isShowingPassword: Boolean = false
 )

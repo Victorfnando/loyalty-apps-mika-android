@@ -34,7 +34,7 @@ class HospitalListViewModel @Inject constructor(
         _emptyViewState.value = EmptyViewState(View.GONE)
     }
 
-    fun init() {
+    fun loadData() {
         _loading.value = View.VISIBLE
         getHospitalListUseCase(Param("test", "rtest")) {
             it.fold(::handleFailure, ::handleSuccessGetHospitalList)

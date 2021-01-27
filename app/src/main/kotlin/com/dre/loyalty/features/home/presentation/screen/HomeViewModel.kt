@@ -49,7 +49,7 @@ class HomeViewModel @Inject constructor(
     private val _navigateInvoiceDetail: MutableLiveData<Event<String>> = MutableLiveData()
     val navigateInvoiceDetail: LiveData<Event<String>> = _navigateInvoiceDetail
 
-    fun init() {
+    fun loadData() {
         _loading.value = View.VISIBLE
         getHomeDataUseCase(Param("test", "tes")) {
             it.fold(::handleFailure, ::handleSuccessGetHome)

@@ -29,7 +29,7 @@ import com.dre.loyalty.features.home.presentation.screen.HomeFragment
 import com.dre.loyalty.features.hospital.presentation.screen.HospitalListFragment
 import com.dre.loyalty.features.invoice.presentation.list.screen.InvoiceListPagerFragment
 import com.dre.loyalty.features.invoice.presentation.detail.screen.InvoiceDetailFragment
-import com.dre.loyalty.features.authentication.presentation.login.presentation.ui.LoginFragment
+import com.dre.loyalty.features.authentication.presentation.login.screen.LoginFragment
 import com.dre.loyalty.features.authentication.presentation.register.screen.RegisterFragment
 import com.dre.loyalty.features.movies.MovieDetailsFragment
 import com.dre.loyalty.features.movies.MoviesFragment

@@ -66,5 +66,19 @@ enum class ConfirmationSheetType(
         R.string.profile_sheet_logout_label_description,
         R.string.profile_sheet_logout_button_exit,
         R.string.profile_sheet_logout_button_no
+    ),
+    NO_INTERNET_CONNECTION_SHEET(
+        R.drawable.ic_img_no_internet,
+        R.string.sheet_noInternet_title,
+        R.string.sheet_noInternet_desc,
+        R.string.sheet_noInternet_button_primary,
+        R.string.sheet_noInternet_button_secondary
+    ),
+    RESPONSE_ERROR_SHEET(
+        R.drawable.ic_img_response_error,
+        R.string.sheet_responseError_title,
+        R.string.sheet_responseError_desc,
+        R.string.sheet_responseError_button_primary,
+        R.string.sheet_responseError_button_secondary
     )
 }

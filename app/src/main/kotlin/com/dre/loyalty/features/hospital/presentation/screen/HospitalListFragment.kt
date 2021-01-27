@@ -25,11 +25,11 @@ import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.databinding.FragmentHospitalListBinding
 import com.dre.loyalty.features.hospital.presentation.entity.EmptyViewState
 import com.dre.loyalty.core.model.Hospital
+import com.dre.loyalty.core.view.sheet.ConfirmationSheetModal
 import com.dre.loyalty.features.hospital.presentation.item.HospitalListItem
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.listeners.ItemFilterListener
-import kotlinx.android.synthetic.main.fragment_movies.*
 import javax.inject.Inject
 
 class HospitalListFragment : BaseFragment() {
@@ -65,6 +65,7 @@ class HospitalListFragment : BaseFragment() {
             observe(hospitalList, ::renderHospitalList)
             observe(failure, ::renderError)
             observe(loading, ::renderLoading)
+            observe(failure, ::showFailureSheet)
         }
     }
 
@@ -82,7 +83,7 @@ class HospitalListFragment : BaseFragment() {
         bindToolbar()
         binding?.etSearch?.editText?.addTextChangedListener(hospitalListener)
         bindHospitalList()
-        vm.init()
+        vm.loadData()
     }
 
     private fun bindToolbar() {
@@ -146,6 +147,19 @@ class HospitalListFragment : BaseFragment() {
 
     private fun renderLoading(visibility: Int?) {
         binding?.progress?.visibility = visibility ?: View.GONE
+    }
+
+    private fun showFailureSheet(failure: Failure?) {
+        if (failure == null) return
+        val sheet = getNetworkErrorSheet(failure)?.also {
+            it.primaryButtonClickListener = {
+                vm.loadData()
+            }
+            it.secondaryButtonClickListener = {
+                navigator.showSetting(requireContext())
+            }
+        }
+        sheet?.show(requireActivity().supportFragmentManager, ConfirmationSheetModal.TAG)
     }
 
     companion object {
