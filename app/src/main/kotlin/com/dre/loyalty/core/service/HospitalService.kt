@@ -7,7 +7,7 @@ import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST
 
-private const val HOSPITAL_LIST_ENDPOINT = "hospitals"
+private const val HOSPITAL_LIST_ENDPOINT = "hospital_list"
 interface HospitalService {
     @POST(HOSPITAL_LIST_ENDPOINT) fun getHospitalList(
         @Body param: Param

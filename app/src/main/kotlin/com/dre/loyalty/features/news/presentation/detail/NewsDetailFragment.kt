@@ -64,10 +64,10 @@ class NewsDetailFragment : BaseFragment() {
         vm.init()
     }
 
-    override fun onDetach() {
-        binding?.ivBanner?.let { Glide.with(requireContext()).clear(it) }
+    override fun onDestroyView() {
+        Glide.get(requireContext()).clearMemory()
         binding = null
-        super.onDetach()
+        super.onDestroyView()
     }
 
     private fun bindToolbar() {
