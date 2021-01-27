@@ -33,12 +33,12 @@ xmlns:android="http://schemas.android.com/apk/res/android">
     </activity>
 
     <activity
-        android:name="com.dre.loyalty.features.login.presentation.ui.LoginActivity"
+        android:name="com.dre.loyalty.features.authentication.presentation.login.presentation.ui.LoginActivity"
         android:label="@string/login_screen_title">
     </activity>
 
     <activity
-        android:name=".features.register.presentation.ui.RegisterActivity"
+        android:name=".features.authentication.presentation.register.screen.RegisterActivity"
         android:label="@string/register_screen_title">
     </activity>
 
@@ -75,7 +75,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
   </activity>
 
   <activity
-      android:name=".features.resetpassword.presentation.ResetPasswordActivity">
+      android:name=".features.authentication.presentation.resetpassword.screen.ResetPasswordActivity">
   </activity>
 
   <activity
@@ -99,15 +99,15 @@ xmlns:android="http://schemas.android.com/apk/res/android">
   </activity>
 
   <activity
-      android:name=".features.uploadinvoice.presentation.UploadInvoiceActivity">
+      android:name=".features.invoice.presentation.upload.screen.UploadInvoiceActivity">
   </activity>
 
   <activity
-      android:name=".features.changeprofile.presentation.UpdateProfileActivity">
+      android:name=".features.profile.presentation.changeprofile.screen.UpdateProfileActivity">
   </activity>
 
   <activity
-      android:name=".features.updatepassword.presentation.UpdatePasswordActivity">
+      android:name=".features.authentication.presentation.updatepassword.screen.UpdatePasswordActivity">
   </activity>
 
   <activity
@@ -131,7 +131,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
   </activity>
 
   <activity
-      android:name=".features.passwordinput.presentation.screen.InputPasswordActivity">
+      android:name=".features.authentication.presentation.inputpassword.screen.InputPasswordActivity">
   </activity>
 
   <activity

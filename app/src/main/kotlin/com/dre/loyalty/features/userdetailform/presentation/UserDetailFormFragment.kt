@@ -23,7 +23,7 @@ import com.dre.loyalty.core.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.core.util.enumtype.ConfirmationSheetType
 import com.dre.loyalty.databinding.FragmentUserDetailFormBinding
-import com.dre.loyalty.features.passwordinput.presentation.enumtype.InputPasswordType
+import com.dre.loyalty.features.authentication.presentation.inputpassword.enumtype.InputPasswordType
 import com.dre.loyalty.features.userdetailform.presentation.dialog.DatePickerDialogFragment
 import com.dre.loyalty.features.userdetailform.presentation.entity.EmailInputState
 import com.dre.loyalty.features.userdetailform.presentation.entity.FirstNameInputState
