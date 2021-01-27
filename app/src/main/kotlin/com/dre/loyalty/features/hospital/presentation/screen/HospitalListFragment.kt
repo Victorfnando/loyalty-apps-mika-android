@@ -88,7 +88,7 @@ class HospitalListFragment : BaseFragment() {
     private fun bindToolbar() {
         (activity as AppCompatActivity).run {
             setSupportActionBar(binding?.toolbarLayout?.toolbar)
-            supportActionBar?.setTitle(R.string.hospitalList_screen_title)
+            supportActionBar?.setTitle(R.string.hospitalList_title)
         }
     }
 

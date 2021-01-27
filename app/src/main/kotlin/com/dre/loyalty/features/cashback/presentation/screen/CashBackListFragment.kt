@@ -90,7 +90,7 @@ class CashBackListFragment : BaseFragment() {
     private fun bindToolbar() {
         (activity as AppCompatActivity).run {
             setSupportActionBar(binding?.toolbarLayout?.toolbar)
-            supportActionBar?.title = resources.getText(R.string.cashbacklist_screen_title)
+            supportActionBar?.title = resources.getText(R.string.cashbackList_title)
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
     }

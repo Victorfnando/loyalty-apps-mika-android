@@ -132,7 +132,7 @@ class ContactUsFragment : BaseFragment() {
     private fun bindToolbar() {
         (activity as AppCompatActivity).run {
             setSupportActionBar(binding?.toolbarLayout?.toolbar)
-            supportActionBar?.setTitle(R.string.contactUs_screen_title)
+            supportActionBar?.setTitle(R.string.contactUs_title)
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
     }

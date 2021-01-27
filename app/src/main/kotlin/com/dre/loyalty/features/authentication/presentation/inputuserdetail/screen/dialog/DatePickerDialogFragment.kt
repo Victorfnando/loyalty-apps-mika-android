@@ -5,7 +5,7 @@
  * github: https://github.com/oandrz
  */
 
-package com.dre.loyalty.features.userdetailform.presentation.dialog
+package com.dre.loyalty.features.authentication.presentation.inputuserdetail.screen.dialog
 
 import android.app.DatePickerDialog
 import android.app.Dialog

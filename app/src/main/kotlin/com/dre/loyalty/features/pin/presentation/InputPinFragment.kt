@@ -59,7 +59,7 @@ class InputPinFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         bindToolbar()
         binding?.tvForgotpinLabel?.text = HtmlCompat.fromHtml(
-           getString(R.string.pin_screen_label_forgotpin),
+           getString(R.string.pin_label_forgotPin),
            HtmlCompat.FROM_HTML_MODE_LEGACY
         )
         bindInputPin()

@@ -35,7 +35,7 @@ import com.dre.loyalty.features.movies.MovieDetailsFragment
 import com.dre.loyalty.features.movies.MoviesFragment
 import com.dre.loyalty.features.news.presentation.detail.NewsDetailFragment
 import com.dre.loyalty.features.news.presentation.list.NewsListFragment
-import com.dre.loyalty.features.otp.OtpFragment
+import com.dre.loyalty.features.authentication.presentation.otp.screen.OtpFragment
 import com.dre.loyalty.features.authentication.presentation.inputpassword.screen.InputPasswordFragment
 import com.dre.loyalty.features.pin.presentation.InputPinFragment
 import com.dre.loyalty.features.profile.presentation.profile.screen.ProfileFragment
@@ -43,7 +43,7 @@ import com.dre.loyalty.features.authentication.presentation.resetpassword.screen
 import com.dre.loyalty.features.splash.presentation.SplashScreenActivity
 import com.dre.loyalty.features.authentication.presentation.updatepassword.screen.UpdatePasswordFragment
 import com.dre.loyalty.features.invoice.presentation.upload.screen.UploadInvoiceFragment
-import com.dre.loyalty.features.userdetailform.presentation.UserDetailFormFragment
+import com.dre.loyalty.features.authentication.presentation.inputuserdetail.screen.UserDetailFormFragment
 import dagger.Component
 import javax.inject.Singleton
 

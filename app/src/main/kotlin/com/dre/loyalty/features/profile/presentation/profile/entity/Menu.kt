@@ -15,9 +15,9 @@ enum class Menu(
     @DrawableRes val menuImage: Int,
     @StringRes val text: Int
 ) {
-    CHANGE_PROFILE(R.drawable.ic_person, R.string.profile_screen_menu_person),
-    CHANGE_PASSWORD(R.drawable.ic_lock, R.string.profile_screen_menu_lock),
-    FAQ(R.drawable.ic_question, R.string.profile_screen_menu_question),
-    CONTACT(R.drawable.ic_contact, R.string.profile_screen_menu_contact),
-    TNC(R.drawable.ic_tnc, R.string.profile_screen_menu_tnc)
+    CHANGE_PROFILE(R.drawable.ic_person, R.string.profile_menu_person),
+    CHANGE_PASSWORD(R.drawable.ic_lock, R.string.profile_menu_lock),
+    FAQ(R.drawable.ic_question, R.string.profile_menu_question),
+    CONTACT(R.drawable.ic_contact, R.string.profile_menu_contact),
+    TNC(R.drawable.ic_tnc, R.string.profile_menu_tnc)
 }

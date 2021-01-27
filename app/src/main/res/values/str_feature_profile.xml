@@ -7,14 +7,14 @@
   -->
 
 <resources>
-    <string name="profile_screen_menu_person">Ubah Profil</string>
-    <string name="profile_screen_menu_lock">Ubah Kata Sandi</string>
-    <string name="profile_screen_menu_question">Pertanyaan yang Sering Diajukan</string>
-    <string name="profile_screen_menu_contact">Kontak Kami</string>
-    <string name="profile_screen_menu_tnc">Syarat dan Ketentuan</string>
-    <string name="profile_screen_menu_logout">Keluar</string>
-    <string name="profile_screen_label_account">Akun</string>
-    <string name="profile_screen_label_about">Tentang</string>
+    <string name="profile_menu_person">Ubah Profil</string>
+    <string name="profile_menu_lock">Ubah Kata Sandi</string>
+    <string name="profile_menu_question">Pertanyaan yang Sering Diajukan</string>
+    <string name="profile_menu_contact">Kontak Kami</string>
+    <string name="profile_menu_tnc">Syarat dan Ketentuan</string>
+    <string name="profile_menu_logout">Keluar</string>
+    <string name="profile_label_account">Akun</string>
+    <string name="profile_label_about">Tentang</string>
 
     <string name="profile_sheet_title_photo">Pilih Foto Profil</string>
     <string name="profile_sheet_label_camera">Buka Kamera</string>

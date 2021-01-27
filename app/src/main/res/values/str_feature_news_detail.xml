@@ -7,5 +7,5 @@
   -->
 
 <resources>
-    <string name="detail_screen_label_info">Informasi terkait</string>
+    <string name="detail_label_info">Informasi terkait</string>
 </resources>

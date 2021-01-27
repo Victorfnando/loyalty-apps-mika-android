@@ -1,5 +1,7 @@
 package com.dre.loyalty.core.di.module
 
+import com.dre.loyalty.features.authentication.data.repository.datasource.AuthenticationCloudDataSource
+import com.dre.loyalty.features.authentication.data.repository.datasource.AuthenticationCloudDataSourceContract
 import com.dre.loyalty.features.faq.data.repository.datasource.FaqCloudDataSource
 import com.dre.loyalty.features.faq.data.repository.datasource.FaqCloudDataSourceContract
 import com.dre.loyalty.features.home.data.repository.datasource.cloud.HomeCloudDataSource
@@ -42,4 +44,8 @@ abstract class DataSourceModule {
     @Binds
     @Singleton
     abstract fun provideInvoiceCloudDataSource(dataSource: InvoiceCloudDataSource): InvoiceCloudDataSourceContract
+
+    @Binds
+    @Singleton
+    abstract fun provideAuthCloudDataSource(dataSource: AuthenticationCloudDataSource): AuthenticationCloudDataSourceContract
 }

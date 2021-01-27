@@ -1,11 +1,14 @@
 /*
- * Created by Andreas Oen on 12/25/20 12:14 PM
- * Copyright (c) 2020 . All rights reserved.
- * Last modified 12/25/20 12:14 PM
- * github: https://github.com/oandrz
+ *
+ * Created by Andreas on 1/27/21 2:00 PM
+ * Copyright (c) 2021 . All rights reserved.
+ * Last modified 1/27/21 1:31 PM
+ * Github Link: https://github.com/oandrz
+ * Email: oentoro.andreas@gmail.com
+ *
  */
 
-package com.dre.loyalty.features.userdetailform.presentation
+package com.dre.loyalty.features.authentication.presentation.inputuserdetail.screen
 
 import android.os.Bundle
 import android.text.Editable
@@ -24,14 +27,14 @@ import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.core.util.enumtype.ConfirmationSheetType
 import com.dre.loyalty.databinding.FragmentUserDetailFormBinding
 import com.dre.loyalty.features.authentication.presentation.inputpassword.enumtype.InputPasswordType
-import com.dre.loyalty.features.userdetailform.presentation.dialog.DatePickerDialogFragment
-import com.dre.loyalty.features.userdetailform.presentation.entity.EmailInputState
-import com.dre.loyalty.features.userdetailform.presentation.entity.FirstNameInputState
-import com.dre.loyalty.features.userdetailform.presentation.entity.KTPInputState
-import com.dre.loyalty.features.userdetailform.presentation.entity.LastNameInputState
-import com.dre.loyalty.features.userdetailform.presentation.entity.RegisterButtonState
+import com.dre.loyalty.features.authentication.presentation.inputuserdetail.screen.dialog.DatePickerDialogFragment
+import com.dre.loyalty.features.authentication.presentation.inputuserdetail.entity.EmailInputState
+import com.dre.loyalty.features.authentication.presentation.inputuserdetail.entity.FirstNameInputState
+import com.dre.loyalty.features.authentication.presentation.inputuserdetail.entity.KTPInputState
+import com.dre.loyalty.features.authentication.presentation.inputuserdetail.entity.LastNameInputState
+import com.dre.loyalty.features.authentication.presentation.inputuserdetail.entity.RegisterButtonState
 import com.dre.loyalty.core.view.sheet.ConfirmationSheetModal
-import com.dre.loyalty.features.userdetailform.presentation.sheet.GenderSheetModal
+import com.dre.loyalty.features.authentication.presentation.inputuserdetail.screen.sheet.GenderSheetModal
 import javax.inject.Inject
 
 class UserDetailFormFragment : BaseFragment() {
@@ -94,7 +97,7 @@ class UserDetailFormFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         bindToolbar()
         binding?.tvFormTnc?.text = HtmlCompat.fromHtml(
-            getString(R.string.userdetailform_screen_label_tnc),
+            getString(R.string.userDetail_label_tnc),
             HtmlCompat.FROM_HTML_MODE_LEGACY
         )
         binding?.etFormFirstname?.editText?.addTextChangedListener(firstNameWatcher)

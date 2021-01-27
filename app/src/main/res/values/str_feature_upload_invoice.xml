@@ -7,17 +7,17 @@
   -->
 
 <resources>
-    <string name="upload_invoice_screen_title">Lengkapi Data Kwitansi</string>
-    <string name="upload_invoice_screen_label_branch">Cabang Mitra Keluarga</string>
-    <string name="upload_invoice_screen_label_transaction_date">Tanggal Transaksi (sesuai kwitansi)</string>
-    <string name="upload_invoice_screen_label_total_amount">Jumlah Pembayaran</string>
-    <string name="upload_invoice_screen_label_updatePhoto">Ubah foto</string>
-    <string name="upload_invoice_screen_hint_branch">Pilih cabang Mitra Keluarga</string>
-    <string name="upload_invoice_screen_hint_transaction_date">Pilih tanggal transaksi</string>
-    <string name="upload_invoice_screen_hint_total_amount">Contoh: 200.000</string>
-    <string name="upload_invoice_screen_label_tnc"><![CDATA[Dengan menambahkan kwitansi, saya menyetujui <font color=\'blue\'> syarat dan ketentuan </font>dari Altea Hospital Loyalty.]]></string>
-    <string name="upload_invoice_screen_btn_next">Selanjutnya</string>
+    <string name="uploadInvoice_title">Lengkapi Data Kwitansi</string>
+    <string name="uploadInvoice_label_branch">Cabang Mitra Keluarga</string>
+    <string name="uploadInvoice_label_transactionDate">Tanggal Transaksi (sesuai kwitansi)</string>
+    <string name="uploadInvoice_label_totalAmount">Jumlah Pembayaran</string>
+    <string name="uploadInvoice_label_updatePhoto">Ubah foto</string>
+    <string name="uploadInvoice_hint_branch">Pilih cabang Mitra Keluarga</string>
+    <string name="uploadInvoice_hint_transactionDate">Pilih tanggal transaksi</string>
+    <string name="uploadInvoice_hint_totalAmount">Contoh: 200.000</string>
+    <string name="uploadInvoiceScreen_label_tnc"><![CDATA[Dengan menambahkan kwitansi, saya menyetujui <font color=\'blue\'> syarat dan ketentuan </font>dari Altea Hospital Loyalty.]]></string>
+    <string name="uploadInvoice_button_next">Selanjutnya</string>
 
-    <string name="upload_invoice_screen_sheet_title">Pilih cabang Mitra Keluarga</string>
-    <string name="upload_invoice_screen_sheet_hint">Cari disini</string>
+    <string name="uploadInvoice_sheet_title">Pilih cabang Mitra Keluarga</string>
+    <string name="uploadInvoice_sheet_hint">Cari disini</string>
 </resources>

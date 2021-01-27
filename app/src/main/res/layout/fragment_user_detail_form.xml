@@ -27,7 +27,7 @@
                 style="@style/Heading5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/userdetailform_screen_title" />
+                android:text="@string/userDetail_title" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_form_desc"
@@ -36,45 +36,45 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_12dp"
-                android:text="@string/userdetailform_screen_desc" />
+                android:text="@string/userDetail_label_desc" />
 
             <com.dre.loyalty.core.view.PrefixEditTextWithLabel
                 android:id="@+id/et_form_firstname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_24dp"
-                android:hint="@string/userdetailform_screen_hint_firstname"
+                android:hint="@string/userDetail_hint_firstName"
                 android:inputType="text"
-                app:fieldLabel="@string/userdetailform_screen_label_firstname" />
+                app:fieldLabel="@string/userDetail_label_firstName" />
 
             <com.dre.loyalty.core.view.PrefixEditTextWithLabel
                 android:id="@+id/et_form_lastname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_20dp"
-                android:hint="@string/userdetailform_screen_hint_lastname"
+                android:hint="@string/userDetail_hint_lastName"
                 android:inputType="text"
-                app:fieldLabel="@string/userdetailform_screen_label_lastname" />
+                app:fieldLabel="@string/userDetail_label_lastName" />
 
             <com.dre.loyalty.core.view.PrefixEditTextWithLabel
                 android:id="@+id/et_form_ktp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_20dp"
-                android:hint="@string/userdetailform_screen_hint_ktpnumber"
+                android:hint="@string/userDetail_hint_ktpNumber"
                 android:inputType="number"
                 android:maxLength="13"
-                app:fieldLabel="@string/userdetailform_screen_label_ktpnumber" />
+                app:fieldLabel="@string/userDetail_label_ktpNumber" />
 
             <com.dre.loyalty.core.view.PrefixEditTextWithLabel
                 android:id="@+id/et_form_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_20dp"
-                android:hint="@string/userdetailform_screen_hint_email"
+                android:hint="@string/userDetail_hint_email"
                 android:inputType="textEmailAddress"
-                app:fieldLabel="@string/userdetailform_screen_label_email"
-                app:label="@string/userdetailform_screen_label_email" />
+                app:fieldLabel="@string/userDetail_label_email"
+                app:label="@string/userDetail_label_email" />
 
             <com.dre.loyalty.core.view.PrefixEditTextWithLabel
                 android:id="@+id/et_form_gender"
@@ -83,8 +83,8 @@
                 android:layout_marginTop="@dimen/space_20dp"
                 android:drawableEnd="@drawable/ic_expand"
                 android:inputType="none"
-                android:text="@string/userdetailform_screen_hint_gender"
-                app:fieldLabel="@string/userdetailform_screen_label_gender" />
+                android:text="@string/userDetail_hint_gender"
+                app:fieldLabel="@string/userDetail_label_gender" />
 
             <com.dre.loyalty.core.view.PrefixEditTextWithLabel
                 android:id="@+id/et_form_dob"
@@ -93,8 +93,8 @@
                 android:layout_marginTop="@dimen/space_20dp"
                 android:drawableEnd="@drawable/ic_calendar"
                 android:inputType="none"
-                android:text="@string/userdetailform_screen_hint_dob"
-                app:fieldLabel="@string/userdetailform_screen_label_dob" />
+                android:text="@string/userDetail_hint_dob"
+                app:fieldLabel="@string/userDetail_label_dob" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_form_tnc"
@@ -109,7 +109,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_20dp"
-                android:text="@string/userdetailform_screen_btn_register" />
+                android:text="@string/userDetail_button_register" />
         </androidx.appcompat.widget.LinearLayoutCompat>
     </ScrollView>
 

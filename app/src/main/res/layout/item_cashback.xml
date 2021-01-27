@@ -42,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space_12dp"
-            android:text="@string/home_screen_item_cashback_label_seeInvoice"
+            android:text="@string/home_item_cashBack_label_seeInvoice"
             android:textColor="@color/blue"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

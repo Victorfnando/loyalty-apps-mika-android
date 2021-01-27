@@ -36,7 +36,7 @@ import com.dre.loyalty.features.invoice.presentation.upload.entity.HospitalBranc
 import com.dre.loyalty.features.invoice.presentation.upload.entity.TotalAmountState
 import com.dre.loyalty.features.invoice.presentation.upload.entity.UploadButtonState
 import com.dre.loyalty.features.invoice.presentation.upload.screen.sheet.BranchListSheetModal
-import com.dre.loyalty.features.userdetailform.presentation.dialog.DatePickerDialogFragment
+import com.dre.loyalty.features.authentication.presentation.inputuserdetail.screen.dialog.DatePickerDialogFragment
 import javax.inject.Inject
 
 class UploadInvoiceFragment : BaseFragment() {
@@ -148,7 +148,7 @@ class UploadInvoiceFragment : BaseFragment() {
 
     private fun bindTvTnc() {
         binding?.stickyButton?.tvFooterText = HtmlCompat.fromHtml(
-            getString(R.string.upload_invoice_screen_label_tnc),
+            getString(R.string.uploadInvoiceScreen_label_tnc),
             HtmlCompat.FROM_HTML_MODE_LEGACY
         )
     }

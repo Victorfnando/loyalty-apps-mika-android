@@ -1,5 +1,7 @@
 package com.dre.loyalty.core.di.module
 
+import com.dre.loyalty.features.authentication.data.repository.AuthenticationRepository
+import com.dre.loyalty.features.authentication.domain.AuthenticationRepositoryContract
 import com.dre.loyalty.features.faq.data.repository.FaqRepository
 import com.dre.loyalty.features.faq.domain.FaqRepositoryContract
 import com.dre.loyalty.features.home.data.repository.HomeRepository
@@ -35,4 +37,8 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun provideInvoiceRepository(repository: InvoiceRepository): InvoiceRepositoryContract
+
+    @Binds
+    @Singleton
+    abstract fun provideAuthRepository(repository: AuthenticationRepository): AuthenticationRepositoryContract
 }

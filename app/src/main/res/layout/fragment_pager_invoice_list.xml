@@ -89,7 +89,7 @@
         android:layout_marginStart="@dimen/space_16dp"
         android:layout_marginEnd="@dimen/space_16dp"
         android:gravity="center_horizontal"
-        android:text="@string/hospitalList_screen_label_empty"
+        android:text="@string/hospitalList_label_empty"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

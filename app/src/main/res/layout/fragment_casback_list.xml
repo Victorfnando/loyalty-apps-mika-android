@@ -41,7 +41,7 @@
         android:layout_marginStart="@dimen/space_32dp"
         android:layout_marginEnd="@dimen/space_32dp"
         android:gravity="center"
-        android:text="@string/cashbacklist_screen_empty_label"
+        android:text="@string/cashbackList_label_empty"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,7 +53,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/space_16dp"
-        android:text="@string/cashbacklist_screen_empty_button"
+        android:text="@string/cashbackList_button_empty"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_empty_upload_label" />

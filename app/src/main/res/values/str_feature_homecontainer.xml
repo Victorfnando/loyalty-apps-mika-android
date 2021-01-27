@@ -7,9 +7,9 @@
   -->
 
 <resources>
-    <string name="homecontainer_screen_menu_home">Home</string>
-    <string name="homecontainer_screen_menu_invoice">Kwitansi</string>
-    <string name="homecontainer_screen_menu_information">Informasi</string>
-    <string name="homecontainer_screen_menu_hospital">Rumah Sakit</string>
-    <string name="homecontainer_screen_menu_profile">Profil</string>
+    <string name="homeContainer_menu_home">Home</string>
+    <string name="homeContainer_menu_invoice">Kwitansi</string>
+    <string name="homeContainer_menu_information">Informasi</string>
+    <string name="homeContainer_menu_hospital">Rumah Sakit</string>
+    <string name="homeContainer_menu_profile">Profil</string>
 </resources>

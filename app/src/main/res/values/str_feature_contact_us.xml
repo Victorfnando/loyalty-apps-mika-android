@@ -7,15 +7,15 @@
   -->
 
 <resources>
-    <string name="contactUs_screen_title">Kontak Kami</string>
-    <string name="contactUs_screen_label_category">Kategori Pesan</string>
-    <string name="contactUs_screen_hint_category">Kategori Pesan</string>
-    <string name="contactUs_screen_label_message">Pesan</string>
-    <string name="contactUs_screen_hint_message">Masukkan isi pesan</string>
-    <string name="contactUs_screen_button_send">Kirim Pesan</string>
-    <string name="contactUs_screen_button_contact">Telepon</string>
-    <string name="contactUs_screen_label_resolutionCenter">Pusat Informasi</string>
-    <string name="contactUs_screen_label_resolutionCenterPhone">021–9999-9999</string>
+    <string name="contactUs_title">Kontak Kami</string>
+    <string name="contactUs_label_category">Kategori Pesan</string>
+    <string name="contactUs_hint_category">Kategori Pesan</string>
+    <string name="contactUs_label_message">Pesan</string>
+    <string name="contactUs_hint_message">Masukkan isi pesan</string>
+    <string name="contactUs_button_send">Kirim Pesan</string>
+    <string name="contactUs_button_contact">Telepon</string>
+    <string name="contactUs_label_resolutionCenter">Pusat Informasi</string>
+    <string name="contactUs_label_resolutionCenterPhone">021–9999-9999</string>
 
     <string name="contactUs_sheet_label_title">Pesan berhasil dikirim !</string>
     <string name="contactUs_sheet_label_description">Tunggu ya, admin akan segera memberikan balasan!</string>

@@ -34,7 +34,7 @@ import com.dre.loyalty.features.authentication.presentation.login.data.Authentic
 import com.dre.loyalty.features.authentication.presentation.login.presentation.ui.LoginActivity
 import com.dre.loyalty.features.news.presentation.detail.NewsDetailActivity
 import com.dre.loyalty.features.news.presentation.list.NewsListActivity
-import com.dre.loyalty.features.otp.OtpActivity
+import com.dre.loyalty.features.authentication.presentation.otp.screen.OtpActivity
 import com.dre.loyalty.features.authentication.presentation.inputpassword.enumtype.InputPasswordType
 import com.dre.loyalty.features.authentication.presentation.inputpassword.screen.InputPasswordActivity
 import com.dre.loyalty.features.photoview.PhotoViewActivity
@@ -44,7 +44,7 @@ import com.dre.loyalty.features.authentication.presentation.resetpassword.screen
 import com.dre.loyalty.features.splash.presentation.SplashScreenActivity
 import com.dre.loyalty.features.authentication.presentation.updatepassword.screen.UpdatePasswordActivity
 import com.dre.loyalty.features.invoice.presentation.upload.screen.UploadInvoiceActivity
-import com.dre.loyalty.features.userdetailform.presentation.UserDetailFormActivity
+import com.dre.loyalty.features.authentication.presentation.inputuserdetail.screen.UserDetailFormActivity
 import javax.inject.Inject
 import javax.inject.Singleton
 

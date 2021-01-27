@@ -1,11 +1,14 @@
 /*
- *  Created by Andreas Oentoro on 12/20/20 4:56 PM
- *  Copyright (c) 2020 . All rights reserved.
- *  Last modified 12/20/20 4:56 PM
- *  Github Profile: https://github.com/oandrz
+ *
+ * Created by Andreas on 1/27/21 1:47 PM
+ * Copyright (c) 2021 . All rights reserved.
+ * Last modified 1/21/21 11:07 AM
+ * Github Link: https://github.com/oandrz
+ * Email: oentoro.andreas@gmail.com
+ *
  */
 
-package com.dre.loyalty.features.otp
+package com.dre.loyalty.features.authentication.presentation.otp.screen
 
 import android.content.Context
 import android.content.Intent

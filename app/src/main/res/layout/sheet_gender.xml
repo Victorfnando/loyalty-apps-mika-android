@@ -13,7 +13,7 @@
         android:paddingStart="@dimen/space_16dp"
         android:paddingEnd="@dimen/space_16dp"
         android:paddingTop="@dimen/space_28dp"
-        android:text="@string/userdetailform_screen_sheet_gender_title" />
+        android:text="@string/userDetail_sheet_gender_title" />
 
     <View
         style="@style/Divider"
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/space_16dp"
             android:layout_weight="0.9"
-            android:text="@string/userdetailform_screen_sheet_gender_label_man" />
+            android:text="@string/userDetail_sheet_gender_label_man" />
 
         <androidx.appcompat.widget.AppCompatRadioButton
             android:id="@+id/radio_man"
@@ -63,7 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/space_16dp"
             android:layout_weight="0.9"
-            android:text="@string/userdetailform_screen_sheet_gender_label_woman" />
+            android:text="@string/userDetail_sheet_gender_label_woman" />
 
         <androidx.appcompat.widget.AppCompatRadioButton
             android:id="@+id/radio_woman"

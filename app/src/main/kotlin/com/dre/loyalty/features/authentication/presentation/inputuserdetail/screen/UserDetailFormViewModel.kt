@@ -5,7 +5,7 @@
  * github: https://github.com/oandrz
  */
 
-package com.dre.loyalty.features.userdetailform.presentation
+package com.dre.loyalty.features.authentication.presentation.inputuserdetail.screen
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
@@ -13,11 +13,11 @@ import androidx.lifecycle.MutableLiveData
 import com.dre.loyalty.core.functional.Event
 import com.dre.loyalty.core.platform.BaseViewModel
 import com.dre.loyalty.core.util.validator.type.ValidationType
-import com.dre.loyalty.features.userdetailform.presentation.entity.EmailInputState
-import com.dre.loyalty.features.userdetailform.presentation.entity.FirstNameInputState
-import com.dre.loyalty.features.userdetailform.presentation.entity.KTPInputState
-import com.dre.loyalty.features.userdetailform.presentation.entity.LastNameInputState
-import com.dre.loyalty.features.userdetailform.presentation.entity.RegisterButtonState
+import com.dre.loyalty.features.authentication.presentation.inputuserdetail.entity.EmailInputState
+import com.dre.loyalty.features.authentication.presentation.inputuserdetail.entity.FirstNameInputState
+import com.dre.loyalty.features.authentication.presentation.inputuserdetail.entity.KTPInputState
+import com.dre.loyalty.features.authentication.presentation.inputuserdetail.entity.LastNameInputState
+import com.dre.loyalty.features.authentication.presentation.inputuserdetail.entity.RegisterButtonState
 import javax.inject.Inject
 
 class UserDetailFormViewModel @Inject constructor() : BaseViewModel() {

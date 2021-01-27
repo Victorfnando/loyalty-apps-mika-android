@@ -5,10 +5,10 @@
  * github: https://github.com/oandrz
  */
 
-package com.dre.loyalty.features.userdetailform.presentation.entity
+package com.dre.loyalty.features.authentication.presentation.inputuserdetail.entity
 
 import androidx.annotation.StringRes
 
-data class FirstNameInputState(
+data class LastNameInputState(
     @StringRes val error: Int? = null
 )

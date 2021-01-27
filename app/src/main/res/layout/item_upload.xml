@@ -27,14 +27,14 @@
         app:layout_constraintEnd_toStartOf="@id/btn_upload_invoice"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:text="@string/home_screen_item_upload_label" />
+        android:text="@string/home_item_label_upload" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_upload_invoice"
         style="@style/NormalButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/home_screen_item_cashback_btn_upload"
+        android:text="@string/home_item_cashBack_button_upload"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

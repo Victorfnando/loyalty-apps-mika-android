@@ -30,7 +30,7 @@ class LogoutMenuItem(private val listener: () -> Unit) : AbstractBindingItem<Ite
     override fun bindView(binding: ItemMenuProfileBinding, payloads: List<Any>) {
         super.bindView(binding, payloads)
         binding.run {
-            tvMenu.setText(R.string.profile_screen_menu_logout)
+            tvMenu.setText(R.string.profile_menu_logout)
             tvMenu.setTextColor(Color.RED)
             ivChevron.visibility = View.GONE
             ivMenu.setImageResource(R.drawable.ic_logout)

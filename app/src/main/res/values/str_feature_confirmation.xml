@@ -7,8 +7,8 @@
   -->
 
 <resources>
-    <string name="confirmation_screen_title">Apakah kamu yakin data yang dimasukkan sudah benar?</string>
-    <string name="confirmation_screen_desc">Jika ada kesalahan, kamu harus menghubungi customer service udah mengubahnya.</string>
-    <string name="confirmation_screen_btn_change">Ubah data</string>
-    <string name="confirmation_screen_btn_confirm">Yakin</string>
+    <string name="confirmation_title">Apakah kamu yakin data yang dimasukkan sudah benar?</string>
+    <string name="confirmation_desc">Jika ada kesalahan, kamu harus menghubungi customer service udah mengubahnya.</string>
+    <string name="confirmation_button_change">Ubah data</string>
+    <string name="confirmation_button_confirm">Yakin</string>
 </resources>

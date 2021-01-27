@@ -7,16 +7,16 @@
   -->
 
 <resources>
-    <string name="home_screen_title">Selamat Datang</string>
-    <string name="home_screen_label_medicalnumber">Nomor rekan medik saya</string>
-    <string name="home_screen_section_label_seeall">Lihat semua</string>
+    <string name="home_title">Selamat Datang</string>
+    <string name="home_label_medicalNumber">Nomor rekan medik saya</string>
+    <string name="home_label_section_seeAll">Lihat semua</string>
 
-    <string name="home_screen_item_cashback_label_invoiceId">ID Kwitansi</string>
-    <string name="home_screen_item_cashback_label_seeInvoice">Lihat detail kwitansi</string>
-    <string name="home_screen_item_cashback_format_seeInvoice">Dikirim ke: %s</string>
+    <string name="home_item_cashBack_label_invoiceId">ID Kwitansi</string>
+    <string name="home_item_cashBack_label_seeInvoice">Lihat detail kwitansi</string>
+    <string name="home_item_cashBack_format_seeInvoice">Dikirim ke: %s</string>
 
-    <string name="home_screen_item_cashback_btn_upload">Unggah kwitansi</string>
-    <string name="home_screen_item_upload_label">Unggah kwitansi-mu untuk mendapatkan cashback</string>
+    <string name="home_item_cashBack_button_upload">Unggah kwitansi</string>
+    <string name="home_item_label_upload">Unggah kwitansi-mu untuk mendapatkan cashback</string>
 
     <string name="home_label_section_cashBack">Cashback diterima</string>
     <string name="home_label_section_information">Informasi</string>

@@ -5,7 +5,7 @@
  * github: https://github.com/oandrz
  */
 
-package com.dre.loyalty.features.userdetailform.presentation.sheet
+package com.dre.loyalty.features.authentication.presentation.inputuserdetail.screen.sheet
 
 import android.os.Bundle
 import android.view.LayoutInflater

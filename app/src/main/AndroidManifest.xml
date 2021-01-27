@@ -39,7 +39,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
 
     <activity
         android:name=".features.authentication.presentation.register.screen.RegisterActivity"
-        android:label="@string/register_screen_title">
+        android:label="@string/register_title">
     </activity>
 
     <activity
@@ -49,7 +49,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
 
     <activity
         android:name="com.dre.loyalty.features.pin.presentation.InputPinActivity"
-        android:label="@string/pin_screen_title">
+        android:label="@string/pin_title">
     </activity>
 
     <activity
@@ -67,11 +67,11 @@ xmlns:android="http://schemas.android.com/apk/res/android">
     </activity>
 
   <activity
-      android:name=".features.otp.OtpActivity">
+      android:name=".features.authentication.presentation.otp.screen.OtpActivity">
   </activity>
 
   <activity
-      android:name=".features.userdetailform.presentation.UserDetailFormActivity">
+      android:name=".features.authentication.presentation.inputuserdetail.screen.UserDetailFormActivity">
   </activity>
 
   <activity

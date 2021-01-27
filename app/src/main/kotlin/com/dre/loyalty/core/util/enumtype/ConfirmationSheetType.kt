@@ -13,10 +13,10 @@ enum class ConfirmationSheetType(
 ) {
     USER_DETAIL_FORM_CONFIRM(
         R.drawable.ic_img_confirmation_detail,
-        R.string.confirmation_screen_title,
-        R.string.confirmation_screen_desc,
-        R.string.confirmation_screen_btn_confirm,
-        R.string.confirmation_screen_btn_change
+        R.string.confirmation_title,
+        R.string.confirmation_desc,
+        R.string.confirmation_button_confirm,
+        R.string.confirmation_button_change
     ),
     INPUT_PASSWORD_CREATE_SUCCESS_SHEET(
         R.drawable.ic_img_success_register,

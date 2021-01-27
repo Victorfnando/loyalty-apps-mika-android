@@ -39,8 +39,8 @@
                 android:layout_height="wrap_content"
                 android:drawableEnd="@drawable/ic_expand"
                 android:inputType="none"
-                android:text="@string/contactUs_screen_hint_category"
-                app:fieldLabel="@string/contactUs_screen_label_category"
+                android:text="@string/contactUs_hint_category"
+                app:fieldLabel="@string/contactUs_label_category"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_20dp"
                 android:layout_marginBottom="@dimen/space_8dp"
-                android:text="@string/contactUs_screen_label_message"
+                android:text="@string/contactUs_label_message"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/et_category" />
@@ -63,7 +63,7 @@
                 android:layout_height="@dimen/et_description_height"
                 android:background="@drawable/et_description_border"
                 android:gravity="top"
-                android:hint="@string/contactUs_screen_hint_message"
+                android:hint="@string/contactUs_hint_message"
                 android:inputType="textMultiLine"
                 android:padding="@dimen/space_16dp"
                 android:scrollbars="vertical"
@@ -88,7 +88,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_20dp"
-                android:text="@string/contactUs_screen_button_send"
+                android:text="@string/contactUs_button_send"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_message_error" />
@@ -113,7 +113,7 @@
             style="@style/Heading7"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/contactUs_screen_label_resolutionCenter"
+            android:text="@string/contactUs_label_resolutionCenter"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -140,7 +140,7 @@
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/ic_phone"
             android:drawablePadding="@dimen/space_8dp"
-            android:text="@string/contactUs_screen_button_contact"
+            android:text="@string/contactUs_button_contact"
             app:layout_constraintBottom_toBottomOf="@id/tv_number"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/tv_number" />

@@ -193,13 +193,13 @@ class ProfileFragment : BaseFragment() {
     private fun populateMenuSection() {
         menuSectionAdapter.add(
             ProfileMenuSection(
-                getString(R.string.profile_screen_label_account),
+                getString(R.string.profile_label_account),
                 listOf(accountItemSection)
             ).also {
                 it.dividerItemDecoration = VerticalDividerDecoration(requireContext(), RecyclerView.VERTICAL)
             },
             ProfileMenuSection(
-                getString(R.string.profile_screen_label_about),
+                getString(R.string.profile_label_about),
                 listOf(aboutItemSection)
             ).also {
                 it.dividerItemDecoration = VerticalDividerDecoration(requireContext(), RecyclerView.VERTICAL)

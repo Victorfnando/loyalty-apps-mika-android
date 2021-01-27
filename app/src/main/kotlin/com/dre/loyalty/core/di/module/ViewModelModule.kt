@@ -42,7 +42,7 @@ import com.dre.loyalty.features.authentication.presentation.register.screen.Regi
 import com.dre.loyalty.features.authentication.presentation.resetpassword.screen.ResetPasswordViewModel
 import com.dre.loyalty.features.authentication.presentation.updatepassword.screen.UpdatePasswordViewModel
 import com.dre.loyalty.features.invoice.presentation.upload.screen.UploadInvoiceViewModel
-import com.dre.loyalty.features.userdetailform.presentation.UserDetailFormViewModel
+import com.dre.loyalty.features.authentication.presentation.inputuserdetail.screen.UserDetailFormViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

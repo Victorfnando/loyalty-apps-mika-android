@@ -5,7 +5,7 @@
  * github: https://github.com/oandrz
  */
 
-package com.dre.loyalty.features.ewallet.presentation.sheet
+package com.dre.loyalty.features.ewallet.presentation.screen.sheet
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -19,7 +19,7 @@ import com.andrefrsousa.superbottomsheet.SuperBottomSheetFragment
 import com.dre.loyalty.R
 import com.dre.loyalty.databinding.SheetEwalletBinding
 import com.dre.loyalty.features.ewallet.presentation.entity.Wallet
-import com.dre.loyalty.features.ewallet.presentation.item.WalletSelectorItem
+import com.dre.loyalty.features.ewallet.presentation.screen.item.WalletSelectorItem
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 

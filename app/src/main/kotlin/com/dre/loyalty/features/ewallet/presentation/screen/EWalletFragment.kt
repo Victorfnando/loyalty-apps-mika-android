@@ -23,7 +23,7 @@ import com.dre.loyalty.features.ewallet.presentation.entity.Wallet
 import com.dre.loyalty.features.ewallet.presentation.entity.WalletInputState
 import com.dre.loyalty.features.ewallet.presentation.entity.WalletPhoneInputState
 import com.dre.loyalty.features.ewallet.presentation.entity.WalletUploadButtonState
-import com.dre.loyalty.features.ewallet.presentation.sheet.EWalletSheetModal
+import com.dre.loyalty.features.ewallet.presentation.screen.sheet.EWalletSheetModal
 
 class EWalletFragment : BaseFragment() {
 

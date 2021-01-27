@@ -5,7 +5,7 @@
  * github: https://github.com/oandrz
  */
 
-package com.dre.loyalty.features.userdetailform.presentation.entity
+package com.dre.loyalty.features.authentication.presentation.inputuserdetail.entity
 
 class RegisterButtonState(
     val isEnabled: Boolean
