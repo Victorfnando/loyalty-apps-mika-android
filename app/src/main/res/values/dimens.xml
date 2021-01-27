@@ -71,4 +71,10 @@
     <!--Profile-->
     <dimen name="profile_imageSelector_sheet_height">198dp</dimen>
 
+    <!--Auth Selector-->
+    <dimen name="brand_width">106dp</dimen>
+    <dimen name="brand_height">19dp</dimen>
+
+    <!--Home-->
+    <dimen name="logo_width">120dp</dimen>
 </resources>
