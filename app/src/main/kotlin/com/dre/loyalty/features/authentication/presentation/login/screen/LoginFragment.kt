@@ -128,7 +128,10 @@ class LoginFragment : BaseFragment() {
             }
             tvFooterText = HtmlCompat.fromHtml(getString(R.string.login_screen_label_reset), HtmlCompat.FROM_HTML_MODE_LEGACY)
             buttonClickListener = {
-                vm.handleLoginButtonClicked()
+                vm.handleLoginButtonClicked(
+                    binding?.etMail?.text.toString(),
+                    binding?.etPass?.text.toString()
+                )
             }
         }
     }

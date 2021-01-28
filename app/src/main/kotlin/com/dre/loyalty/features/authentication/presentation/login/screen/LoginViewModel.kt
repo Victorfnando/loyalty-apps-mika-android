@@ -10,14 +10,18 @@ package com.dre.loyalty.features.authentication.presentation.login.screen
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dre.loyalty.core.functional.Event
+import com.dre.loyalty.core.model.AuthCertificate
 import com.dre.loyalty.core.platform.BaseViewModel
 import com.dre.loyalty.core.util.validator.type.ValidationType
+import com.dre.loyalty.features.authentication.domain.usecase.DoLoginUseCase
 import com.dre.loyalty.features.authentication.presentation.login.entity.LoginButtonState
 import com.dre.loyalty.features.authentication.presentation.login.entity.LoginEmailInputState
 import com.dre.loyalty.features.authentication.presentation.login.entity.LoginPasswordInputState
 import javax.inject.Inject
 
-class LoginViewModel @Inject constructor() : BaseViewModel() {
+class LoginViewModel @Inject constructor(
+    private val doLoginUseCase: DoLoginUseCase
+) : BaseViewModel() {
 
     private val _navigateMain: MutableLiveData<Event<Boolean>> = MutableLiveData()
     val navigateMain: LiveData<Event<Boolean>> = _navigateMain
@@ -72,12 +76,18 @@ class LoginViewModel @Inject constructor() : BaseViewModel() {
         )
     }
 
-    fun handleLoginButtonClicked() {
-        _navigateMain.value = Event(true)
+    fun handleLoginButtonClicked(email: String, password: String) {
+        doLoginUseCase(DoLoginUseCase.Param(email, password)) {
+            it.fold(::handleFailure, ::handleSuccessLogin)
+        }
     }
 
     fun handleTvFooterClicked() {
         _navigateResetPassword.value = Event(true)
+    }
+
+    private fun handleSuccessLogin(certificate: AuthCertificate) {
+        _navigateMain.value = Event(true)
     }
 
     private fun updateButtonState() {
@@ -86,4 +96,5 @@ class LoginViewModel @Inject constructor() : BaseViewModel() {
                     && _loginPasswordInputState.value?.error == null
         )
     }
+
 }

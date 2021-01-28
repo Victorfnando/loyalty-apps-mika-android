@@ -1,9 +1,6 @@
 package com.dre.loyalty.core.di.module
 
-import com.dre.loyalty.core.service.FaqService
-import com.dre.loyalty.core.service.HomeService
-import com.dre.loyalty.core.service.HospitalService
-import com.dre.loyalty.core.service.NewsService
+import com.dre.loyalty.core.service.*
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -33,5 +30,11 @@ class ServiceModule {
     @Singleton
     fun provideNewsService(retrofit: Retrofit): NewsService {
         return retrofit.create(NewsService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideAuthenticationService(retrofit: Retrofit): AuthenticationService {
+        return retrofit.create(AuthenticationService::class.java)
     }
 }

@@ -101,6 +101,12 @@ fun <L, R> Either<L, R>.getOrElse(value: R): R =
         is Either.Right -> b
     }
 
+fun <L, R> Either<L, R>.getOrElseNull(value: R? = null): R? =
+    when (this) {
+        is Either.Left -> value
+        is Either.Right -> b
+    }
+
 /**
  * Left-biased onFailure() FP convention dictates that when this class is Left, it'll perform
  * the onFailure functionality passed as a parameter, but, overall will still return an either

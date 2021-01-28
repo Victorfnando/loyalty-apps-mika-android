@@ -16,7 +16,7 @@ import com.google.gson.annotations.SerializedName
 @Keep
 data class HomeResponse(
     @SerializedName("cards")
-    val cardResponse: List<CardResponse>,
+    val cardResponse: CardResponse,
     @SerializedName("cashback")
     val cashBackResponse: List<CashBackResponse>,
     @SerializedName("news")

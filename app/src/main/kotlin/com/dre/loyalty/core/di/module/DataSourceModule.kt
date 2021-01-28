@@ -1,7 +1,9 @@
 package com.dre.loyalty.core.di.module
 
-import com.dre.loyalty.features.authentication.data.repository.datasource.AuthenticationCloudDataSource
-import com.dre.loyalty.features.authentication.data.repository.datasource.AuthenticationCloudDataSourceContract
+import com.dre.loyalty.features.authentication.data.repository.datasource.cloud.AuthenticationCloudDataSource
+import com.dre.loyalty.features.authentication.data.repository.datasource.cloud.AuthenticationCloudDataSourceContract
+import com.dre.loyalty.features.authentication.data.repository.datasource.local.AuthenticationLocalDataSource
+import com.dre.loyalty.features.authentication.data.repository.datasource.local.AuthenticationLocalDataSourceContract
 import com.dre.loyalty.features.faq.data.repository.datasource.FaqCloudDataSource
 import com.dre.loyalty.features.faq.data.repository.datasource.FaqCloudDataSourceContract
 import com.dre.loyalty.features.home.data.repository.datasource.cloud.HomeCloudDataSource
@@ -48,4 +50,8 @@ abstract class DataSourceModule {
     @Binds
     @Singleton
     abstract fun provideAuthCloudDataSource(dataSource: AuthenticationCloudDataSource): AuthenticationCloudDataSourceContract
+
+    @Binds
+    @Singleton
+    abstract fun provideAuthLocalDataSource(dataSource: AuthenticationLocalDataSource): AuthenticationLocalDataSourceContract
 }

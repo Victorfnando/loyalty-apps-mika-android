@@ -10,5 +10,11 @@
 
 package com.dre.loyalty.features.authentication.domain
 
+import com.dre.loyalty.core.exception.Failure
+import com.dre.loyalty.core.functional.Either
+import com.dre.loyalty.core.model.AuthCertificate
+import com.dre.loyalty.features.authentication.data.entity.request.LoginRequest
+
 interface AuthenticationRepositoryContract {
+    suspend fun login(param: LoginRequest): Either<Failure, AuthCertificate>
 }

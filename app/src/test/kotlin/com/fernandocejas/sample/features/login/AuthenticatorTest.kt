@@ -15,7 +15,6 @@
  */
 package com.fernandocejas.sample.features.login
 
-import com.dre.loyalty.features.authentication.data.repository.Authenticator
 import com.fernandocejas.sample.UnitTest
 import org.amshove.kluent.shouldBe
 import org.junit.Test

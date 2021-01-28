@@ -18,7 +18,6 @@ package com.fernandocejas.sample.core.navigation
 import com.dre.loyalty.core.navigation.Navigator
 import com.dre.loyalty.core.navigation.RouteActivity
 import com.fernandocejas.sample.AndroidTest
-import com.dre.loyalty.features.authentication.data.repository.Authenticator
 import com.dre.loyalty.features.authentication.presentation.login.screen.LoginActivity
 import com.dre.loyalty.features.movies.MoviesActivity
 import com.fernandocejas.sample.shouldNavigateTo

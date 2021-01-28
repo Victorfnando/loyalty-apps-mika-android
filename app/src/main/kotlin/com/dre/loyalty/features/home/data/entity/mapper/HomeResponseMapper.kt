@@ -18,7 +18,7 @@ import javax.inject.Inject
 class HomeResponseMapper @Inject constructor() {
     fun transform(response: Response<HomeResponse>): Home {
         return Home(
-            transform(response.data.cardResponse.first()),
+            transform(response.data.cardResponse),
             response.data.cashBackResponse.map { transform(it)},
             response.data.newsResponse.map { transform(it) }
         )
@@ -26,18 +26,21 @@ class HomeResponseMapper @Inject constructor() {
 
     private fun transform(response: CardResponse): Card {
         return Card(
-            response.id,
             response.cardName,
-            Hospital(response.hospitalId, response.hospitalName)
+            response.birthDate,
+            response.memberSince,
+            response.backgroundImageUrl
         )
     }
 
     private fun transform(response: CashBackResponse): CashBack {
         return CashBack(
             response.id,
+            response.receiptId,
             response.cashBack,
             response.date,
-            Hospital(response.hospitalId, response.hospitalName)
+            response.phone,
+            response.walletName
         )
     }
 

@@ -96,26 +96,6 @@ class CashBackListFragment : BaseFragment() {
     }
 
     private fun bindList() {
-        cashBackItem.add(
-            listOf(
-                CashBackItem(CashBack("10", 10000L, "12 Desember 2020", Hospital("", ""))),
-                CashBackItem(CashBack("20", 20000L, "20 Desember 2020", Hospital("", ""))),
-                CashBackItem(CashBack("30", 30000L, "21 Desember 2020", Hospital("", ""))),
-                CashBackItem(CashBack("40", 40000L, "22 Desember 2020", Hospital("", ""))),
-                CashBackItem(CashBack("50", 50000L, "12 Desember 2020", Hospital("", ""))),
-                CashBackItem(CashBack("60", 60000L, "20 Desember 2020", Hospital("", ""))),
-                CashBackItem(CashBack("70", 70000L, "21 Desember 2020", Hospital("", ""))),
-                CashBackItem(CashBack("80", 80000L, "22 Desember 2020", Hospital("", ""))),
-                CashBackItem(CashBack("10", 10000L, "12 Desember 2020", Hospital("", ""))),
-                CashBackItem(CashBack("20", 20000L, "20 Desember 2020", Hospital("", ""))),
-                CashBackItem(CashBack("30", 30000L, "21 Desember 2020", Hospital("", ""))),
-                CashBackItem(CashBack("40", 40000L, "22 Desember 2020", Hospital("", ""))),
-                CashBackItem(CashBack("50", 50000L, "12 Desember 2020", Hospital("", ""))),
-                CashBackItem(CashBack("60", 60000L, "20 Desember 2020", Hospital("", ""))),
-                CashBackItem(CashBack("70", 70000L, "21 Desember 2020", Hospital("", ""))),
-                CashBackItem(CashBack("80", 80000L, "22 Desember 2020", Hospital("", "")))
-            )
-        )
         binding?.rvCashback?.run {
             layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
             addItemDecoration(

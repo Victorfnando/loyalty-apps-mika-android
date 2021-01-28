@@ -13,14 +13,16 @@ package com.dre.loyalty.features.home.data.entity.response
 import com.google.gson.annotations.SerializedName
 
 data class CashBackResponse(
-    @SerializedName("receiptId")
+    @SerializedName("cashbackId")
     val id: String,
+    @SerializedName("receiptId")
+    val receiptId: String,
     @SerializedName("cashback")
     val cashBack: Long,
     @SerializedName("date")
     val date: String,
-    @SerializedName("hospitalName")
-    val hospitalName: String,
-    @SerializedName("hospitalId")
-    val hospitalId: String
+    @SerializedName("phone")
+    val phone: String,
+    @SerializedName("walletName")
+    val walletName: String
 )

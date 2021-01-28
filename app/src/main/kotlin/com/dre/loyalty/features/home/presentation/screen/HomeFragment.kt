@@ -164,7 +164,6 @@ class HomeFragment : BaseFragment() {
     private fun updateCard(state: Card?) {
         state?.let {
             binding?.cardMedicalNumber?.name = state.name
-            binding?.cardMedicalNumber?.medicalNumber = state.id
         }
     }
 
