@@ -14,11 +14,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import com.dre.loyalty.core.exception.Failure
 import com.dre.loyalty.core.extension.observe
 import com.dre.loyalty.core.extension.viewModel
 import com.dre.loyalty.core.functional.Event
 import com.dre.loyalty.core.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
+import com.dre.loyalty.core.view.sheet.ConfirmationSheetModal
 import com.dre.loyalty.databinding.FragmentRegisterBinding
 import com.dre.loyalty.features.authentication.presentation.register.entity.RegisterButtonState
 import com.dre.loyalty.features.authentication.presentation.register.entity.RegisterEmailInputState
@@ -53,6 +55,8 @@ class RegisterFragment : BaseFragment() {
             observe(navigateOtpScreen, ::navigateOtpScreen)
             observe(regisButtonState, ::updateRegisButtonState)
             observe(emailInputState, ::updateEmailInputState)
+            observe(loading, ::renderLoading)
+            observe(failure, ::showFailureSheet)
         }
     }
 
@@ -73,10 +77,19 @@ class RegisterFragment : BaseFragment() {
                 vm.handleLoginButtonClicked()
             }
             btnRegister.setOnClickListener {
-                vm.handleRegisterButtonClicked()
+                vm.handleRegisterButtonClicked(
+                    binding?.etMail?.text.toString()
+                )
             }
             etMail.editText.addTextChangedListener(emailChangedListener)
         }
+    }
+
+    override fun onDetach() {
+        (activity as AppCompatActivity).setSupportActionBar(null)
+        binding?.etMail?.editText?.removeTextChangedListener(emailChangedListener)
+        binding = null
+        super.onDetach()
     }
 
     private fun bindToolbar() {
@@ -111,10 +124,25 @@ class RegisterFragment : BaseFragment() {
         }
     }
 
-    override fun onDetach() {
-        (activity as AppCompatActivity).setSupportActionBar(null)
-        binding?.etMail?.editText?.removeTextChangedListener(emailChangedListener)
-        binding = null
-        super.onDetach()
+    private fun renderLoading(visibility: Int?) {
+        visibility?.let {
+            binding?.progress?.visibility = it
+        }
+    }
+
+    private fun showFailureSheet(failure: Failure?) {
+        if (failure == null) return
+        binding?.btnRegister?.isEnabled = true
+        val sheet = getNetworkErrorSheet(failure)?.also {
+            it.primaryButtonClickListener = {
+                vm.handleRegisterButtonClicked(
+                    binding?.etMail?.text.toString()
+                )
+            }
+            it.secondaryButtonClickListener = {
+                navigator.showSetting(requireContext())
+            }
+        }
+        sheet?.show(requireActivity().supportFragmentManager, ConfirmationSheetModal.TAG)
     }
 }

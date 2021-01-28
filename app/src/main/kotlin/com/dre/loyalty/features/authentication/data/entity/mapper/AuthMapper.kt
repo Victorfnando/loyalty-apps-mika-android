@@ -18,4 +18,5 @@ class AuthMapper @Inject constructor() {
     fun transform(response: LoginResponse): AuthCertificate {
         return AuthCertificate(response.userId, response.token)
     }
+
 }

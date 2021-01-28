@@ -16,8 +16,12 @@ import com.dre.loyalty.core.functional.Either
 import com.dre.loyalty.core.functional.getOrElseNull
 import com.dre.loyalty.core.model.AuthCertificate
 import com.dre.loyalty.core.platform.NetworkHandler
+import com.dre.loyalty.core.response.BasicResponse
 import com.dre.loyalty.features.authentication.data.entity.mapper.AuthMapper
+import com.dre.loyalty.features.authentication.data.entity.request.EmailRequest
 import com.dre.loyalty.features.authentication.data.entity.request.LoginRequest
+import com.dre.loyalty.features.authentication.data.entity.request.RegisterRequest
+import com.dre.loyalty.features.authentication.data.entity.request.VerifyCodeRequest
 import com.dre.loyalty.features.authentication.data.repository.datasource.cloud.AuthenticationCloudDataSourceContract
 import com.dre.loyalty.features.authentication.data.repository.datasource.local.AuthenticationLocalDataSourceContract
 import com.dre.loyalty.features.authentication.domain.AuthenticationRepositoryContract
@@ -29,7 +33,7 @@ class AuthenticationRepository @Inject constructor(
     private val localDataSourceContract: AuthenticationLocalDataSourceContract,
     private val mapper: AuthMapper
 ) : AuthenticationRepositoryContract {
-    override suspend fun login(request: LoginRequest): Either<Failure, AuthCertificate> {
+    override fun login(request: LoginRequest): Either<Failure, AuthCertificate> {
         return when(networkHandler.isNetworkAvailable()) {
             true -> {
                 val result = cloudDataSource.login(request).request {
@@ -40,6 +44,33 @@ class AuthenticationRepository @Inject constructor(
                     localDataSourceContract.token = it.token
                 }
                 result
+            }
+            false -> Either.Left(Failure.NetworkConnection)
+        }
+    }
+
+    override fun register(request: RegisterRequest): Either<Failure, BasicResponse> {
+        return when(networkHandler.isNetworkAvailable()) {
+            true -> {
+                return cloudDataSource.register(request).request { it }
+            }
+            false -> Either.Left(Failure.NetworkConnection)
+        }
+    }
+
+    override fun checkMail(request: EmailRequest): Either<Failure, BasicResponse> {
+        return when(networkHandler.isNetworkAvailable()) {
+            true -> {
+                return cloudDataSource.checkMail(request).request { it }
+            }
+            false -> Either.Left(Failure.NetworkConnection)
+        }
+    }
+
+    override fun verifyCode(request: VerifyCodeRequest): Either<Failure, BasicResponse> {
+        return when(networkHandler.isNetworkAvailable()) {
+            true -> {
+                return cloudDataSource.verifyCode(request).request { it }
             }
             false -> Either.Left(Failure.NetworkConnection)
         }

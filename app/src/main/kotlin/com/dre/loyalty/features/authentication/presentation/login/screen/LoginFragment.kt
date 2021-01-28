@@ -20,15 +20,18 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.HtmlCompat
 import com.dre.loyalty.R
+import com.dre.loyalty.core.exception.Failure
 import com.dre.loyalty.core.extension.observe
 import com.dre.loyalty.core.extension.viewModel
 import com.dre.loyalty.core.functional.Event
 import com.dre.loyalty.core.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
+import com.dre.loyalty.core.view.sheet.ConfirmationSheetModal
 import com.dre.loyalty.databinding.FragmentLoginBinding
 import com.dre.loyalty.features.authentication.presentation.login.entity.LoginButtonState
 import com.dre.loyalty.features.authentication.presentation.login.entity.LoginEmailInputState
 import com.dre.loyalty.features.authentication.presentation.login.entity.LoginPasswordInputState
+import com.dre.loyalty.features.movies.MovieFailure
 import javax.inject.Inject
 
 class LoginFragment : BaseFragment() {
@@ -73,6 +76,8 @@ class LoginFragment : BaseFragment() {
             observe(loginButtonState, ::updateLoginButtonState)
             observe(loginEmailInputState, ::updateEmailInput)
             observe(loginPasswordInputState, ::updatePasswordInput)
+            observe(loading, ::renderLoading)
+            observe(failure, ::showFailureSheet)
         }
     }
 
@@ -182,6 +187,29 @@ class LoginFragment : BaseFragment() {
         event?.getIfNotHandled()?.let {
             navigator.showResetPasswordScreen(requireContext())
         }
+    }
+
+    private fun renderLoading(visibility: Int?) {
+        visibility?.let {
+            binding?.progress?.visibility = it
+        }
+    }
+
+    private fun showFailureSheet(failure: Failure?) {
+        if (failure == null) return
+        binding?.btnLoginSticky?.isButtonEnabled = true
+        val sheet = getNetworkErrorSheet(failure)?.also {
+            it.primaryButtonClickListener = {
+                vm.handleLoginButtonClicked(
+                    binding?.etMail?.text.toString(),
+                    binding?.etPass?.text.toString()
+                )
+            }
+            it.secondaryButtonClickListener = {
+                navigator.showSetting(requireContext())
+            }
+        }
+        sheet?.show(requireActivity().supportFragmentManager, ConfirmationSheetModal.TAG)
     }
 
     companion object {

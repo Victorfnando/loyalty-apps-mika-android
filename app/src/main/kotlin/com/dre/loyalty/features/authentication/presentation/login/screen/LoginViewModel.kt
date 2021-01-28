@@ -7,6 +7,7 @@
 
 package com.dre.loyalty.features.authentication.presentation.login.screen
 
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dre.loyalty.core.functional.Event
@@ -77,6 +78,8 @@ class LoginViewModel @Inject constructor(
     }
 
     fun handleLoginButtonClicked(email: String, password: String) {
+        _loading.value = View.VISIBLE
+        _loginButtonState.value = LoginButtonState(false)
         doLoginUseCase(DoLoginUseCase.Param(email, password)) {
             it.fold(::handleFailure, ::handleSuccessLogin)
         }
@@ -87,6 +90,8 @@ class LoginViewModel @Inject constructor(
     }
 
     private fun handleSuccessLogin(certificate: AuthCertificate) {
+        _loading.value = View.GONE
+        _loginButtonState.value = LoginButtonState(true)
         _navigateMain.value = Event(true)
     }
 

@@ -7,16 +7,23 @@
 
 package com.dre.loyalty.features.authentication.presentation.register.screen
 
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dre.loyalty.core.functional.Event
 import com.dre.loyalty.core.platform.BaseViewModel
+import com.dre.loyalty.core.response.BasicResponse
 import com.dre.loyalty.core.util.validator.type.ValidationType
+import com.dre.loyalty.features.authentication.data.entity.request.EmailRequest
+import com.dre.loyalty.features.authentication.domain.usecase.DoRegisterUseCase
+import com.dre.loyalty.features.authentication.domain.usecase.VerifyEmailUseCase
 import com.dre.loyalty.features.authentication.presentation.register.entity.RegisterButtonState
 import com.dre.loyalty.features.authentication.presentation.register.entity.RegisterEmailInputState
 import javax.inject.Inject
 
-class RegisterViewModel @Inject constructor() : BaseViewModel() {
+class RegisterViewModel @Inject constructor(
+    private val verifyEmailUseCase: VerifyEmailUseCase
+) : BaseViewModel() {
 
     private val _navigateLogin: MutableLiveData<Event<Boolean>> = MutableLiveData()
     val navigateLogin: LiveData<Event<Boolean>> = _navigateLogin
@@ -39,8 +46,12 @@ class RegisterViewModel @Inject constructor() : BaseViewModel() {
         _navigateLogin.value = Event(true)
     }
 
-    fun handleRegisterButtonClicked() {
-        _navigateOtpScreen.value = Event(true)
+    fun handleRegisterButtonClicked(email: String) {
+        _loading.value = View.VISIBLE
+        _regisButtonState.value = RegisterButtonState(false)
+        verifyEmailUseCase(EmailRequest(email)) {
+            it.fold(::handleFailure, ::handleVerifyEmailSuccess)
+        }
     }
 
     fun handleEmailTextChanged(text: String) {
@@ -51,5 +62,11 @@ class RegisterViewModel @Inject constructor() : BaseViewModel() {
             RegisterEmailInputState(result.errorMessage)
         }
         _regisButtonState.value = RegisterButtonState(_emailInputState.value?.error == null)
+    }
+
+    private fun handleVerifyEmailSuccess(response: BasicResponse) {
+        _loading.value = View.GONE
+        _regisButtonState.value = RegisterButtonState(true)
+        _navigateOtpScreen.value = Event(true)
     }
 }
