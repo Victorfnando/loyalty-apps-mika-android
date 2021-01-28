@@ -69,16 +69,16 @@ import javax.inject.Singleton
         context.startActivity(InputPinActivity.callingIntent(context))
     }
 
-    fun showOtp(context: Context) {
-        context.startActivity(OtpActivity.callingIntent(context))
+    fun showOtp(context: Context, email: String) {
+        context.startActivity(OtpActivity.callingIntent(context, email))
     }
 
     fun showSplashScreen(context: Context) {
         context.startActivity(SplashScreenActivity.callingIntent(context))
     }
 
-    fun showUserDetailForm(context: Context) {
-        context.startActivity(UserDetailFormActivity.callingIntent(context))
+    fun showUserDetailForm(context: Context, email: String) {
+        context.startActivity(UserDetailFormActivity.callingIntent(context, email))
     }
 
     fun showResetPasswordScreen(context: Context) {

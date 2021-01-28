@@ -18,7 +18,9 @@ import com.dre.loyalty.core.platform.BaseFragment
 
 class UserDetailFormActivity : BaseActivity() {
 
-    override fun fragment(): BaseFragment = UserDetailFormFragment.newInstance()
+    override fun fragment(): BaseFragment = UserDetailFormFragment.newInstance(
+        intent.extras?.getString(EXTRA_EMAIL).orEmpty()
+    )
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
@@ -29,6 +31,11 @@ class UserDetailFormActivity : BaseActivity() {
     }
 
     companion object {
-        fun callingIntent(context: Context) = Intent(context, UserDetailFormActivity::class.java)
+        private const val EXTRA_EMAIL = "EXTRA_EMAIL"
+
+        fun callingIntent(context: Context, email: String) =
+            Intent(context, UserDetailFormActivity::class.java).also {
+                it.putExtra(EXTRA_EMAIL, email)
+            }
     }
 }

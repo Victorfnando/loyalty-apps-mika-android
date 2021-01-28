@@ -118,9 +118,9 @@ class RegisterFragment : BaseFragment() {
         }
     }
 
-    private fun navigateOtpScreen(flag: Event<Boolean>?) {
-        flag?.getIfNotHandled()?.let {
-            navigator.showOtp(requireContext())
+    private fun navigateOtpScreen(event: Event<String>?) {
+        event?.getIfNotHandled()?.let {
+            navigator.showOtp(requireContext(), it)
         }
     }
 

@@ -8,7 +8,8 @@
 
 <resources>
     <string name="otp_title">Kode verifikasi sudah dikirim!</string>
-    <string name="otp_format_phoneDesc">Masukkan kode verifikasi yang sudah kami SMS ke nomor HP kamu (%s)</string>
+    <string name="otp_format_mailDesc">Masukkan kode verifikasi yang sudah kami kirim ke email kamu (%s)</string>
     <string name="otp_label_codeNotFound">Tidak menerima kode?</string>
     <string name="otp_button_reSend">Kirim ulang</string>
+    <string name="otp_button_format_resend">Kirim Ulang (tunggu %d detik)</string>
 </resources>

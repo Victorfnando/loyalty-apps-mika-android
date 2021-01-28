@@ -28,14 +28,16 @@ class RegisterViewModel @Inject constructor(
     private val _navigateLogin: MutableLiveData<Event<Boolean>> = MutableLiveData()
     val navigateLogin: LiveData<Event<Boolean>> = _navigateLogin
 
-    private val _navigateOtpScreen: MutableLiveData<Event<Boolean>> = MutableLiveData()
-    val navigateOtpScreen: LiveData<Event<Boolean>> = _navigateOtpScreen
+    private val _navigateOtpScreen: MutableLiveData<Event<String>> = MutableLiveData()
+    val navigateOtpScreen: LiveData<Event<String>> = _navigateOtpScreen
 
     private val _regisButtonState: MutableLiveData<RegisterButtonState> = MutableLiveData()
     val regisButtonState: LiveData<RegisterButtonState> = _regisButtonState
 
     private val _emailInputState: MutableLiveData<RegisterEmailInputState> = MutableLiveData()
     val emailInputState: LiveData<RegisterEmailInputState> = _emailInputState
+
+    private var email: String? = null
 
     init {
         _emailInputState.value = RegisterEmailInputState(-1)
@@ -49,6 +51,7 @@ class RegisterViewModel @Inject constructor(
     fun handleRegisterButtonClicked(email: String) {
         _loading.value = View.VISIBLE
         _regisButtonState.value = RegisterButtonState(false)
+        this.email = email
         verifyEmailUseCase(EmailRequest(email)) {
             it.fold(::handleFailure, ::handleVerifyEmailSuccess)
         }
@@ -67,6 +70,6 @@ class RegisterViewModel @Inject constructor(
     private fun handleVerifyEmailSuccess(response: BasicResponse) {
         _loading.value = View.GONE
         _regisButtonState.value = RegisterButtonState(true)
-        _navigateOtpScreen.value = Event(true)
+        _navigateOtpScreen.value = Event(email.orEmpty())
     }
 }

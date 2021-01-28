@@ -18,7 +18,9 @@ import com.dre.loyalty.core.platform.BaseFragment
 
 class OtpActivity : BaseActivity() {
 
-    override fun fragment(): BaseFragment = OtpFragment.newInstance()
+    override fun fragment(): BaseFragment = OtpFragment.newInstance(
+        intent.extras?.getString(EXTRA_EMAIL).orEmpty()
+    )
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
@@ -29,6 +31,11 @@ class OtpActivity : BaseActivity() {
     }
 
     companion object {
-        fun callingIntent(context: Context): Intent = Intent(context, OtpActivity::class.java)
+        private const val EXTRA_EMAIL = "EXTRA_EMAIL"
+
+        fun callingIntent(context: Context, email: String): Intent =
+            Intent(context, OtpActivity::class.java).also {
+                it.putExtra(EXTRA_EMAIL, email)
+            }
     }
 }

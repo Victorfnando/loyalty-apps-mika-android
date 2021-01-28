@@ -43,6 +43,7 @@ import com.dre.loyalty.features.authentication.presentation.resetpassword.screen
 import com.dre.loyalty.features.authentication.presentation.updatepassword.screen.UpdatePasswordViewModel
 import com.dre.loyalty.features.invoice.presentation.upload.screen.UploadInvoiceViewModel
 import com.dre.loyalty.features.authentication.presentation.inputuserdetail.screen.UserDetailFormViewModel
+import com.dre.loyalty.features.authentication.presentation.otp.screen.OtpViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -161,6 +162,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(NewsDetailViewModel::class)
     abstract fun provideNewsDetailViewModel(vm: NewsDetailViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(OtpViewModel::class)
+    abstract fun provideOtpViewModel(vm: OtpViewModel): ViewModel
 
     @Binds
     @IntoMap

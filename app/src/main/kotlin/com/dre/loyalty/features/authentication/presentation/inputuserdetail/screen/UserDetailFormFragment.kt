@@ -234,8 +234,14 @@ class UserDetailFormFragment : BaseFragment() {
     }
 
     companion object {
-        fun newInstance(): UserDetailFormFragment {
-            return UserDetailFormFragment()
+        private const val ARG_EMAIL = "ARG_EMAIL"
+
+        fun newInstance(email: String): UserDetailFormFragment {
+            return UserDetailFormFragment().also {
+                val bundle = Bundle()
+                bundle.putString(ARG_EMAIL, email)
+                it.arguments = bundle
+            }
         }
     }
 }
