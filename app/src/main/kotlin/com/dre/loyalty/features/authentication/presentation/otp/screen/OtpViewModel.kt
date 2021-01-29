@@ -13,30 +13,35 @@ package com.dre.loyalty.features.authentication.presentation.otp.screen
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dre.loyalty.core.functional.Event
+import com.dre.loyalty.core.model.User
 import com.dre.loyalty.core.platform.BaseViewModel
 import com.dre.loyalty.core.response.BasicResponse
 import com.dre.loyalty.features.authentication.data.entity.request.EmailRequest
 import com.dre.loyalty.features.authentication.data.entity.request.VerifyCodeRequest
+import com.dre.loyalty.features.authentication.domain.entity.OtpCode
 import com.dre.loyalty.features.authentication.domain.usecase.VerifyCodeUseCase
 import com.dre.loyalty.features.authentication.domain.usecase.VerifyEmailUseCase
+import com.dre.loyalty.features.authentication.presentation.otp.enumType.OtpType
 import javax.inject.Inject
 
 private const val OTP_CODE_LENGTH = 6
-class OtpViewModel @Inject constructor(
-    private val verifyCodeUseCase: VerifyCodeUseCase,
+abstract class OtpViewModel constructor(
     private val verifyEmailUseCase: VerifyEmailUseCase
 ) : BaseViewModel() {
 
     private val _startCountDown: MutableLiveData<Event<Boolean>> = MutableLiveData()
     val startCountDown: LiveData<Event<Boolean>> = _startCountDown
 
-    private val _navigateUserDetailForm: MutableLiveData<Event<String>> = MutableLiveData()
-    val navigateUserDetailForm: LiveData<Event<String>> = _navigateUserDetailForm
+    protected val _navigateDetailForm: MutableLiveData<Event<String>> = MutableLiveData()
+    val navigateDetailForm: LiveData<Event<String>> = _navigateDetailForm
+
+    protected val _navigateResetPassword: MutableLiveData<Event<User>> = MutableLiveData()
+    val navigateResetPassword: LiveData<Event<User>> = _navigateResetPassword
 
     private val _successVerifyEmail: MutableLiveData<Event<Boolean>> = MutableLiveData()
     val successVerifyEmail: LiveData<Event<Boolean>> = _successVerifyEmail
 
-    private lateinit var email: String
+    protected lateinit var email: String
 
     fun init(email: String) {
         this.email = email
@@ -52,16 +57,14 @@ class OtpViewModel @Inject constructor(
 
     fun handleCodeTextChanged(text: String) {
         if (text.length != OTP_CODE_LENGTH) return
-        verifyCodeUseCase(VerifyCodeRequest(email, text)) {
-            it.fold(::handleFailure, ::handleSuccessVerifyCode)
-        }
-    }
-
-    private fun handleSuccessVerifyCode(response: BasicResponse) {
-        _navigateUserDetailForm.value = Event(email)
+        verifyCode(OtpCode(email, text))
     }
 
     private fun handleSuccessVerifyEmail(response: BasicResponse) {
         _successVerifyEmail.value = Event(true)
     }
+
+    abstract fun getType(): OtpType
+
+    abstract fun verifyCode(otpCode: OtpCode)
 }

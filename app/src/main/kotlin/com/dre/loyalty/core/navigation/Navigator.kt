@@ -48,6 +48,7 @@ import com.dre.loyalty.features.splash.presentation.SplashScreenActivity
 import com.dre.loyalty.features.authentication.presentation.updatepassword.screen.UpdatePasswordActivity
 import com.dre.loyalty.features.invoice.presentation.upload.screen.UploadInvoiceActivity
 import com.dre.loyalty.features.authentication.presentation.inputuserdetail.screen.UserDetailFormActivity
+import com.dre.loyalty.features.authentication.presentation.otp.enumType.OtpType
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -78,8 +79,8 @@ import javax.inject.Singleton
         context.startActivity(InputPinActivity.callingIntent(context))
     }
 
-    fun showOtp(context: Context, email: String) {
-        context.startActivity(OtpActivity.callingIntent(context, email))
+    fun showOtp(context: Context, email: String, type: OtpType) {
+        context.startActivity(OtpActivity.callingIntent(context, email, type))
     }
 
     fun showSplashScreen(context: Context) {

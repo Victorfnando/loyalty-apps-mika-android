@@ -20,15 +20,20 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProviders
 import com.dre.loyalty.R
 import com.dre.loyalty.core.exception.Failure
 import com.dre.loyalty.core.extension.observe
 import com.dre.loyalty.core.extension.viewModel
 import com.dre.loyalty.core.functional.Event
+import com.dre.loyalty.core.model.User
 import com.dre.loyalty.core.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.core.view.sheet.ConfirmationSheetModal
 import com.dre.loyalty.databinding.FragmentOtpBinding
+import com.dre.loyalty.features.authentication.presentation.inputpassword.enumtype.InputPasswordType
+import com.dre.loyalty.features.authentication.presentation.inputpassword.screen.InputPasswordFragment
+import com.dre.loyalty.features.authentication.presentation.otp.enumType.OtpType
 import javax.inject.Inject
 
 class OtpFragment : BaseFragment() {
@@ -53,13 +58,7 @@ class OtpFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
-        vm = viewModel(viewModelFactory) {
-            observe(startCountDown, ::startCountDownIfNeeded)
-            observe(loading, ::renderLoading)
-            observe(failure, ::showFailureSheet)
-            observe(navigateUserDetailForm, ::showUserDetailScreen)
-            observe(successVerifyEmail, ::showToastSuccessSendEmailVerification)
-        }
+        injectViewModel()
     }
 
     override fun onCreateView(
@@ -86,6 +85,18 @@ class OtpFragment : BaseFragment() {
         (activity as AppCompatActivity).setSupportActionBar(null)
         binding = null
         super.onDetach()
+    }
+
+    private fun injectViewModel() {
+        val type: OtpType = arguments?.getSerializable(ARG_TYPE) as OtpType
+        vm = ViewModelProviders.of(this, viewModelFactory)[type.reference].apply {
+            observe(startCountDown, ::startCountDownIfNeeded)
+            observe(loading, ::renderLoading)
+            observe(failure, ::showFailureSheet)
+            observe(navigateDetailForm, ::showDetailForm)
+            observe(navigateResetPassword, ::showInputResetPassword)
+            observe(successVerifyEmail, ::showToastSuccessSendEmailVerification)
+        }
     }
 
     private fun bindToolbar() {
@@ -149,9 +160,16 @@ class OtpFragment : BaseFragment() {
         sheet?.show(requireActivity().supportFragmentManager, ConfirmationSheetModal.TAG)
     }
 
-    private fun showUserDetailScreen(event: Event<String>?) {
+    private fun showDetailForm(event: Event<String>?) {
         event?.getIfNotHandled()?.let {
             navigator.showUserDetailForm(requireContext(), it)
+            requireActivity().finish()
+        }
+    }
+
+    private fun showInputResetPassword(event: Event<User>?) {
+        event?.getIfNotHandled()?.let {
+            navigator.showInputPasswordScreen(requireContext(), it, InputPasswordType.RESET)
             requireActivity().finish()
         }
     }
@@ -166,11 +184,13 @@ class OtpFragment : BaseFragment() {
         private const val EMAIL_VERIFICATION_TIME_INTERVAL = 120000L
         private const val COUNT_DOWN_INTERVAL = 1000L
         private const val ARG_EMAIL = "ARG_EMAIL"
+        private const val ARG_TYPE = "ARG_TYPE"
 
-        fun newInstance(email: String): OtpFragment {
+        fun newInstance(email: String, type: OtpType): OtpFragment {
             return OtpFragment().also {
                 val bundle = Bundle()
                 bundle.putString(ARG_EMAIL, email)
+                bundle.putSerializable(ARG_TYPE, type)
                 it.arguments = bundle
             }
         }

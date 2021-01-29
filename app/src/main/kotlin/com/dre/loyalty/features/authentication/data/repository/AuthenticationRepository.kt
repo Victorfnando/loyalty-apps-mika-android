@@ -18,10 +18,7 @@ import com.dre.loyalty.core.model.AuthCertificate
 import com.dre.loyalty.core.platform.NetworkHandler
 import com.dre.loyalty.core.response.BasicResponse
 import com.dre.loyalty.features.authentication.data.entity.mapper.AuthMapper
-import com.dre.loyalty.features.authentication.data.entity.request.EmailRequest
-import com.dre.loyalty.features.authentication.data.entity.request.LoginRequest
-import com.dre.loyalty.features.authentication.data.entity.request.RegisterRequest
-import com.dre.loyalty.features.authentication.data.entity.request.VerifyCodeRequest
+import com.dre.loyalty.features.authentication.data.entity.request.*
 import com.dre.loyalty.features.authentication.data.repository.datasource.cloud.AuthenticationCloudDataSourceContract
 import com.dre.loyalty.features.authentication.data.repository.datasource.local.AuthenticationLocalDataSourceContract
 import com.dre.loyalty.features.authentication.domain.AuthenticationRepositoryContract
@@ -33,6 +30,7 @@ class AuthenticationRepository @Inject constructor(
     private val localDataSourceContract: AuthenticationLocalDataSourceContract,
     private val mapper: AuthMapper
 ) : AuthenticationRepositoryContract {
+
     override fun login(request: LoginRequest): Either<Failure, AuthCertificate> {
         return when(networkHandler.isNetworkAvailable()) {
             true -> {
@@ -71,6 +69,33 @@ class AuthenticationRepository @Inject constructor(
         return when(networkHandler.isNetworkAvailable()) {
             true -> {
                 return cloudDataSource.verifyCode(request).request { it }
+            }
+            false -> Either.Left(Failure.NetworkConnection)
+        }
+    }
+
+    override fun forgotPasswordCheckMail(request: EmailRequest): Either<Failure, Int> {
+        return when(networkHandler.isNetworkAvailable()) {
+            true -> {
+                return cloudDataSource.forgotPasswordCheckMail(request).request { it.data.attempt }
+            }
+            false -> Either.Left(Failure.NetworkConnection)
+        }
+    }
+
+    override fun forgotPasswordVerifyCode(request: VerifyCodeRequest): Either<Failure, BasicResponse> {
+        return when(networkHandler.isNetworkAvailable()) {
+            true -> {
+                return cloudDataSource.forgotPasswordVerifyCode(request).request { it }
+            }
+            false -> Either.Left(Failure.NetworkConnection)
+        }
+    }
+
+    override fun resetPassword(request: ResetPasswordRequest): Either<Failure, BasicResponse> {
+        return when(networkHandler.isNetworkAvailable()) {
+            true -> {
+                return cloudDataSource.resetPassword(request).request { it }
             }
             false -> Either.Left(Failure.NetworkConnection)
         }

@@ -13,10 +13,8 @@ package com.dre.loyalty.features.authentication.data.repository.datasource.cloud
 import com.dre.loyalty.core.response.BasicResponse
 import com.dre.loyalty.core.response.Response
 import com.dre.loyalty.core.service.AuthenticationService
-import com.dre.loyalty.features.authentication.data.entity.request.EmailRequest
-import com.dre.loyalty.features.authentication.data.entity.request.LoginRequest
-import com.dre.loyalty.features.authentication.data.entity.request.RegisterRequest
-import com.dre.loyalty.features.authentication.data.entity.request.VerifyCodeRequest
+import com.dre.loyalty.features.authentication.data.entity.request.*
+import com.dre.loyalty.features.authentication.data.entity.response.ForgotPasswordEmailVerificationResponse
 import com.dre.loyalty.features.authentication.data.entity.response.LoginResponse
 import com.dre.loyalty.features.authentication.domain.usecase.DoLoginUseCase
 import retrofit2.Call
@@ -25,6 +23,7 @@ import javax.inject.Inject
 class AuthenticationCloudDataSource @Inject constructor(
     private val service: AuthenticationService
 ) : AuthenticationCloudDataSourceContract {
+
     override fun login(request: LoginRequest): Call<Response<LoginResponse>> {
         return service.login(request)
     }
@@ -39,5 +38,17 @@ class AuthenticationCloudDataSource @Inject constructor(
 
     override fun verifyCode(request: VerifyCodeRequest): Call<BasicResponse> {
         return service.verifyCode(request)
+    }
+
+    override fun forgotPasswordCheckMail(request: EmailRequest): Call<Response<ForgotPasswordEmailVerificationResponse>> {
+        return service.forgotPasswordCheckMail(request)
+    }
+
+    override fun forgotPasswordVerifyCode(request: VerifyCodeRequest): Call<BasicResponse> {
+        return service.forgotPasswordVerifyCode(request)
+    }
+
+    override fun resetPassword(request: ResetPasswordRequest): Call<BasicResponse> {
+        return service.resetPassword(request)
     }
 }

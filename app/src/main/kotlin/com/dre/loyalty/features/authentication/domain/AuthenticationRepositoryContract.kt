@@ -14,14 +14,14 @@ import com.dre.loyalty.core.exception.Failure
 import com.dre.loyalty.core.functional.Either
 import com.dre.loyalty.core.model.AuthCertificate
 import com.dre.loyalty.core.response.BasicResponse
-import com.dre.loyalty.features.authentication.data.entity.request.EmailRequest
-import com.dre.loyalty.features.authentication.data.entity.request.LoginRequest
-import com.dre.loyalty.features.authentication.data.entity.request.RegisterRequest
-import com.dre.loyalty.features.authentication.data.entity.request.VerifyCodeRequest
+import com.dre.loyalty.features.authentication.data.entity.request.*
 
 interface AuthenticationRepositoryContract {
     fun login(request: LoginRequest): Either<Failure, AuthCertificate>
     fun register(request: RegisterRequest): Either<Failure, BasicResponse>
     fun checkMail(request: EmailRequest): Either<Failure, BasicResponse>
     fun verifyCode(request: VerifyCodeRequest): Either<Failure, BasicResponse>
+    fun forgotPasswordCheckMail(request: EmailRequest): Either<Failure, Int>
+    fun forgotPasswordVerifyCode(request: VerifyCodeRequest): Either<Failure, BasicResponse>
+    fun resetPassword(request: ResetPasswordRequest): Either<Failure, BasicResponse>
 }

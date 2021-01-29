@@ -12,10 +12,8 @@ package com.dre.loyalty.features.authentication.data.repository.datasource.cloud
 
 import com.dre.loyalty.core.response.BasicResponse
 import com.dre.loyalty.core.response.Response
-import com.dre.loyalty.features.authentication.data.entity.request.EmailRequest
-import com.dre.loyalty.features.authentication.data.entity.request.LoginRequest
-import com.dre.loyalty.features.authentication.data.entity.request.RegisterRequest
-import com.dre.loyalty.features.authentication.data.entity.request.VerifyCodeRequest
+import com.dre.loyalty.features.authentication.data.entity.request.*
+import com.dre.loyalty.features.authentication.data.entity.response.ForgotPasswordEmailVerificationResponse
 import com.dre.loyalty.features.authentication.data.entity.response.LoginResponse
 import retrofit2.Call
 
@@ -24,4 +22,7 @@ interface AuthenticationCloudDataSourceContract {
     fun register(request: RegisterRequest): Call<BasicResponse>
     fun checkMail(request: EmailRequest): Call<BasicResponse>
     fun verifyCode(request: VerifyCodeRequest): Call<BasicResponse>
+    fun forgotPasswordCheckMail(request: EmailRequest): Call<Response<ForgotPasswordEmailVerificationResponse>>
+    fun forgotPasswordVerifyCode(request: VerifyCodeRequest): Call<BasicResponse>
+    fun resetPassword(request: ResetPasswordRequest): Call<BasicResponse>
 }

@@ -1,8 +1,8 @@
 /*
  *
- * Created by Andreas on 1/28/21 7:23 PM
+ * Created by Andreas on 1/29/21 3:15 PM
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 1/28/21 7:23 PM
+ * Last modified 1/29/21 3:15 PM
  * Github Link: https://github.com/oandrz
  * Email: oentoro.andreas@gmail.com
  *
@@ -18,14 +18,14 @@ import com.dre.loyalty.features.authentication.data.entity.request.VerifyCodeReq
 import com.dre.loyalty.features.authentication.domain.AuthenticationRepositoryContract
 import javax.inject.Inject
 
-class VerifyCodeUseCase @Inject constructor(
+class DoVerifyCodeForgotPasswordUseCase @Inject constructor(
     private val repository: AuthenticationRepositoryContract
-) : UseCase<BasicResponse, VerifyCodeUseCase.Param>() {
+) : UseCase<BasicResponse, DoVerifyCodeForgotPasswordUseCase.Param>() {
 
     override suspend fun run(params: Param): Either<Failure, BasicResponse> {
-        return repository.verifyCode(VerifyCodeRequest(
-            params.email, params.code
-        ))
+        return repository.forgotPasswordVerifyCode(
+            VerifyCodeRequest(params.email, params.code)
+        )
     }
 
     data class Param(

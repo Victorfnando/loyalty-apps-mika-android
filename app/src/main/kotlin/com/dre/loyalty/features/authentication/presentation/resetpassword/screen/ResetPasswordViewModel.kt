@@ -10,17 +10,21 @@
 
 package com.dre.loyalty.features.authentication.presentation.resetpassword.screen
 
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.dre.loyalty.core.functional.Event
+import com.dre.loyalty.core.platform.BaseViewModel
 import com.dre.loyalty.core.util.enumtype.ConfirmationSheetType
 import com.dre.loyalty.core.util.validator.type.ValidationType
+import com.dre.loyalty.features.authentication.domain.usecase.DoCheckMailForgotPasswordUseCase
 import com.dre.loyalty.features.authentication.presentation.resetpassword.entity.ResetPinButtonState
 import com.dre.loyalty.features.authentication.presentation.resetpassword.entity.ResetPinPhoneNumberInputState
 import javax.inject.Inject
 
-class ResetPasswordViewModel @Inject constructor() : ViewModel() {
+class ResetPasswordViewModel @Inject constructor(
+    private val checkMailUseCase: DoCheckMailForgotPasswordUseCase
+) : BaseViewModel() {
 
     private val _resetPinButtonState: MutableLiveData<ResetPinButtonState> = MutableLiveData()
     val resetPinButtonState: LiveData<ResetPinButtonState> = _resetPinButtonState
@@ -28,8 +32,10 @@ class ResetPasswordViewModel @Inject constructor() : ViewModel() {
     private val _mailInputState: MutableLiveData<ResetPinPhoneNumberInputState> = MutableLiveData()
     val mailInputState: LiveData<ResetPinPhoneNumberInputState> = _mailInputState
 
-    private val _navigatePasswordInput: MutableLiveData<Event<ConfirmationSheetType>> = MutableLiveData()
-    val navigatePasswordInput: LiveData<Event<ConfirmationSheetType>> = _navigatePasswordInput
+    private val _navigateOtp: MutableLiveData<Event<String>> = MutableLiveData()
+    val navigateOtp: LiveData<Event<String>> = _navigateOtp
+
+    private var email: String? = null
 
     init {
         _resetPinButtonState.value = ResetPinButtonState(false)
@@ -47,6 +53,19 @@ class ResetPasswordViewModel @Inject constructor() : ViewModel() {
     }
 
     fun handleButtonClicked(text: String) {
-        _navigatePasswordInput.value = Event(ConfirmationSheetType.RESET_PASSWORD_LINK_SHEET)
+        email = text
+        _loading.value = View.VISIBLE
+        _resetPinButtonState.value = _resetPinButtonState.value?.copy(isEnable = false)
+        checkMailUseCase(DoCheckMailForgotPasswordUseCase.Param(text)) {
+            it.fold(::handleFailure, ::handleSuccessVerifyEmail)
+        }
+    }
+
+    private fun handleSuccessVerifyEmail(attempt: Int) {
+        _loading.value = View.GONE
+        _resetPinButtonState.value = _resetPinButtonState.value?.copy(isEnable = true)
+        email?.let {
+            _navigateOtp.value = Event(it)
+        }
     }
 }

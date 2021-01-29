@@ -22,6 +22,7 @@ import com.dre.loyalty.core.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.core.view.sheet.ConfirmationSheetModal
 import com.dre.loyalty.databinding.FragmentRegisterBinding
+import com.dre.loyalty.features.authentication.presentation.otp.enumType.OtpType
 import com.dre.loyalty.features.authentication.presentation.register.entity.RegisterButtonState
 import com.dre.loyalty.features.authentication.presentation.register.entity.RegisterEmailInputState
 import javax.inject.Inject
@@ -120,7 +121,7 @@ class RegisterFragment : BaseFragment() {
 
     private fun navigateOtpScreen(event: Event<String>?) {
         event?.getIfNotHandled()?.let {
-            navigator.showOtp(requireContext(), it)
+            navigator.showOtp(requireContext(), it, OtpType.REGISTER)
         }
     }
 

@@ -17,15 +17,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import com.dre.loyalty.core.exception.Failure
 import com.dre.loyalty.core.extension.observe
 import com.dre.loyalty.core.extension.viewModel
 import com.dre.loyalty.core.functional.Event
 import com.dre.loyalty.core.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
-import com.dre.loyalty.core.util.enumtype.ConfirmationSheetType
 import com.dre.loyalty.core.view.sheet.ConfirmationSheetModal
 import com.dre.loyalty.databinding.FragmentResetPasswordBinding
-import com.dre.loyalty.features.authentication.presentation.inputpassword.enumtype.InputPasswordType
+import com.dre.loyalty.features.authentication.presentation.otp.enumType.OtpType
 import com.dre.loyalty.features.authentication.presentation.resetpassword.entity.ResetPinButtonState
 import com.dre.loyalty.features.authentication.presentation.resetpassword.entity.ResetPinPhoneNumberInputState
 import javax.inject.Inject
@@ -39,7 +39,7 @@ class ResetPasswordFragment : BaseFragment() {
 
     private var binding: FragmentResetPasswordBinding? = null
 
-    private val phoneChangeListener: TextWatcher = object : TextWatcher {
+    private val emailWatcher: TextWatcher = object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
         }
 
@@ -57,7 +57,9 @@ class ResetPasswordFragment : BaseFragment() {
         vm = viewModel(viewModelFactory) {
             observe(resetPinButtonState, ::updateResetPinButtonState)
             observe(mailInputState, ::updateEmailInputState)
-            observe(navigatePasswordInput, ::showPasswordInput)
+            observe(navigateOtp, ::showOtpScreen)
+            observe(failure, ::showFailureSheet)
+            observe(loading, ::renderLoading)
         }
     }
 
@@ -73,14 +75,17 @@ class ResetPasswordFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         bindToolbar()
-        binding?.etMail?.editText?.addTextChangedListener(phoneChangeListener)
-        binding?.btnReset?.setOnClickListener {
-
+        binding?.run {
+            etMail.editText.addTextChangedListener(emailWatcher)
+            btnReset.setOnClickListener {
+                vm.handleButtonClicked(etMail.editText.text.toString())
+            }
         }
     }
 
     override fun onDetach() {
         (activity as AppCompatActivity).setSupportActionBar(null)
+        binding?.etMail?.editText?.removeTextChangedListener(emailWatcher)
         binding = null
         super.onDetach()
     }
@@ -97,7 +102,7 @@ class ResetPasswordFragment : BaseFragment() {
         binding?.btnReset?.run {
             isEnabled = state?.isEnable ?: false
             setOnClickListener {
-                vm.handleButtonClicked(binding?.etMail?.text.toString())
+                vm.handleButtonClicked(binding?.etMail?.editText?.text.toString())
             }
         }
     }
@@ -110,13 +115,30 @@ class ResetPasswordFragment : BaseFragment() {
         }
     }
 
-    private fun showPasswordInput(event: Event<ConfirmationSheetType>?) {
+    private fun showOtpScreen(event: Event<String>?) {
         event?.getIfNotHandled()?.let {
-            val modal = ConfirmationSheetModal.newInstance(it)
-            modal.primaryButtonClickListener = {
-            }
-            modal.show(requireActivity().supportFragmentManager, ConfirmationSheetModal.TAG)
+            navigator.showOtp(requireContext(), it, OtpType.FORGOT_PASSWORD)
         }
+    }
+
+    private fun renderLoading(visibility: Int?) {
+        visibility?.let {
+            binding?.progress?.visibility = it
+        }
+    }
+
+    private fun showFailureSheet(failure: Failure?) {
+        if (failure == null) return
+        binding?.btnReset?.isEnabled = true
+        val sheet = getNetworkErrorSheet(failure)?.also {
+            it.primaryButtonClickListener = {
+                vm.handleButtonClicked(binding?.etMail?.text.toString())
+            }
+            it.secondaryButtonClickListener = {
+                navigator.showSetting(requireContext())
+            }
+        }
+        sheet?.show(requireActivity().supportFragmentManager, ConfirmationSheetModal.TAG)
     }
 
     companion object {
