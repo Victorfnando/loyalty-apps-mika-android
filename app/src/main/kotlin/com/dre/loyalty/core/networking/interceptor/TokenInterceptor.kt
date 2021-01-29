@@ -26,15 +26,29 @@ class TokenInterceptor(private val authorizationManager: AuthenticationManager) 
     }
 
     override fun authenticate(route: Route?, response: Response): Request? {
-        var requestAvailable: Request? = null
-        try {
-            requestAvailable = response.request.newBuilder()
-                .addHeader("Authorization", authorizationManager.getToken().orEmpty())
-                .build()
-            return requestAvailable
-        } catch (ex: Exception) {
-            ex.printStackTrace()
+        when (hasAuthorizationToken(response)) {
+            false -> {
+                return null
+            }
+            true -> {
+                val retryCount = response.request.header("RetryCount")?.toInt() ?: 0
+                if (retryCount > 2) {
+                    return null
+                }
+                return response.request.newBuilder()
+                    .header("Authorization", authorizationManager.getToken().orEmpty())
+                    .header("RetryCount", "$retryCount")
+                    .build()
+
+            }
         }
-        return requestAvailable
     }
+
+    private fun hasAuthorizationToken(response: Response?): Boolean {
+        response?.let {
+            return it.request.header("Authorization") != null
+        }
+        return false
+    }
+
 }
