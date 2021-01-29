@@ -12,9 +12,9 @@ package com.dre.loyalty.features.invoice.presentation.upload.screen
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.dre.loyalty.core.functional.Event
+import com.dre.loyalty.core.platform.functional.Event
 import com.dre.loyalty.core.platform.BaseViewModel
-import com.dre.loyalty.core.util.validator.type.ValidationType
+import com.dre.loyalty.core.platform.util.validator.type.ValidationType
 import com.dre.loyalty.features.invoice.presentation.upload.entity.HospitalBranchState
 import com.dre.loyalty.features.invoice.presentation.upload.entity.TotalAmountState
 import com.dre.loyalty.features.invoice.presentation.upload.entity.UploadButtonState

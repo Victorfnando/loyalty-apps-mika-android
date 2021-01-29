@@ -18,13 +18,12 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.model.GlideUrl
 import com.bumptech.glide.load.model.LazyHeaders
 import com.dre.loyalty.R
-import com.dre.loyalty.core.extension.observe
-import com.dre.loyalty.core.extension.viewModel
+import com.dre.loyalty.core.platform.extension.observe
+import com.dre.loyalty.core.platform.extension.viewModel
 import com.dre.loyalty.core.model.News
 import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.core.view.VerticalSpaceDecoration
 import com.dre.loyalty.databinding.FragmentNewsDetailBinding
-import com.dre.loyalty.features.news.presentation.view.NewsItem
 import com.dre.loyalty.features.news.presentation.view.VerticalNewsItem
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter

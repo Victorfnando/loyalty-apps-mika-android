@@ -11,9 +11,8 @@
 package com.dre.loyalty.features.news.data.entity.mapper
 
 import com.dre.loyalty.core.model.News
-import com.dre.loyalty.core.response.Response
+import com.dre.loyalty.core.networking.response.Response
 import com.dre.loyalty.features.news.data.entity.response.NewsDetailResponse
-import com.dre.loyalty.features.news.data.entity.response.NewsListResponse
 import com.dre.loyalty.features.news.data.entity.response.NewsResponse
 import javax.inject.Inject
 

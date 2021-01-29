@@ -10,9 +10,9 @@
 
 package com.dre.loyalty.features.authentication.presentation.otp.screen.forgot
 
-import com.dre.loyalty.core.functional.Event
+import com.dre.loyalty.core.platform.functional.Event
 import com.dre.loyalty.core.model.User
-import com.dre.loyalty.core.response.BasicResponse
+import com.dre.loyalty.core.networking.response.BasicResponse
 import com.dre.loyalty.features.authentication.domain.entity.OtpCode
 import com.dre.loyalty.features.authentication.domain.usecase.DoVerifyCodeForgotPasswordUseCase
 import com.dre.loyalty.features.authentication.domain.usecase.DoVerifyCodeForgotPasswordUseCase.Param

@@ -18,12 +18,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dre.loyalty.R
-import com.dre.loyalty.core.extension.observe
-import com.dre.loyalty.core.extension.viewModel
-import com.dre.loyalty.core.functional.Event
-import com.dre.loyalty.core.model.CashBack
-import com.dre.loyalty.core.model.Hospital
-import com.dre.loyalty.core.navigation.Navigator
+import com.dre.loyalty.core.platform.extension.observe
+import com.dre.loyalty.core.platform.extension.viewModel
+import com.dre.loyalty.core.platform.functional.Event
+import com.dre.loyalty.core.platform.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.core.view.VerticalDividerDecoration
 import com.dre.loyalty.databinding.FragmentCasbackListBinding

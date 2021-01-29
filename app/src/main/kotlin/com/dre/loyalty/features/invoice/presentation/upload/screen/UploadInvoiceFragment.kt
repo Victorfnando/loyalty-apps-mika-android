@@ -23,10 +23,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.HtmlCompat
 import com.bumptech.glide.Glide
 import com.dre.loyalty.R
-import com.dre.loyalty.core.extension.observe
-import com.dre.loyalty.core.extension.viewModel
-import com.dre.loyalty.core.functional.Event
-import com.dre.loyalty.core.navigation.Navigator
+import com.dre.loyalty.core.platform.extension.observe
+import com.dre.loyalty.core.platform.extension.viewModel
+import com.dre.loyalty.core.platform.functional.Event
+import com.dre.loyalty.core.platform.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.databinding.FragmentUploadInvoiceBinding
 import com.dre.loyalty.features.camera.CameraActivity

@@ -10,7 +10,7 @@
 
 package com.dre.loyalty.features.authentication.data.repository.datasource.local
 
-import com.dre.loyalty.core.util.preferences.AuthenticationManager
+import com.dre.loyalty.core.platform.util.preferences.AuthenticationManager
 import javax.inject.Inject
 
 class AuthenticationLocalDataSource @Inject constructor(

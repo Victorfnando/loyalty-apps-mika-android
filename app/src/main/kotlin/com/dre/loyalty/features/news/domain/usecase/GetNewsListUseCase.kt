@@ -10,27 +10,18 @@
 
 package com.dre.loyalty.features.news.domain.usecase
 
-import com.dre.loyalty.core.exception.Failure
-import com.dre.loyalty.core.functional.Either
+import com.dre.loyalty.core.networking.exception.Failure
+import com.dre.loyalty.core.platform.functional.Either
 import com.dre.loyalty.core.interactor.UseCase
 import com.dre.loyalty.core.model.News
 import com.dre.loyalty.features.news.domain.NewsRepositoryContract
-import com.dre.loyalty.features.news.domain.usecase.GetNewsListUseCase.Param
-import com.google.gson.annotations.SerializedName
 import javax.inject.Inject
 
 class GetNewsListUseCase @Inject constructor(
     private val repository: NewsRepositoryContract
-) : UseCase<List<News>, Param>() {
+) : UseCase<List<News>, UseCase.None>() {
 
-    override suspend fun run(params: Param): Either<Failure, List<News>> {
-        return repository.getNewsList(params)
+    override suspend fun run(params: None): Either<Failure, List<News>> {
+        return repository.getNewsList()
     }
-
-    data class Param(
-        @SerializedName("user_id")
-        val userId: String,
-        @SerializedName("token")
-        val token: String
-    )
 }

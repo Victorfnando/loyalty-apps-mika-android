@@ -9,9 +9,9 @@ package com.dre.loyalty.features.profile.presentation.changeprofile.screen
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.dre.loyalty.core.functional.Event
+import com.dre.loyalty.core.platform.functional.Event
 import com.dre.loyalty.core.platform.BaseViewModel
-import com.dre.loyalty.core.util.validator.type.ValidationType
+import com.dre.loyalty.core.platform.util.validator.type.ValidationType
 import com.dre.loyalty.features.profile.presentation.changeprofile.entity.DescriptionEtState
 import com.dre.loyalty.features.profile.presentation.changeprofile.entity.SendButtonState
 import javax.inject.Inject

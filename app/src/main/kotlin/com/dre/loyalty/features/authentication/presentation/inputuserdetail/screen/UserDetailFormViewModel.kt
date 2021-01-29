@@ -10,11 +10,10 @@ package com.dre.loyalty.features.authentication.presentation.inputuserdetail.scr
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
-import com.dre.loyalty.core.functional.Event
+import com.dre.loyalty.core.platform.functional.Event
 import com.dre.loyalty.core.model.User
 import com.dre.loyalty.core.platform.BaseViewModel
-import com.dre.loyalty.core.util.validator.type.ValidationType
-import com.dre.loyalty.features.authentication.data.entity.request.RegisterRequest
+import com.dre.loyalty.core.platform.util.validator.type.ValidationType
 import com.dre.loyalty.features.authentication.presentation.inputuserdetail.entity.*
 import javax.inject.Inject
 

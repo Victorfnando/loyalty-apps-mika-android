@@ -21,7 +21,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
-import com.dre.loyalty.core.extension.cancelTransition
+import com.dre.loyalty.core.platform.extension.cancelTransition
 import javax.inject.Inject
 
 

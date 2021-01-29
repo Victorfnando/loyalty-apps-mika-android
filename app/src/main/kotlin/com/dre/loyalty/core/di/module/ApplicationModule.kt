@@ -18,6 +18,8 @@ package com.dre.loyalty.core.di.module
 import android.content.Context
 import com.dre.loyalty.AndroidApplication
 import com.dre.loyalty.BuildConfig
+import com.dre.loyalty.core.networking.interceptor.TokenInterceptor
+import com.dre.loyalty.core.platform.util.preferences.AuthenticationManager
 import com.dre.loyalty.features.movies.MoviesRepository
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import dagger.Module
@@ -26,6 +28,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
@@ -37,22 +40,28 @@ class ApplicationModule(private val application: AndroidApplication) {
 
     @Provides
     @Singleton
-    fun provideRetrofit(): Retrofit {
+    fun provideRetrofit(
+        authenticationManager: AuthenticationManager
+    ): Retrofit {
         return Retrofit.Builder()
                 .baseUrl("https://443c2858-d57a-43ce-8ab9-4372283dfca8.mock.pstmn.io/")
-                .client(createClient())
+                .client(createClient(authenticationManager))
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
     }
 
-    private fun createClient(): OkHttpClient {
+    private fun createClient(authenticationManager: AuthenticationManager): OkHttpClient {
         val okHttpClientBuilder: OkHttpClient.Builder = OkHttpClient.Builder()
         if (BuildConfig.DEBUG) {
-            val loggingInterceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC)
+            val loggingInterceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
             okHttpClientBuilder.addInterceptor(loggingInterceptor)
         }
         return okHttpClientBuilder
             .addNetworkInterceptor(StethoInterceptor())
+            .connectTimeout(20, TimeUnit.SECONDS)
+            .readTimeout(20, TimeUnit.SECONDS)
+            .addInterceptor(TokenInterceptor(authenticationManager))
+            .authenticator(TokenInterceptor(authenticationManager))
             .build()
     }
 

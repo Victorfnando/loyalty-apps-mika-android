@@ -11,7 +11,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.dre.loyalty.R
 import com.dre.loyalty.core.model.CashBack
-import com.dre.loyalty.core.util.extension.formatToCurrency
+import com.dre.loyalty.core.platform.util.extension.formatToCurrency
 import com.dre.loyalty.databinding.ItemCashbackBinding
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
 

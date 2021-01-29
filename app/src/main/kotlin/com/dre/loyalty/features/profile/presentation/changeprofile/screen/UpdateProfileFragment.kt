@@ -18,11 +18,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.dre.loyalty.R
-import com.dre.loyalty.core.extension.observe
-import com.dre.loyalty.core.extension.viewModel
-import com.dre.loyalty.core.functional.Event
+import com.dre.loyalty.core.platform.extension.observe
+import com.dre.loyalty.core.platform.extension.viewModel
+import com.dre.loyalty.core.platform.functional.Event
 import com.dre.loyalty.core.platform.BaseFragment
-import com.dre.loyalty.core.util.enumtype.ConfirmationSheetType
+import com.dre.loyalty.core.platform.util.enumtype.ConfirmationSheetType
 import com.dre.loyalty.core.view.sheet.ConfirmationSheetModal
 import com.dre.loyalty.databinding.FragmentChangeProfileBinding
 import com.dre.loyalty.features.profile.presentation.changeprofile.entity.DescriptionEtState

@@ -3,11 +3,11 @@ package com.dre.loyalty.features.news.presentation.list
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.dre.loyalty.core.functional.Event
+import com.dre.loyalty.core.platform.functional.Event
+import com.dre.loyalty.core.interactor.UseCase
 import com.dre.loyalty.core.model.News
 import com.dre.loyalty.core.platform.BaseViewModel
 import com.dre.loyalty.features.news.domain.usecase.GetNewsListUseCase
-import com.dre.loyalty.features.news.domain.usecase.GetNewsListUseCase.Param
 import javax.inject.Inject
 
 class NewsListViewModel @Inject constructor(
@@ -22,7 +22,7 @@ class NewsListViewModel @Inject constructor(
 
     fun loadData() {
         _loading.value = View.VISIBLE
-        getNewsListUseCase(Param("test", "test")) {
+        getNewsListUseCase(UseCase.None()) {
             it.fold(::handleFailure, ::handleSuccessGetNews)
         }
     }

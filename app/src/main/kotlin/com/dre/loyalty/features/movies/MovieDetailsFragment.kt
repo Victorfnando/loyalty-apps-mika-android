@@ -18,11 +18,12 @@ package com.dre.loyalty.features.movies
 import android.os.Bundle
 import android.view.View
 import com.dre.loyalty.R
-import com.dre.loyalty.core.exception.Failure
-import com.dre.loyalty.core.exception.Failure.NetworkConnection
-import com.dre.loyalty.core.exception.Failure.ServerError
-import com.dre.loyalty.core.extension.*
+import com.dre.loyalty.core.networking.exception.Failure
+import com.dre.loyalty.core.networking.exception.Failure.NetworkConnection
+import com.dre.loyalty.core.networking.exception.Failure.ServerError
 import com.dre.loyalty.core.platform.BaseFragment
+import com.dre.loyalty.core.platform.extension.*
+import com.dre.loyalty.core.platform.extension.failure
 import com.dre.loyalty.features.movies.MovieFailure.NonExistentMovie
 import kotlinx.android.synthetic.main.fragment_movie_details.*
 import kotlinx.android.synthetic.main.toolbar.*

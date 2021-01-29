@@ -9,10 +9,10 @@ package com.dre.loyalty.features.authentication.presentation.inputpassword.scree
 
 import android.view.View
 import com.dre.loyalty.R
-import com.dre.loyalty.core.functional.Event
+import com.dre.loyalty.core.platform.functional.Event
 import com.dre.loyalty.core.model.User
-import com.dre.loyalty.core.response.BasicResponse
-import com.dre.loyalty.core.util.enumtype.ConfirmationSheetType
+import com.dre.loyalty.core.networking.response.BasicResponse
+import com.dre.loyalty.core.platform.util.enumtype.ConfirmationSheetType
 import com.dre.loyalty.features.authentication.domain.usecase.DoResetPasswordUseCase
 import com.dre.loyalty.features.authentication.presentation.inputpassword.entity.InputPasswordState
 import com.dre.loyalty.features.authentication.presentation.inputpassword.entity.InputPasswordSubmitState

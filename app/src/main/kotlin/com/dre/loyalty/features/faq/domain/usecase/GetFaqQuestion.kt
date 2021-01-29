@@ -1,7 +1,7 @@
 package com.dre.loyalty.features.faq.domain.usecase
 
-import com.dre.loyalty.core.exception.Failure
-import com.dre.loyalty.core.functional.Either
+import com.dre.loyalty.core.networking.exception.Failure
+import com.dre.loyalty.core.platform.functional.Either
 import com.dre.loyalty.core.interactor.UseCase
 import com.dre.loyalty.features.faq.domain.FaqRepositoryContract
 import com.dre.loyalty.features.faq.domain.entity.FrequentlyAskedQuestion

@@ -1,8 +1,8 @@
 package com.dre.loyalty.features.hospital.data.repository
 
-import com.dre.loyalty.core.exception.Failure
-import com.dre.loyalty.core.extension.request
-import com.dre.loyalty.core.functional.Either
+import com.dre.loyalty.core.networking.exception.Failure
+import com.dre.loyalty.core.platform.extension.request
+import com.dre.loyalty.core.platform.functional.Either
 import com.dre.loyalty.core.model.Hospital
 import com.dre.loyalty.core.platform.NetworkHandler
 import com.dre.loyalty.features.hospital.data.entity.mapper.HospitalListResponseMapper

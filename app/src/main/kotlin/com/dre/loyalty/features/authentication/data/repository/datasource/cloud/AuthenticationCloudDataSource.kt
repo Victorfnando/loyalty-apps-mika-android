@@ -10,13 +10,12 @@
 
 package com.dre.loyalty.features.authentication.data.repository.datasource.cloud
 
-import com.dre.loyalty.core.response.BasicResponse
-import com.dre.loyalty.core.response.Response
-import com.dre.loyalty.core.service.AuthenticationService
+import com.dre.loyalty.core.networking.response.BasicResponse
+import com.dre.loyalty.core.networking.response.Response
+import com.dre.loyalty.core.networking.AuthenticationService
 import com.dre.loyalty.features.authentication.data.entity.request.*
 import com.dre.loyalty.features.authentication.data.entity.response.ForgotPasswordEmailVerificationResponse
 import com.dre.loyalty.features.authentication.data.entity.response.LoginResponse
-import com.dre.loyalty.features.authentication.domain.usecase.DoLoginUseCase
 import retrofit2.Call
 import javax.inject.Inject
 

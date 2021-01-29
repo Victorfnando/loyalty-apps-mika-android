@@ -16,12 +16,12 @@
 package com.dre.loyalty.features.movies
 
 import android.content.Context
-import com.dre.loyalty.core.exception.Failure
-import com.dre.loyalty.core.functional.Either
-import com.dre.loyalty.core.functional.Either.Right
+import com.dre.loyalty.core.networking.exception.Failure
+import com.dre.loyalty.core.platform.functional.Either
+import com.dre.loyalty.core.platform.functional.Either.Right
 import com.dre.loyalty.core.interactor.UseCase
 import com.dre.loyalty.core.interactor.UseCase.None
-import com.dre.loyalty.core.navigation.Navigator
+import com.dre.loyalty.core.platform.navigation.Navigator
 import com.dre.loyalty.features.movies.PlayMovie.Params
 import javax.inject.Inject
 

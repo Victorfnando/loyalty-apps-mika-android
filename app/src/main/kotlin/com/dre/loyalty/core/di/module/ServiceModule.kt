@@ -1,6 +1,6 @@
 package com.dre.loyalty.core.di.module
 
-import com.dre.loyalty.core.service.*
+import com.dre.loyalty.core.networking.*
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit

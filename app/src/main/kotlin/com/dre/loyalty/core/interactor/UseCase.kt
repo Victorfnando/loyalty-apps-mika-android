@@ -15,8 +15,8 @@
  */
 package com.dre.loyalty.core.interactor
 
-import com.dre.loyalty.core.exception.Failure
-import com.dre.loyalty.core.functional.Either
+import com.dre.loyalty.core.networking.exception.Failure
+import com.dre.loyalty.core.platform.functional.Either
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async

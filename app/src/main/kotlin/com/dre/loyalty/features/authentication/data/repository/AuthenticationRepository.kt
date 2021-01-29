@@ -10,13 +10,13 @@
 
 package com.dre.loyalty.features.authentication.data.repository
 
-import com.dre.loyalty.core.exception.Failure
-import com.dre.loyalty.core.extension.request
-import com.dre.loyalty.core.functional.Either
-import com.dre.loyalty.core.functional.getOrElseNull
+import com.dre.loyalty.core.networking.exception.Failure
+import com.dre.loyalty.core.platform.extension.request
+import com.dre.loyalty.core.platform.functional.Either
+import com.dre.loyalty.core.platform.functional.getOrElseNull
 import com.dre.loyalty.core.model.AuthCertificate
 import com.dre.loyalty.core.platform.NetworkHandler
-import com.dre.loyalty.core.response.BasicResponse
+import com.dre.loyalty.core.networking.response.BasicResponse
 import com.dre.loyalty.features.authentication.data.entity.mapper.AuthMapper
 import com.dre.loyalty.features.authentication.data.entity.request.*
 import com.dre.loyalty.features.authentication.data.repository.datasource.cloud.AuthenticationCloudDataSourceContract

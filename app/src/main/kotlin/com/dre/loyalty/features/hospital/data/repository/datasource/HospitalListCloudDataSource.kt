@@ -1,7 +1,7 @@
 package com.dre.loyalty.features.hospital.data.repository.datasource
 
-import com.dre.loyalty.core.service.HospitalService
-import com.dre.loyalty.core.response.Response
+import com.dre.loyalty.core.networking.HospitalService
+import com.dre.loyalty.core.networking.response.Response
 import com.dre.loyalty.features.hospital.data.entity.response.HospitalResponse
 import com.dre.loyalty.features.hospital.domain.usecase.GetHospitalListUseCase.Param
 import retrofit2.Call

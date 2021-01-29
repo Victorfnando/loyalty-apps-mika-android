@@ -17,10 +17,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dre.loyalty.R
-import com.dre.loyalty.core.exception.Failure
-import com.dre.loyalty.core.extension.observe
-import com.dre.loyalty.core.extension.viewModel
-import com.dre.loyalty.core.navigation.Navigator
+import com.dre.loyalty.core.networking.exception.Failure
+import com.dre.loyalty.core.platform.extension.observe
+import com.dre.loyalty.core.platform.extension.viewModel
+import com.dre.loyalty.core.platform.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.databinding.FragmentHospitalListBinding
 import com.dre.loyalty.features.hospital.presentation.entity.EmptyViewState

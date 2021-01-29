@@ -11,8 +11,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import com.dre.loyalty.R
-import com.dre.loyalty.core.util.extension.addBorder
-import com.dre.loyalty.core.util.extension.showIfNotEmpty
+import com.dre.loyalty.core.platform.util.extension.addBorder
+import com.dre.loyalty.core.platform.util.extension.showIfNotEmpty
 import com.dre.loyalty.databinding.ItemVerticalFieldLabelBinding
 import com.dre.loyalty.features.invoice.presentation.entity.VerticalFieldLabelState
 import com.dre.loyalty.features.invoice.presentation.detail.enumtype.VerticalValueType

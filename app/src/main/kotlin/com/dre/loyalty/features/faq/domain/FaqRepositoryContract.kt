@@ -1,7 +1,7 @@
 package com.dre.loyalty.features.faq.domain
 
-import com.dre.loyalty.core.exception.Failure
-import com.dre.loyalty.core.functional.Either
+import com.dre.loyalty.core.networking.exception.Failure
+import com.dre.loyalty.core.platform.functional.Either
 import com.dre.loyalty.features.faq.domain.entity.FrequentlyAskedQuestion
 import com.dre.loyalty.features.faq.domain.usecase.GetFaqQuestion.Param
 

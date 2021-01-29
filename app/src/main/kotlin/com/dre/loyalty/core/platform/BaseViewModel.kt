@@ -19,7 +19,7 @@ import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.dre.loyalty.core.exception.Failure
+import com.dre.loyalty.core.networking.exception.Failure
 
 /**
  * Base ViewModel class with default Failure handling.

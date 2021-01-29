@@ -15,7 +15,7 @@
  */
 package com.dre.loyalty.features.movies
 
-import com.dre.loyalty.core.exception.Failure.FeatureFailure
+import com.dre.loyalty.core.networking.exception.Failure.FeatureFailure
 
 class MovieFailure {
     class ListNotAvailable: FeatureFailure()

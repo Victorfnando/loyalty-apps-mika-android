@@ -10,14 +10,13 @@
 
 package com.dre.loyalty.features.authentication.domain.usecase
 
-import com.dre.loyalty.core.exception.Failure
-import com.dre.loyalty.core.functional.Either
+import com.dre.loyalty.core.networking.exception.Failure
+import com.dre.loyalty.core.platform.functional.Either
 import com.dre.loyalty.core.interactor.UseCase
 import com.dre.loyalty.core.model.AuthCertificate
 import com.dre.loyalty.features.authentication.data.entity.request.LoginRequest
 import com.dre.loyalty.features.authentication.domain.AuthenticationRepositoryContract
 import com.dre.loyalty.features.authentication.domain.usecase.DoLoginUseCase.Param
-import com.google.gson.annotations.SerializedName
 import javax.inject.Inject
 
 class DoLoginUseCase @Inject constructor(

@@ -11,11 +11,11 @@ import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dre.loyalty.R
-import com.dre.loyalty.core.functional.Event
+import com.dre.loyalty.core.platform.functional.Event
 import com.dre.loyalty.core.model.User
 import com.dre.loyalty.core.platform.BaseViewModel
-import com.dre.loyalty.core.util.enumtype.ConfirmationSheetType
-import com.dre.loyalty.core.util.validator.type.ValidationType
+import com.dre.loyalty.core.platform.util.enumtype.ConfirmationSheetType
+import com.dre.loyalty.core.platform.util.validator.type.ValidationType
 import com.dre.loyalty.features.authentication.presentation.inputpassword.entity.InputPasswordState
 import com.dre.loyalty.features.authentication.presentation.inputpassword.entity.InputPasswordSubmitState
 import com.dre.loyalty.features.authentication.presentation.inputpassword.entity.InputPasswordTitleState

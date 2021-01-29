@@ -11,7 +11,7 @@
 package com.dre.loyalty.features.home.data.entity.mapper
 
 import com.dre.loyalty.core.model.*
-import com.dre.loyalty.core.response.Response
+import com.dre.loyalty.core.networking.response.Response
 import com.dre.loyalty.features.home.data.entity.response.*
 import javax.inject.Inject
 

@@ -13,7 +13,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.dre.loyalty.R
-import com.dre.loyalty.core.extension.inTransaction
+import com.dre.loyalty.core.platform.extension.inTransaction
 import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.databinding.ActivityHomeBinding
 import com.dre.loyalty.features.hospital.presentation.screen.HospitalListFragment

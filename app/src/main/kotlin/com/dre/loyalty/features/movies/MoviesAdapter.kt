@@ -19,9 +19,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dre.loyalty.R
-import com.dre.loyalty.core.extension.inflate
-import com.dre.loyalty.core.extension.loadFromUrl
-import com.dre.loyalty.core.navigation.Navigator
+import com.dre.loyalty.core.platform.extension.inflate
+import com.dre.loyalty.core.platform.extension.loadFromUrl
+import com.dre.loyalty.core.platform.navigation.Navigator
 import kotlinx.android.synthetic.main.row_movie.view.*
 import javax.inject.Inject
 import kotlin.properties.Delegates

@@ -9,7 +9,7 @@ package com.dre.loyalty.features.profile.presentation.profile.screen
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.dre.loyalty.core.functional.Event
+import com.dre.loyalty.core.platform.functional.Event
 import com.dre.loyalty.core.platform.BaseViewModel
 import javax.inject.Inject
 

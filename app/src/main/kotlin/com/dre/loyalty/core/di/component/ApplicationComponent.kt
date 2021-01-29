@@ -17,7 +17,7 @@ package com.dre.loyalty.core.di.component
 
 import com.dre.loyalty.AndroidApplication
 import com.dre.loyalty.core.di.module.*
-import com.dre.loyalty.core.navigation.RouteActivity
+import com.dre.loyalty.core.platform.navigation.RouteActivity
 import com.dre.loyalty.features.authenticationselector.presentation.AuthenticationSelectorFragment
 import com.dre.loyalty.features.cashback.presentation.screen.CashBackListFragment
 import com.dre.loyalty.features.profile.presentation.changeprofile.screen.UpdateProfileFragment

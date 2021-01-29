@@ -11,8 +11,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import com.dre.loyalty.R
-import com.dre.loyalty.core.util.extension.addBorder
-import com.dre.loyalty.core.util.extension.formatToCurrency
+import com.dre.loyalty.core.platform.util.extension.addBorder
+import com.dre.loyalty.core.platform.util.extension.formatToCurrency
 import com.dre.loyalty.databinding.ItemInvoiceBinding
 import com.dre.loyalty.features.invoice.presentation.entity.Invoice
 import com.mikepenz.fastadapter.binding.AbstractBindingItem

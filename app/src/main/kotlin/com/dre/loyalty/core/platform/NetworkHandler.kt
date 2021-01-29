@@ -18,7 +18,7 @@ package com.dre.loyalty.core.platform
 import android.content.Context
 import android.net.NetworkCapabilities
 import android.os.Build
-import com.dre.loyalty.core.extension.connectivityManager
+import com.dre.loyalty.core.platform.extension.connectivityManager
 import javax.inject.Inject
 import javax.inject.Singleton
 

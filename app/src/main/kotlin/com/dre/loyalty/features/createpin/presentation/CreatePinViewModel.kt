@@ -10,9 +10,8 @@ package com.dre.loyalty.features.createpin.presentation
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dre.loyalty.R
-import com.dre.loyalty.core.functional.Event
+import com.dre.loyalty.core.platform.functional.Event
 import com.dre.loyalty.core.platform.BaseViewModel
-import com.dre.loyalty.core.util.validator.type.ValidationType
 import com.dre.loyalty.features.createpin.presentation.enums.CreatePinType
 import javax.inject.Inject
 

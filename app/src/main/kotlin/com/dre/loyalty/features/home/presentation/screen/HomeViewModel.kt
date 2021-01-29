@@ -10,8 +10,7 @@ package com.dre.loyalty.features.home.presentation.screen
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.dre.loyalty.core.exception.Failure
-import com.dre.loyalty.core.functional.Event
+import com.dre.loyalty.core.platform.functional.Event
 import com.dre.loyalty.core.model.Card
 import com.dre.loyalty.core.model.CashBack
 import com.dre.loyalty.core.model.Home
@@ -51,7 +50,7 @@ class HomeViewModel @Inject constructor(
 
     fun loadData() {
         _loading.value = View.VISIBLE
-        getHomeDataUseCase(Param("test", "tes")) {
+        getHomeDataUseCase(Param("test")) {
             it.fold(::handleFailure, ::handleSuccessGetHome)
         }
     }

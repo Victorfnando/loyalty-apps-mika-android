@@ -9,9 +9,9 @@ package com.dre.loyalty.features.contactus.presentation
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.dre.loyalty.core.functional.Event
+import com.dre.loyalty.core.platform.functional.Event
 import com.dre.loyalty.core.platform.BaseViewModel
-import com.dre.loyalty.core.util.validator.type.ValidationType
+import com.dre.loyalty.core.platform.util.validator.type.ValidationType
 import com.dre.loyalty.core.view.sheet.SheetListState
 import com.dre.loyalty.features.contactus.presentation.entity.InputMessageState
 import com.dre.loyalty.features.contactus.presentation.entity.SendMessageButtonState

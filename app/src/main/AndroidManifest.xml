@@ -23,7 +23,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
 
   <!--Activities-->
     <activity
-        android:name="com.dre.loyalty.core.navigation.RouteActivity"
+        android:name="com.dre.loyalty.core.platform.navigation.RouteActivity"
         android:noHistory="true"
         android:theme="@style/AppTheme.Translucent">
         <intent-filter>

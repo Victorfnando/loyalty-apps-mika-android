@@ -22,17 +22,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProviders
 import com.dre.loyalty.R
-import com.dre.loyalty.core.exception.Failure
-import com.dre.loyalty.core.extension.observe
-import com.dre.loyalty.core.extension.viewModel
-import com.dre.loyalty.core.functional.Event
+import com.dre.loyalty.core.networking.exception.Failure
+import com.dre.loyalty.core.platform.extension.observe
+import com.dre.loyalty.core.platform.functional.Event
 import com.dre.loyalty.core.model.User
-import com.dre.loyalty.core.navigation.Navigator
+import com.dre.loyalty.core.platform.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.core.view.sheet.ConfirmationSheetModal
 import com.dre.loyalty.databinding.FragmentOtpBinding
 import com.dre.loyalty.features.authentication.presentation.inputpassword.enumtype.InputPasswordType
-import com.dre.loyalty.features.authentication.presentation.inputpassword.screen.InputPasswordFragment
 import com.dre.loyalty.features.authentication.presentation.otp.enumType.OtpType
 import javax.inject.Inject
 
@@ -52,6 +50,21 @@ class OtpFragment : BaseFragment() {
 
         override fun afterTextChanged(text: Editable?) {
             vm.handleCodeTextChanged(text.toString())
+        }
+    }
+
+    private val timer = object : CountDownTimer(EMAIL_VERIFICATION_TIME_INTERVAL, COUNT_DOWN_INTERVAL) {
+        override fun onTick(millisUntilFinished: Long) {
+            val seconds = (millisUntilFinished / COUNT_DOWN_INTERVAL)
+            binding?.btnResend?.text = getString(R.string.otp_button_format_resend, seconds)
+        }
+
+        override fun onFinish() {
+            binding?.btnResend?.run {
+                text = getString(R.string.otp_button_reSend)
+                isEnabled = true
+                setTextColor(ContextCompat.getColor(requireContext(), R.color.mainColor))
+            }
         }
     }
 
@@ -80,11 +93,13 @@ class OtpFragment : BaseFragment() {
         vm.init(email)
     }
 
-    override fun onDetach() {
+    override fun onDestroyView() {
+        timer.cancel()
+        timer.onFinish()
         binding?.etPin?.removeTextChangedListener(verificationCodeWatcher)
         (activity as AppCompatActivity).setSupportActionBar(null)
         binding = null
-        super.onDetach()
+        super.onDestroyView()
     }
 
     private fun injectViewModel() {
@@ -122,20 +137,6 @@ class OtpFragment : BaseFragment() {
             binding?.btnResend?.run {
                 isEnabled = false
                 setTextColor(ContextCompat.getColor(requireContext(), R.color.gray_3))
-            }
-            val timer = object : CountDownTimer(EMAIL_VERIFICATION_TIME_INTERVAL, COUNT_DOWN_INTERVAL) {
-                override fun onTick(millisUntilFinished: Long) {
-                    val seconds = (millisUntilFinished / COUNT_DOWN_INTERVAL)
-                    binding?.btnResend?.text = getString(R.string.otp_button_format_resend, seconds)
-                }
-
-                override fun onFinish() {
-                    binding?.btnResend?.run {
-                        text = getString(R.string.otp_button_reSend)
-                        isEnabled = true
-                        setTextColor(ContextCompat.getColor(requireContext(), R.color.mainColor))
-                    }
-                }
             }
             timer.start()
         }

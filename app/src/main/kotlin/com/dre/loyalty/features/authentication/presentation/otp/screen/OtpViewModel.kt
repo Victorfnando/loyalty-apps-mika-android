@@ -12,17 +12,14 @@ package com.dre.loyalty.features.authentication.presentation.otp.screen
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.dre.loyalty.core.functional.Event
+import com.dre.loyalty.core.platform.functional.Event
 import com.dre.loyalty.core.model.User
 import com.dre.loyalty.core.platform.BaseViewModel
-import com.dre.loyalty.core.response.BasicResponse
+import com.dre.loyalty.core.networking.response.BasicResponse
 import com.dre.loyalty.features.authentication.data.entity.request.EmailRequest
-import com.dre.loyalty.features.authentication.data.entity.request.VerifyCodeRequest
 import com.dre.loyalty.features.authentication.domain.entity.OtpCode
-import com.dre.loyalty.features.authentication.domain.usecase.VerifyCodeUseCase
 import com.dre.loyalty.features.authentication.domain.usecase.VerifyEmailUseCase
 import com.dre.loyalty.features.authentication.presentation.otp.enumType.OtpType
-import javax.inject.Inject
 
 private const val OTP_CODE_LENGTH = 6
 abstract class OtpViewModel constructor(

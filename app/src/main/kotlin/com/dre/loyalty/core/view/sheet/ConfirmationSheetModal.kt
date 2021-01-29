@@ -14,7 +14,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import com.andrefrsousa.superbottomsheet.SuperBottomSheetFragment
 import com.bumptech.glide.Glide
-import com.dre.loyalty.core.util.enumtype.ConfirmationSheetType
+import com.dre.loyalty.core.platform.util.enumtype.ConfirmationSheetType
 import com.dre.loyalty.databinding.SheetConfirmationBinding
 
 class ConfirmationSheetModal : SuperBottomSheetFragment() {

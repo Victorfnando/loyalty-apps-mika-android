@@ -10,8 +10,8 @@
 
 package com.dre.loyalty.features.authentication.data.repository.datasource.cloud
 
-import com.dre.loyalty.core.response.BasicResponse
-import com.dre.loyalty.core.response.Response
+import com.dre.loyalty.core.networking.response.BasicResponse
+import com.dre.loyalty.core.networking.response.Response
 import com.dre.loyalty.features.authentication.data.entity.request.*
 import com.dre.loyalty.features.authentication.data.entity.response.ForgotPasswordEmailVerificationResponse
 import com.dre.loyalty.features.authentication.data.entity.response.LoginResponse

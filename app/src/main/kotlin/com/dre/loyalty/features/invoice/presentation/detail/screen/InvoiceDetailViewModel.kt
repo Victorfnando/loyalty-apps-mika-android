@@ -11,8 +11,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dre.loyalty.R
-import com.dre.loyalty.core.functional.Event
-import com.dre.loyalty.core.util.extension.formatToCurrency
+import com.dre.loyalty.core.platform.functional.Event
+import com.dre.loyalty.core.platform.util.extension.formatToCurrency
 import com.dre.loyalty.features.invoice.presentation.entity.Invoice
 import com.dre.loyalty.features.invoice.presentation.list.enumtype.InvoiceType
 import com.dre.loyalty.features.invoice.presentation.entity.VerticalFieldLabelState

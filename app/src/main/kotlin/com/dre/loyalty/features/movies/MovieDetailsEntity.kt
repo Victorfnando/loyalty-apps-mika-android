@@ -15,7 +15,7 @@
  */
 package com.dre.loyalty.features.movies
 
-import com.dre.loyalty.core.extension.empty
+import com.dre.loyalty.core.platform.extension.empty
 
 data class MovieDetailsEntity(private val id: Int,
                               private val title: String,

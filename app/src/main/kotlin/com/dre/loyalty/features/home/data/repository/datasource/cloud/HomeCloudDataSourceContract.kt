@@ -10,7 +10,7 @@
 
 package com.dre.loyalty.features.home.data.repository.datasource.cloud
 
-import com.dre.loyalty.core.response.Response
+import com.dre.loyalty.core.networking.response.Response
 import com.dre.loyalty.features.home.data.entity.response.HomeResponse
 import com.dre.loyalty.features.home.domain.usecase.GetHomeDataUseCase
 import retrofit2.Call

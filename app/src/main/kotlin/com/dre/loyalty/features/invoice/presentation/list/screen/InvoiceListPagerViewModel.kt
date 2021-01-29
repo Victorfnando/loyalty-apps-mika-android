@@ -10,7 +10,7 @@ package com.dre.loyalty.features.invoice.presentation.list.screen
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dre.loyalty.R
-import com.dre.loyalty.core.functional.Event
+import com.dre.loyalty.core.platform.functional.Event
 import com.dre.loyalty.core.platform.BaseViewModel
 import com.dre.loyalty.core.view.sheet.SheetListState
 import com.dre.loyalty.features.invoice.domain.usecase.GetInvoiceUseCase

@@ -10,12 +10,11 @@ package com.dre.loyalty.features.authentication.presentation.register.screen
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.dre.loyalty.core.functional.Event
+import com.dre.loyalty.core.platform.functional.Event
 import com.dre.loyalty.core.platform.BaseViewModel
-import com.dre.loyalty.core.response.BasicResponse
-import com.dre.loyalty.core.util.validator.type.ValidationType
+import com.dre.loyalty.core.networking.response.BasicResponse
+import com.dre.loyalty.core.platform.util.validator.type.ValidationType
 import com.dre.loyalty.features.authentication.data.entity.request.EmailRequest
-import com.dre.loyalty.features.authentication.domain.usecase.DoRegisterUseCase
 import com.dre.loyalty.features.authentication.domain.usecase.VerifyEmailUseCase
 import com.dre.loyalty.features.authentication.presentation.register.entity.RegisterButtonState
 import com.dre.loyalty.features.authentication.presentation.register.entity.RegisterEmailInputState

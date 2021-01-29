@@ -15,7 +15,7 @@
  */
 package com.dre.loyalty.features.authentication.data.repository
 
-import com.dre.loyalty.core.util.preferences.AuthenticationManager
+import com.dre.loyalty.core.platform.util.preferences.AuthenticationManager
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -26,5 +26,6 @@ class Authenticator @Inject constructor(
     //Learning purpose: We assume the user is always logged in
     //Here you should put your own logic to return whether the user
     //is authenticated or not
-    fun userLoggedIn(): Boolean =false
+    fun userLoggedIn(): Boolean = authenticationManager.getUserId() != null
+            && authenticationManager.getToken() != null
 }

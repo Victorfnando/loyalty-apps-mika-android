@@ -76,5 +76,6 @@
     <dimen name="brand_height">19dp</dimen>
 
     <!--Home-->
-    <dimen name="logo_width">120dp</dimen>
+    <dimen name="logo_width">130dp</dimen>
+    <dimen name="logo_height">31dp</dimen>
 </resources>

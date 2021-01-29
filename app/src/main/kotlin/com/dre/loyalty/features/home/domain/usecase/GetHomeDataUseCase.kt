@@ -1,7 +1,7 @@
 package com.dre.loyalty.features.home.domain.usecase
 
-import com.dre.loyalty.core.exception.Failure
-import com.dre.loyalty.core.functional.Either
+import com.dre.loyalty.core.networking.exception.Failure
+import com.dre.loyalty.core.platform.functional.Either
 import com.dre.loyalty.core.interactor.UseCase
 import com.dre.loyalty.core.model.Home
 import com.dre.loyalty.features.home.domain.HomeRepositoryContract
@@ -19,7 +19,5 @@ class GetHomeDataUseCase @Inject constructor(
     data class Param(
         @SerializedName("user_id")
         val id: String,
-        @SerializedName("token")
-        val token: String
     )
 }
