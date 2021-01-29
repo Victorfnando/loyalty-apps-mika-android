@@ -10,6 +10,7 @@ package com.dre.loyalty.features.authentication.presentation.inputpassword.scree
 import android.content.Context
 import android.content.Intent
 import android.view.MenuItem
+import com.dre.loyalty.core.model.User
 import com.dre.loyalty.core.platform.BaseActivity
 import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.features.authentication.presentation.inputpassword.enumtype.InputPasswordType
@@ -17,6 +18,7 @@ import com.dre.loyalty.features.authentication.presentation.inputpassword.enumty
 class InputPasswordActivity : BaseActivity() {
 
     override fun fragment(): BaseFragment = InputPasswordFragment.newInstance(
+        intent.extras?.get(EXTRA_USER) as User,
         intent.extras?.get(EXTRA_PASSWORD_INPUT_TYPE) as InputPasswordType
     )
 
@@ -30,10 +32,12 @@ class InputPasswordActivity : BaseActivity() {
 
     companion object {
         private const val EXTRA_PASSWORD_INPUT_TYPE = "EXTRA_PASSWORD_INPUT_TYPE"
+        private const val EXTRA_USER = "EXTRA_USER"
 
-        fun callingIntent(context: Context, passwordType: InputPasswordType): Intent {
+        fun callingIntent(context: Context, user: User, passwordType: InputPasswordType): Intent {
             return Intent(context, InputPasswordActivity::class.java).also {
                 it.putExtra(EXTRA_PASSWORD_INPUT_TYPE, passwordType)
+                it.putExtra(EXTRA_USER, user)
             }
         }
     }

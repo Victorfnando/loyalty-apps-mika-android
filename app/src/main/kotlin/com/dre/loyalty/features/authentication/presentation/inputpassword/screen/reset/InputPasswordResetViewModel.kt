@@ -8,6 +8,7 @@
 package com.dre.loyalty.features.authentication.presentation.inputpassword.screen.reset
 
 import com.dre.loyalty.R
+import com.dre.loyalty.core.model.User
 import com.dre.loyalty.core.util.enumtype.ConfirmationSheetType
 import com.dre.loyalty.features.authentication.presentation.inputpassword.entity.InputPasswordState
 import com.dre.loyalty.features.authentication.presentation.inputpassword.entity.InputPasswordSubmitState
@@ -33,6 +34,10 @@ class InputPasswordResetViewModel @Inject constructor() : InputPasswordViewModel
         _submitButtonState.value = InputPasswordSubmitState(
             R.string.inputPassword_label_button_reset, false
         )
+    }
+
+    override fun doApiTransaction(user: User) {
+
     }
 
     override fun getSuccessSheetType(): ConfirmationSheetType =

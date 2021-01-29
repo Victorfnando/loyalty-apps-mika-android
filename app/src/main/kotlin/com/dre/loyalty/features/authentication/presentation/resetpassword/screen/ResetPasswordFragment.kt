@@ -114,7 +114,6 @@ class ResetPasswordFragment : BaseFragment() {
         event?.getIfNotHandled()?.let {
             val modal = ConfirmationSheetModal.newInstance(it)
             modal.primaryButtonClickListener = {
-                navigator.showInputPasswordScreen(requireContext(), InputPasswordType.RESET)
             }
             modal.show(requireActivity().supportFragmentManager, ConfirmationSheetModal.TAG)
         }

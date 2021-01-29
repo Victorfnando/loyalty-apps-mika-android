@@ -152,6 +152,7 @@ class OtpFragment : BaseFragment() {
     private fun showUserDetailScreen(event: Event<String>?) {
         event?.getIfNotHandled()?.let {
             navigator.showUserDetailForm(requireContext(), it)
+            requireActivity().finish()
         }
     }
 

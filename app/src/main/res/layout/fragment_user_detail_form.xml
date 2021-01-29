@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <include
         android:id="@+id/toolbar_layout"
@@ -16,16 +14,24 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:indeterminate="true"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_layout" />
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/sticky_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/progress">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:background="@color/white"
             android:paddingStart="@dimen/space_16dp"
             android:paddingTop="@dimen/space_24dp"
             android:paddingEnd="@dimen/space_16dp"
@@ -34,92 +40,122 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_form_title"
                 style="@style/Heading5"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/userDetail_title" />
+                android:text="@string/userDetail_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_form_desc"
                 style="@style/SmallLabel"
-                android:textColor="@color/dark2"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_12dp"
-                android:text="@string/userDetail_label_desc" />
+                android:text="@string/userDetail_label_desc"
+                android:textColor="@color/dark2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_form_title" />
 
             <com.dre.loyalty.core.view.PrefixEditTextWithLabel
                 android:id="@+id/et_form_firstname"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_24dp"
                 android:hint="@string/userDetail_hint_firstName"
                 android:inputType="text"
-                app:fieldLabel="@string/userDetail_label_firstName" />
+                app:fieldLabel="@string/userDetail_label_firstName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_form_desc" />
 
             <com.dre.loyalty.core.view.PrefixEditTextWithLabel
                 android:id="@+id/et_form_lastname"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_20dp"
                 android:hint="@string/userDetail_hint_lastName"
                 android:inputType="text"
-                app:fieldLabel="@string/userDetail_label_lastName" />
+                app:fieldLabel="@string/userDetail_label_lastName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_form_firstname" />
 
             <com.dre.loyalty.core.view.PrefixEditTextWithLabel
                 android:id="@+id/et_form_ktp"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_20dp"
                 android:hint="@string/userDetail_hint_ktpNumber"
                 android:inputType="number"
                 android:maxLength="13"
-                app:fieldLabel="@string/userDetail_label_ktpNumber" />
+                app:fieldLabel="@string/userDetail_label_ktpNumber"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_form_lastname" />
+
+            <com.dre.loyalty.core.view.PrefixEditTextWithLabel
+                android:id="@+id/et_phone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_20dp"
+                android:hint="@string/userDetail_hint_phone"
+                android:inputType="number"
+                android:maxLength="13"
+                app:fieldLabel="@string/userDetail_label_phone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_form_ktp" />
 
             <com.dre.loyalty.core.view.PrefixEditTextWithLabel
                 android:id="@+id/et_form_email"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_20dp"
                 android:hint="@string/userDetail_hint_email"
                 android:inputType="textEmailAddress"
                 app:fieldLabel="@string/userDetail_label_email"
-                app:label="@string/userDetail_label_email" />
+                app:label="@string/userDetail_label_email"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_phone" />
 
             <com.dre.loyalty.core.view.PrefixEditTextWithLabel
                 android:id="@+id/et_form_gender"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_20dp"
                 android:drawableEnd="@drawable/ic_expand"
                 android:inputType="none"
                 android:text="@string/userDetail_hint_gender"
-                app:fieldLabel="@string/userDetail_label_gender" />
+                app:fieldLabel="@string/userDetail_label_gender"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_form_email" />
 
             <com.dre.loyalty.core.view.PrefixEditTextWithLabel
                 android:id="@+id/et_form_dob"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_20dp"
                 android:drawableEnd="@drawable/ic_calendar"
                 android:inputType="none"
                 android:text="@string/userDetail_hint_dob"
-                app:fieldLabel="@string/userDetail_label_dob" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_form_tnc"
-                style="@style/NormalText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space_24dp" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_register"
-                style="@style/NormalButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space_20dp"
-                android:text="@string/userDetail_button_register" />
-        </androidx.appcompat.widget.LinearLayoutCompat>
+                app:fieldLabel="@string/userDetail_label_dob"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_form_gender" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
-</androidx.appcompat.widget.LinearLayoutCompat>
+    <com.dre.loyalty.core.view.StickyFooterButton
+        android:id="@+id/sticky_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:footerButtonText="@string/userDetail_button_register"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

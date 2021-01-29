@@ -21,6 +21,8 @@ import android.content.Intent.ACTION_DIAL
 import android.net.Uri
 import android.provider.Settings
 import android.view.View
+import com.dre.loyalty.core.model.User
+import com.dre.loyalty.features.authentication.data.entity.request.RegisterRequest
 import com.dre.loyalty.features.authentication.data.repository.Authenticator
 import com.dre.loyalty.features.authenticationselector.presentation.AuthenticationSelectorActivity
 import com.dre.loyalty.features.cashback.presentation.screen.CashBackListActivity
@@ -59,7 +61,14 @@ import javax.inject.Singleton
         }
     }
 
-    fun showLogin(context: Context) = context.startActivity(LoginActivity.callingIntent(context))
+    fun showLogin(context: Context, clearTask: Boolean = false) =
+        context.startActivity(
+            LoginActivity.callingIntent(context).also {
+                if (clearTask) {
+                    it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                }
+            }
+        )
     fun showRegister(context: Context) = context.startActivity(RegisterActivity.callingIntent(context))
 
     private fun showAuthSelector(context: Context) =
@@ -156,8 +165,8 @@ import javax.inject.Singleton
         context.startActivity(PhotoViewActivity.callingIntent(context, url))
     }
 
-    fun showInputPasswordScreen(context: Context, passwordType: InputPasswordType) {
-        context.startActivity(InputPasswordActivity.callingIntent(context, passwordType))
+    fun showInputPasswordScreen(context: Context, user: User, type: InputPasswordType) {
+        context.startActivity(InputPasswordActivity.callingIntent(context, user, type))
     }
 
     fun showWalletScreen(context: Context) {

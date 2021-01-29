@@ -15,6 +15,8 @@
     <string name="validation_failed_password_confirm">Password Belum Sesuai</string>
     <string name="validation_failed_format_email">Format e-mail salah</string>
     <string name="validation_failed_format_number">Hanya boleh angka</string>
+    <string name="validation_failed_format_ktp">Nomor KTP harus 13 karakter</string>
+    <string name="validation_failed_format_phone">Format nomor HP salah</string>
 
     <string name="sheet_noInternet_title">Yah, Internet kamu mati</string>
     <string name="sheet_noInternet_desc">Silahkan cek wifi atau kuota internet kamu</string>

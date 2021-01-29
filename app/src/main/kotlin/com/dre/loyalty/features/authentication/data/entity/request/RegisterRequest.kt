@@ -10,8 +10,10 @@
 
 package com.dre.loyalty.features.authentication.data.entity.request
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 
+@Keep
 data class RegisterRequest(
     @SerializedName("firstName")
     val firstName: String,

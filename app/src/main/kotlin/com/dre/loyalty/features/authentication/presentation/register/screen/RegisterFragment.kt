@@ -78,7 +78,7 @@ class RegisterFragment : BaseFragment() {
             }
             btnRegister.setOnClickListener {
                 vm.handleRegisterButtonClicked(
-                    binding?.etMail?.text.toString()
+                    binding?.etMail?.editText?.text.toString()
                 )
             }
             etMail.editText.addTextChangedListener(emailChangedListener)

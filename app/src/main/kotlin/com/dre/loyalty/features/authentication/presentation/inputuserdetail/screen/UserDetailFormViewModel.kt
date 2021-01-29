@@ -11,13 +11,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import com.dre.loyalty.core.functional.Event
+import com.dre.loyalty.core.model.User
 import com.dre.loyalty.core.platform.BaseViewModel
 import com.dre.loyalty.core.util.validator.type.ValidationType
-import com.dre.loyalty.features.authentication.presentation.inputuserdetail.entity.EmailInputState
-import com.dre.loyalty.features.authentication.presentation.inputuserdetail.entity.FirstNameInputState
-import com.dre.loyalty.features.authentication.presentation.inputuserdetail.entity.KTPInputState
-import com.dre.loyalty.features.authentication.presentation.inputuserdetail.entity.LastNameInputState
-import com.dre.loyalty.features.authentication.presentation.inputuserdetail.entity.RegisterButtonState
+import com.dre.loyalty.features.authentication.data.entity.request.RegisterRequest
+import com.dre.loyalty.features.authentication.presentation.inputuserdetail.entity.*
 import javax.inject.Inject
 
 class UserDetailFormViewModel @Inject constructor() : BaseViewModel() {
@@ -49,11 +47,16 @@ class UserDetailFormViewModel @Inject constructor() : BaseViewModel() {
     private val _emailInputState: MutableLiveData<EmailInputState> = MutableLiveData()
     val emailInputState: LiveData<EmailInputState> = _emailInputState
 
+    private val _phoneInputState: MutableLiveData<PhoneInputState> = MutableLiveData()
+    val phoneInputState: LiveData<PhoneInputState> = _phoneInputState
+
     private val _registerButtonState: MutableLiveData<RegisterButtonState> = MediatorLiveData()
     val registerButtonState: LiveData<RegisterButtonState> = _registerButtonState
 
-    private val _navigateToCreateSecurity: MutableLiveData<Event<Boolean>> = MutableLiveData()
-    val navigateToCreateSecurity: LiveData<Event<Boolean>> = _navigateToCreateSecurity
+    private val _navigateToCreateSecurity: MutableLiveData<Event<User>> = MutableLiveData()
+    val navigateToCreateSecurity: LiveData<Event<User>> = _navigateToCreateSecurity
+
+    private var request: User? = null
 
     init {
         _firstNameInputState.value = FirstNameInputState(-1)
@@ -71,7 +74,24 @@ class UserDetailFormViewModel @Inject constructor() : BaseViewModel() {
         _showGenderSheet.value = Event(_selectedGender.value)
     }
 
-    fun handleRegisterButtonClicked() {
+    fun handleRegisterButtonClicked(
+        firstName: String,
+        lastName: String,
+        identificationNumber: String,
+        phone: String,
+        email: String,
+        gender: String,
+        dob: String
+    ) {
+        request = User(
+            firstName,
+            lastName,
+            identificationNumber,
+            phone,
+            gender,
+            dob,
+            email,
+            "")
         _showConfirmationSheet.value = Event(true)
     }
 
@@ -115,6 +135,16 @@ class UserDetailFormViewModel @Inject constructor() : BaseViewModel() {
         checkButtonState()
     }
 
+    fun handlePhoneTextChanged(text: String) {
+        val result = ValidationType.PHONE.strategy.validate(text)
+        if (result.isPass) {
+            _phoneInputState.value = PhoneInputState(null)
+        } else {
+            _phoneInputState.value = PhoneInputState(result.errorMessage)
+        }
+        checkButtonState()
+    }
+
     fun handleEmailTextChangedListener(text: String) {
         val result = ValidationType.EMAIL.strategy.validate(text)
         if (result.isPass) {
@@ -126,7 +156,9 @@ class UserDetailFormViewModel @Inject constructor() : BaseViewModel() {
     }
 
     fun handleConfirmationSheetConfirmButtonClicked() {
-        _navigateToCreateSecurity.value = Event(true)
+        request?.let {
+            _navigateToCreateSecurity.value = Event(it)
+        }
     }
 
     private fun checkButtonState() {
@@ -140,4 +172,5 @@ class UserDetailFormViewModel @Inject constructor() : BaseViewModel() {
             && _emailInputState.value?.error == null
             && _selectedGender.value != null
             && _selectedDate.value != null
+            && _phoneInputState.value?.error == null
 }

@@ -22,18 +22,15 @@ import com.dre.loyalty.R
 import com.dre.loyalty.core.extension.observe
 import com.dre.loyalty.core.extension.viewModel
 import com.dre.loyalty.core.functional.Event
+import com.dre.loyalty.core.model.User
 import com.dre.loyalty.core.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.core.util.enumtype.ConfirmationSheetType
 import com.dre.loyalty.databinding.FragmentUserDetailFormBinding
 import com.dre.loyalty.features.authentication.presentation.inputpassword.enumtype.InputPasswordType
 import com.dre.loyalty.features.authentication.presentation.inputuserdetail.screen.dialog.DatePickerDialogFragment
-import com.dre.loyalty.features.authentication.presentation.inputuserdetail.entity.EmailInputState
-import com.dre.loyalty.features.authentication.presentation.inputuserdetail.entity.FirstNameInputState
-import com.dre.loyalty.features.authentication.presentation.inputuserdetail.entity.KTPInputState
-import com.dre.loyalty.features.authentication.presentation.inputuserdetail.entity.LastNameInputState
-import com.dre.loyalty.features.authentication.presentation.inputuserdetail.entity.RegisterButtonState
 import com.dre.loyalty.core.view.sheet.ConfirmationSheetModal
+import com.dre.loyalty.features.authentication.presentation.inputuserdetail.entity.*
 import com.dre.loyalty.features.authentication.presentation.inputuserdetail.screen.sheet.GenderSheetModal
 import javax.inject.Inject
 
@@ -70,6 +67,12 @@ class UserDetailFormFragment : BaseFragment() {
         override fun afterTextChanged(s: Editable?) { vm.handleKtpTextChangedListener(s.toString()) }
     }
 
+    private val phoneWatcher: TextWatcher = object : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        override fun afterTextChanged(s: Editable?) { vm.handlePhoneTextChanged(s.toString()) }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
@@ -81,6 +84,7 @@ class UserDetailFormFragment : BaseFragment() {
             observe(firstNameInputState, ::renderFirstName)
             observe(lastNameInputState, ::renderLastName)
             observe(ktpInputState, ::renderKtp)
+            observe(phoneInputState, ::updatePhoneInputState)
             observe(emailInputState, ::renderEmail)
             observe(registerButtonState, ::renderRegisterButton)
             observe(showConfirmationSheet, ::showConfirmationSheet)
@@ -96,19 +100,14 @@ class UserDetailFormFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         bindToolbar()
-        binding?.tvFormTnc?.text = HtmlCompat.fromHtml(
-            getString(R.string.userDetail_label_tnc),
-            HtmlCompat.FROM_HTML_MODE_LEGACY
-        )
         binding?.etFormFirstname?.editText?.addTextChangedListener(firstNameWatcher)
         binding?.etFormLastname?.editText?.addTextChangedListener(lastNameWatcher)
         binding?.etFormEmail?.editText?.addTextChangedListener(emailWatcher)
         binding?.etFormKtp?.editText?.addTextChangedListener(ktpWatcher)
+        binding?.etPhone?.editText?.addTextChangedListener(phoneWatcher)
         bindEtFormGender()
         bindEtDate()
-        binding?.btnRegister?.setOnClickListener {
-            vm.handleRegisterButtonClicked()
-        }
+        bindFooter()
     }
 
     override fun onDetach() {
@@ -116,6 +115,7 @@ class UserDetailFormFragment : BaseFragment() {
         binding?.etFormLastname?.editText?.removeTextChangedListener(lastNameWatcher)
         binding?.etFormEmail?.editText?.removeTextChangedListener(emailWatcher)
         binding?.etFormKtp?.editText?.removeTextChangedListener(ktpWatcher)
+        binding?.etPhone?.editText?.removeTextChangedListener(phoneWatcher)
         (activity as AppCompatActivity).setSupportActionBar(null)
         binding = null
         super.onDetach()
@@ -174,12 +174,11 @@ class UserDetailFormFragment : BaseFragment() {
     }
 
     private fun renderRegisterButton(state: RegisterButtonState?) {
-        binding?.btnRegister?.isEnabled = state?.isEnabled ?: false
+        binding?.stickyButton?.isButtonEnabled = state?.isEnabled ?: false
     }
 
     private fun renderFirstName(state: FirstNameInputState?) {
-        if (state?.error == -1) return
-        binding?.etFormFirstname?.error = if (state?.error == null) {
+        binding?.etFormFirstname?.error = if (state?.error == null || state.error == -1) {
             ""
         } else {
             getString(state.error)
@@ -187,8 +186,7 @@ class UserDetailFormFragment : BaseFragment() {
     }
 
     private fun renderLastName(state: LastNameInputState?) {
-        if (state?.error == -1) return
-        binding?.etFormLastname?.error = if (state?.error == null) {
+        binding?.etFormLastname?.error = if (state?.error == null || state.error == -1) {
             ""
         } else {
             getString(state.error)
@@ -196,8 +194,15 @@ class UserDetailFormFragment : BaseFragment() {
     }
 
     private fun renderKtp(state: KTPInputState?) {
-        if (state?.error == -1) return
-        binding?.etFormKtp?.error = if (state?.error == null) {
+        binding?.etFormKtp?.error = if (state?.error == null || state.error == -1) {
+            ""
+        } else {
+            getString(state.error)
+        }
+    }
+
+    private fun updatePhoneInputState(state: PhoneInputState?) {
+        binding?.etPhone?.error = if (state?.error == null || state.error == -1) {
             ""
         } else {
             getString(state.error)
@@ -205,8 +210,7 @@ class UserDetailFormFragment : BaseFragment() {
     }
 
     private fun renderEmail(state: EmailInputState?) {
-        if (state?.error == -1) return
-        binding?.etFormEmail?.error = if (state?.error == null) {
+        binding?.etFormEmail?.error = if (state?.error == null || state.error == -1) {
             ""
         } else {
             getString(state.error)
@@ -227,9 +231,32 @@ class UserDetailFormFragment : BaseFragment() {
         }
     }
 
-    private fun navigateCreatePinScreen(event: Event<Boolean>?) {
+    private fun navigateCreatePinScreen(event: Event<User>?) {
         event?.getIfNotHandled()?.let {
-            navigator.showInputPasswordScreen(requireContext(), InputPasswordType.CREATE)
+            navigator.showInputPasswordScreen(requireContext(), it, InputPasswordType.CREATE)
+        }
+    }
+
+    private fun bindFooter() {
+        binding?.stickyButton?.run {
+            tvFooterText = HtmlCompat.fromHtml(
+                getString(R.string.userDetail_label_tnc),
+                HtmlCompat.FROM_HTML_MODE_LEGACY
+            )
+            tvFooterClickListener = {
+
+            }
+            buttonClickListener = {
+                vm.handleRegisterButtonClicked(
+                    binding?.etFormFirstname?.editText?.text.toString(),
+                    binding?.etFormLastname?.editText?.text.toString(),
+                    binding?.etFormKtp?.editText?.text.toString(),
+                    binding?.etPhone?.editText?.text.toString(),
+                    binding?.etFormEmail?.editText?.text.toString(),
+                    binding?.etFormGender?.editText?.text.toString(),
+                    binding?.etFormDob?.editText?.text.toString()
+                )
+            }
         }
     }
 

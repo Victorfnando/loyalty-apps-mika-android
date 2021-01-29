@@ -7,10 +7,12 @@
 
 package com.dre.loyalty.features.authentication.presentation.inputpassword.screen
 
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dre.loyalty.R
 import com.dre.loyalty.core.functional.Event
+import com.dre.loyalty.core.model.User
 import com.dre.loyalty.core.platform.BaseViewModel
 import com.dre.loyalty.core.util.enumtype.ConfirmationSheetType
 import com.dre.loyalty.core.util.validator.type.ValidationType
@@ -32,10 +34,15 @@ abstract class InputPasswordViewModel : BaseViewModel() {
     protected val _submitButtonState: MutableLiveData<InputPasswordSubmitState> = MutableLiveData()
     val submitButtonState: LiveData<InputPasswordSubmitState> = _submitButtonState
 
-    private val _submitButtonClicked: MutableLiveData<Event<ConfirmationSheetType>> = MutableLiveData()
+    protected val _submitButtonClicked: MutableLiveData<Event<ConfirmationSheetType>> = MutableLiveData()
     val submitButtonClicked: LiveData<Event<ConfirmationSheetType>> = _submitButtonClicked
 
+    private val _confirmationButtonClicked: MutableLiveData<Event<Boolean>> = MutableLiveData()
+    val confirmationButtonClicked: LiveData<Event<Boolean>> = _confirmationButtonClicked
+
     private var password: Pair<String?, String?> = Pair(null, null)
+
+    var user: User? = null
 
     fun handleInputPasswordDrawableEndClicked() {
         _inputPasswordState.value = _inputPasswordState.value?.copy(
@@ -81,8 +88,17 @@ abstract class InputPasswordViewModel : BaseViewModel() {
         checkButtonState()
     }
 
-    fun handleResetButtonClicked(pass: String, confirmPass: String) {
-        _submitButtonClicked.value = Event(getSuccessSheetType())
+    fun handleSubmitButtonClicked(pass: String) {
+        user = user?.copy(password = pass)
+        user?.let {
+            _loading.value = View.VISIBLE
+            _submitButtonState.value = _submitButtonState.value?.copy(isEnabled = false)
+            doApiTransaction(it)
+        }
+    }
+
+    fun handleConfirmationSheetButtonClicked() {
+        _confirmationButtonClicked.value = Event(true)
     }
 
     private fun checkButtonState() {
@@ -93,6 +109,8 @@ abstract class InputPasswordViewModel : BaseViewModel() {
     }
 
     abstract fun bindInitialValue()
+
+    protected abstract fun doApiTransaction(user: User)
 
     abstract fun getSuccessSheetType(): ConfirmationSheetType
 }

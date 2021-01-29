@@ -15,6 +15,8 @@
     <string name="userDetail_hint_lastName">Cth: Rahman</string>
     <string name="userDetail_label_ktpNumber">Nomor KTP</string>
     <string name="userDetail_hint_ktpNumber">1234567892</string>
+    <string name="userDetail_label_phone">Nomor HP</string>
+    <string name="userDetail_hint_phone">Contoh: 081234567898 </string>
     <string name="userDetail_label_email">Email</string>
     <string name="userDetail_hint_email">nama@mail.com</string>
     <string name="userDetail_label_gender">Gender</string>

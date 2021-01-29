@@ -18,8 +18,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
+import com.dre.loyalty.core.exception.Failure
 import com.dre.loyalty.core.extension.observe
 import com.dre.loyalty.core.functional.Event
+import com.dre.loyalty.core.model.User
 import com.dre.loyalty.core.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.core.util.enumtype.ConfirmationSheetType
@@ -72,12 +74,10 @@ class InputPasswordFragment : BaseFragment() {
         bindToolbar()
         bindEtPassword()
         bindEtConfirmPassword()
+        vm.user = arguments?.getParcelable(ARGS_USER)
         vm.bindInitialValue()
         binding?.btnSubmit?.buttonClickListener = {
-            vm.handleResetButtonClicked(
-                binding?.etPass?.text.toString(),
-                binding?.etConfirmPass?.text.toString()
-            )
+            vm.handleSubmitButtonClicked(binding?.etPass?.editText?.text.toString())
         }
     }
 
@@ -123,6 +123,9 @@ class InputPasswordFragment : BaseFragment() {
             observe(inputPasswordConfirmationState, ::renderConfirmationPassword)
             observe(submitButtonState, ::renderSubmitButton)
             observe(submitButtonClicked, ::showSuccessSheet)
+            observe(confirmationButtonClicked, ::showLoginScreen)
+            observe(loading, ::renderLoading)
+            observe(failure, ::showFailureSheet)
         }
     }
 
@@ -180,19 +183,46 @@ class InputPasswordFragment : BaseFragment() {
         event?.getIfNotHandled()?.let {
             val modal = ConfirmationSheetModal.newInstance(it)
             modal.primaryButtonClickListener = {
-                navigator.showLogin(requireContext())
-                requireActivity().finish()
+                vm.handleConfirmationSheetButtonClicked()
             }
             modal.show(requireActivity().supportFragmentManager, ConfirmationSheetModal.TAG)
         }
     }
 
+    private fun showLoginScreen(event: Event<Boolean>?) {
+        event?.getIfNotHandled()?.let {
+            navigator.showLogin(requireContext(), true)
+        }
+    }
+
+    private fun renderLoading(visibility: Int?) {
+        visibility?.let {
+            binding?.progress?.visibility = it
+        }
+    }
+
+    private fun showFailureSheet(failure: Failure?) {
+        if (failure == null) return
+        binding?.btnSubmit?.isButtonEnabled = true
+        val sheet = getNetworkErrorSheet(failure)?.also {
+            it.primaryButtonClickListener = {
+                vm.handleSubmitButtonClicked(binding?.etPass?.editText?.text.toString())
+            }
+            it.secondaryButtonClickListener = {
+                navigator.showSetting(requireContext())
+            }
+        }
+        sheet?.show(requireActivity().supportFragmentManager, ConfirmationSheetModal.TAG)
+    }
+
     companion object {
         private const val ARGS_PASSWORD_INPUT = "ARGS_PASSWORD_INPUT"
+        private const val ARGS_USER = "ARGS_USER"
 
-        fun newInstance(passwordType: InputPasswordType): InputPasswordFragment {
+        fun newInstance(user: User, passwordType: InputPasswordType): InputPasswordFragment {
             val args = Bundle()
             args.putSerializable(ARGS_PASSWORD_INPUT, passwordType)
+            args.putParcelable(ARGS_USER, user)
             val fragment = InputPasswordFragment()
             fragment.arguments = args
             return fragment
