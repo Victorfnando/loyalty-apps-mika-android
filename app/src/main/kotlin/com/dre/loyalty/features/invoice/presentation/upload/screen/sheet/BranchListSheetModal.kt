@@ -71,10 +71,10 @@ class BranchListSheetModal : SuperBottomSheetFragment() {
         binding?.etSearch?.editText?.addTextChangedListener(searchTextListener)
     }
 
-    override fun onDetach() {
+    override fun onDestroyView() {
         binding?.etSearch?.editText?.removeTextChangedListener(searchTextListener)
         binding = null
-        super.onDetach()
+        super.onDestroyView()
     }
 
     private fun bindList() {

@@ -66,10 +66,10 @@ class UpdateProfileFragment : BaseFragment() {
         bindSubmitButton()
     }
 
-    override fun onDetach() {
+    override fun onDestroyView() {
         binding?.etDescription?.removeTextChangedListener(descWatcher)
         binding = null
-        super.onDetach()
+        super.onDestroyView()
     }
 
     private fun bindToolbar() {

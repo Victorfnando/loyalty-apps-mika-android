@@ -43,7 +43,7 @@ class HomeSection(
             adapter = FastAdapter.with(body).also {
                 it.onClickListener = { _, _, item, _ ->
                     if (item is CashBackItem) {
-                        itemClickListener?.invoke(item.item.id)
+                        itemClickListener?.invoke(item.item.receiptId)
                     } else if (item is NewsItem) {
                         itemClickListener?.invoke(item.item.id)
                     }

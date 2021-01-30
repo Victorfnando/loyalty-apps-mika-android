@@ -33,7 +33,8 @@ class InvoiceResponseMapper @Inject constructor() {
             response.date,
             response.hospitalCity,
             response.reason,
-            response.walletName
+            response.walletName,
+            response.phoneNumber
         )
     }
 }

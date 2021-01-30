@@ -86,11 +86,11 @@ class RegisterFragment : BaseFragment() {
         }
     }
 
-    override fun onDetach() {
+    override fun onDestroyView() {
         (activity as AppCompatActivity).setSupportActionBar(null)
         binding?.etMail?.editText?.removeTextChangedListener(emailChangedListener)
         binding = null
-        super.onDetach()
+        super.onDestroyView()
     }
 
     private fun bindToolbar() {

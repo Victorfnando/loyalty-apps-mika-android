@@ -111,11 +111,11 @@ class UploadInvoiceFragment : BaseFragment() {
         }
     }
 
-    override fun onDetach() {
+    override fun onDestroyView() {
         binding?.ivInvoice?.let { Glide.with(this).clear(it) }
         binding?.etAmount?.editText?.removeTextChangedListener(totalAmountWatcher)
         binding = null
-        super.onDetach()
+        super.onDestroyView()
     }
 
     private fun bindToolbar() {

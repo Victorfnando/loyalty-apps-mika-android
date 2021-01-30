@@ -79,11 +79,11 @@ class ContactUsFragment : BaseFragment() {
         bindSubmitMessageButton()
     }
 
-    override fun onDetach() {
+    override fun onDestroyView() {
         binding?.etMessage?.removeTextChangedListener(messageTextWatcher)
         binding?.btnCall?.setOnClickListener(null)
         binding = null
-        super.onDetach()
+        super.onDestroyView()
     }
 
     private fun bindEtCategory() {

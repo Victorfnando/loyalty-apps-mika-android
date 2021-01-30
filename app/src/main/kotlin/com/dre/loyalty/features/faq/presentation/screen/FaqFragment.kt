@@ -68,9 +68,9 @@ class FaqFragment : BaseFragment() {
         vm.init()
     }
 
-    override fun onDetach() {
+    override fun onDestroyView() {
         binding = null
-        super.onDetach()
+        super.onDestroyView()
     }
 
     private fun bindToolbar() {

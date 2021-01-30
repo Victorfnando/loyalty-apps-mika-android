@@ -11,6 +11,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -36,15 +37,11 @@ class SheetListModal : SuperBottomSheetFragment() {
     }
 
     override fun isSheetAlwaysExpanded(): Boolean {
-        return false
+        return true
     }
 
-    override fun getPeekHeight(): Int {
-        return if (state?.peekHeight == null) {
-            super.getPeekHeight()
-        } else {
-            resources.getDimensionPixelSize(state?.peekHeight ?: -1)
-        }
+    override fun getExpandedHeight(): Int {
+        return WRAP_CONTENT
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,11 +65,11 @@ class SheetListModal : SuperBottomSheetFragment() {
         bindList()
     }
 
-    override fun onDetach() {
+    override fun onDestroyView() {
         binding?.tvCategory?.text = null
         selectorItem.clear()
         binding = null
-        super.onDetach()
+        super.onDestroyView()
     }
 
     private fun bindList() {

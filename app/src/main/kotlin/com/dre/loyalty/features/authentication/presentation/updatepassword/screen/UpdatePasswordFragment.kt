@@ -93,12 +93,12 @@ class UpdatePasswordFragment : BaseFragment() {
         bindFooter()
     }
 
-    override fun onDetach() {
+    override fun onDestroyView() {
         binding?.etOldPass?.editText?.removeTextChangedListener(oldPasswordWatcher)
         binding?.etNewPass?.editText?.removeTextChangedListener(newPasswordWatcher)
         binding?.etNewPassConfirm?.editText?.removeTextChangedListener(confirmPasswordWatcher)
         binding = null
-        super.onDetach()
+        super.onDestroyView()
     }
 
     private fun bindEtOldPass() {

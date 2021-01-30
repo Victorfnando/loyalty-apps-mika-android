@@ -64,12 +64,12 @@ class EWalletFragment : BaseFragment() {
         bindPhoneInput()
     }
 
-    override fun onDetach() {
+    override fun onDestroyView() {
         (activity as AppCompatActivity).setSupportActionBar(null)
         binding?.etPhone?.editText?.removeTextChangedListener(phoneTextWatcher)
         binding?.etEWallet?.editText?.setOnClickListener(null)
         binding = null
-        super.onDetach()
+        super.onDestroyView()
     }
 
     private fun bindToolbar() {

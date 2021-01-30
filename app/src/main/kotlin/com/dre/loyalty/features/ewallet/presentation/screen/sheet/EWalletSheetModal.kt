@@ -80,9 +80,9 @@ class EWalletSheetModal : SuperBottomSheetFragment() {
         )
     }
 
-    override fun onDetach() {
+    override fun onDestroyView() {
         binding = null
-        super.onDetach()
+        super.onDestroyView()
     }
 
     companion object {

@@ -10,7 +10,7 @@ import javax.inject.Inject
 class FaqCloudDataSource @Inject constructor(
     private val service: FaqService
 ) : FaqCloudDataSourceContract {
-    override fun getFaq(param: GetFaqQuestion.Param): Call<LoyaltyResponse<List<FaqResponse>>> {
-        return service.getFaq(param)
+    override fun getFaq(): Call<LoyaltyResponse<List<FaqResponse>>> {
+        return service.getFaq()
     }
 }

@@ -56,6 +56,7 @@ class CashBackListFragment : BaseFragment() {
             observe(cashBackList, ::renderCashBackList)
             observe(loading, ::renderLoading)
             observe(failure, ::showFailureSheet)
+            observe(navigateInvoiceDetail, ::showInvoiceDetail)
         }
     }
 
@@ -106,7 +107,12 @@ class CashBackListFragment : BaseFragment() {
             addItemDecoration(
                 VerticalDividerDecoration(requireContext(), RecyclerView.VERTICAL)
             )
-            adapter = FastAdapter.with(cashBackItem)
+            adapter = FastAdapter.with(cashBackItem).also {
+                it.onClickListener = { _, _, item, _ ->
+                    vm.handleCashBackItemClicked(item.item.receiptId)
+                    true
+                }
+            }
         }
 
     }
@@ -143,6 +149,12 @@ class CashBackListFragment : BaseFragment() {
         cashBackItem.add(
             cashBackList?.map { CashBackItem(it) }.orEmpty()
         )
+    }
+
+    private fun showInvoiceDetail(event: Event<String>?) {
+        event?.getIfNotHandled()?.let {
+            navigator.showInvoiceDetail(requireContext(), it)
+        }
     }
 
     companion object {

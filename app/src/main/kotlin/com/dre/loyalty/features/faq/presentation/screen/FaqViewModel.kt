@@ -3,10 +3,10 @@ package com.dre.loyalty.features.faq.presentation.screen
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.dre.loyalty.core.interactor.UseCase.None
 import com.dre.loyalty.core.platform.BaseViewModel
 import com.dre.loyalty.features.faq.domain.entity.FrequentlyAskedQuestion
 import com.dre.loyalty.features.faq.domain.usecase.GetFaqQuestion
-import com.dre.loyalty.features.faq.domain.usecase.GetFaqQuestion.Param
 import javax.inject.Inject
 
 class FaqViewModel @Inject constructor(
@@ -18,7 +18,7 @@ class FaqViewModel @Inject constructor(
 
     fun init() {
         _loading.value = View.VISIBLE
-        getFaqQuestion(Param("test", "test")) {
+        getFaqQuestion(None()) {
             it.fold(::handleFailure, ::handleSuccessGetFaq)
         }
     }

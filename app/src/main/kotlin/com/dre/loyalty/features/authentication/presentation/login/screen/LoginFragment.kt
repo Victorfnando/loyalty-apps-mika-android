@@ -97,14 +97,14 @@ class LoginFragment : BaseFragment() {
         bindEtPassword()
     }
 
-    override fun onDetach() {
+    override fun onDestroyView() {
         (activity as AppCompatActivity).setSupportActionBar(null)
         binding?.run {
             etMail.editText.removeTextChangedListener(emailChangeListener)
             etPass.editText.removeTextChangedListener(passwordChangeListener)
         }
         binding = null
-        super.onDetach()
+        super.onDestroyView()
     }
 
     private fun bindToolbar() {

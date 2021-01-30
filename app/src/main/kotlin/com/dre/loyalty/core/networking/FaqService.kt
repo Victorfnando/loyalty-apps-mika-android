@@ -1,13 +1,11 @@
 package com.dre.loyalty.core.networking
 
-import com.dre.loyalty.features.faq.domain.usecase.GetFaqQuestion.Param
 import com.dre.loyalty.core.networking.response.LoyaltyResponse
 import com.dre.loyalty.features.faq.data.entity.response.FaqResponse
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.POST
+import retrofit2.http.GET
 
 private const val FAQ_ENDPOINT = "faqs"
 interface FaqService {
-    @POST(FAQ_ENDPOINT) fun getFaq(@Body param: Param): Call<LoyaltyResponse<List<FaqResponse>>>
+    @GET(FAQ_ENDPOINT) fun getFaq(): Call<LoyaltyResponse<List<FaqResponse>>>
 }

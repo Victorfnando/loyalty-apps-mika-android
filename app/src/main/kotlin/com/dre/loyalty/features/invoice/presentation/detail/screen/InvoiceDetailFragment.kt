@@ -15,12 +15,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dre.loyalty.R
+import com.dre.loyalty.core.networking.exception.Failure
 import com.dre.loyalty.core.platform.extension.observe
 import com.dre.loyalty.core.platform.extension.viewModel
 import com.dre.loyalty.core.platform.functional.Event
 import com.dre.loyalty.core.platform.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.core.view.VerticalDividerDecoration
+import com.dre.loyalty.core.view.sheet.ConfirmationSheetModal
 import com.dre.loyalty.databinding.FragmentInvoiceDetailBinding
 import com.dre.loyalty.features.invoice.presentation.entity.VerticalFieldLabelState
 import com.dre.loyalty.features.invoice.presentation.detail.item.BannerImageItem
@@ -58,6 +60,8 @@ class InvoiceDetailFragment : BaseFragment() {
             observe(invoiceDetail, ::renderInvoiceDetail)
             observe(photoView, ::showPhotoView)
             observe(bannerImage, ::renderBanner)
+            observe(loading, ::renderLoading)
+            observe(failure, ::showFailureSheet)
         }
     }
 
@@ -78,10 +82,10 @@ class InvoiceDetailFragment : BaseFragment() {
         vm.init(id)
     }
 
-    override fun onDetach() {
+    override fun onDestroyView() {
         (activity as AppCompatActivity).setSupportActionBar(null)
         binding = null
-        super.onDetach()
+        super.onDestroyView()
     }
 
     private fun bindToolbar() {
@@ -128,6 +132,25 @@ class InvoiceDetailFragment : BaseFragment() {
             bannerImageAdapter.set(listOf(BannerImageItem(it)))
         }
         dividerAdapter.set(listOf(DividerItem()))
+    }
+
+    private fun renderLoading(visibility: Int?) {
+        visibility?.let {
+            binding?.progress?.visibility = it
+        }
+    }
+
+    private fun showFailureSheet(failure: Failure?) {
+        if (failure == null) return
+        val sheet = getNetworkErrorSheet(failure)?.also {
+            it.primaryButtonClickListener = {
+                vm.refresh()
+            }
+            it.secondaryButtonClickListener = {
+                navigator.showSetting(requireContext())
+            }
+        }
+        sheet?.show(requireActivity().supportFragmentManager, ConfirmationSheetModal.TAG)
     }
 
     companion object {

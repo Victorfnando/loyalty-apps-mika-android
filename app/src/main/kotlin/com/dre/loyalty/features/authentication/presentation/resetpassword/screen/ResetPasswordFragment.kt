@@ -83,11 +83,11 @@ class ResetPasswordFragment : BaseFragment() {
         }
     }
 
-    override fun onDetach() {
+    override fun onDestroyView() {
         (activity as AppCompatActivity).setSupportActionBar(null)
         binding?.etMail?.editText?.removeTextChangedListener(emailWatcher)
         binding = null
-        super.onDetach()
+        super.onDestroyView()
     }
 
     private fun bindToolbar() {

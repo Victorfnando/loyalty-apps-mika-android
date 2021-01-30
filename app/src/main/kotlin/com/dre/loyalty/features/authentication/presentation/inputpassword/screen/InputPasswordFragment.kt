@@ -81,12 +81,12 @@ class InputPasswordFragment : BaseFragment() {
         }
     }
 
-    override fun onDetach() {
+    override fun onDestroyView() {
         (activity as AppCompatActivity).setSupportActionBar(null)
         binding?.etPass?.editText?.removeTextChangedListener(passwordWatcher)
         binding?.etConfirmPass?.editText?.removeTextChangedListener(confirmPasswordWatcher)
         binding = null
-        super.onDetach()
+        super.onDestroyView()
     }
 
     private fun bindToolbar() {

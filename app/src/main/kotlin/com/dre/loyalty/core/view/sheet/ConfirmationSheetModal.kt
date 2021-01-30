@@ -97,10 +97,10 @@ class ConfirmationSheetModal : SuperBottomSheetFragment() {
         }
     }
 
-    override fun onDetach() {
+    override fun onDestroyView() {
         binding?.ivBanner?.let { Glide.with(requireContext()).clear(it) }
         binding = null
-        super.onDetach()
+        super.onDestroyView()
     }
 
     companion object {

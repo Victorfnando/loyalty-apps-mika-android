@@ -40,11 +40,11 @@ class InvoiceListFragment : BaseFragment() {
         bindTabLayout()
     }
 
-    override fun onDetach() {
+    override fun onDestroyView() {
         (activity as AppCompatActivity).setSupportActionBar(null)
         binding?.pager?.adapter = null
         binding = null
-        super.onDetach()
+        super.onDestroyView()
     }
 
     private fun bindToolbar() {

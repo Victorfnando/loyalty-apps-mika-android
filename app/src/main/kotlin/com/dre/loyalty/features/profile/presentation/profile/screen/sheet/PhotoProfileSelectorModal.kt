@@ -58,11 +58,11 @@ class PhotoProfileSelectorModal : SuperBottomSheetFragment() {
         }
     }
 
-    override fun onDetach() {
+    override fun onDestroyView() {
         binding?.tvGallery?.setOnClickListener(null)
         binding?.tvCamera?.setOnClickListener(null)
         binding = null
-        super.onDetach()
+        super.onDestroyView()
     }
 
     companion object {

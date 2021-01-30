@@ -22,6 +22,9 @@ class CashBackListViewModel @Inject constructor(
     private val _cashBackList: MutableLiveData<List<CashBack>> = MutableLiveData()
     val cashBackList: LiveData<List<CashBack>> = _cashBackList
 
+    private val _navigateInvoiceDetail: MutableLiveData<Event<String>> = MutableLiveData()
+    val navigateInvoiceDetail: LiveData<Event<String>> = _navigateInvoiceDetail
+
     fun init() {
         refresh()
     }
@@ -38,6 +41,10 @@ class CashBackListViewModel @Inject constructor(
                 result.fold(::handleFailure, ::handleSuccessGetCashBack)
             }
         }
+    }
+
+    fun handleCashBackItemClicked(id: String) {
+        _navigateInvoiceDetail.value = Event(id)
     }
 
     private fun handleSuccessGetCashBack(cashBackList: List<CashBack>) {

@@ -110,7 +110,7 @@ class UserDetailFormFragment : BaseFragment() {
         bindFooter()
     }
 
-    override fun onDetach() {
+    override fun onDestroyView() {
         binding?.etFormFirstname?.editText?.removeTextChangedListener(firstNameWatcher)
         binding?.etFormLastname?.editText?.removeTextChangedListener(lastNameWatcher)
         binding?.etFormEmail?.editText?.removeTextChangedListener(emailWatcher)
@@ -118,7 +118,7 @@ class UserDetailFormFragment : BaseFragment() {
         binding?.etPhone?.editText?.removeTextChangedListener(phoneWatcher)
         (activity as AppCompatActivity).setSupportActionBar(null)
         binding = null
-        super.onDetach()
+        super.onDestroyView()
     }
 
     private fun bindToolbar() {

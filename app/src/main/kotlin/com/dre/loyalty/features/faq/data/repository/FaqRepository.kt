@@ -16,10 +16,10 @@ class FaqRepository @Inject constructor(
     private val cloudDataSource: FaqCloudDataSourceContract,
     private val mapper: FaqResponseMapper
 ) : FaqRepositoryContract {
-    override fun getFaqQuestionList(param: GetFaqQuestion.Param): Either<Failure, List<FrequentlyAskedQuestion>> {
+    override fun getFaqQuestionList(): Either<Failure, List<FrequentlyAskedQuestion>> {
         return when(networkHandler.isNetworkAvailable()) {
             true -> {
-                cloudDataSource.getFaq(param).request {
+                cloudDataSource.getFaq().request {
                     mapper.transform(it)
                 }
             }

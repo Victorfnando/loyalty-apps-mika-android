@@ -99,9 +99,9 @@ class HomeFragment : BaseFragment() {
         bindList()
     }
 
-    override fun onDetach() {
+    override fun onDestroyView() {
         binding = null
-        super.onDetach()
+        super.onDestroyView()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
