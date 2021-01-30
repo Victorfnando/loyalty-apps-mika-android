@@ -25,6 +25,7 @@ import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.databinding.FragmentHospitalListBinding
 import com.dre.loyalty.features.hospital.presentation.entity.EmptyViewState
 import com.dre.loyalty.core.model.Hospital
+import com.dre.loyalty.core.platform.functional.Event
 import com.dre.loyalty.core.view.sheet.ConfirmationSheetModal
 import com.dre.loyalty.features.hospital.presentation.item.HospitalListItem
 import com.mikepenz.fastadapter.FastAdapter
@@ -66,6 +67,7 @@ class HospitalListFragment : BaseFragment() {
             observe(failure, ::renderError)
             observe(loading, ::renderLoading)
             observe(failure, ::showFailureSheet)
+            observe(navigateMap, ::showMap)
         }
     }
 
@@ -86,6 +88,13 @@ class HospitalListFragment : BaseFragment() {
         vm.loadData()
     }
 
+    override fun onDestroyView() {
+        (activity as AppCompatActivity).setSupportActionBar(null)
+        binding?.etSearch?.editText?.removeTextChangedListener(hospitalListener)
+        binding = null
+        super.onDestroyView()
+    }
+
     private fun bindToolbar() {
         (activity as AppCompatActivity).run {
             setSupportActionBar(binding?.toolbarLayout?.toolbar)
@@ -96,19 +105,31 @@ class HospitalListFragment : BaseFragment() {
     private fun bindHospitalList() {
         binding?.rvHospital?.run {
             layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
-            adapter = FastAdapter.with(listOf(hospitalListItem))
-        }
-
-        hospitalListItem.itemFilter.filterPredicate = { item, constraint ->
-            item.item.name.toLowerCase().contains(constraint.toString())
-        }
-        hospitalListItem.itemFilter.itemFilterListener = object : ItemFilterListener<HospitalListItem> {
-            override fun itemsFiltered(constraint: CharSequence?, results: List<HospitalListItem>?) {
-                vm.handleItemWereFiltered(results?.map { it.item } ?: emptyList())
+            adapter = FastAdapter.with(listOf(hospitalListItem)).also {
+                it.onClickListener = { _, _, item, _ ->
+                    item.item.detail?.let { detail ->
+                        vm.handleItemClicked(
+                            detail.latitude,
+                            detail.longitude,
+                            item.item.name
+                        )
+                    }
+                    true
+                }
             }
+        }
+        hospitalListItem.itemFilter.run {
+            filterPredicate = { item, constraint ->
+                item.item.name.toLowerCase().contains(constraint.toString())
+            }
+            itemFilterListener = object : ItemFilterListener<HospitalListItem> {
+                override fun itemsFiltered(constraint: CharSequence?, results: List<HospitalListItem>?) {
+                    vm.handleItemWereFiltered(results?.map { it.item } ?: emptyList())
+                }
 
-            override fun onReset() {
-                vm.handleListReset()
+                override fun onReset() {
+                    vm.handleListReset()
+                }
             }
         }
     }
@@ -160,6 +181,12 @@ class HospitalListFragment : BaseFragment() {
             }
         }
         sheet?.show(requireActivity().supportFragmentManager, ConfirmationSheetModal.TAG)
+    }
+
+    private fun showMap(event: Event<Triple<Double, Double, String>>?) {
+        event?.getIfNotHandled()?.let {
+            navigator.showMap(requireContext(), it)
+        }
     }
 
     companion object {

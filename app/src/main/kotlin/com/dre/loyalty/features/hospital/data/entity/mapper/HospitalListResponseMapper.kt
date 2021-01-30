@@ -20,7 +20,9 @@ class HospitalListResponseMapper @Inject constructor() {
                 response.city,
                 response.address,
                 response.phoneInfo,
-                response.phoneIgd
+                response.phoneIgd,
+                response.latitude,
+                response.longitude
             )
         )
     }

@@ -15,6 +15,7 @@ import com.dre.loyalty.core.interactor.UseCase
 import com.dre.loyalty.core.platform.BaseViewModel
 import com.dre.loyalty.features.hospital.presentation.entity.EmptyViewState
 import com.dre.loyalty.core.model.Hospital
+import com.dre.loyalty.core.platform.functional.Event
 import com.dre.loyalty.features.hospital.domain.usecase.GetHospitalListUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -29,6 +30,9 @@ class HospitalListViewModel @Inject constructor(
 
     private val _emptyViewState: MutableLiveData<EmptyViewState> = MutableLiveData()
     val emptyViewState: LiveData<EmptyViewState> = _emptyViewState
+
+    private val _navigateMap: MutableLiveData<Event<Triple<Double, Double, String>>> = MutableLiveData()
+    val navigateMap: LiveData<Event<Triple<Double, Double, String>>> = _navigateMap
 
     init {
         _emptyViewState.value = EmptyViewState(View.GONE)
@@ -53,6 +57,10 @@ class HospitalListViewModel @Inject constructor(
                 EmptyViewState(View.GONE)
             }
         }
+    }
+
+    fun handleItemClicked(lat: Double, long: Double, hospitalName: String) {
+        _navigateMap.value = Event(Triple(lat, long, hospitalName))
     }
 
     private fun handleSuccessGetHospitalList(hospitals: List<Hospital>) {
