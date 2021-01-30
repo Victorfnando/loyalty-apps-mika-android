@@ -10,13 +10,12 @@
 
 package com.dre.loyalty.features.news.data.repository.datasource
 
-import com.dre.loyalty.core.networking.response.Response
+import com.dre.loyalty.core.networking.response.LoyaltyResponse
 import com.dre.loyalty.features.news.data.entity.response.NewsDetailResponse
 import com.dre.loyalty.features.news.data.entity.response.NewsResponse
-import com.dre.loyalty.features.news.domain.usecase.GetNewsDetailUseCase
 import retrofit2.Call
 
 interface NewsCloudDataSourceContract {
-    fun getNews(): Call<Response<List<NewsResponse>>>
-    fun getNewsDetail(param: GetNewsDetailUseCase.Param): Call<Response<NewsDetailResponse>>
+    fun getNews(): Call<LoyaltyResponse<List<NewsResponse>>>
+    fun getNewsDetail(id: String): Call<LoyaltyResponse<NewsDetailResponse>>
 }

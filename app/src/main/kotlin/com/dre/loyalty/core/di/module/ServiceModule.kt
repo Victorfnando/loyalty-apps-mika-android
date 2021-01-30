@@ -37,4 +37,16 @@ class ServiceModule {
     fun provideAuthenticationService(retrofit: Retrofit): AuthenticationService {
         return retrofit.create(AuthenticationService::class.java)
     }
+
+    @Provides
+    @Singleton
+    fun provideCashBackListService(retrofit: Retrofit): CashBackService {
+        return retrofit.create(CashBackService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideInvoiceService(retrofit: Retrofit): InvoiceService {
+        return retrofit.create(InvoiceService::class.java)
+    }
 }

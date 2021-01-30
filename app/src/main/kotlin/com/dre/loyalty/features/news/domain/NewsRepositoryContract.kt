@@ -17,5 +17,5 @@ import com.dre.loyalty.features.news.domain.usecase.GetNewsDetailUseCase
 
 interface NewsRepositoryContract {
     fun getNewsList(): Either<Failure, List<News>>
-    fun getNewsDetail(param: GetNewsDetailUseCase.Param): Either<Failure, News>
+    fun getNewsDetail(id: String): Either<Failure, News>
 }

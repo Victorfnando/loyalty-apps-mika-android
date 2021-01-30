@@ -17,18 +17,20 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dre.loyalty.R
+import com.dre.loyalty.core.model.Invoice
+import com.dre.loyalty.core.networking.exception.Failure
 import com.dre.loyalty.core.platform.extension.observe
 import com.dre.loyalty.core.platform.extension.viewModel
 import com.dre.loyalty.core.platform.functional.Event
 import com.dre.loyalty.core.platform.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.core.view.VerticalSpaceDecoration
+import com.dre.loyalty.core.view.sheet.ConfirmationSheetModal
 import com.dre.loyalty.core.view.sheet.SheetListModal
 import com.dre.loyalty.core.view.sheet.SheetListState
 import com.dre.loyalty.databinding.FragmentPagerInvoiceListBinding
 import com.dre.loyalty.features.camera.CameraActivity
 import com.dre.loyalty.features.camera.CameraRequestType
-import com.dre.loyalty.features.invoice.presentation.entity.Invoice
 import com.dre.loyalty.features.invoice.presentation.list.item.InvoiceListItem
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
@@ -55,6 +57,8 @@ class InvoiceListPagerFragment : BaseFragment() {
             observe(sortOrder, ::showSortSheet)
             observe(buttonUploadClicked, ::showCamera)
             observe(selectedItem, ::showInvoiceDetail)
+            observe(loading, ::renderLoading)
+            observe(failure, ::showFailureSheet)
         }
     }
 
@@ -105,7 +109,7 @@ class InvoiceListPagerFragment : BaseFragment() {
             layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
             adapter = FastAdapter.with(invoiceListItemAdapter).also {
                 it.onClickListener = { _, _, item, _ ->
-                    vm.handleItemClicked(item.invoice.invoiceId)
+                    vm.handleItemClicked(item.invoice.receiptId)
                     true
                 }
             }
@@ -149,9 +153,25 @@ class InvoiceListPagerFragment : BaseFragment() {
             navigator.showInvoiceDetail(requireContext(), it)
         }
     }
+
+    private fun renderLoading(visibility: Int?) {
+        binding?.progress?.visibility = visibility ?: View.GONE
+    }
+
+    private fun showFailureSheet(failure: Failure?) {
+        if (failure == null) return
+        val sheet = getNetworkErrorSheet(failure)?.also {
+            it.primaryButtonClickListener = {
+                vm.refresh()
+            }
+            it.secondaryButtonClickListener = {
+                navigator.showSetting(requireContext())
+            }
+        }
+        sheet?.show(requireActivity().supportFragmentManager, ConfirmationSheetModal.TAG)
+    }
     
     companion object {
-
         private const val ARGS_TYPE = "ARGS_TYPE"
 
         fun newInstance(position: Int): InvoiceListPagerFragment {

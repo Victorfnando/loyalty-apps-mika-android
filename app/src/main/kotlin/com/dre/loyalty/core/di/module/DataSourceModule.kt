@@ -4,6 +4,8 @@ import com.dre.loyalty.features.authentication.data.repository.datasource.cloud.
 import com.dre.loyalty.features.authentication.data.repository.datasource.cloud.AuthenticationCloudDataSourceContract
 import com.dre.loyalty.features.authentication.data.repository.datasource.local.AuthenticationLocalDataSource
 import com.dre.loyalty.features.authentication.data.repository.datasource.local.AuthenticationLocalDataSourceContract
+import com.dre.loyalty.features.cashback.data.repository.datasource.CashBackListCloudDataSource
+import com.dre.loyalty.features.cashback.data.repository.datasource.CashBackListCloudDataSourceContract
 import com.dre.loyalty.features.faq.data.repository.datasource.FaqCloudDataSource
 import com.dre.loyalty.features.faq.data.repository.datasource.FaqCloudDataSourceContract
 import com.dre.loyalty.features.home.data.repository.datasource.cloud.HomeCloudDataSource
@@ -54,4 +56,8 @@ abstract class DataSourceModule {
     @Binds
     @Singleton
     abstract fun provideAuthLocalDataSource(dataSource: AuthenticationLocalDataSource): AuthenticationLocalDataSourceContract
+
+    @Binds
+    @Singleton
+    abstract fun provideCashBackListCloudDataSource(dataSourceList: CashBackListCloudDataSource): CashBackListCloudDataSourceContract
 }

@@ -37,10 +37,10 @@ class NewsRepository @Inject constructor(
         }
     }
 
-    override fun getNewsDetail(param: GetNewsDetailUseCase.Param): Either<Failure, News> {
+    override fun getNewsDetail(id: String): Either<Failure, News> {
         return when(networkHandler.isNetworkAvailable()) {
             true -> {
-                cloud.getNewsDetail(param).request {
+                cloud.getNewsDetail(id).request {
                     responseMapper.transform(it)
                 }
             }

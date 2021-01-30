@@ -21,14 +21,22 @@ import com.dre.loyalty.R
 import com.dre.loyalty.core.platform.extension.observe
 import com.dre.loyalty.core.platform.extension.viewModel
 import com.dre.loyalty.core.model.News
+import com.dre.loyalty.core.networking.exception.Failure
 import com.dre.loyalty.core.platform.BaseFragment
+import com.dre.loyalty.core.platform.functional.Event
+import com.dre.loyalty.core.platform.navigation.Navigator
 import com.dre.loyalty.core.view.VerticalSpaceDecoration
+import com.dre.loyalty.core.view.sheet.ConfirmationSheetModal
 import com.dre.loyalty.databinding.FragmentNewsDetailBinding
 import com.dre.loyalty.features.news.presentation.view.VerticalNewsItem
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
+import javax.inject.Inject
 
 class NewsDetailFragment : BaseFragment() {
+
+    @Inject
+    lateinit var navigator: Navigator
 
     private var binding: FragmentNewsDetailBinding? = null
 
@@ -44,6 +52,8 @@ class NewsDetailFragment : BaseFragment() {
         vm = viewModel(viewModelFactory) {
             observe(detail, ::renderDetail)
             observe(loading, ::renderLoading)
+            observe(failure, ::showFailureSheet)
+            observe(navigateNewsDetail, ::showNewsDetail)
         }
     }
 
@@ -60,7 +70,7 @@ class NewsDetailFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         bindToolbar()
         bindList()
-        vm.init()
+        vm.init(arguments?.getString(ARG_ID).orEmpty())
     }
 
     override fun onDestroyView() {
@@ -84,7 +94,12 @@ class NewsDetailFragment : BaseFragment() {
                 VerticalSpaceDecoration(resources.getDimensionPixelSize(R.dimen.space_16dp))
             )
             isNestedScrollingEnabled = false
-            adapter = FastAdapter.with(newsItem)
+            adapter = FastAdapter.with(newsItem).also {
+                it.onClickListener = { _, _, item, _ ->
+                    vm.handleRelatedNewsClicked(item.item.id)
+                    true
+                }
+            }
         }
     }
 
@@ -127,9 +142,35 @@ class NewsDetailFragment : BaseFragment() {
         binding?.progress?.visibility = visibility ?: View.GONE
     }
 
+    private fun showFailureSheet(failure: Failure?) {
+        if (failure == null) return
+        val sheet = getNetworkErrorSheet(failure)?.also {
+            it.primaryButtonClickListener = {
+                vm.refresh()
+            }
+            it.secondaryButtonClickListener = {
+                navigator.showSetting(requireContext())
+            }
+        }
+        sheet?.show(requireActivity().supportFragmentManager, ConfirmationSheetModal.TAG)
+    }
+
+    private fun showNewsDetail(event: Event<String>?) {
+        event?.getIfNotHandled()?.let {
+            navigator.showNewsDetail(requireContext(), it)
+        }
+    }
+
     companion object {
-        fun newInstance(): NewsDetailFragment {
-            return NewsDetailFragment()
+
+        private const val ARG_ID = "ARG_ID"
+
+        fun newInstance(id: String): NewsDetailFragment {
+            return NewsDetailFragment().also {
+                val bundle = Bundle()
+                bundle.putString(ARG_ID, id)
+                it.arguments = bundle
+            }
         }
     }
 }

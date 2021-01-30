@@ -11,11 +11,11 @@ import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.dre.loyalty.core.interactor.UseCase
 import com.dre.loyalty.core.platform.BaseViewModel
 import com.dre.loyalty.features.hospital.presentation.entity.EmptyViewState
 import com.dre.loyalty.core.model.Hospital
 import com.dre.loyalty.features.hospital.domain.usecase.GetHospitalListUseCase
-import com.dre.loyalty.features.hospital.domain.usecase.GetHospitalListUseCase.Param
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -36,7 +36,7 @@ class HospitalListViewModel @Inject constructor(
 
     fun loadData() {
         _loading.value = View.VISIBLE
-        getHospitalListUseCase(Param("test", "rtest")) {
+        getHospitalListUseCase(UseCase.None()) {
             it.fold(::handleFailure, ::handleSuccessGetHospitalList)
         }
     }

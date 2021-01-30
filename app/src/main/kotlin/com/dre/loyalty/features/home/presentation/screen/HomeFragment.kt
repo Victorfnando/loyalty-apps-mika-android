@@ -142,7 +142,7 @@ class HomeFragment : BaseFragment() {
 
     private fun showNewsDetailScreen(event: Event<String>?) {
         event?.getIfNotHandled()?.let {
-            navigator.showNewsDetail(requireContext())
+            navigator.showNewsDetail(requireContext(), it)
         }
     }
 

@@ -17,8 +17,8 @@ class NewsListViewModel @Inject constructor(
     private val _newsList: MutableLiveData<List<News>> = MutableLiveData()
     val newsList: LiveData<List<News>> = _newsList
 
-    private val _newsItemClicked: MutableLiveData<Event<String>> = MutableLiveData()
-    val newsItemClicked: LiveData<Event<String>> = _newsItemClicked
+    private val _navigateNewsDetail: MutableLiveData<Event<String>> = MutableLiveData()
+    val navigateNewsDetail: LiveData<Event<String>> = _navigateNewsDetail
 
     fun loadData() {
         _loading.value = View.VISIBLE
@@ -28,7 +28,7 @@ class NewsListViewModel @Inject constructor(
     }
 
     fun handleNewsItemClicked(selectedId: String) {
-        _newsItemClicked.value = Event(selectedId)
+        _navigateNewsDetail.value = Event(selectedId)
     }
 
     private fun handleSuccessGetNews(news: List<News>) {

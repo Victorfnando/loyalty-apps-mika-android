@@ -26,18 +26,20 @@ class CashBackItem(val item: CashBack) : AbstractBindingItem<ItemCashbackBinding
     override fun bindView(binding: ItemCashbackBinding, payloads: List<Any>) {
         super.bindView(binding, payloads)
         binding.run {
-            tvInvoice.text = item.id
+            tvPhone.text = item.phone
             tvPrice.text = item.amount.formatToCurrency(true)
             tvDate.text = item.date
+            tvWallet.text = tvWallet.context.resources.getString(R.string.home_item_cashBack_format_wallet, item.walletName)
         }
     }
 
     override fun unbindView(binding: ItemCashbackBinding) {
         super.unbindView(binding)
         binding.run {
-            tvInvoice.text = null
+            tvPhone.text = null
             tvPrice.text = null
             tvDate.text = null
+            tvWallet.text = null
         }
     }
 }

@@ -26,5 +26,10 @@ enum class InvoiceType(
             val types = values()
             return types.find { it.position == position } ?: UNKNOWN
         }
+
+        fun fromValue(status: String) : InvoiceType {
+            val types = values()
+            return types.find { it.status.equals(status, true) } ?: UNKNOWN
+        }
     }
 }

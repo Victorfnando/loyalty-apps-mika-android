@@ -122,9 +122,9 @@ import javax.inject.Singleton
         )
     }
 
-    fun showNewsDetail(context: Context) {
+    fun showNewsDetail(context: Context, id: String) {
         context.startActivity(
-            NewsDetailActivity.callingIntent(context)
+            NewsDetailActivity.callingIntent(context, id)
         )
     }
 

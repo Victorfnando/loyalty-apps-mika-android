@@ -47,7 +47,7 @@ class NewsListFragment : BaseFragment() {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
         vm = viewModel(viewModelFactory) {
-            observe(newsItemClicked, ::showNewsDetail)
+            observe(navigateNewsDetail, ::showNewsDetail)
             observe(newsList, ::renderNewsList)
             observe(loading, ::renderLoading)
             observe(failure, ::showFailureSheet)
@@ -100,7 +100,7 @@ class NewsListFragment : BaseFragment() {
 
     private fun showNewsDetail(event: Event<String>?) {
         event?.getIfNotHandled()?.let {
-            navigator.showNewsDetail(requireContext())
+            navigator.showNewsDetail(requireContext(), it)
         }
     }
 

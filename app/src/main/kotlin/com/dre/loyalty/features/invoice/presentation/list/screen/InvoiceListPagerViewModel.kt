@@ -7,20 +7,24 @@
 
 package com.dre.loyalty.features.invoice.presentation.list.screen
 
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dre.loyalty.R
+import com.dre.loyalty.core.model.Invoice
 import com.dre.loyalty.core.platform.functional.Event
 import com.dre.loyalty.core.platform.BaseViewModel
+import com.dre.loyalty.core.platform.util.preferences.AuthenticationManager
 import com.dre.loyalty.core.view.sheet.SheetListState
 import com.dre.loyalty.features.invoice.domain.usecase.GetInvoiceUseCase
-import com.dre.loyalty.features.invoice.presentation.entity.Invoice
+import com.dre.loyalty.features.invoice.domain.usecase.GetInvoiceUseCase.Param
 import com.dre.loyalty.features.invoice.presentation.list.enumtype.InvoiceType
 import com.dre.loyalty.features.invoice.presentation.list.enumtype.SortOrder
 import javax.inject.Inject
 
 private const val SORT_SHEET_TITLE = "Urutkan berdasarkan waktu unggah kwitansi"
 class InvoiceListPagerViewModel @Inject constructor(
+    private val authenticationManager: AuthenticationManager,
     private val getInvoiceUseCase: GetInvoiceUseCase
 ) : BaseViewModel() {
 
@@ -41,34 +45,7 @@ class InvoiceListPagerViewModel @Inject constructor(
 
     fun init(position: Int) {
         invoiceType = InvoiceType.fromValue(position)
-        _invoiceList.value = when(invoiceType) {
-            InvoiceType.ALL -> {
-               listOf(
-               )
-            }
-            InvoiceType.ACCEPTED -> {
-                listOf(
-                    Invoice("", "gre-2", 30_000L, "21 Desember 2020", "Jakarta", InvoiceType.ACCEPTED),
-                    Invoice("", "gre-2", 30_000L, "21 Desember 2020", "Jakarta", InvoiceType.ACCEPTED),
-                    Invoice("", "gre-2", 30_000L, "21 Desember 2020", "Jakarta", InvoiceType.ACCEPTED),
-                    Invoice("", "gre-2", 30_000L, "21 Desember 2020", "Jakarta", InvoiceType.ACCEPTED),
-                    Invoice("", "gre-2", 30_000L, "21 Desember 2020", "Jakarta", InvoiceType.ACCEPTED),
-                    Invoice("", "gre-2", 30_000L, "21 Desember 2020", "Jakarta", InvoiceType.ACCEPTED),
-                    Invoice("", "gre-2", 30_000L, "27 Desember 2020", "Jakarta", InvoiceType.ACCEPTED),
-                )
-            }
-            InvoiceType.PROCESS -> {
-                listOf(
-                    Invoice("", "yel-3", 420_000L, "22 Desember 2020", "Planet", InvoiceType.PROCESS)
-                )
-            }
-            InvoiceType.DENIED -> {
-                listOf(
-                    Invoice("", "red-4", 50_000L, "23 Desember 2020", "Depok", InvoiceType.DENIED)
-                )
-            }
-            else -> throw IllegalStateException()
-        }
+        refresh()
     }
 
     fun handleSortClicked() {
@@ -97,5 +74,20 @@ class InvoiceListPagerViewModel @Inject constructor(
 
     fun handleItemClicked(selectedId: String) {
         _selectedItem.value = Event(selectedId)
+    }
+
+    fun refresh() {
+        _loading.value = View.VISIBLE
+        getInvoiceUseCase(Param(
+            authenticationManager.getUserId().orEmpty(),
+            invoiceType
+        )) {
+            it.fold(::handleFailure, ::handleSuccessFetchInvoiceList)
+        }
+    }
+
+    private fun handleSuccessFetchInvoiceList(invoices: List<Invoice>) {
+        _loading.value = View.GONE
+        _invoiceList.value = invoices
     }
 }

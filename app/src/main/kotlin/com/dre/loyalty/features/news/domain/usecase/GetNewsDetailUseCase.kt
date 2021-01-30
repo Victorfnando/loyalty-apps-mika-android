@@ -20,18 +20,9 @@ import javax.inject.Inject
 
 class GetNewsDetailUseCase @Inject constructor(
     private val repository: NewsRepositoryContract
-) : UseCase<News, GetNewsDetailUseCase.Param>() {
+) : UseCase<News, String>() {
 
-    override suspend fun run(params: Param): Either<Failure, News> {
+    override suspend fun run(params: String): Either<Failure, News> {
         return repository.getNewsDetail(params)
     }
-
-    data class Param(
-        @SerializedName("user_id")
-        private val userId: String,
-        @SerializedName("news_id")
-        private val newsId: String,
-        @SerializedName("token")
-        private val token: String
-    )
 }

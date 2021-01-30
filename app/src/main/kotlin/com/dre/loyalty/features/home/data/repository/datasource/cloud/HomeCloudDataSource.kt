@@ -11,7 +11,7 @@
 package com.dre.loyalty.features.home.data.repository.datasource.cloud
 
 import com.dre.loyalty.core.networking.HomeService
-import com.dre.loyalty.core.networking.response.Response
+import com.dre.loyalty.core.networking.response.LoyaltyResponse
 import com.dre.loyalty.features.home.data.entity.response.HomeResponse
 import com.dre.loyalty.features.home.domain.usecase.GetHomeDataUseCase.*
 import retrofit2.Call
@@ -20,7 +20,7 @@ import javax.inject.Inject
 class HomeCloudDataSource @Inject constructor(
     private val service: HomeService
 ) : HomeCloudDataSourceContract {
-    override fun getHome(param: Param): Call<Response<HomeResponse>> {
+    override fun getHome(param: Param): Call<LoyaltyResponse<HomeResponse>> {
         return service.getHomeData(param)
     }
 }

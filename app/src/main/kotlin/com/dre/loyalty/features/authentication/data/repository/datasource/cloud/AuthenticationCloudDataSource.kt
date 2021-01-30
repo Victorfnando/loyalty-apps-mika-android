@@ -11,7 +11,7 @@
 package com.dre.loyalty.features.authentication.data.repository.datasource.cloud
 
 import com.dre.loyalty.core.networking.response.BasicResponse
-import com.dre.loyalty.core.networking.response.Response
+import com.dre.loyalty.core.networking.response.LoyaltyResponse
 import com.dre.loyalty.core.networking.AuthenticationService
 import com.dre.loyalty.features.authentication.data.entity.request.*
 import com.dre.loyalty.features.authentication.data.entity.response.ForgotPasswordEmailVerificationResponse
@@ -23,7 +23,7 @@ class AuthenticationCloudDataSource @Inject constructor(
     private val service: AuthenticationService
 ) : AuthenticationCloudDataSourceContract {
 
-    override fun login(request: LoginRequest): Call<Response<LoginResponse>> {
+    override fun login(request: LoginRequest): Call<LoyaltyResponse<LoginResponse>> {
         return service.login(request)
     }
 
@@ -39,7 +39,7 @@ class AuthenticationCloudDataSource @Inject constructor(
         return service.verifyCode(request)
     }
 
-    override fun forgotPasswordCheckMail(request: EmailRequest): Call<Response<ForgotPasswordEmailVerificationResponse>> {
+    override fun forgotPasswordCheckMail(request: EmailRequest): Call<LoyaltyResponse<ForgotPasswordEmailVerificationResponse>> {
         return service.forgotPasswordCheckMail(request)
     }
 

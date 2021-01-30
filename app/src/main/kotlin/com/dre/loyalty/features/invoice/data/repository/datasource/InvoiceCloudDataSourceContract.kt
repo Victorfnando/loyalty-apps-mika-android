@@ -10,5 +10,12 @@
 
 package com.dre.loyalty.features.invoice.data.repository.datasource
 
+import com.dre.loyalty.core.networking.response.LoyaltyResponse
+import com.dre.loyalty.features.invoice.data.entity.request.InvoiceListRequest
+import com.dre.loyalty.features.invoice.data.entity.response.InvoiceResponse
+import retrofit2.Call
+
 interface InvoiceCloudDataSourceContract {
+    fun getInvoice(request: InvoiceListRequest): Call<LoyaltyResponse<List<InvoiceResponse>>>
+    fun getInvoiceDetail(id: String): Call<LoyaltyResponse<InvoiceResponse>>
 }

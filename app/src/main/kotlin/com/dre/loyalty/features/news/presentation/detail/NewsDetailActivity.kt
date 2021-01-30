@@ -15,7 +15,9 @@ import com.dre.loyalty.core.platform.BaseFragment
 
 class NewsDetailActivity : BaseActivity() {
 
-    override fun fragment(): BaseFragment = NewsDetailFragment.newInstance()
+    override fun fragment(): BaseFragment = NewsDetailFragment.newInstance(
+        intent.extras?.getString(EXTRA_ID).orEmpty()
+    )
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
@@ -26,6 +28,11 @@ class NewsDetailActivity : BaseActivity() {
     }
 
     companion object {
-        fun callingIntent(context: Context): Intent = Intent(context, NewsDetailActivity::class.java)
+        private const val EXTRA_ID = "EXTRA_ID"
+
+        fun callingIntent(context: Context, id: String): Intent =
+            Intent(context, NewsDetailActivity::class.java).also {
+                it.putExtra(EXTRA_ID, id)
+            }
     }
 }

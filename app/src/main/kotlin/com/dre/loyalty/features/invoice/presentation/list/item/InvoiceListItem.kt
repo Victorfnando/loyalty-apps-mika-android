@@ -11,10 +11,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import com.dre.loyalty.R
+import com.dre.loyalty.core.model.Invoice
 import com.dre.loyalty.core.platform.util.extension.addBorder
 import com.dre.loyalty.core.platform.util.extension.formatToCurrency
 import com.dre.loyalty.databinding.ItemInvoiceBinding
-import com.dre.loyalty.features.invoice.presentation.entity.Invoice
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
 
 class InvoiceListItem(val invoice: Invoice) : AbstractBindingItem<ItemInvoiceBinding>() {
@@ -32,9 +32,9 @@ class InvoiceListItem(val invoice: Invoice) : AbstractBindingItem<ItemInvoiceBin
             tvStatus.text = invoice.status.status
             tvStatus.addBorder(ContextCompat.getColor(tvStatus.context, invoice.status.borderColor))
             tvId.text = tvId.context.resources.getString(
-                R.string.invoice_list_format_id, invoice.invoiceId
+                R.string.invoice_list_format_id, invoice.receiptId
             )
-            tvPrice.text = invoice.price.formatToCurrency()
+            tvPrice.text = invoice.transactionPrice.formatToCurrency()
             tvDate.text = invoice.date
             tvLocation.text = invoice.location
         }

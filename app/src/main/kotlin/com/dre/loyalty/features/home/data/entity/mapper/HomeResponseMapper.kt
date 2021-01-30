@@ -11,16 +11,16 @@
 package com.dre.loyalty.features.home.data.entity.mapper
 
 import com.dre.loyalty.core.model.*
-import com.dre.loyalty.core.networking.response.Response
+import com.dre.loyalty.core.networking.response.LoyaltyResponse
 import com.dre.loyalty.features.home.data.entity.response.*
 import javax.inject.Inject
 
 class HomeResponseMapper @Inject constructor() {
-    fun transform(response: Response<HomeResponse>): Home {
+    fun transform(loyaltyResponse: LoyaltyResponse<HomeResponse>): Home {
         return Home(
-            transform(response.data.cardResponse),
-            response.data.cashBackResponse.map { transform(it)},
-            response.data.newsResponse.map { transform(it) }
+            transform(loyaltyResponse.data.cardResponse),
+            loyaltyResponse.data.cashBackResponse.map { transform(it)},
+            loyaltyResponse.data.newsResponse.map { transform(it) }
         )
     }
 

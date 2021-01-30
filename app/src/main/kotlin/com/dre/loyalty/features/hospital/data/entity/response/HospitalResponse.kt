@@ -14,5 +14,9 @@ data class HospitalResponse(
     @SerializedName("phoneInfo")
     val phoneInfo: String,
     @SerializedName("phoneIgd")
-    val phoneIgd: String
+    val phoneIgd: String,
+    @SerializedName("longitude")
+    val longitude: Double,
+    @SerializedName("latitude")
+    val latitude: Double
 )

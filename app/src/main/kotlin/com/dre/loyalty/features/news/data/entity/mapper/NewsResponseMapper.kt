@@ -11,24 +11,24 @@
 package com.dre.loyalty.features.news.data.entity.mapper
 
 import com.dre.loyalty.core.model.News
-import com.dre.loyalty.core.networking.response.Response
+import com.dre.loyalty.core.networking.response.LoyaltyResponse
 import com.dre.loyalty.features.news.data.entity.response.NewsDetailResponse
 import com.dre.loyalty.features.news.data.entity.response.NewsResponse
 import javax.inject.Inject
 
 class NewsResponseMapper @Inject constructor() {
-    fun transform(response: Response<List<NewsResponse>>): List<News> {
-        return response.data.map { transform(it) }
+    fun transform(loyaltyResponse: LoyaltyResponse<List<NewsResponse>>): List<News> {
+        return loyaltyResponse.data.map { transform(it) }
     }
 
-    fun transform(response: Response<NewsDetailResponse>): News {
+    fun transform(loyaltyResponse: LoyaltyResponse<NewsDetailResponse>): News {
         return News(
-            response.data.news.id,
-            response.data.news.title,
-            response.data.news.desc,
-            response.data.news.date,
-            response.data.news.imageUrl,
-            response.data.relatedNews.map { transform(it) },
+            loyaltyResponse.data.news.id,
+            loyaltyResponse.data.news.title,
+            loyaltyResponse.data.news.desc,
+            loyaltyResponse.data.news.date,
+            loyaltyResponse.data.news.imageUrl,
+            loyaltyResponse.data.relatedNews.map { transform(it) },
         )
     }
 

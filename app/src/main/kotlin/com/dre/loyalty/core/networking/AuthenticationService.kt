@@ -11,7 +11,7 @@
 package com.dre.loyalty.core.networking
 
 import com.dre.loyalty.core.networking.response.BasicResponse
-import com.dre.loyalty.core.networking.response.Response
+import com.dre.loyalty.core.networking.response.LoyaltyResponse
 import com.dre.loyalty.features.authentication.data.entity.request.*
 import com.dre.loyalty.features.authentication.data.entity.response.ForgotPasswordEmailVerificationResponse
 import com.dre.loyalty.features.authentication.data.entity.response.LoginResponse
@@ -29,7 +29,7 @@ private const val FORGOT_PASSWORD_RESET_PASSWORD = "forgot_password/update"
 interface AuthenticationService {
 
     @POST(LOGIN_ENDPOINT)
-    fun login(@Body request: LoginRequest): Call<Response<LoginResponse>>
+    fun login(@Body request: LoginRequest): Call<LoyaltyResponse<LoginResponse>>
 
     @POST(REGISTER_ENDPOINT)
     fun register(@Body request: RegisterRequest): Call<BasicResponse>
@@ -41,7 +41,7 @@ interface AuthenticationService {
     fun verifyCode(@Body request: VerifyCodeRequest): Call<BasicResponse>
 
     @POST(FORGOT_PASSWORD_EMAIL_CHECK_ENDPOINT)
-    fun forgotPasswordCheckMail(@Body request: EmailRequest): Call<Response<ForgotPasswordEmailVerificationResponse>>
+    fun forgotPasswordCheckMail(@Body request: EmailRequest): Call<LoyaltyResponse<ForgotPasswordEmailVerificationResponse>>
 
     @POST(FORGOT_PASSWORD_VERIFY_CODE_ENDPOINT)
     fun forgotPasswordVerifyCode(@Body request: VerifyCodeRequest): Call<BasicResponse>

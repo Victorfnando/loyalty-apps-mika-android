@@ -45,7 +45,7 @@ class HomeSection(
                     if (item is CashBackItem) {
                         itemClickListener?.invoke(item.item.id)
                     } else if (item is NewsItem) {
-                        itemClickListener?.invoke(item.item.title)
+                        itemClickListener?.invoke(item.item.id)
                     }
                     true
                 }
