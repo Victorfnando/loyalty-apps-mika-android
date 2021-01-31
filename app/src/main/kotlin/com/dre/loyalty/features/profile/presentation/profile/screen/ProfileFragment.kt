@@ -19,7 +19,10 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.model.GlideUrl
+import com.bumptech.glide.load.model.LazyHeaders
 import com.dre.loyalty.R
+import com.dre.loyalty.core.networking.exception.Failure
 import com.dre.loyalty.core.platform.extension.observe
 import com.dre.loyalty.core.platform.extension.viewModel
 import com.dre.loyalty.core.platform.functional.Event
@@ -32,6 +35,7 @@ import com.dre.loyalty.databinding.FragmentProfileBinding
 import com.dre.loyalty.features.camera.CameraActivity
 import com.dre.loyalty.features.camera.CameraRequestType
 import com.dre.loyalty.features.profile.presentation.profile.entity.Menu
+import com.dre.loyalty.features.profile.presentation.profile.entity.ProfileState
 import com.dre.loyalty.features.profile.presentation.profile.screen.item.LogoutMenuItem
 import com.dre.loyalty.features.profile.presentation.profile.screen.item.ProfileMenuItem
 import com.dre.loyalty.features.profile.presentation.profile.screen.item.ProfileMenuSection
@@ -76,6 +80,9 @@ class ProfileFragment : BaseFragment() {
             observe(navigateTnc, ::navigateTnCScreen)
             observe(navigateLogout, ::showLogoutConfirmationSheet)
             observe(profilePictureClickedEvent, ::showProfilePictureSelectorModal)
+            observe(loading, ::renderLoading)
+            observe(failure, ::showFailureSheet)
+            observe(userProfileState, ::renderProfile)
         }
     }
 
@@ -92,23 +99,34 @@ class ProfileFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         bindProfilePicture()
         bindList()
-        binding?.tvName?.text = "Batman"
-        binding?.tvMail?.text = "Batman@gmail.com"
+        vm.init()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK && requestCode == CameraActivity.REQUEST_CODE_CAMERA) {
             data?.extras?.getString(CameraActivity.EXTRA_URI)?.let {
-                renderPhoto(it)
+                vm.handleProfilePictureSelected(it)
             }
         }
     }
 
-    private fun renderPhoto(uri: String) {
+    override fun onDestroyView() {
+        Glide.get(requireContext()).clearMemory()
+        binding = null
+        super.onDestroyView()
+    }
+
+    private fun renderPhoto(url: String) {
         binding?.ivProfile?.let {
+            val glideUrl = GlideUrl(
+                url,
+                LazyHeaders.Builder()
+                    .addHeader("User-Agent", "appllication")
+                    .build()
+            )
             Glide.with(this)
-                .load(Uri.parse(uri))
+                .load(glideUrl)
                 .circleCrop()
                 .into(it)
         }
@@ -244,6 +262,33 @@ class ProfileFragment : BaseFragment() {
                 vm.handleLogoutConfirmationClicked()
             }
             sheet.show(requireActivity().supportFragmentManager, ConfirmationSheetModal.TAG)
+        }
+    }
+
+    private fun renderLoading(visibility: Int?) {
+        visibility?.let {
+            binding?.progress?.visibility = it
+        }
+    }
+
+    private fun showFailureSheet(failure: Failure?) {
+        if (failure == null) return
+        val sheet = getNetworkErrorSheet(failure)?.also {
+            it.primaryButtonClickListener = {
+                vm.refresh()
+            }
+            it.secondaryButtonClickListener = {
+                navigator.showSetting(requireContext())
+            }
+        }
+        sheet?.show(requireActivity().supportFragmentManager, ConfirmationSheetModal.TAG)
+    }
+
+    private fun renderProfile(state: ProfileState?) {
+        binding?.run {
+            tvName.text = state?.name
+            tvMail.text = state?.email
+            renderPhoto(state?.profileImageUrl.orEmpty())
         }
     }
 

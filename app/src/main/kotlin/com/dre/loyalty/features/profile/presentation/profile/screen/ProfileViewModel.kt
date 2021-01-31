@@ -7,13 +7,23 @@
 
 package com.dre.loyalty.features.profile.presentation.profile.screen
 
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.dre.loyalty.core.model.User
 import com.dre.loyalty.core.platform.functional.Event
 import com.dre.loyalty.core.platform.BaseViewModel
+import com.dre.loyalty.core.platform.util.preferences.AuthenticationManager
+import com.dre.loyalty.features.profile.domain.usecase.GetProfileUseCase
+import com.dre.loyalty.features.profile.domain.usecase.UpdateProfilePictureUseCase
+import com.dre.loyalty.features.profile.presentation.profile.entity.ProfileState
 import javax.inject.Inject
 
-class ProfileViewModel @Inject constructor() : BaseViewModel() {
+class ProfileViewModel @Inject constructor(
+    private val authenticationManager: AuthenticationManager,
+    private val getProfileUseCase: GetProfileUseCase,
+    private val updatePhotoProfileUseCase: UpdateProfilePictureUseCase
+) : BaseViewModel() {
 
     private val _navigateChangeProfile: MutableLiveData<Event<Boolean>> = MutableLiveData()
     val navigateChangeProfile: LiveData<Event<Boolean>> = _navigateChangeProfile
@@ -35,6 +45,17 @@ class ProfileViewModel @Inject constructor() : BaseViewModel() {
 
     private val _profilePictureClickedEvent: MutableLiveData<Event<Boolean>> = MutableLiveData()
     val profilePictureClickedEvent: LiveData<Event<Boolean>> = _profilePictureClickedEvent
+
+    private val _userProfileState: MutableLiveData<ProfileState> = MutableLiveData()
+    val userProfileState: LiveData<ProfileState> = _userProfileState
+
+    private lateinit var user: User
+    private lateinit var userId: String
+
+    fun init() {
+        userId = authenticationManager.getUserId().orEmpty()
+        refresh()
+    }
 
     fun handleProfilePictureClicked() {
         _profilePictureClickedEvent.value = Event(true)
@@ -66,5 +87,32 @@ class ProfileViewModel @Inject constructor() : BaseViewModel() {
 
     fun handleLogoutConfirmationClicked() {
 
+    }
+
+    fun handleProfilePictureSelected(uri: String) {
+        updatePhotoProfileUseCase(uri) {
+            it.fold(::handleFailure, ::handleSuccessPhotoProfile)
+        }
+    }
+
+    fun refresh() {
+        _loading.value = View.VISIBLE
+        getProfileUseCase(userId) {
+            it.fold(::handleFailure, ::handleSuccessGetProfile)
+        }
+    }
+
+    private fun handleSuccessGetProfile(user: User) {
+        _loading.value = View.GONE
+        this.user = user
+        _userProfileState.value = ProfileState(
+            user.profilePictureImageUrl,
+            "${user.firstName} ${user.lastName}",
+            user.email
+        )
+    }
+
+    private fun handleSuccessPhotoProfile(imageUrl: String) {
+        _userProfileState.value = _userProfileState.value?.copy(profileImageUrl = imageUrl)
     }
 }

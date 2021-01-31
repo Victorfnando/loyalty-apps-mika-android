@@ -89,6 +89,7 @@ class UserDetailFormViewModel @Inject constructor() : BaseViewModel() {
             phone,
             gender,
             dob,
+            "",
             email,
             "")
         _showConfirmationSheet.value = Event(true)

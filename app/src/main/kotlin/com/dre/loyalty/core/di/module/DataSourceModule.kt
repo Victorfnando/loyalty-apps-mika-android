@@ -20,6 +20,8 @@ import com.dre.loyalty.features.invoice.data.repository.datasource.InvoiceCloudD
 import com.dre.loyalty.features.invoice.data.repository.datasource.InvoiceCloudDataSourceContract
 import com.dre.loyalty.features.news.data.repository.datasource.NewsCloudDataSource
 import com.dre.loyalty.features.news.data.repository.datasource.NewsCloudDataSourceContract
+import com.dre.loyalty.features.profile.data.repository.datasource.UserCloudDataSource
+import com.dre.loyalty.features.profile.data.repository.datasource.UserCloudDataSourceContract
 import dagger.Binds
 import dagger.Module
 import javax.inject.Singleton
@@ -66,4 +68,8 @@ abstract class DataSourceModule {
     @Binds
     @Singleton
     abstract fun provideEWalletCloudDataSource(dataSource: EWalletCloudDataSource): EWalletCloudDataSourceContract
+
+    @Binds
+    @Singleton
+    abstract fun provideUserCloudDataSource(dataSource: UserCloudDataSource): UserCloudDataSourceContract
 }

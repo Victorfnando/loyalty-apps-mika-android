@@ -16,6 +16,8 @@ import com.dre.loyalty.features.invoice.data.repository.InvoiceRepository
 import com.dre.loyalty.features.invoice.domain.InvoiceRepositoryContract
 import com.dre.loyalty.features.news.data.repository.NewsRepository
 import com.dre.loyalty.features.news.domain.NewsRepositoryContract
+import com.dre.loyalty.features.profile.data.repository.UserRepository
+import com.dre.loyalty.features.profile.domain.UserRepositoryContract
 import dagger.Binds
 import dagger.Module
 import javax.inject.Singleton
@@ -53,4 +55,8 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun provideEWalletRepository(repository: EWalletRepository): EWalletRepositoryContract
+
+    @Binds
+    @Singleton
+    abstract fun provideUserRepository(repository: UserRepository): UserRepositoryContract
 }

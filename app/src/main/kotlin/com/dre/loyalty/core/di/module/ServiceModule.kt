@@ -55,4 +55,10 @@ class ServiceModule {
     fun provideWalletService(retrofit: Retrofit): EWalletService {
         return retrofit.create(EWalletService::class.java)
     }
+
+    @Provides
+    @Singleton
+    fun provideUserService(retrofit: Retrofit): UserService {
+        return retrofit.create(UserService::class.java)
+    }
 }
