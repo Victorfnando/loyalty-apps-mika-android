@@ -101,4 +101,13 @@ class AuthenticationRepository @Inject constructor(
         }
     }
 
+    override fun updatePassword(request: UpdatePasswordRequest): Either<Failure, BasicResponse> {
+        return when(networkHandler.isNetworkAvailable()) {
+            true -> {
+                return cloudDataSource.updatePassword(request).request { it }
+            }
+            false -> Either.Left(Failure.NetworkConnection)
+        }
+    }
+
 }

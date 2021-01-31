@@ -23,6 +23,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.HtmlCompat
 import com.dre.loyalty.R
+import com.dre.loyalty.core.networking.exception.Failure
 import com.dre.loyalty.core.platform.extension.observe
 import com.dre.loyalty.core.platform.extension.viewModel
 import com.dre.loyalty.core.platform.functional.Event
@@ -70,8 +71,10 @@ class UpdatePasswordFragment : BaseFragment() {
             observe(newPasswordInputState, ::updateNewPasswordState)
             observe(confirmPasswordInputState, ::updateConfirmPasswordState)
             observe(submitButtonState, ::updateSubmitButtonState)
-            observe(submitButtonClicked, ::showSuccessUpdatePasswordSheet)
+            observe(successUpdatePasswordSheet, ::showSuccessUpdatePasswordSheet)
             observe(tvFooterClicked, ::navigateResetPassword)
+            observe(loading, ::renderLoading)
+            observe(failure, ::showFailureSheet)
         }
     }
 
@@ -195,7 +198,10 @@ class UpdatePasswordFragment : BaseFragment() {
                 vm.handleFooterTextClicked()
             }
             buttonClickListener = {
-                vm.handleSubmitButtonClicked()
+                vm.handleSubmitButtonClicked(
+                    binding?.etOldPass?.editText?.text.toString(),
+                    binding?.etNewPass?.editText?.text.toString()
+                )
             }
         }
     }
@@ -214,6 +220,29 @@ class UpdatePasswordFragment : BaseFragment() {
             }
             modal.show(requireActivity().supportFragmentManager, ConfirmationSheetModal.TAG)
         }
+    }
+
+    private fun renderLoading(visibility: Int?) {
+        visibility?.let {
+            binding?.progress?.visibility = it
+        }
+    }
+
+    private fun showFailureSheet(failure: Failure?) {
+        if (failure == null) return
+        binding?.stickyButton?.isButtonEnabled = true
+        val sheet = getNetworkErrorSheet(failure)?.also {
+            it.primaryButtonClickListener = {
+                vm.handleSubmitButtonClicked(
+                    binding?.etOldPass?.editText?.text.toString(),
+                    binding?.etNewPass?.editText?.text.toString()
+                )
+            }
+            it.secondaryButtonClickListener = {
+                navigator.showSetting(requireContext())
+            }
+        }
+        sheet?.show(requireActivity().supportFragmentManager, ConfirmationSheetModal.TAG)
     }
 
     companion object {

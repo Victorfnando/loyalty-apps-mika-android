@@ -50,4 +50,8 @@ class AuthenticationCloudDataSource @Inject constructor(
     override fun resetPassword(request: ResetPasswordRequest): Call<BasicResponse> {
         return service.resetPassword(request)
     }
+
+    override fun updatePassword(request: UpdatePasswordRequest): Call<BasicResponse> {
+        return service.updatePassword(request)
+    }
 }

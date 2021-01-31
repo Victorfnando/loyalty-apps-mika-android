@@ -25,4 +25,5 @@ interface AuthenticationCloudDataSourceContract {
     fun forgotPasswordCheckMail(request: EmailRequest): Call<LoyaltyResponse<ForgotPasswordEmailVerificationResponse>>
     fun forgotPasswordVerifyCode(request: VerifyCodeRequest): Call<BasicResponse>
     fun resetPassword(request: ResetPasswordRequest): Call<BasicResponse>
+    fun updatePassword(request: UpdatePasswordRequest): Call<BasicResponse>
 }

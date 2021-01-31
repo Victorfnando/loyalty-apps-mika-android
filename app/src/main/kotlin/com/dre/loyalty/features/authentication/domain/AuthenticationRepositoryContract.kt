@@ -24,4 +24,5 @@ interface AuthenticationRepositoryContract {
     fun forgotPasswordCheckMail(request: EmailRequest): Either<Failure, Int>
     fun forgotPasswordVerifyCode(request: VerifyCodeRequest): Either<Failure, BasicResponse>
     fun resetPassword(request: ResetPasswordRequest): Either<Failure, BasicResponse>
+    fun updatePassword(request: UpdatePasswordRequest): Either<Failure, BasicResponse>
 }

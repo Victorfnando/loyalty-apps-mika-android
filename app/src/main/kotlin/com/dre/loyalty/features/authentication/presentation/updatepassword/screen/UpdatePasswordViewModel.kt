@@ -10,17 +10,25 @@
 
 package com.dre.loyalty.features.authentication.presentation.updatepassword.screen
 
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dre.loyalty.R
+import com.dre.loyalty.core.networking.response.BasicResponse
 import com.dre.loyalty.core.platform.functional.Event
 import com.dre.loyalty.core.platform.BaseViewModel
+import com.dre.loyalty.core.platform.util.preferences.AuthenticationManager
 import com.dre.loyalty.core.platform.util.validator.type.ValidationType
+import com.dre.loyalty.features.authentication.domain.usecase.UpdatePasswordUseCase
+import com.dre.loyalty.features.authentication.domain.usecase.UpdatePasswordUseCase.Param
 import com.dre.loyalty.features.authentication.presentation.updatepassword.entity.PasswordInputState
 import com.dre.loyalty.features.authentication.presentation.updatepassword.entity.SubmitButtonState
 import javax.inject.Inject
 
-class UpdatePasswordViewModel @Inject constructor() : BaseViewModel() {
+class UpdatePasswordViewModel @Inject constructor(
+    private val authenticationManager: AuthenticationManager,
+    private val updatePasswordUseCase: UpdatePasswordUseCase
+) : BaseViewModel() {
 
     private val _oldPasswordInputState: MutableLiveData<PasswordInputState> = MutableLiveData()
     val oldPasswordInputState: LiveData<PasswordInputState> = _oldPasswordInputState
@@ -34,8 +42,8 @@ class UpdatePasswordViewModel @Inject constructor() : BaseViewModel() {
     private val _submitButtonState: MutableLiveData<SubmitButtonState> = MutableLiveData()
     val submitButtonState: LiveData<SubmitButtonState> = _submitButtonState
 
-    private val _submitButtonClicked: MutableLiveData<Event<Boolean>> = MutableLiveData()
-    val submitButtonClicked: LiveData<Event<Boolean>> = _submitButtonClicked
+    private val _successUpdatePasswordSheet: MutableLiveData<Event<Boolean>> = MutableLiveData()
+    val successUpdatePasswordSheet: LiveData<Event<Boolean>> = _successUpdatePasswordSheet
 
     private val _tvFooterClicked: MutableLiveData<Event<Boolean>> = MutableLiveData()
     val tvFooterClicked: LiveData<Event<Boolean>> = _tvFooterClicked
@@ -131,8 +139,14 @@ class UpdatePasswordViewModel @Inject constructor() : BaseViewModel() {
         checkButtonState()
     }
 
-    fun handleSubmitButtonClicked() {
-        _submitButtonClicked.value = Event(true)
+    fun handleSubmitButtonClicked(password: String, newPassword: String) {
+        authenticationManager.getUserId()?.let {
+            _loading.value = View.VISIBLE
+            _submitButtonState.value = SubmitButtonState(false)
+            updatePasswordUseCase(Param(it, password, newPassword)) { result ->
+                result.fold(::handleFailure, ::handleSuccessUpdatePassword)
+            }
+        }
     }
 
     fun handleFooterTextClicked() {
@@ -146,4 +160,10 @@ class UpdatePasswordViewModel @Inject constructor() : BaseViewModel() {
     private fun isValidForm(): Boolean = _oldPasswordInputState.value?.error == null
             && _newPasswordInputState.value?.error == null
             && _confirmPasswordInputState.value?.error == null
+
+    private fun handleSuccessUpdatePassword(response: BasicResponse) {
+        _loading.value = View.GONE
+        _submitButtonState.value = SubmitButtonState(true)
+        _successUpdatePasswordSheet.value = Event(true)
+    }
 }
