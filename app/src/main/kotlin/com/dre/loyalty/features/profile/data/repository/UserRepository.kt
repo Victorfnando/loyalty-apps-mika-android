@@ -12,10 +12,12 @@ package com.dre.loyalty.features.profile.data.repository
 
 import com.dre.loyalty.core.model.User
 import com.dre.loyalty.core.networking.exception.Failure
+import com.dre.loyalty.core.networking.response.BasicResponse
 import com.dre.loyalty.core.platform.NetworkHandler
 import com.dre.loyalty.core.platform.extension.request
 import com.dre.loyalty.core.platform.functional.Either
 import com.dre.loyalty.features.profile.data.entity.mapper.UserResponseMapper
+import com.dre.loyalty.features.profile.data.entity.request.UpdateProfileRequest
 import com.dre.loyalty.features.profile.data.repository.datasource.UserCloudDataSourceContract
 import com.dre.loyalty.features.profile.domain.UserRepositoryContract
 import javax.inject.Inject
@@ -41,6 +43,17 @@ class UserRepository @Inject constructor(
             true -> {
                 cloudDataSource.changeProfileImage(uri).request {
                     it.data.imageUri
+                }
+            }
+            false -> Either.Left(Failure.NetworkConnection)
+        }
+    }
+
+    override fun updateProfile(requestUpdate: UpdateProfileRequest): Either<Failure, BasicResponse> {
+        return when(networkHandler.isNetworkAvailable()) {
+            true -> {
+                cloudDataSource.updateProfile(requestUpdate).request {
+                    it
                 }
             }
             false -> Either.Left(Failure.NetworkConnection)

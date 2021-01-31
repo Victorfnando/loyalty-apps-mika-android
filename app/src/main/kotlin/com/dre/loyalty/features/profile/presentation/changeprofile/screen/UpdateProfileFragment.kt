@@ -18,17 +18,24 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.dre.loyalty.R
+import com.dre.loyalty.core.model.User
+import com.dre.loyalty.core.networking.exception.Failure
 import com.dre.loyalty.core.platform.extension.observe
 import com.dre.loyalty.core.platform.extension.viewModel
 import com.dre.loyalty.core.platform.functional.Event
 import com.dre.loyalty.core.platform.BaseFragment
+import com.dre.loyalty.core.platform.navigation.Navigator
 import com.dre.loyalty.core.platform.util.enumtype.ConfirmationSheetType
 import com.dre.loyalty.core.view.sheet.ConfirmationSheetModal
 import com.dre.loyalty.databinding.FragmentChangeProfileBinding
 import com.dre.loyalty.features.profile.presentation.changeprofile.entity.DescriptionEtState
 import com.dre.loyalty.features.profile.presentation.changeprofile.entity.SendButtonState
+import javax.inject.Inject
 
 class UpdateProfileFragment : BaseFragment() {
+
+    @Inject
+    lateinit var navigator: Navigator
 
     private var binding: FragmentChangeProfileBinding? = null
 
@@ -46,7 +53,10 @@ class UpdateProfileFragment : BaseFragment() {
         vm = viewModel(viewModelFactory) {
             observe(descInputState, ::updateDescriptionEtState)
             observe(sendButtonState, ::updateSendButtonState)
-            observe(buttonSubmitClicked, ::showEditProfileSuccessModal)
+            observe(successUpdateProfileSheet, ::showEditProfileSuccessModal)
+            observe(userState, ::renderProfile)
+            observe(loading, ::renderLoading)
+            observe(failure, ::showFailureSheet)
         }
     }
 
@@ -64,6 +74,9 @@ class UpdateProfileFragment : BaseFragment() {
         bindToolbar()
         binding?.etDescription?.addTextChangedListener(descWatcher)
         bindSubmitButton()
+        arguments?.getParcelable<User>(ARG_USER)?.also {
+            vm.init(it)
+        }
     }
 
     override fun onDestroyView() {
@@ -82,7 +95,9 @@ class UpdateProfileFragment : BaseFragment() {
 
     private fun bindSubmitButton() {
         binding?.btnSend?.setOnClickListener {
-            vm.handleSubmitButtonClicked()
+            vm.handleSubmitButtonClicked(
+                binding?.etDescription?.text.toString()
+            )
         }
     }
 
@@ -111,9 +126,44 @@ class UpdateProfileFragment : BaseFragment() {
         }
     }
 
+    private fun renderProfile(user: User?) {
+        user?.let {
+            binding?.tvFullname?.text = "${it.firstName} ${it.lastName}"
+            binding?.tvIdentification?.text = it.cardId
+            binding?.tvGender?.text = it.gender
+            binding?.tvDob?.text = it.birthDate
+        }
+    }
+
+    private fun renderLoading(visibility: Int?) {
+        visibility?.let {
+            binding?.progress?.visibility = it
+        }
+    }
+
+    private fun showFailureSheet(failure: Failure?) {
+        if (failure == null) return
+        binding?.btnSend?.isEnabled = true
+        val sheet = getNetworkErrorSheet(failure)?.also {
+            it.primaryButtonClickListener = {
+                vm.handleSubmitButtonClicked(binding?.etDescription?.text.toString())
+            }
+            it.secondaryButtonClickListener = {
+                navigator.showSetting(requireContext())
+            }
+        }
+        sheet?.show(requireActivity().supportFragmentManager, ConfirmationSheetModal.TAG)
+    }
+
     companion object {
-        fun newInstance(): UpdateProfileFragment {
-            return UpdateProfileFragment()
+        private const val ARG_USER = "ARG_USER"
+
+        fun newInstance(user: User): UpdateProfileFragment {
+            val bundle = Bundle()
+            bundle.putParcelable(ARG_USER, user)
+            return UpdateProfileFragment().also {
+                it.arguments = bundle
+            }
         }
     }
 }

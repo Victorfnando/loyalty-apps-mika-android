@@ -25,8 +25,8 @@ class ProfileViewModel @Inject constructor(
     private val updatePhotoProfileUseCase: UpdateProfilePictureUseCase
 ) : BaseViewModel() {
 
-    private val _navigateChangeProfile: MutableLiveData<Event<Boolean>> = MutableLiveData()
-    val navigateChangeProfile: LiveData<Event<Boolean>> = _navigateChangeProfile
+    private val _navigateChangeProfile: MutableLiveData<Event<User>> = MutableLiveData()
+    val navigateChangeProfile: LiveData<Event<User>> = _navigateChangeProfile
 
     private val _navigateChangePassword: MutableLiveData<Event<Boolean>> = MutableLiveData()
     val navigateChangePassword: LiveData<Event<Boolean>> = _navigateChangePassword
@@ -62,7 +62,7 @@ class ProfileViewModel @Inject constructor(
     }
 
     fun handleChangeProfileMenuClicked() {
-        _navigateChangeProfile.value = Event(true)
+        _navigateChangeProfile.value = Event(user)
     }
 
     fun handleChangePasswordMenuClicked() {

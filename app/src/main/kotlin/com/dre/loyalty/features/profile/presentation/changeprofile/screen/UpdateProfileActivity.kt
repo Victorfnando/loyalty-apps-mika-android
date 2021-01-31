@@ -13,12 +13,15 @@ package com.dre.loyalty.features.profile.presentation.changeprofile.screen
 import android.content.Context
 import android.content.Intent
 import android.view.MenuItem
+import com.dre.loyalty.core.model.User
 import com.dre.loyalty.core.platform.BaseActivity
 import com.dre.loyalty.core.platform.BaseFragment
 
 class UpdateProfileActivity : BaseActivity() {
 
-    override fun fragment(): BaseFragment = UpdateProfileFragment.newInstance()
+    override fun fragment(): BaseFragment = UpdateProfileFragment.newInstance(
+        intent.extras?.getParcelable<User>(EXTRA_USER) as User
+    )
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
@@ -29,6 +32,11 @@ class UpdateProfileActivity : BaseActivity() {
     }
 
     companion object {
-        fun callingIntent(context: Context) = Intent(context, UpdateProfileActivity::class.java)
+        private const val EXTRA_USER = "EXTRA_USER"
+
+        fun callingIntent(context: Context, user: User) =
+            Intent(context, UpdateProfileActivity::class.java).also {
+                it.putExtra(EXTRA_USER, user)
+            }
     }
 }

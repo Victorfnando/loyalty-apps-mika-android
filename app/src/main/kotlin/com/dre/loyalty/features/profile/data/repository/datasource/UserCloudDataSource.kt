@@ -11,7 +11,9 @@
 package com.dre.loyalty.features.profile.data.repository.datasource
 
 import com.dre.loyalty.core.networking.UserService
+import com.dre.loyalty.core.networking.response.BasicResponse
 import com.dre.loyalty.core.networking.response.LoyaltyResponse
+import com.dre.loyalty.features.profile.data.entity.request.UpdateProfileRequest
 import com.dre.loyalty.features.profile.data.entity.response.ImageResponse
 import com.dre.loyalty.features.profile.data.entity.response.UserResponse
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -36,5 +38,9 @@ class UserCloudDataSource @Inject constructor(
         val requestFile: RequestBody = file.asRequestBody("multipart/form-data".toMediaTypeOrNull())
         val body: MultipartBody.Part = MultipartBody.Part.createFormData("profileImage", file.name, requestFile)
         return service.changePhotoProfile(body)
+    }
+
+    override fun updateProfile(requestUpdate: UpdateProfileRequest): Call<BasicResponse> {
+        return service.updateProfile(requestUpdate)
     }
 }

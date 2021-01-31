@@ -149,8 +149,8 @@ import javax.inject.Singleton
         context.startActivity(intent)
     }
 
-    fun showChangeProfile(context: Context) {
-        context.startActivity(UpdateProfileActivity.callingIntent(context))
+    fun showChangeProfile(context: Context, user: User) {
+        context.startActivity(UpdateProfileActivity.callingIntent(context, user))
     }
 
     fun showUpdatePasswordActivity(context: Context) {

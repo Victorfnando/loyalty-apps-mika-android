@@ -22,6 +22,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.model.GlideUrl
 import com.bumptech.glide.load.model.LazyHeaders
 import com.dre.loyalty.R
+import com.dre.loyalty.core.model.User
 import com.dre.loyalty.core.networking.exception.Failure
 import com.dre.loyalty.core.platform.extension.observe
 import com.dre.loyalty.core.platform.extension.viewModel
@@ -231,9 +232,9 @@ class ProfileFragment : BaseFragment() {
         }
     }
 
-    private fun navigateChangeProfileScreen(event: Event<Boolean>?) {
+    private fun navigateChangeProfileScreen(event: Event<User>?) {
         event?.getIfNotHandled()?.let {
-            navigator.showChangeProfile(requireContext())
+            navigator.showChangeProfile(requireContext(), it)
         }
     }
 
