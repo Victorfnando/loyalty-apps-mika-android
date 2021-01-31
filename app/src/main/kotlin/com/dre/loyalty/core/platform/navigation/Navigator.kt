@@ -42,6 +42,7 @@ import com.dre.loyalty.features.ewallet.presentation.screen.EWalletActivity
 import com.dre.loyalty.features.faq.presentation.screen.FaqActivity
 import com.dre.loyalty.features.home.presentation.screen.HomeActivity
 import com.dre.loyalty.features.invoice.presentation.detail.screen.InvoiceDetailActivity
+import com.dre.loyalty.features.invoice.presentation.entity.UploadInvoiceState
 import com.dre.loyalty.features.invoice.presentation.upload.screen.UploadInvoiceActivity
 import com.dre.loyalty.features.news.presentation.detail.NewsDetailActivity
 import com.dre.loyalty.features.news.presentation.list.NewsListActivity
@@ -176,8 +177,8 @@ import javax.inject.Singleton
         context.startActivity(InputPasswordActivity.callingIntent(context, user, type))
     }
 
-    fun showWalletScreen(context: Context) {
-        context.startActivity(EWalletActivity.callingIntent(context))
+    fun showWalletScreen(context: Context, state: UploadInvoiceState) {
+        context.startActivity(EWalletActivity.callingIntent(context, state))
     }
 
     fun showSetting(context: Context) {

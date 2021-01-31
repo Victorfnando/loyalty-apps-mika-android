@@ -11,7 +11,9 @@
 package com.dre.loyalty.features.invoice.data.repository.datasource
 
 import com.dre.loyalty.core.networking.InvoiceService
+import com.dre.loyalty.core.networking.response.BasicResponse
 import com.dre.loyalty.core.networking.response.LoyaltyResponse
+import com.dre.loyalty.features.invoice.data.entity.request.CreateInvoiceRequest
 import com.dre.loyalty.features.invoice.data.entity.request.InvoiceListRequest
 import com.dre.loyalty.features.invoice.data.entity.response.InvoiceResponse
 import retrofit2.Call
@@ -26,5 +28,9 @@ class InvoiceCloudDataSource @Inject constructor(
 
     override fun getInvoiceDetail(id: String): Call<LoyaltyResponse<InvoiceResponse>> {
         return service.getInvoiceDetail(id)
+    }
+
+    override fun createInvoice(request: CreateInvoiceRequest): Call<BasicResponse> {
+        return service.createInvoice(request)
     }
 }

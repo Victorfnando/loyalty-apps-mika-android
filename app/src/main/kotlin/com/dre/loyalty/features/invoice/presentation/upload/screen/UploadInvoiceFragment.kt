@@ -23,11 +23,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.HtmlCompat
 import com.bumptech.glide.Glide
 import com.dre.loyalty.R
+import com.dre.loyalty.core.networking.exception.Failure
 import com.dre.loyalty.core.platform.extension.observe
 import com.dre.loyalty.core.platform.extension.viewModel
 import com.dre.loyalty.core.platform.functional.Event
 import com.dre.loyalty.core.platform.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
+import com.dre.loyalty.core.view.sheet.ConfirmationSheetModal
 import com.dre.loyalty.databinding.FragmentUploadInvoiceBinding
 import com.dre.loyalty.features.camera.CameraActivity
 import com.dre.loyalty.features.camera.CameraActivity.Companion.EXTRA_URI
@@ -37,6 +39,7 @@ import com.dre.loyalty.features.invoice.presentation.upload.entity.TotalAmountSt
 import com.dre.loyalty.features.invoice.presentation.upload.entity.UploadButtonState
 import com.dre.loyalty.features.invoice.presentation.upload.screen.sheet.BranchListSheetModal
 import com.dre.loyalty.features.authentication.presentation.inputuserdetail.screen.dialog.DatePickerDialogFragment
+import com.dre.loyalty.features.invoice.presentation.entity.UploadInvoiceState
 import javax.inject.Inject
 
 class UploadInvoiceFragment : BaseFragment() {
@@ -72,6 +75,9 @@ class UploadInvoiceFragment : BaseFragment() {
             observe(uploadButtonState, ::updateUploadButtonState)
             observe(changePhotoClicked, ::showPhotoScreen)
             observe(nextButtonClicked, ::showWalletScreen)
+            observe(loading, ::renderLoading)
+            observe(failure, ::showFailureSheet)
+            observe(imageUri, ::renderPhoto)
         }
     }
 
@@ -86,9 +92,6 @@ class UploadInvoiceFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        arguments?.getString(ARGS_IMAGE_URI)?.let {
-            renderPhoto(it)
-        }
         bindToolbar()
         bindEtFormBranch()
         bindEtDate()
@@ -98,7 +101,14 @@ class UploadInvoiceFragment : BaseFragment() {
             vm.handleChangePhotoClicked()
         }
         binding?.stickyButton?.buttonClickListener = {
-            vm.handleNextButtonClicked()
+            vm.handleNextButtonClicked(
+                binding?.etFormBranch?.editText?.text.toString(),
+                binding?.etTransactionDate?.editText?.text.toString(),
+                binding?.etAmount?.editText?.text.toString(),
+            )
+        }
+        arguments?.getString(ARGS_IMAGE_URI)?.let {
+            vm.init(it)
         }
     }
 
@@ -106,7 +116,7 @@ class UploadInvoiceFragment : BaseFragment() {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == RESULT_OK && requestCode == CameraActivity.REQUEST_CODE_CAMERA) {
             data?.extras?.getString(EXTRA_URI)?.let {
-                renderPhoto(it)
+                vm.handleImageSelected(it)
             }
         }
     }
@@ -205,7 +215,8 @@ class UploadInvoiceFragment : BaseFragment() {
         }
     }
 
-    private fun renderPhoto(uri: String) {
+    private fun renderPhoto(uri: String?) {
+        if (uri == null) return
         binding?.ivInvoice?.let {
             Glide.with(this)
                 .load(Uri.parse(uri))
@@ -213,10 +224,29 @@ class UploadInvoiceFragment : BaseFragment() {
         }
     }
 
-    private fun showWalletScreen(event: Event<Boolean>?) {
+    private fun showWalletScreen(event: Event<UploadInvoiceState>?) {
         event?.getIfNotHandled()?.let {
-            navigator.showWalletScreen(requireContext())
+            navigator.showWalletScreen(requireContext(), it)
         }
+    }
+
+    private fun renderLoading(visibility: Int?) {
+        visibility?.let {
+            binding?.progress?.visibility = it
+        }
+    }
+
+    private fun showFailureSheet(failure: Failure?) {
+        if (failure == null) return
+        val sheet = getNetworkErrorSheet(failure)?.also {
+            it.primaryButtonClickListener = {
+                vm.handleFormBranchEtClicked()
+            }
+            it.secondaryButtonClickListener = {
+                navigator.showSetting(requireContext())
+            }
+        }
+        sheet?.show(requireActivity().supportFragmentManager, ConfirmationSheetModal.TAG)
     }
 
     companion object {

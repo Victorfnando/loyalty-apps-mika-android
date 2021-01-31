@@ -7,21 +7,32 @@
 
 package com.dre.loyalty.features.ewallet.presentation.screen
 
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.dre.loyalty.core.interactor.UseCase
+import com.dre.loyalty.core.model.EWallet
+import com.dre.loyalty.core.networking.exception.Failure
+import com.dre.loyalty.core.networking.response.BasicResponse
 import com.dre.loyalty.core.platform.functional.Event
 import com.dre.loyalty.core.platform.BaseViewModel
 import com.dre.loyalty.core.platform.util.validator.type.ValidationType
-import com.dre.loyalty.features.ewallet.presentation.entity.Wallet
+import com.dre.loyalty.features.ewallet.data.entity.failure.GetWalletFailure
+import com.dre.loyalty.features.ewallet.domain.usecase.GetWalletListUseCase
 import com.dre.loyalty.features.ewallet.presentation.entity.WalletInputState
 import com.dre.loyalty.features.ewallet.presentation.entity.WalletPhoneInputState
 import com.dre.loyalty.features.ewallet.presentation.entity.WalletUploadButtonState
+import com.dre.loyalty.features.invoice.domain.usecase.CreateInvoiceUseCase
+import com.dre.loyalty.features.invoice.presentation.entity.UploadInvoiceState
 import javax.inject.Inject
 
-class EWalletViewModel @Inject constructor() : BaseViewModel() {
+class EWalletViewModel @Inject constructor(
+    private val getWalletListUseCase: GetWalletListUseCase,
+    private val createInvoiceUseCase: CreateInvoiceUseCase
+) : BaseViewModel() {
 
-    private val _walletSelectorClicked: MutableLiveData<Event<List<Wallet>>> = MutableLiveData()
-    val walletSelectorClicked: LiveData<Event<List<Wallet>>> = _walletSelectorClicked
+    private val _walletSelectorClicked: MutableLiveData<Event<List<EWallet>>> = MutableLiveData()
+    val walletSelectorClicked: LiveData<Event<List<EWallet>>> = _walletSelectorClicked
 
     private val _walletInputState: MutableLiveData<WalletInputState> = MutableLiveData()
     val walletInputState: LiveData<WalletInputState> = _walletInputState
@@ -32,24 +43,30 @@ class EWalletViewModel @Inject constructor() : BaseViewModel() {
     private val _uploadButtonState: MutableLiveData<WalletUploadButtonState> = MutableLiveData()
     val uploadButtonState: LiveData<WalletUploadButtonState> = _uploadButtonState
 
-    private var selectedWallet: Wallet? = null
+    private val _walletConfirmationSheet: MutableLiveData<Boolean> = MutableLiveData()
+    val walletConfirmationSheet: LiveData<Boolean> = _walletConfirmationSheet
+
+    private var selectedWallet: EWallet? = null
+    private var state: UploadInvoiceState? = null
+    private var walletList: List<EWallet> = listOf()
 
     init {
         _uploadButtonState.value = WalletUploadButtonState(false)
         _phoneInputState.value = WalletPhoneInputState(-1)
     }
 
-    fun handleWalletSelectorClicked() {
-        _walletSelectorClicked.value = Event(listOf(
-            Wallet("Go Pay", ""),
-            Wallet("Shopee Pay", ""),
-            Wallet("OVO", "")
-        ))
+    fun init(state: UploadInvoiceState) {
+        this.state = state
+        fetchWalletList()
     }
 
-    fun handleSelectedWallet(wallet: Wallet) {
+    fun handleWalletSelectorClicked() {
+        _walletSelectorClicked.value = Event(walletList)
+    }
+
+    fun handleSelectedWallet(wallet: EWallet) {
         selectedWallet = wallet
-        _walletInputState.value = WalletInputState(wallet.text)
+        _walletInputState.value = WalletInputState(wallet.name)
     }
 
     fun handlePhoneNumberChangedListener(text: String) {
@@ -60,6 +77,48 @@ class EWalletViewModel @Inject constructor() : BaseViewModel() {
             _phoneInputState.value = _phoneInputState.value?.copy(error = result.errorMessage)
         }
         checkButtonState()
+    }
+
+    fun handleUploadButtonClicked(eWallet: String, phoneNumber: String) {
+        _loading.value = View.VISIBLE
+        _uploadButtonState.value = _uploadButtonState.value?.copy(isEnabled = false)
+        val selectedWallet = walletList.find { it.name == eWallet }
+        state?.copy(walletId = selectedWallet?.id.orEmpty(), phoneNumber = phoneNumber)
+        state?.let {
+            createInvoiceUseCase(CreateInvoiceUseCase.Param(
+                it.userId,
+                it.walletId,
+                it.hospitalId,
+                it.price,
+                it.phoneNumber,
+                it.imageUri,
+                it.date
+            )) { result ->
+                result.fold(::handleFailure, ::handleSuccessCreateWallet)
+            }
+        }
+    }
+
+    fun fetchWalletList() {
+        _loading.value = View.VISIBLE
+        getWalletListUseCase(UseCase.None()) {
+            it.fold(::handleFailedGetWallet, ::handleSuccessGetWallet)
+        }
+    }
+
+    private fun handleSuccessGetWallet(walletList: List<EWallet>) {
+        _loading.value = View.GONE
+        this.walletList = walletList
+    }
+
+    private fun handleFailedGetWallet(failure: Failure) {
+        handleFailure(GetWalletFailure())
+    }
+
+    private fun handleSuccessCreateWallet(response: BasicResponse) {
+        _loading.value = View.GONE
+        _uploadButtonState.value = _uploadButtonState.value?.copy(isEnabled = true)
+        _walletConfirmationSheet.value = true
     }
 
     private fun checkButtonState() {

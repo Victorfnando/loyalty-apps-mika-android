@@ -14,18 +14,28 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import com.dre.loyalty.core.model.EWallet
+import com.dre.loyalty.core.networking.exception.Failure
 import com.dre.loyalty.core.platform.extension.observe
 import com.dre.loyalty.core.platform.extension.viewModel
 import com.dre.loyalty.core.platform.functional.Event
 import com.dre.loyalty.core.platform.BaseFragment
+import com.dre.loyalty.core.platform.navigation.Navigator
+import com.dre.loyalty.core.platform.util.enumtype.ConfirmationSheetType
+import com.dre.loyalty.core.view.sheet.ConfirmationSheetModal
 import com.dre.loyalty.databinding.FragmentEwalletBinding
-import com.dre.loyalty.features.ewallet.presentation.entity.Wallet
+import com.dre.loyalty.features.ewallet.data.entity.failure.GetWalletFailure
 import com.dre.loyalty.features.ewallet.presentation.entity.WalletInputState
 import com.dre.loyalty.features.ewallet.presentation.entity.WalletPhoneInputState
 import com.dre.loyalty.features.ewallet.presentation.entity.WalletUploadButtonState
 import com.dre.loyalty.features.ewallet.presentation.screen.sheet.EWalletSheetModal
+import com.dre.loyalty.features.invoice.presentation.entity.UploadInvoiceState
+import javax.inject.Inject
 
 class EWalletFragment : BaseFragment() {
+
+    @Inject
+    lateinit var navigator: Navigator
 
     private var binding: FragmentEwalletBinding? = null
 
@@ -45,6 +55,9 @@ class EWalletFragment : BaseFragment() {
             observe(walletInputState, ::updateWalletInput)
             observe(phoneInputState, ::updatePhoneInput)
             observe(uploadButtonState, ::updateUploadButton)
+            observe(loading, ::renderLoading)
+            observe(failure, ::showFailureSheet)
+            observe(walletConfirmationSheet, ::showWalletSuccessConfirmation)
         }
     }
 
@@ -62,6 +75,15 @@ class EWalletFragment : BaseFragment() {
         bindToolbar()
         bindEtWallet()
         bindPhoneInput()
+        arguments?.getParcelable<UploadInvoiceState>(ARG_UPLOAD_INVOICE_STATE).also {
+            vm.init(it as UploadInvoiceState)
+        }
+        binding?.btnUpload?.setOnClickListener {
+            vm.handleUploadButtonClicked(
+                binding?.etEWallet?.editText?.text.toString(),
+                binding?.etPhone?.editText?.text.toString()
+            )
+        }
     }
 
     override fun onDestroyView() {
@@ -94,7 +116,7 @@ class EWalletFragment : BaseFragment() {
         binding?.etPhone?.editText?.addTextChangedListener(phoneTextWatcher)
     }
 
-    private fun showWalletSelectorModal(event: Event<List<Wallet>>?) {
+    private fun showWalletSelectorModal(event: Event<List<EWallet>>?) {
         event?.getIfNotHandled()?.let {
             val sheet = EWalletSheetModal.newInstance(it)
             sheet.listener = { selected ->
@@ -122,9 +144,54 @@ class EWalletFragment : BaseFragment() {
         binding?.btnUpload?.isEnabled = state?.isEnabled ?: false
     }
 
+    private fun renderLoading(visibility: Int?) {
+        visibility?.let {
+            binding?.progress?.visibility = it
+        }
+    }
+
+    private fun showFailureSheet(failure: Failure?) {
+        if (failure == null) return
+        val sheet = if (failure is GetWalletFailure)  {
+            ConfirmationSheetModal.newInstance(ConfirmationSheetType.RESPONSE_ERROR_SHEET)
+        } else {
+            getNetworkErrorSheet(failure)
+        }
+        sheet?.also {
+            it.primaryButtonClickListener = {
+                if (failure is GetWalletFailure) {
+                    vm.fetchWalletList()
+                } else {
+                    vm.handleUploadButtonClicked(
+                        binding?.etEWallet?.editText?.text.toString(),
+                        binding?.etPhone?.editText?.text.toString()
+                    )
+                }
+            }
+            it.secondaryButtonClickListener = {
+                navigator.showSetting(requireContext())
+            }
+        }
+        sheet?.show(requireActivity().supportFragmentManager, ConfirmationSheetModal.TAG)
+    }
+
+    private fun showWalletSuccessConfirmation(state: Boolean?) {
+        val modal = ConfirmationSheetModal.newInstance(ConfirmationSheetType.UPLOAD_INVOICE_SUCCESS_SHEET)
+        modal.primaryButtonClickListener = {
+            requireActivity().finish()
+        }
+        modal.show(requireActivity().supportFragmentManager, ConfirmationSheetModal.TAG)
+    }
+
     companion object {
-        fun newInstance(): EWalletFragment {
-            return EWalletFragment()
+        private const val ARG_UPLOAD_INVOICE_STATE = "ARG_UPLOAD_INVOICE_STATE"
+
+        fun newInstance(state: UploadInvoiceState): EWalletFragment {
+            return EWalletFragment().also {
+                val bundle = Bundle()
+                bundle.putParcelable(ARG_UPLOAD_INVOICE_STATE, state)
+                it.arguments = bundle
+            }
         }
     }
 }

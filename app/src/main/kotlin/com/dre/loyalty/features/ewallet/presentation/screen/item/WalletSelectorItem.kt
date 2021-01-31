@@ -11,11 +11,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.dre.loyalty.R
+import com.dre.loyalty.core.model.EWallet
 import com.dre.loyalty.databinding.ItemWalletBinding
-import com.dre.loyalty.features.ewallet.presentation.entity.Wallet
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
 
-class WalletSelectorItem(val wallet: Wallet) : AbstractBindingItem<ItemWalletBinding>() {
+class WalletSelectorItem(val wallet: EWallet) : AbstractBindingItem<ItemWalletBinding>() {
 
     override val type: Int
         get() = R.id.walletItem
@@ -26,7 +26,7 @@ class WalletSelectorItem(val wallet: Wallet) : AbstractBindingItem<ItemWalletBin
 
     override fun bindView(binding: ItemWalletBinding, payloads: List<Any>) {
         super.bindView(binding, payloads)
-        binding.tvText.text = wallet.text
+        binding.tvText.text = wallet.name
         Glide.with(binding.ivLogo.context)
             .load(wallet.imageUrl)
             .into(binding.ivLogo)

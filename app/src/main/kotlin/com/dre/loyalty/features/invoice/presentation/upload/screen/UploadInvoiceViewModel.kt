@@ -10,17 +10,26 @@
 
 package com.dre.loyalty.features.invoice.presentation.upload.screen
 
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.dre.loyalty.core.interactor.UseCase
+import com.dre.loyalty.core.model.Hospital
 import com.dre.loyalty.core.platform.functional.Event
 import com.dre.loyalty.core.platform.BaseViewModel
+import com.dre.loyalty.core.platform.util.preferences.AuthenticationManager
 import com.dre.loyalty.core.platform.util.validator.type.ValidationType
+import com.dre.loyalty.features.hospital.domain.usecase.GetHospitalListUseCase
+import com.dre.loyalty.features.invoice.presentation.entity.UploadInvoiceState
 import com.dre.loyalty.features.invoice.presentation.upload.entity.HospitalBranchState
 import com.dre.loyalty.features.invoice.presentation.upload.entity.TotalAmountState
 import com.dre.loyalty.features.invoice.presentation.upload.entity.UploadButtonState
 import javax.inject.Inject
 
-class UploadInvoiceViewModel @Inject constructor() : BaseViewModel() {
+class UploadInvoiceViewModel @Inject constructor(
+    private val authenticationManager: AuthenticationManager,
+    private val getHospitalListUseCase: GetHospitalListUseCase
+) : BaseViewModel() {
 
     private val _showDateSelector: MutableLiveData<Event<String?>> = MutableLiveData()
     val showDateSelector: LiveData<Event<String?>> = _showDateSelector
@@ -43,12 +52,22 @@ class UploadInvoiceViewModel @Inject constructor() : BaseViewModel() {
     private val _changePhotoClicked: MutableLiveData<Event<Boolean>> = MutableLiveData()
     val changePhotoClicked: LiveData<Event<Boolean>> = _changePhotoClicked
 
-    private val _nextButtonClicked: MutableLiveData<Event<Boolean>> = MutableLiveData()
-    val nextButtonClicked: LiveData<Event<Boolean>> = _nextButtonClicked
+    private val _nextButtonClicked: MutableLiveData<Event<UploadInvoiceState>> = MutableLiveData()
+    val nextButtonClicked: LiveData<Event<UploadInvoiceState>> = _nextButtonClicked
+
+    private val _imageUri: MutableLiveData<String> = MutableLiveData()
+    val imageUri: LiveData<String> = _imageUri
+
+    private var hospitalList: List<Hospital> = emptyList()
 
     init {
         _totalAmountInputState.value = TotalAmountState(-1)
         _uploadButtonState.value = UploadButtonState(false)
+    }
+
+    fun init(imageUri: String) {
+        handleImageSelected(imageUri)
+        refreshHospitalList()
     }
 
     fun handleTransactionDateEtClicked() {
@@ -58,18 +77,16 @@ class UploadInvoiceViewModel @Inject constructor() : BaseViewModel() {
     fun handleFormBranchEtClicked() {
         _showBranchListSheet.value = Event(
             HospitalBranchState(
-            listOf(
-                    "kemayoran", "jakarta",
-                    "kemayoran", "jakarta",
-                    "kemayoran", "jakarta",
-                    "kemayoran", "jakarta",
-                    "kemayoran", "jakarta",
-                    "kemayoran", "jakarta",
-                    "kemayoran", "jakarta",
-            ),
-            _selectedBranch.value
-        )
-        )
+                hospitalList.map { it.name },
+                _selectedBranch.value
+            ))
+    }
+
+    fun refreshHospitalList() {
+        _loading.value = View.VISIBLE
+        getHospitalListUseCase(UseCase.None()) {
+            it.fold(::handleFailure, ::handleSuccessGetHospitalList)
+        }
     }
 
     fun handleSelectedDate(selectedDate: String) {
@@ -96,8 +113,26 @@ class UploadInvoiceViewModel @Inject constructor() : BaseViewModel() {
         _changePhotoClicked.value = Event(true)
     }
 
-    fun handleNextButtonClicked() {
-        _nextButtonClicked.value = Event(true)
+    fun handleNextButtonClicked(
+        hospitalName: String,
+        date: String,
+        price: String
+    ) {
+        _nextButtonClicked.value = Event(
+            UploadInvoiceState(
+                authenticationManager.getUserId().orEmpty(),
+                "",
+                hospitalList.find { it.name == hospitalName }?.id.orEmpty(),
+                price.toLong(),
+                "",
+                _imageUri.value.orEmpty(),
+                date
+            )
+        )
+    }
+
+    fun handleImageSelected(uri: String) {
+        _imageUri.value = uri
     }
 
     private fun validateButtonState() {
@@ -107,4 +142,9 @@ class UploadInvoiceViewModel @Inject constructor() : BaseViewModel() {
     private fun isValidForm() = _totalAmountInputState.value?.error == null
             && _selectedBranch.value != null
             && _selectedDate.value != null
+
+    private fun handleSuccessGetHospitalList(hospitalList: List<Hospital>) {
+        _loading.value = View.GONE
+        this.hospitalList = hospitalList
+    }
 }

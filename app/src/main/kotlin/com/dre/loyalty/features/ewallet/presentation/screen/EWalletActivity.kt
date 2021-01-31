@@ -12,10 +12,13 @@ import android.content.Intent
 import android.view.MenuItem
 import com.dre.loyalty.core.platform.BaseActivity
 import com.dre.loyalty.core.platform.BaseFragment
+import com.dre.loyalty.features.invoice.presentation.entity.UploadInvoiceState
 
 class EWalletActivity : BaseActivity() {
 
-    override fun fragment(): BaseFragment = EWalletFragment.newInstance()
+    override fun fragment(): BaseFragment = EWalletFragment.newInstance(
+        intent.extras?.getParcelable<UploadInvoiceState>(EXTRA_UPLOAD_INVOICE_STATE) as UploadInvoiceState
+    )
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
@@ -26,8 +29,12 @@ class EWalletActivity : BaseActivity() {
     }
 
     companion object {
-        fun callingIntent(context: Context) : Intent {
-            return Intent(context, EWalletActivity::class.java)
+        private const val EXTRA_UPLOAD_INVOICE_STATE = "EXTRA_UPLOAD_INVOICE_STATE"
+
+        fun callingIntent(context: Context, state: UploadInvoiceState) : Intent {
+            return Intent(context, EWalletActivity::class.java).also {
+                it.putExtra(EXTRA_UPLOAD_INVOICE_STATE, state)
+            }
         }
     }
 }

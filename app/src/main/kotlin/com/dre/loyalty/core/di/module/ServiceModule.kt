@@ -49,4 +49,10 @@ class ServiceModule {
     fun provideInvoiceService(retrofit: Retrofit): InvoiceService {
         return retrofit.create(InvoiceService::class.java)
     }
+
+    @Provides
+    @Singleton
+    fun provideWalletService(retrofit: Retrofit): EWalletService {
+        return retrofit.create(EWalletService::class.java)
+    }
 }

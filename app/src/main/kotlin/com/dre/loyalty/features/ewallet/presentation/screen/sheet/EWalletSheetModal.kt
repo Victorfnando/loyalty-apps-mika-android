@@ -17,8 +17,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.andrefrsousa.superbottomsheet.SuperBottomSheetFragment
 import com.dre.loyalty.R
+import com.dre.loyalty.core.model.EWallet
 import com.dre.loyalty.databinding.SheetEwalletBinding
-import com.dre.loyalty.features.ewallet.presentation.entity.Wallet
 import com.dre.loyalty.features.ewallet.presentation.screen.item.WalletSelectorItem
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
@@ -27,7 +27,7 @@ class EWalletSheetModal : SuperBottomSheetFragment() {
 
     private var binding: SheetEwalletBinding? = null
 
-    var listener: ((Wallet) -> Unit)? = null
+    var listener: ((EWallet) -> Unit)? = null
 
     private val walletItemAdapter: ItemAdapter<WalletSelectorItem> by lazy {
         ItemAdapter<WalletSelectorItem>()
@@ -72,7 +72,7 @@ class EWalletSheetModal : SuperBottomSheetFragment() {
                 }
             }
         }
-        val item: List<Wallet> = arguments?.getParcelableArrayList<Wallet>(ARGUMENT_SHEET_ITEM) ?: emptyList()
+        val item: List<EWallet> = arguments?.getParcelableArrayList<EWallet>(ARGUMENT_SHEET_ITEM) ?: emptyList()
         walletItemAdapter.add(
             item.map {
                 WalletSelectorItem(it)
@@ -89,7 +89,7 @@ class EWalletSheetModal : SuperBottomSheetFragment() {
         const val TAG = "EWalletSheetModal"
         private const val ARGUMENT_SHEET_ITEM = "ARGUMENT_SHEET_ITEM"
 
-        fun newInstance(item: List<Wallet>): EWalletSheetModal {
+        fun newInstance(item: List<EWallet>): EWalletSheetModal {
             return EWalletSheetModal().also {
                 val bundle = Bundle()
                 bundle.putParcelableArrayList(ARGUMENT_SHEET_ITEM, ArrayList(item))
