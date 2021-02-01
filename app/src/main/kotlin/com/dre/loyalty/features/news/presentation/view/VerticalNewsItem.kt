@@ -9,6 +9,9 @@ package com.dre.loyalty.features.news.presentation.view
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.model.GlideUrl
+import com.bumptech.glide.load.model.LazyHeaders
 import com.dre.loyalty.R
 import com.dre.loyalty.core.model.News
 import com.dre.loyalty.databinding.ItemNewsVerticalBinding
@@ -29,6 +32,16 @@ class VerticalNewsItem(val item: News) : AbstractBindingItem<ItemNewsVerticalBin
             tvDate.text = item.date
             tvDesc.text = item.desc
             tvTitle.text = item.title
+
+            val url = GlideUrl(
+                    item.imageUrl,
+                    LazyHeaders.Builder()
+                            .addHeader("User-Agent", "appllication")
+                            .build()
+            )
+            Glide.with(ivBanner.context)
+                    .load(url)
+                    .into(ivBanner)
         }
     }
 
@@ -37,5 +50,7 @@ class VerticalNewsItem(val item: News) : AbstractBindingItem<ItemNewsVerticalBin
         binding.tvDate.text = null
         binding.tvDesc.text = null
         binding.tvTitle.text = null
+        Glide.with(binding.ivBanner.context)
+                .clear(binding.ivBanner)
     }
 }

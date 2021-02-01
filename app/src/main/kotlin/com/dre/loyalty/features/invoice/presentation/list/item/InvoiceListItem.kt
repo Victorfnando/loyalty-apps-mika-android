@@ -10,6 +10,9 @@ package com.dre.loyalty.features.invoice.presentation.list.item
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.model.GlideUrl
+import com.bumptech.glide.load.model.LazyHeaders
 import com.dre.loyalty.R
 import com.dre.loyalty.core.model.Invoice
 import com.dre.loyalty.core.platform.util.extension.addBorder
@@ -37,6 +40,17 @@ class InvoiceListItem(val invoice: Invoice) : AbstractBindingItem<ItemInvoiceBin
             tvPrice.text = invoice.transactionPrice.formatToCurrency()
             tvDate.text = invoice.date
             tvLocation.text = invoice.location
+            val url = GlideUrl(
+                    invoice.imageUrl,
+                    LazyHeaders.Builder()
+                            .addHeader("User-Agent", "appllication")
+                            .build()
+            )
+            Glide.with(ivInvoice.context)
+                    .load(url)
+                    .into(ivInvoice)
+
+
         }
     }
 
@@ -47,6 +61,9 @@ class InvoiceListItem(val invoice: Invoice) : AbstractBindingItem<ItemInvoiceBin
             tvPrice.text = null
             tvDate.text = null
             tvLocation.text = null
+
+            Glide.with(binding.ivInvoice.context)
+                    .clear(binding.ivInvoice)
         }
     }
 }
