@@ -5,7 +5,7 @@
  * github: https://github.com/oandrz
  */
 
-package com.dre.loyalty.features.contactus.presentation
+package com.dre.loyalty.features.profile.presentation.contactus
 
 import android.os.Bundle
 import android.text.Editable
@@ -15,6 +15,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.dre.loyalty.R
+import com.dre.loyalty.core.networking.exception.Failure
 import com.dre.loyalty.core.platform.extension.observe
 import com.dre.loyalty.core.platform.extension.viewModel
 import com.dre.loyalty.core.platform.functional.Event
@@ -25,8 +26,8 @@ import com.dre.loyalty.core.view.sheet.ConfirmationSheetModal
 import com.dre.loyalty.core.view.sheet.SheetListModal
 import com.dre.loyalty.core.view.sheet.SheetListState
 import com.dre.loyalty.databinding.FragmentContactUsBinding
-import com.dre.loyalty.features.contactus.presentation.entity.InputMessageState
-import com.dre.loyalty.features.contactus.presentation.entity.SendMessageButtonState
+import com.dre.loyalty.features.profile.presentation.contactus.entity.InputMessageState
+import com.dre.loyalty.features.profile.presentation.contactus.entity.SendMessageButtonState
 import javax.inject.Inject
 
 class ContactUsFragment : BaseFragment() {
@@ -58,6 +59,8 @@ class ContactUsFragment : BaseFragment() {
             observe(submitMessageClicked, ::showSuccessSendMessageSheet)
             observe(inputMessageState, ::updateInputMessage)
             observe(sendButtonState, ::updateSendButtonState)
+            observe(loading, ::renderLoading)
+            observe(failure, ::showFailureSheet)
         }
     }
 
@@ -108,7 +111,10 @@ class ContactUsFragment : BaseFragment() {
 
     private fun bindSubmitMessageButton() {
         binding?.btnSend?.setOnClickListener {
-            vm.handleSubmitMessageClicked()
+            vm.handleSubmitMessageClicked(
+                binding?.etMessage?.text.toString(),
+                binding?.etCategory?.editText?.text.toString()
+            )
         }
     }
 
@@ -164,6 +170,29 @@ class ContactUsFragment : BaseFragment() {
 
     private fun updateSendButtonState(state: SendMessageButtonState?) {
         binding?.btnSend?.isEnabled = state?.isEnabled ?: false
+    }
+
+    private fun renderLoading(visibility: Int?) {
+        visibility?.let {
+            binding?.progress?.visibility = it
+        }
+    }
+
+    private fun showFailureSheet(failure: Failure?) {
+        if (failure == null) return
+        binding?.btnSend?.isEnabled = true
+        val sheet = getNetworkErrorSheet(failure)?.also {
+            it.primaryButtonClickListener = {
+                vm.handleSubmitMessageClicked(
+                    binding?.etMessage?.text.toString(),
+                    binding?.etCategory?.editText?.text.toString()
+                )
+            }
+            it.secondaryButtonClickListener = {
+                navigator.showSetting(requireContext())
+            }
+        }
+        sheet?.show(requireActivity().supportFragmentManager, ConfirmationSheetModal.TAG)
     }
 
     companion object {

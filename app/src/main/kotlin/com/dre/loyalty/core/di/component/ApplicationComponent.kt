@@ -21,7 +21,7 @@ import com.dre.loyalty.core.platform.navigation.RouteActivity
 import com.dre.loyalty.features.authenticationselector.presentation.AuthenticationSelectorFragment
 import com.dre.loyalty.features.cashback.presentation.screen.CashBackListFragment
 import com.dre.loyalty.features.profile.presentation.changeprofile.screen.UpdateProfileFragment
-import com.dre.loyalty.features.contactus.presentation.ContactUsFragment
+import com.dre.loyalty.features.profile.presentation.contactus.ContactUsFragment
 import com.dre.loyalty.features.createpin.presentation.CreatePinFragment
 import com.dre.loyalty.features.ewallet.presentation.screen.EWalletFragment
 import com.dre.loyalty.features.faq.presentation.screen.FaqFragment

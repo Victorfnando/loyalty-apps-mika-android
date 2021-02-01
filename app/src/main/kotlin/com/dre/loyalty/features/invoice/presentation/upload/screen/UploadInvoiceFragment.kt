@@ -39,6 +39,7 @@ import com.dre.loyalty.features.invoice.presentation.upload.entity.TotalAmountSt
 import com.dre.loyalty.features.invoice.presentation.upload.entity.UploadButtonState
 import com.dre.loyalty.features.invoice.presentation.upload.screen.sheet.BranchListSheetModal
 import com.dre.loyalty.features.authentication.presentation.inputuserdetail.screen.dialog.DatePickerDialogFragment
+import com.dre.loyalty.features.ewallet.presentation.screen.EWalletActivity
 import com.dre.loyalty.features.invoice.presentation.entity.UploadInvoiceState
 import javax.inject.Inject
 
@@ -78,6 +79,7 @@ class UploadInvoiceFragment : BaseFragment() {
             observe(loading, ::renderLoading)
             observe(failure, ::showFailureSheet)
             observe(imageUri, ::renderPhoto)
+            observe(navigateWebView, ::showWebView)
         }
     }
 
@@ -104,7 +106,7 @@ class UploadInvoiceFragment : BaseFragment() {
             vm.handleNextButtonClicked(
                 binding?.etFormBranch?.editText?.text.toString(),
                 binding?.etTransactionDate?.editText?.text.toString(),
-                binding?.etAmount?.editText?.text.toString(),
+                binding?.etAmount?.editText?.text.toString()
             )
         }
         arguments?.getString(ARGS_IMAGE_URI)?.let {
@@ -114,9 +116,13 @@ class UploadInvoiceFragment : BaseFragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == RESULT_OK && requestCode == CameraActivity.REQUEST_CODE_CAMERA) {
-            data?.extras?.getString(EXTRA_URI)?.let {
-                vm.handleImageSelected(it)
+        if (resultCode == RESULT_OK) {
+            if (requestCode == CameraActivity.REQUEST_CODE_CAMERA) {
+                data?.extras?.getString(EXTRA_URI)?.let {
+                    vm.handleImageSelected(it)
+                }
+            } else if (requestCode == EWalletActivity.REQUEST_CODE_UPLOAD) {
+                requireActivity().finish()
             }
         }
     }
@@ -157,10 +163,15 @@ class UploadInvoiceFragment : BaseFragment() {
     }
 
     private fun bindTvTnc() {
-        binding?.stickyButton?.tvFooterText = HtmlCompat.fromHtml(
-            getString(R.string.uploadInvoiceScreen_label_tnc),
-            HtmlCompat.FROM_HTML_MODE_LEGACY
-        )
+        binding?.stickyButton?.run {
+            tvFooterText = HtmlCompat.fromHtml(
+                getString(R.string.uploadInvoiceScreen_label_tnc),
+                HtmlCompat.FROM_HTML_MODE_LEGACY
+            )
+            tvFooterClickListener = {
+                vm.handleFooterTextClicked()
+            }
+        }
     }
 
     private fun showDateDialog(event: Event<String?>?) {
@@ -226,7 +237,10 @@ class UploadInvoiceFragment : BaseFragment() {
 
     private fun showWalletScreen(event: Event<UploadInvoiceState>?) {
         event?.getIfNotHandled()?.let {
-            navigator.showWalletScreen(requireContext(), it)
+            startActivityForResult(
+                EWalletActivity.callingIntent(requireContext(), it),
+                EWalletActivity.REQUEST_CODE_UPLOAD
+            )
         }
     }
 
@@ -247,6 +261,12 @@ class UploadInvoiceFragment : BaseFragment() {
             }
         }
         sheet?.show(requireActivity().supportFragmentManager, ConfirmationSheetModal.TAG)
+    }
+
+    private fun showWebView(event: Event<String>?) {
+        event?.getIfNotHandled()?.let {
+            navigator.callingWebView(requireContext(), it)
+        }
     }
 
     companion object {

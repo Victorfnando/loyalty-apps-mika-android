@@ -11,9 +11,14 @@ import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dre.loyalty.core.model.User
+import com.dre.loyalty.core.networking.exception.Failure
+import com.dre.loyalty.core.networking.response.BasicResponse
 import com.dre.loyalty.core.platform.functional.Event
 import com.dre.loyalty.core.platform.BaseViewModel
 import com.dre.loyalty.core.platform.util.preferences.AuthenticationManager
+import com.dre.loyalty.features.authentication.domain.usecase.LogOutUseCase
+import com.dre.loyalty.features.profile.data.entity.failure.LogoutFailure
+import com.dre.loyalty.features.profile.data.entity.failure.UploadPhotoFailure
 import com.dre.loyalty.features.profile.domain.usecase.GetProfileUseCase
 import com.dre.loyalty.features.profile.domain.usecase.UpdateProfilePictureUseCase
 import com.dre.loyalty.features.profile.presentation.profile.entity.ProfileState
@@ -22,7 +27,8 @@ import javax.inject.Inject
 class ProfileViewModel @Inject constructor(
     private val authenticationManager: AuthenticationManager,
     private val getProfileUseCase: GetProfileUseCase,
-    private val updatePhotoProfileUseCase: UpdateProfilePictureUseCase
+    private val updatePhotoProfileUseCase: UpdateProfilePictureUseCase,
+    private val logOutUseCase: LogOutUseCase
 ) : BaseViewModel() {
 
     private val _navigateChangeProfile: MutableLiveData<Event<User>> = MutableLiveData()
@@ -37,11 +43,14 @@ class ProfileViewModel @Inject constructor(
     private val _navigateContact: MutableLiveData<Event<Boolean>> = MutableLiveData()
     val navigateContact: LiveData<Event<Boolean>> = _navigateContact
 
-    private val _navigateTnc: MutableLiveData<Event<Boolean>> = MutableLiveData()
-    val navigateTnc: LiveData<Event<Boolean>> = _navigateTnc
+    private val _navigateTnc: MutableLiveData<Event<String>> = MutableLiveData()
+    val navigateTnc: LiveData<Event<String>> = _navigateTnc
 
-    private val _navigateLogout: MutableLiveData<Event<Boolean>> = MutableLiveData()
-    val navigateLogout: LiveData<Event<Boolean>> = _navigateLogout
+    private val _logoutConfirmationSheet: MutableLiveData<Event<Boolean>> = MutableLiveData()
+    val logoutConfirmationSheet: LiveData<Event<Boolean>> = _logoutConfirmationSheet
+
+    private val _navigateToAuthSelector: MutableLiveData<Event<Boolean>> = MutableLiveData()
+    val navigateToAuthSelector: LiveData<Event<Boolean>> = _navigateToAuthSelector
 
     private val _profilePictureClickedEvent: MutableLiveData<Event<Boolean>> = MutableLiveData()
     val profilePictureClickedEvent: LiveData<Event<Boolean>> = _profilePictureClickedEvent
@@ -51,6 +60,7 @@ class ProfileViewModel @Inject constructor(
 
     private lateinit var user: User
     private lateinit var userId: String
+    private lateinit var selectedImageUri: String
 
     fun init() {
         userId = authenticationManager.getUserId().orEmpty()
@@ -78,27 +88,37 @@ class ProfileViewModel @Inject constructor(
     }
 
     fun handleTnCMenuClicked() {
-        _navigateTnc.value = Event(true)
+        _navigateTnc.value = Event("https://google.com")
     }
 
     fun handleLogoutMenuClicked() {
-        _navigateLogout.value = Event(true)
+        _logoutConfirmationSheet.value = Event(true)
     }
 
     fun handleLogoutConfirmationClicked() {
-
+        _loading.value = View.VISIBLE
+        logOutUseCase(LogOutUseCase.Param(userId)) { result ->
+            result.fold(::handleFailureLogout, ::handleSuccessLogout)
+        }
     }
 
     fun handleProfilePictureSelected(uri: String) {
-        updatePhotoProfileUseCase(uri) {
-            it.fold(::handleFailure, ::handleSuccessPhotoProfile)
-        }
+        _loading.value = View.VISIBLE
+        selectedImageUri = uri
+        uploadProfilePicture()
     }
 
     fun refresh() {
         _loading.value = View.VISIBLE
         getProfileUseCase(userId) {
             it.fold(::handleFailure, ::handleSuccessGetProfile)
+        }
+    }
+
+    fun uploadProfilePicture() {
+        _loading.value = View.VISIBLE
+        updatePhotoProfileUseCase(selectedImageUri) {
+            it.fold(::handleFailedUploadPhoto, ::handleSuccessPhotoProfile)
         }
     }
 
@@ -113,6 +133,23 @@ class ProfileViewModel @Inject constructor(
     }
 
     private fun handleSuccessPhotoProfile(imageUrl: String) {
+        _loading.value = View.GONE
         _userProfileState.value = _userProfileState.value?.copy(profileImageUrl = imageUrl)
+    }
+
+    private fun handleFailedUploadPhoto(failure: Failure) {
+        _loading.value = View.GONE
+        handleFailure(UploadPhotoFailure())
+    }
+
+    private fun handleFailureLogout(failure: Failure) {
+        _loading.value = View.GONE
+        handleFailure(LogoutFailure())
+    }
+
+    private fun handleSuccessLogout(response: BasicResponse) {
+        _loading.value = View.GONE
+        authenticationManager.clear()
+        _navigateToAuthSelector.value = Event(true)
     }
 }

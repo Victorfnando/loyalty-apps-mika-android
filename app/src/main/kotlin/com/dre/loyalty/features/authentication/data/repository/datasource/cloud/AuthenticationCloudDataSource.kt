@@ -54,4 +54,8 @@ class AuthenticationCloudDataSource @Inject constructor(
     override fun updatePassword(request: UpdatePasswordRequest): Call<BasicResponse> {
         return service.updatePassword(request)
     }
+
+    override fun logout(request: LogoutRequest): Call<BasicResponse> {
+        return service.logout(request)
+    }
 }

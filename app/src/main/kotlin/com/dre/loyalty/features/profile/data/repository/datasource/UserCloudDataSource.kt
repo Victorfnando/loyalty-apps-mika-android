@@ -10,9 +10,11 @@
 
 package com.dre.loyalty.features.profile.data.repository.datasource
 
+import android.net.Uri
 import com.dre.loyalty.core.networking.UserService
 import com.dre.loyalty.core.networking.response.BasicResponse
 import com.dre.loyalty.core.networking.response.LoyaltyResponse
+import com.dre.loyalty.features.profile.data.entity.request.ContactUsRequest
 import com.dre.loyalty.features.profile.data.entity.request.UpdateProfileRequest
 import com.dre.loyalty.features.profile.data.entity.response.ImageResponse
 import com.dre.loyalty.features.profile.data.entity.response.UserResponse
@@ -34,13 +36,17 @@ class UserCloudDataSource @Inject constructor(
     }
 
     override fun changeProfileImage(uri: String): Call<LoyaltyResponse<ImageResponse>> {
-        val file = File(uri)
+        val file = File(Uri.parse(uri).path.orEmpty())
         val requestFile: RequestBody = file.asRequestBody("multipart/form-data".toMediaTypeOrNull())
         val body: MultipartBody.Part = MultipartBody.Part.createFormData("profileImage", file.name, requestFile)
         return service.changePhotoProfile(body)
     }
 
-    override fun updateProfile(requestUpdate: UpdateProfileRequest): Call<BasicResponse> {
-        return service.updateProfile(requestUpdate)
+    override fun updateProfile(request: UpdateProfileRequest): Call<BasicResponse> {
+        return service.updateProfile(request)
+    }
+
+    override fun submitContactUs(request: ContactUsRequest): Call<BasicResponse> {
+        return service.submitContactUs(request)
     }
 }

@@ -55,6 +55,9 @@ class UserDetailFormViewModel @Inject constructor() : BaseViewModel() {
     private val _navigateToCreateSecurity: MutableLiveData<Event<User>> = MutableLiveData()
     val navigateToCreateSecurity: LiveData<Event<User>> = _navigateToCreateSecurity
 
+    private val _navigateWebView: MutableLiveData<Event<String>> = MutableLiveData()
+    val navigateWebView: LiveData<Event<String>> = _navigateWebView
+
     private var request: User? = null
 
     init {
@@ -159,6 +162,10 @@ class UserDetailFormViewModel @Inject constructor() : BaseViewModel() {
         request?.let {
             _navigateToCreateSecurity.value = Event(it)
         }
+    }
+
+    fun handleFooterTextClicked() {
+        _navigateWebView.value = Event("https://google.com")
     }
 
     private fun checkButtonState() {

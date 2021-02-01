@@ -21,7 +21,7 @@ import com.dre.loyalty.core.di.viewmodel.ViewModelFactory
 import com.dre.loyalty.core.di.viewmodel.ViewModelKey
 import com.dre.loyalty.features.cashback.presentation.screen.CashBackListViewModel
 import com.dre.loyalty.features.profile.presentation.changeprofile.screen.UpdateProfileViewModel
-import com.dre.loyalty.features.contactus.presentation.ContactUsViewModel
+import com.dre.loyalty.features.profile.presentation.contactus.ContactUsViewModel
 import com.dre.loyalty.features.createpin.presentation.CreatePinViewModel
 import com.dre.loyalty.features.ewallet.presentation.screen.EWalletViewModel
 import com.dre.loyalty.features.faq.presentation.screen.FaqViewModel
@@ -43,7 +43,6 @@ import com.dre.loyalty.features.authentication.presentation.resetpassword.screen
 import com.dre.loyalty.features.authentication.presentation.updatepassword.screen.UpdatePasswordViewModel
 import com.dre.loyalty.features.invoice.presentation.upload.screen.UploadInvoiceViewModel
 import com.dre.loyalty.features.authentication.presentation.inputuserdetail.screen.UserDetailFormViewModel
-import com.dre.loyalty.features.authentication.presentation.otp.screen.OtpViewModel
 import com.dre.loyalty.features.authentication.presentation.otp.screen.create.OtpRegisterViewModel
 import com.dre.loyalty.features.authentication.presentation.otp.screen.forgot.OtpForgotPasswordViewModel
 import dagger.Binds

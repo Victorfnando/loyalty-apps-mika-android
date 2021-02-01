@@ -10,13 +10,19 @@
 
 package com.dre.loyalty.features.invoice.data.repository.datasource
 
+import android.net.Uri
 import com.dre.loyalty.core.networking.InvoiceService
 import com.dre.loyalty.core.networking.response.BasicResponse
 import com.dre.loyalty.core.networking.response.LoyaltyResponse
 import com.dre.loyalty.features.invoice.data.entity.request.CreateInvoiceRequest
 import com.dre.loyalty.features.invoice.data.entity.request.InvoiceListRequest
 import com.dre.loyalty.features.invoice.data.entity.response.InvoiceResponse
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import retrofit2.Call
+import java.io.File
 import javax.inject.Inject
 
 class InvoiceCloudDataSource @Inject constructor(
@@ -31,6 +37,17 @@ class InvoiceCloudDataSource @Inject constructor(
     }
 
     override fun createInvoice(request: CreateInvoiceRequest): Call<BasicResponse> {
-        return service.createInvoice(request)
+        val file = File(Uri.parse(request.imageUri).path.orEmpty())
+        val requestFile: RequestBody = file.asRequestBody("multipart/form-data".toMediaTypeOrNull())
+        val body: MultipartBody.Part = MultipartBody.Part.createFormData("receiptImage", file.name, requestFile)
+        return service.createInvoice(
+            request.userId,
+            request.walletId,
+            request.hospitalId,
+            request.price,
+            request.phoneNumber,
+            request.date,
+            body
+        )
     }
 }

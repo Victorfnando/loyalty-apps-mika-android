@@ -35,7 +35,7 @@ import com.dre.loyalty.features.authentication.presentation.resetpassword.screen
 import com.dre.loyalty.features.authentication.presentation.updatepassword.screen.UpdatePasswordActivity
 import com.dre.loyalty.features.authenticationselector.presentation.AuthenticationSelectorActivity
 import com.dre.loyalty.features.cashback.presentation.screen.CashBackListActivity
-import com.dre.loyalty.features.contactus.presentation.ContactUsActivity
+import com.dre.loyalty.features.profile.presentation.contactus.ContactUsActivity
 import com.dre.loyalty.features.createpin.presentation.CreatePinActivity
 import com.dre.loyalty.features.createpin.presentation.enums.CreatePinType
 import com.dre.loyalty.features.ewallet.presentation.screen.EWalletActivity
@@ -50,6 +50,7 @@ import com.dre.loyalty.features.photoview.PhotoViewActivity
 import com.dre.loyalty.features.pin.presentation.InputPinActivity
 import com.dre.loyalty.features.profile.presentation.changeprofile.screen.UpdateProfileActivity
 import com.dre.loyalty.features.splash.presentation.SplashScreenActivity
+import com.dre.loyalty.features.webview.WebViewActivity
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -77,8 +78,10 @@ import javax.inject.Singleton
         )
     )
 
-    private fun showAuthSelector(context: Context) =
-        context.startActivity(AuthenticationSelectorActivity.callingIntent(context))
+    fun showAuthSelector(context: Context) =
+        context.startActivity(AuthenticationSelectorActivity.callingIntent(context).also {
+            it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        })
 
     fun showPin(context: Context) {
         context.startActivity(InputPinActivity.callingIntent(context))
@@ -196,6 +199,10 @@ import javax.inject.Singleton
         context.startActivity(
             Intent(ACTION_VIEW, Uri.parse(uriString))
         )
+    }
+
+    fun callingWebView(context: Context, url: String) {
+        context.startActivity(WebViewActivity.callingIntent(context, url))
     }
 
     class Extras(val transitionSharedElement: View)

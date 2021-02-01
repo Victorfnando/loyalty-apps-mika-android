@@ -9,12 +9,10 @@ package com.dre.loyalty.features.profile.presentation.profile.screen
 
 import android.app.Activity
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -24,17 +22,19 @@ import com.bumptech.glide.load.model.LazyHeaders
 import com.dre.loyalty.R
 import com.dre.loyalty.core.model.User
 import com.dre.loyalty.core.networking.exception.Failure
+import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.core.platform.extension.observe
 import com.dre.loyalty.core.platform.extension.viewModel
 import com.dre.loyalty.core.platform.functional.Event
 import com.dre.loyalty.core.platform.navigation.Navigator
-import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.core.platform.util.enumtype.ConfirmationSheetType
 import com.dre.loyalty.core.view.VerticalDividerDecoration
 import com.dre.loyalty.core.view.sheet.ConfirmationSheetModal
 import com.dre.loyalty.databinding.FragmentProfileBinding
 import com.dre.loyalty.features.camera.CameraActivity
 import com.dre.loyalty.features.camera.CameraRequestType
+import com.dre.loyalty.features.profile.data.entity.failure.LogoutFailure
+import com.dre.loyalty.features.profile.data.entity.failure.UploadPhotoFailure
 import com.dre.loyalty.features.profile.presentation.profile.entity.Menu
 import com.dre.loyalty.features.profile.presentation.profile.entity.ProfileState
 import com.dre.loyalty.features.profile.presentation.profile.screen.item.LogoutMenuItem
@@ -44,6 +44,7 @@ import com.dre.loyalty.features.profile.presentation.profile.screen.sheet.PhotoP
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import javax.inject.Inject
+
 
 class ProfileFragment : BaseFragment() {
 
@@ -79,11 +80,12 @@ class ProfileFragment : BaseFragment() {
             observe(navigateContact, ::navigateContactScreen)
             observe(navigateFaq, ::navigateFaqScreen)
             observe(navigateTnc, ::navigateTnCScreen)
-            observe(navigateLogout, ::showLogoutConfirmationSheet)
+            observe(logoutConfirmationSheet, ::showLogoutConfirmationSheet)
             observe(profilePictureClickedEvent, ::showProfilePictureSelectorModal)
             observe(loading, ::renderLoading)
             observe(failure, ::showFailureSheet)
             observe(userProfileState, ::renderProfile)
+            observe(navigateToAuthSelector, ::navigateAuthSelectorScreen)
         }
     }
 
@@ -168,9 +170,10 @@ class ProfileFragment : BaseFragment() {
         binding?.rvMenu?.run {
             addItemDecoration(
                 VerticalDividerDecoration(requireContext(), RecyclerView.VERTICAL).also {
-                    ContextCompat.getDrawable(requireContext(), R.drawable.normal_divider)?.let { divider ->
-                        it.setDrawable(divider)
-                    }
+                    ContextCompat.getDrawable(requireContext(), R.drawable.normal_divider)
+                        ?.let { divider ->
+                            it.setDrawable(divider)
+                        }
                 }
             )
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
@@ -215,13 +218,19 @@ class ProfileFragment : BaseFragment() {
                 getString(R.string.profile_label_account),
                 listOf(accountItemSection)
             ).also {
-                it.dividerItemDecoration = VerticalDividerDecoration(requireContext(), RecyclerView.VERTICAL)
+                it.dividerItemDecoration = VerticalDividerDecoration(
+                    requireContext(),
+                    RecyclerView.VERTICAL
+                )
             },
             ProfileMenuSection(
                 getString(R.string.profile_label_about),
                 listOf(aboutItemSection)
             ).also {
-                it.dividerItemDecoration = VerticalDividerDecoration(requireContext(), RecyclerView.VERTICAL)
+                it.dividerItemDecoration = VerticalDividerDecoration(
+                    requireContext(),
+                    RecyclerView.VERTICAL
+                )
             }
         )
     }
@@ -250,9 +259,9 @@ class ProfileFragment : BaseFragment() {
         }
     }
 
-    private fun navigateTnCScreen(event: Event<Boolean>?) {
+    private fun navigateTnCScreen(event: Event<String>?) {
         event?.getIfNotHandled()?.let {
-            Toast.makeText(requireContext(), "tnc", Toast.LENGTH_SHORT).show()
+            navigator.callingWebView(requireContext(), it)
         }
     }
 
@@ -266,6 +275,12 @@ class ProfileFragment : BaseFragment() {
         }
     }
 
+    private fun navigateAuthSelectorScreen(event: Event<Boolean>?) {
+        event?.getIfNotHandled()?.let {
+            navigator.showAuthSelector(requireContext())
+        }
+    }
+
     private fun renderLoading(visibility: Int?) {
         visibility?.let {
             binding?.progress?.visibility = it
@@ -274,9 +289,18 @@ class ProfileFragment : BaseFragment() {
 
     private fun showFailureSheet(failure: Failure?) {
         if (failure == null) return
-        val sheet = getNetworkErrorSheet(failure)?.also {
+        val sheet = if (failure is LogoutFailure || failure is UploadPhotoFailure) {
+            ConfirmationSheetModal.newInstance(ConfirmationSheetType.RESPONSE_ERROR_SHEET)
+        } else {
+            getNetworkErrorSheet(failure)
+        }
+        sheet?.also {
             it.primaryButtonClickListener = {
-                vm.refresh()
+                when(failure) {
+                    is LogoutFailure -> vm.handleLogoutConfirmationClicked()
+                    is UploadPhotoFailure -> vm.uploadProfilePicture()
+                    else -> vm.refresh()
+                }
             }
             it.secondaryButtonClickListener = {
                 navigator.showSetting(requireContext())

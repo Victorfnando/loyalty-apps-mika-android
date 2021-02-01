@@ -5,7 +5,7 @@
  * github: https://github.com/oandrz
  */
 
-package com.dre.loyalty.features.contactus.presentation
+package com.dre.loyalty.features.profile.presentation.contactus
 
 import android.content.Context
 import android.content.Intent

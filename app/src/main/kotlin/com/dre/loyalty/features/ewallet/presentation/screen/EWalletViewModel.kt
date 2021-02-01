@@ -83,7 +83,7 @@ class EWalletViewModel @Inject constructor(
         _loading.value = View.VISIBLE
         _uploadButtonState.value = _uploadButtonState.value?.copy(isEnabled = false)
         val selectedWallet = walletList.find { it.name == eWallet }
-        state?.copy(walletId = selectedWallet?.id.orEmpty(), phoneNumber = phoneNumber)
+        state = state?.copy(walletId = selectedWallet?.id.orEmpty(), phoneNumber = phoneNumber)
         state?.let {
             createInvoiceUseCase(CreateInvoiceUseCase.Param(
                 it.userId,
