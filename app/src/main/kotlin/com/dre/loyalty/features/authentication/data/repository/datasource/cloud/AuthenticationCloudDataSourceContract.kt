@@ -26,4 +26,5 @@ interface AuthenticationCloudDataSourceContract {
     fun forgotPasswordVerifyCode(request: VerifyCodeRequest): Call<BasicResponse>
     fun resetPassword(request: ResetPasswordRequest): Call<BasicResponse>
     fun updatePassword(request: UpdatePasswordRequest): Call<BasicResponse>
+    fun logout(request: LogoutRequest): Call<BasicResponse>
 }

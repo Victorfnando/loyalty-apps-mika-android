@@ -9,7 +9,6 @@ package com.dre.loyalty.features.profile.presentation.profile.screen
 
 import android.app.Activity
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -35,6 +34,8 @@ import com.dre.loyalty.core.view.sheet.ConfirmationSheetModal
 import com.dre.loyalty.databinding.FragmentProfileBinding
 import com.dre.loyalty.features.camera.CameraActivity
 import com.dre.loyalty.features.camera.CameraRequestType
+import com.dre.loyalty.features.profile.data.entity.failure.LogoutFailure
+import com.dre.loyalty.features.profile.data.entity.failure.UploadPhotoFailure
 import com.dre.loyalty.features.profile.presentation.profile.entity.Menu
 import com.dre.loyalty.features.profile.presentation.profile.entity.ProfileState
 import com.dre.loyalty.features.profile.presentation.profile.screen.item.LogoutMenuItem
@@ -79,11 +80,12 @@ class ProfileFragment : BaseFragment() {
             observe(navigateContact, ::navigateContactScreen)
             observe(navigateFaq, ::navigateFaqScreen)
             observe(navigateTnc, ::navigateTnCScreen)
-            observe(navigateLogout, ::showLogoutConfirmationSheet)
+            observe(logoutConfirmationSheet, ::showLogoutConfirmationSheet)
             observe(profilePictureClickedEvent, ::showProfilePictureSelectorModal)
             observe(loading, ::renderLoading)
             observe(failure, ::showFailureSheet)
             observe(userProfileState, ::renderProfile)
+            observe(navigateToAuthSelector, ::navigateAuthSelectorScreen)
         }
     }
 
@@ -266,6 +268,12 @@ class ProfileFragment : BaseFragment() {
         }
     }
 
+    private fun navigateAuthSelectorScreen(event: Event<Boolean>?) {
+        event?.getIfNotHandled()?.let {
+            navigator.showAuthSelector(requireContext())
+        }
+    }
+
     private fun renderLoading(visibility: Int?) {
         visibility?.let {
             binding?.progress?.visibility = it
@@ -274,9 +282,18 @@ class ProfileFragment : BaseFragment() {
 
     private fun showFailureSheet(failure: Failure?) {
         if (failure == null) return
-        val sheet = getNetworkErrorSheet(failure)?.also {
+        val sheet = if (failure is LogoutFailure || failure is UploadPhotoFailure) {
+            ConfirmationSheetModal.newInstance(ConfirmationSheetType.RESPONSE_ERROR_SHEET)
+        } else {
+            getNetworkErrorSheet(failure)
+        }
+        sheet?.also {
             it.primaryButtonClickListener = {
-                vm.refresh()
+                when(failure) {
+                    is LogoutFailure -> vm.handleLogoutConfirmationClicked()
+                    is UploadPhotoFailure -> vm.uploadProfilePicture()
+                    else -> vm.refresh()
+                }
             }
             it.secondaryButtonClickListener = {
                 navigator.showSetting(requireContext())

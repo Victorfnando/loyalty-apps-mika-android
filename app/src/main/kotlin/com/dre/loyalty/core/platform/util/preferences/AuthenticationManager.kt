@@ -42,6 +42,13 @@ class AuthenticationManager @Inject constructor(context: Context) {
         return sp.getString(TOKEN, null)
     }
 
+    fun clear() {
+        with(sp.edit()) {
+            clear()
+            apply()
+        }
+    }
+
     companion object {
         private const val AUTH_DATA_STORE_NAME = "AUTH_DATA_STORE"
         private const val USER_ID = "USER_ID_KEY"

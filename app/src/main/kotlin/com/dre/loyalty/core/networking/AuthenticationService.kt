@@ -27,6 +27,7 @@ private const val FORGOT_PASSWORD_EMAIL_CHECK_ENDPOINT = "forgot_password/check_
 private const val FORGOT_PASSWORD_VERIFY_CODE_ENDPOINT = "forgot_password/verify_code"
 private const val FORGOT_PASSWORD_RESET_PASSWORD = "forgot_password/update"
 private const val UPDATE_PASSWORD_ENDPOINT = "change_password"
+private const val LOGOUT_ENDPOINT = "logout"
 interface AuthenticationService {
 
     @POST(LOGIN_ENDPOINT)
@@ -52,4 +53,7 @@ interface AuthenticationService {
 
     @POST(UPDATE_PASSWORD_ENDPOINT)
     fun updatePassword(@Body request: UpdatePasswordRequest): Call<BasicResponse>
+
+    @POST(LOGOUT_ENDPOINT)
+    fun logout(@Body request: LogoutRequest): Call<BasicResponse>
 }

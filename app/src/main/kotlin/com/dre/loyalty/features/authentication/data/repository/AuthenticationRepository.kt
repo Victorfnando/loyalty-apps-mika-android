@@ -110,4 +110,13 @@ class AuthenticationRepository @Inject constructor(
         }
     }
 
+    override fun logout(request: LogoutRequest): Either<Failure, BasicResponse> {
+        return when(networkHandler.isNetworkAvailable()) {
+            true -> {
+                return cloudDataSource.logout(request).request { it }
+            }
+            false -> Either.Left(Failure.NetworkConnection)
+        }
+    }
+
 }

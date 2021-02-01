@@ -62,8 +62,8 @@ abstract class BaseFragment : Fragment() {
 
     protected fun getNetworkErrorSheet(failure: Failure): ConfirmationSheetModal? {
         return when (failure) {
-            is NetworkConnection -> ConfirmationSheetModal.newInstance(ConfirmationSheetType.RESPONSE_ERROR_SHEET)
-            is ServerError -> ConfirmationSheetModal.newInstance(ConfirmationSheetType.NO_INTERNET_CONNECTION_SHEET)
+            is NetworkConnection -> ConfirmationSheetModal.newInstance(ConfirmationSheetType.NO_INTERNET_CONNECTION_SHEET)
+            is ServerError -> ConfirmationSheetModal.newInstance(ConfirmationSheetType.RESPONSE_ERROR_SHEET)
             else -> null
         }
     }

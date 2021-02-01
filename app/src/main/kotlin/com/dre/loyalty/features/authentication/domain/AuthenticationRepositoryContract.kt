@@ -25,4 +25,5 @@ interface AuthenticationRepositoryContract {
     fun forgotPasswordVerifyCode(request: VerifyCodeRequest): Either<Failure, BasicResponse>
     fun resetPassword(request: ResetPasswordRequest): Either<Failure, BasicResponse>
     fun updatePassword(request: UpdatePasswordRequest): Either<Failure, BasicResponse>
+    fun logout(request: LogoutRequest): Either<Failure, BasicResponse>
 }

@@ -77,8 +77,10 @@ import javax.inject.Singleton
         )
     )
 
-    private fun showAuthSelector(context: Context) =
-        context.startActivity(AuthenticationSelectorActivity.callingIntent(context))
+    fun showAuthSelector(context: Context) =
+        context.startActivity(AuthenticationSelectorActivity.callingIntent(context).also {
+            it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        })
 
     fun showPin(context: Context) {
         context.startActivity(InputPinActivity.callingIntent(context))
