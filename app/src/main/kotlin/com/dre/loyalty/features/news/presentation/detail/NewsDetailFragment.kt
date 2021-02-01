@@ -12,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -120,7 +121,10 @@ class NewsDetailFragment : BaseFragment() {
         binding?.run {
             tvNewsTitle.text = detail.title
             tvNewsDate.text = detail.date
-            tvNewsDesc.text = detail.desc
+            tvNewsDesc.text = HtmlCompat.fromHtml(
+                detail.desc,
+                HtmlCompat.FROM_HTML_MODE_LEGACY
+            )
         }
     }
 
