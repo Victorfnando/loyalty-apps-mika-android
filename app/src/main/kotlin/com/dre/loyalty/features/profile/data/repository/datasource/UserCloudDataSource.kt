@@ -13,6 +13,7 @@ package com.dre.loyalty.features.profile.data.repository.datasource
 import com.dre.loyalty.core.networking.UserService
 import com.dre.loyalty.core.networking.response.BasicResponse
 import com.dre.loyalty.core.networking.response.LoyaltyResponse
+import com.dre.loyalty.features.profile.data.entity.request.ContactUsRequest
 import com.dre.loyalty.features.profile.data.entity.request.UpdateProfileRequest
 import com.dre.loyalty.features.profile.data.entity.response.ImageResponse
 import com.dre.loyalty.features.profile.data.entity.response.UserResponse
@@ -40,7 +41,11 @@ class UserCloudDataSource @Inject constructor(
         return service.changePhotoProfile(body)
     }
 
-    override fun updateProfile(requestUpdate: UpdateProfileRequest): Call<BasicResponse> {
-        return service.updateProfile(requestUpdate)
+    override fun updateProfile(request: UpdateProfileRequest): Call<BasicResponse> {
+        return service.updateProfile(request)
+    }
+
+    override fun submitContactUs(request: ContactUsRequest): Call<BasicResponse> {
+        return service.submitContactUs(request)
     }
 }

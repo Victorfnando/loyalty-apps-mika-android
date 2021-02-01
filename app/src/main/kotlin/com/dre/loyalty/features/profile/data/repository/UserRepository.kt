@@ -17,6 +17,7 @@ import com.dre.loyalty.core.platform.NetworkHandler
 import com.dre.loyalty.core.platform.extension.request
 import com.dre.loyalty.core.platform.functional.Either
 import com.dre.loyalty.features.profile.data.entity.mapper.UserResponseMapper
+import com.dre.loyalty.features.profile.data.entity.request.ContactUsRequest
 import com.dre.loyalty.features.profile.data.entity.request.UpdateProfileRequest
 import com.dre.loyalty.features.profile.data.repository.datasource.UserCloudDataSourceContract
 import com.dre.loyalty.features.profile.domain.UserRepositoryContract
@@ -49,10 +50,21 @@ class UserRepository @Inject constructor(
         }
     }
 
-    override fun updateProfile(requestUpdate: UpdateProfileRequest): Either<Failure, BasicResponse> {
+    override fun updateProfile(request: UpdateProfileRequest): Either<Failure, BasicResponse> {
         return when(networkHandler.isNetworkAvailable()) {
             true -> {
-                cloudDataSource.updateProfile(requestUpdate).request {
+                cloudDataSource.updateProfile(request).request {
+                    it
+                }
+            }
+            false -> Either.Left(Failure.NetworkConnection)
+        }
+    }
+
+    override fun submitContactUs(request: ContactUsRequest): Either<Failure, BasicResponse> {
+        return when(networkHandler.isNetworkAvailable()) {
+            true -> {
+                cloudDataSource.submitContactUs(request).request {
                     it
                 }
             }

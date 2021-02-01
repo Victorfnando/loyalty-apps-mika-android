@@ -115,7 +115,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
   </activity>
 
   <activity
-      android:name=".features.contactus.presentation.ContactUsActivity">
+      android:name=".features.profile.presentation.contactus.ContactUsActivity">
   </activity>
 
   <activity

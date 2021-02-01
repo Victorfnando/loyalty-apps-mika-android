@@ -1,4 +1,4 @@
-package com.dre.loyalty.features.contactus.presentation.entity
+package com.dre.loyalty.features.profile.presentation.contactus.entity
 
 import androidx.annotation.StringRes
 

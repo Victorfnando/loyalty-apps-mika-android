@@ -35,7 +35,7 @@ import com.dre.loyalty.features.authentication.presentation.resetpassword.screen
 import com.dre.loyalty.features.authentication.presentation.updatepassword.screen.UpdatePasswordActivity
 import com.dre.loyalty.features.authenticationselector.presentation.AuthenticationSelectorActivity
 import com.dre.loyalty.features.cashback.presentation.screen.CashBackListActivity
-import com.dre.loyalty.features.contactus.presentation.ContactUsActivity
+import com.dre.loyalty.features.profile.presentation.contactus.ContactUsActivity
 import com.dre.loyalty.features.createpin.presentation.CreatePinActivity
 import com.dre.loyalty.features.createpin.presentation.enums.CreatePinType
 import com.dre.loyalty.features.ewallet.presentation.screen.EWalletActivity
