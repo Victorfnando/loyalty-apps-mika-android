@@ -63,6 +63,7 @@ object Libraries {
         const val bottomSheet = "2.0.0"
         const val photoView = "2.3.0"
         const val stetho = "1.5.1"
+        const val webView = "3.2.1"
 
         //TODO: Legacy -> WIP -> Try Hilt?
         const val dagger = "2.11"
@@ -102,6 +103,7 @@ object Libraries {
     const val photoView                = "com.github.chrisbanes:PhotoView:${Versions.photoView}"
     const val stetho                   = "com.facebook.stetho:stetho:${Versions.stetho}"
     const val stethoOkHTTP             = "com.facebook.stetho:stetho-okhttp3:${Versions.stetho}"
+    const val webView                  = "com.github.delight-im:Android-AdvancedWebView:v${Versions.webView}"
 
     //TODO: Legacy -> WIP -> Migrate to Koin or Hilt?
     const val daggerCompiler   = "com.google.dagger:dagger-compiler:${Versions.dagger}"

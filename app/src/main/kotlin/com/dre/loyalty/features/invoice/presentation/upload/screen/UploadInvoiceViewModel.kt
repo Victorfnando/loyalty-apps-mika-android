@@ -58,6 +58,9 @@ class UploadInvoiceViewModel @Inject constructor(
     private val _imageUri: MutableLiveData<String> = MutableLiveData()
     val imageUri: LiveData<String> = _imageUri
 
+    private val _navigateWebView: MutableLiveData<Event<String>> = MutableLiveData()
+    val navigateWebView: LiveData<Event<String>> = _navigateWebView
+
     private var hospitalList: List<Hospital> = emptyList()
 
     init {
@@ -133,6 +136,10 @@ class UploadInvoiceViewModel @Inject constructor(
 
     fun handleImageSelected(uri: String) {
         _imageUri.value = uri
+    }
+
+    fun handleFooterTextClicked() {
+        _navigateWebView.value = Event("https://google.com")
     }
 
     private fun validateButtonState() {

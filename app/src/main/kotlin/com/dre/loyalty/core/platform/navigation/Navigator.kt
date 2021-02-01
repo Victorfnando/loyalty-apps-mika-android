@@ -50,6 +50,7 @@ import com.dre.loyalty.features.photoview.PhotoViewActivity
 import com.dre.loyalty.features.pin.presentation.InputPinActivity
 import com.dre.loyalty.features.profile.presentation.changeprofile.screen.UpdateProfileActivity
 import com.dre.loyalty.features.splash.presentation.SplashScreenActivity
+import com.dre.loyalty.features.webview.WebViewActivity
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -198,6 +199,10 @@ import javax.inject.Singleton
         context.startActivity(
             Intent(ACTION_VIEW, Uri.parse(uriString))
         )
+    }
+
+    fun callingWebView(context: Context, url: String) {
+        context.startActivity(WebViewActivity.callingIntent(context, url))
     }
 
     class Extras(val transitionSharedElement: View)

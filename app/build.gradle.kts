@@ -79,6 +79,7 @@ dependencies {
   implementation(Libraries.photoView)
   implementation(Libraries.stetho)
   implementation(Libraries.stethoOkHTTP)
+  implementation(Libraries.webView)
 
   // Unit/Android tests dependencies
   testImplementation(TestLibraries.junit4)

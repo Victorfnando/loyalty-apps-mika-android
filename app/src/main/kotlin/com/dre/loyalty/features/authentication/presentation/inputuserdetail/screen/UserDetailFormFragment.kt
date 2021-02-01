@@ -89,6 +89,7 @@ class UserDetailFormFragment : BaseFragment() {
             observe(registerButtonState, ::renderRegisterButton)
             observe(showConfirmationSheet, ::showConfirmationSheet)
             observe(navigateToCreateSecurity, ::navigateCreatePinScreen)
+            observe(navigateWebView, ::showWebView)
         }
     }
 
@@ -244,7 +245,7 @@ class UserDetailFormFragment : BaseFragment() {
                 HtmlCompat.FROM_HTML_MODE_LEGACY
             )
             tvFooterClickListener = {
-
+                vm.handleFooterTextClicked()
             }
             buttonClickListener = {
                 vm.handleRegisterButtonClicked(
@@ -257,6 +258,12 @@ class UserDetailFormFragment : BaseFragment() {
                     binding?.etFormDob?.editText?.text.toString()
                 )
             }
+        }
+    }
+
+    private fun showWebView(event: Event<String?>?) {
+        event?.getIfNotHandled()?.let {
+            navigator.callingWebView(requireContext(), it)
         }
     }
 

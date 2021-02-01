@@ -78,6 +78,7 @@ class UploadInvoiceFragment : BaseFragment() {
             observe(loading, ::renderLoading)
             observe(failure, ::showFailureSheet)
             observe(imageUri, ::renderPhoto)
+            observe(navigateWebView, ::showWebView)
         }
     }
 
@@ -247,6 +248,12 @@ class UploadInvoiceFragment : BaseFragment() {
             }
         }
         sheet?.show(requireActivity().supportFragmentManager, ConfirmationSheetModal.TAG)
+    }
+
+    private fun showWebView(event: Event<String>?) {
+        event?.getIfNotHandled()?.let {
+            navigator.callingWebView(requireContext(), it)
+        }
     }
 
     companion object {

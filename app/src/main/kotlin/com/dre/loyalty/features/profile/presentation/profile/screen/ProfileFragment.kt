@@ -13,7 +13,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,11 +22,11 @@ import com.bumptech.glide.load.model.LazyHeaders
 import com.dre.loyalty.R
 import com.dre.loyalty.core.model.User
 import com.dre.loyalty.core.networking.exception.Failure
+import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.core.platform.extension.observe
 import com.dre.loyalty.core.platform.extension.viewModel
 import com.dre.loyalty.core.platform.functional.Event
 import com.dre.loyalty.core.platform.navigation.Navigator
-import com.dre.loyalty.core.platform.BaseFragment
 import com.dre.loyalty.core.platform.util.enumtype.ConfirmationSheetType
 import com.dre.loyalty.core.view.VerticalDividerDecoration
 import com.dre.loyalty.core.view.sheet.ConfirmationSheetModal
@@ -45,6 +44,7 @@ import com.dre.loyalty.features.profile.presentation.profile.screen.sheet.PhotoP
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import javax.inject.Inject
+
 
 class ProfileFragment : BaseFragment() {
 
@@ -170,9 +170,10 @@ class ProfileFragment : BaseFragment() {
         binding?.rvMenu?.run {
             addItemDecoration(
                 VerticalDividerDecoration(requireContext(), RecyclerView.VERTICAL).also {
-                    ContextCompat.getDrawable(requireContext(), R.drawable.normal_divider)?.let { divider ->
-                        it.setDrawable(divider)
-                    }
+                    ContextCompat.getDrawable(requireContext(), R.drawable.normal_divider)
+                        ?.let { divider ->
+                            it.setDrawable(divider)
+                        }
                 }
             )
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
@@ -217,13 +218,19 @@ class ProfileFragment : BaseFragment() {
                 getString(R.string.profile_label_account),
                 listOf(accountItemSection)
             ).also {
-                it.dividerItemDecoration = VerticalDividerDecoration(requireContext(), RecyclerView.VERTICAL)
+                it.dividerItemDecoration = VerticalDividerDecoration(
+                    requireContext(),
+                    RecyclerView.VERTICAL
+                )
             },
             ProfileMenuSection(
                 getString(R.string.profile_label_about),
                 listOf(aboutItemSection)
             ).also {
-                it.dividerItemDecoration = VerticalDividerDecoration(requireContext(), RecyclerView.VERTICAL)
+                it.dividerItemDecoration = VerticalDividerDecoration(
+                    requireContext(),
+                    RecyclerView.VERTICAL
+                )
             }
         )
     }
@@ -252,9 +259,9 @@ class ProfileFragment : BaseFragment() {
         }
     }
 
-    private fun navigateTnCScreen(event: Event<Boolean>?) {
+    private fun navigateTnCScreen(event: Event<String>?) {
         event?.getIfNotHandled()?.let {
-            Toast.makeText(requireContext(), "tnc", Toast.LENGTH_SHORT).show()
+            navigator.callingWebView(requireContext(), it)
         }
     }
 

@@ -43,8 +43,8 @@ class ProfileViewModel @Inject constructor(
     private val _navigateContact: MutableLiveData<Event<Boolean>> = MutableLiveData()
     val navigateContact: LiveData<Event<Boolean>> = _navigateContact
 
-    private val _navigateTnc: MutableLiveData<Event<Boolean>> = MutableLiveData()
-    val navigateTnc: LiveData<Event<Boolean>> = _navigateTnc
+    private val _navigateTnc: MutableLiveData<Event<String>> = MutableLiveData()
+    val navigateTnc: LiveData<Event<String>> = _navigateTnc
 
     private val _logoutConfirmationSheet: MutableLiveData<Event<Boolean>> = MutableLiveData()
     val logoutConfirmationSheet: LiveData<Event<Boolean>> = _logoutConfirmationSheet
@@ -88,7 +88,7 @@ class ProfileViewModel @Inject constructor(
     }
 
     fun handleTnCMenuClicked() {
-        _navigateTnc.value = Event(true)
+        _navigateTnc.value = Event("https://google.com")
     }
 
     fun handleLogoutMenuClicked() {
