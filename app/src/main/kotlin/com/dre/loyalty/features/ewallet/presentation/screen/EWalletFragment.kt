@@ -7,6 +7,8 @@
 
 package com.dre.loyalty.features.ewallet.presentation.screen
 
+import android.app.Activity.RESULT_OK
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -178,7 +180,10 @@ class EWalletFragment : BaseFragment() {
     private fun showWalletSuccessConfirmation(state: Boolean?) {
         val modal = ConfirmationSheetModal.newInstance(ConfirmationSheetType.UPLOAD_INVOICE_SUCCESS_SHEET)
         modal.primaryButtonClickListener = {
-            requireActivity().finish()
+            requireActivity().run {
+                setResult(RESULT_OK, Intent())
+                finish()
+            }
         }
         modal.show(requireActivity().supportFragmentManager, ConfirmationSheetModal.TAG)
     }

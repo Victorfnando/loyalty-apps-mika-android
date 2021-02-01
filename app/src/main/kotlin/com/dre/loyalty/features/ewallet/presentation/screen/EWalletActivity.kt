@@ -29,6 +29,7 @@ class EWalletActivity : BaseActivity() {
     }
 
     companion object {
+        const val REQUEST_CODE_UPLOAD = 102
         private const val EXTRA_UPLOAD_INVOICE_STATE = "EXTRA_UPLOAD_INVOICE_STATE"
 
         fun callingIntent(context: Context, state: UploadInvoiceState) : Intent {

@@ -10,6 +10,7 @@
 
 package com.dre.loyalty.features.profile.data.repository.datasource
 
+import android.net.Uri
 import com.dre.loyalty.core.networking.UserService
 import com.dre.loyalty.core.networking.response.BasicResponse
 import com.dre.loyalty.core.networking.response.LoyaltyResponse
@@ -35,7 +36,7 @@ class UserCloudDataSource @Inject constructor(
     }
 
     override fun changeProfileImage(uri: String): Call<LoyaltyResponse<ImageResponse>> {
-        val file = File(uri)
+        val file = File(Uri.parse(uri).path.orEmpty())
         val requestFile: RequestBody = file.asRequestBody("multipart/form-data".toMediaTypeOrNull())
         val body: MultipartBody.Part = MultipartBody.Part.createFormData("profileImage", file.name, requestFile)
         return service.changePhotoProfile(body)
