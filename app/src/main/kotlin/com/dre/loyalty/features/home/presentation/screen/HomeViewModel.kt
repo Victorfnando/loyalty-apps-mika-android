@@ -16,12 +16,14 @@ import com.dre.loyalty.core.model.CashBack
 import com.dre.loyalty.core.model.Home
 import com.dre.loyalty.core.model.News
 import com.dre.loyalty.core.platform.BaseViewModel
+import com.dre.loyalty.core.platform.util.preferences.AuthenticationManager
 import com.dre.loyalty.features.home.domain.usecase.GetHomeDataUseCase
 import com.dre.loyalty.features.home.domain.usecase.GetHomeDataUseCase.Param
 import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(
-    private val getHomeDataUseCase: GetHomeDataUseCase
+    private val getHomeDataUseCase: GetHomeDataUseCase,
+    private val authenticationManager: AuthenticationManager
 ): BaseViewModel() {
 
     private val _cardState: MutableLiveData<Card> = MutableLiveData()
@@ -50,7 +52,7 @@ class HomeViewModel @Inject constructor(
 
     fun loadData() {
         _loading.value = View.VISIBLE
-        getHomeDataUseCase(Param("test")) {
+        getHomeDataUseCase(Param(authenticationManager.getUserId().orEmpty())) {
             it.fold(::handleFailure, ::handleSuccessGetHome)
         }
     }
