@@ -17,7 +17,7 @@ class GetHomeDataUseCase @Inject constructor(
     }
 
     data class Param(
-        @SerializedName("user_id")
+        @SerializedName("userId")
         val id: String,
     )
 }

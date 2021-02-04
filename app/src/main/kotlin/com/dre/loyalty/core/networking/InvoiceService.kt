@@ -37,10 +37,10 @@ interface InvoiceService {
         @Part("userId") userId: String,
         @Part("walletId") walletId: String,
         @Part("hospitalId") hospitalId: String,
-        @Part("price") price: Long,
+        @Part("transaction") price: Long,
         @Part("phone") phone: String,
         @Part("date") date: String,
-        @Part image: MultipartBody.Part
+        @Part photoPath: MultipartBody.Part
     ): Call<BasicResponse>
 
 }

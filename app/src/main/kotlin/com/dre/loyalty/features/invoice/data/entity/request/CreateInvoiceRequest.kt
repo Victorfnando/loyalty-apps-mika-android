@@ -19,10 +19,11 @@ data class CreateInvoiceRequest(
     val walletId: String,
     @SerializedName("hospitalId")
     val hospitalId: String,
-    @SerializedName("receiptPrice")
+    @SerializedName("transaction")
     val price: Long,
     @SerializedName("phone")
     val phoneNumber: String,
+    @SerializedName("photoPath")
     val imageUri: String,
     @SerializedName("date")
     val date: String

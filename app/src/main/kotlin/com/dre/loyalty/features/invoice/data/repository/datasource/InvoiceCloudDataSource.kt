@@ -39,7 +39,7 @@ class InvoiceCloudDataSource @Inject constructor(
     override fun createInvoice(request: CreateInvoiceRequest): Call<BasicResponse> {
         val file = File(Uri.parse(request.imageUri).path.orEmpty())
         val requestFile: RequestBody = file.asRequestBody("multipart/form-data".toMediaTypeOrNull())
-        val body: MultipartBody.Part = MultipartBody.Part.createFormData("receiptImage", file.name, requestFile)
+        val body: MultipartBody.Part = MultipartBody.Part.createFormData("photoPath", file.name, requestFile)
         return service.createInvoice(
             request.userId,
             request.walletId,

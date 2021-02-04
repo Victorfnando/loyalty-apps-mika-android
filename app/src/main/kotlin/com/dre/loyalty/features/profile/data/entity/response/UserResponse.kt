@@ -27,7 +27,7 @@ data class UserResponse(
     val gender: String,
     @SerializedName("birthdate")
     val dob: String,
-    @SerializedName("profileImage")
+    @SerializedName("photoPath")
     val profileImage: String,
     @SerializedName("email")
     val email: String
