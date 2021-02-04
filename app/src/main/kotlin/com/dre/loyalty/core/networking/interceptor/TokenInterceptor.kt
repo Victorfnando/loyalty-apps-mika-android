@@ -20,7 +20,7 @@ class TokenInterceptor(private val authorizationManager: AuthenticationManager) 
             .addHeader("Accept", "application/json")
         val token = authorizationManager.getToken()
         if (token != null) {
-            requestBuilder.addHeader("Authorization", token)
+            requestBuilder.addHeader("Authorization", "Bearer "+ token)
         }
         return chain.proceed(requestBuilder.build())
     }

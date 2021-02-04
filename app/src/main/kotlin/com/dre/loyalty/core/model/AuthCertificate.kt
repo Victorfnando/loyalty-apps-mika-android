@@ -11,6 +11,6 @@
 package com.dre.loyalty.core.model
 
 data class AuthCertificate(
-    val id: String,
+    val userId: String,
     val token: String
 )

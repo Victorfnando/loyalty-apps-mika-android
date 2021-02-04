@@ -44,8 +44,8 @@ class ApplicationModule(private val application: AndroidApplication) {
         authenticationManager: AuthenticationManager
     ): Retrofit {
         return Retrofit.Builder()
-                .baseUrl("https://443c2858-d57a-43ce-8ab9-4372283dfca8.mock.pstmn.io/")
-                //.baseUrl("https://apitest.digitalnative.id/")
+                //.baseUrl("https://443c2858-d57a-43ce-8ab9-4372283dfca8.mock.pstmn.io/")
+                .baseUrl("https://apitest.digitalnative.id/")
                 .client(createClient(authenticationManager))
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()

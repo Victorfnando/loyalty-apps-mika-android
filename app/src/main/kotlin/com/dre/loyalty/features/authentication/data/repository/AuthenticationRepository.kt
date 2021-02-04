@@ -38,7 +38,7 @@ class AuthenticationRepository @Inject constructor(
                     mapper.transform(it.data)
                 }
                 result.getOrElseNull()?.let {
-                    localDataSourceContract.userId = it.id
+                    localDataSourceContract.userId = it.userId
                     localDataSourceContract.token = it.token
                 }
                 result
