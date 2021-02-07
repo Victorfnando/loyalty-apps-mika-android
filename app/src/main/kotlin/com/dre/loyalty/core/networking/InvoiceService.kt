@@ -34,9 +34,9 @@ interface InvoiceService {
     @Multipart
     @POST(CREATE_INVOICE_ENDPOINT)
     fun createInvoice(
-        @Part("userId") userId: String,
-        @Part("walletId") walletId: String,
-        @Part("hospitalId") hospitalId: String,
+        @Part("userId") userId: Int,
+        @Part("walletId") walletId: Int,
+        @Part("hospitalId") hospitalId: Int,
         @Part("transaction") price: Long,
         @Part("phone") phone: String,
         @Part("date") date: String,

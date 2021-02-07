@@ -32,6 +32,7 @@ import com.dre.loyalty.databinding.FragmentPagerInvoiceListBinding
 import com.dre.loyalty.features.camera.CameraActivity
 import com.dre.loyalty.features.camera.CameraRequestType
 import com.dre.loyalty.features.invoice.presentation.list.item.InvoiceListItem
+import com.dre.loyalty.features.profile.presentation.profile.screen.sheet.PhotoProfileSelectorModal
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import javax.inject.Inject
@@ -55,7 +56,7 @@ class InvoiceListPagerFragment : BaseFragment() {
         vm = viewModel(viewModelFactory) {
             observe(invoiceList, ::renderInvoice)
             observe(sortOrder, ::showSortSheet)
-            observe(buttonUploadClicked, ::showCamera)
+            observe(buttonUploadClicked, ::showPictureSelectorModal)
             observe(selectedItem, ::showInvoiceDetail)
             observe(loading, ::renderLoading)
             observe(failure, ::showFailureSheet)
@@ -139,12 +140,31 @@ class InvoiceListPagerFragment : BaseFragment() {
         }
     }
 
-    private fun showCamera(event: Event<Boolean>?) {
+//    private fun showCamera(event: Event<Boolean>?) {
+//        event?.getIfNotHandled()?.let {
+//            startActivityForResult(
+//                CameraActivity.callingIntent(requireContext(), CameraRequestType.CAMERA),
+//                CameraActivity.REQUEST_CODE_CAMERA
+//            )
+//        }
+//    }
+
+    private fun showPictureSelectorModal(event: Event<Boolean>?) {
         event?.getIfNotHandled()?.let {
-            startActivityForResult(
-                CameraActivity.callingIntent(requireContext(), CameraRequestType.CAMERA),
-                CameraActivity.REQUEST_CODE_CAMERA
-            )
+            val sheet = PhotoProfileSelectorModal.newInstance()
+            sheet.cameraClickedListener = {
+                startActivityForResult(
+                    CameraActivity.callingIntent(requireContext(), CameraRequestType.CAMERA),
+                    CameraActivity.REQUEST_CODE_CAMERA
+                )
+            }
+            sheet.galleryClickedListener = {
+                startActivityForResult(
+                    CameraActivity.callingIntent(requireContext(), CameraRequestType.GALLERY),
+                    CameraActivity.REQUEST_CODE_CAMERA
+                )
+            }
+            sheet.show(requireActivity().supportFragmentManager, PhotoProfileSelectorModal.TAG)
         }
     }
 

@@ -27,7 +27,7 @@ data class InvoiceResponse(
     val status: String,
     @SerializedName("hospitalCity")
     val hospitalCity: String,
-    @SerializedName("imgUrl")
+    @SerializedName("photoPath")
     val imgUrl: String,
     @SerializedName("reason")
     val reason: String,

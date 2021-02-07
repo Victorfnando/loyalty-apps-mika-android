@@ -37,8 +37,8 @@ class UserCloudDataSource @Inject constructor(
 
     override fun changeProfileImage(uri: String): Call<LoyaltyResponse<ImageResponse>> {
         val file = File(Uri.parse(uri).path.orEmpty())
-        val requestFile: RequestBody = file.asRequestBody("multipart/form-data".toMediaTypeOrNull())
-        val body: MultipartBody.Part = MultipartBody.Part.createFormData("profileImage", file.name, requestFile)
+        val requestFile: RequestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
+        val body: MultipartBody.Part = MultipartBody.Part.createFormData("photoPath", file.name, requestFile)
         return service.changePhotoProfile(body)
     }
 

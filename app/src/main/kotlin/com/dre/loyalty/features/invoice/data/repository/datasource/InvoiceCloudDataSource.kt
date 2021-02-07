@@ -11,6 +11,7 @@
 package com.dre.loyalty.features.invoice.data.repository.datasource
 
 import android.net.Uri
+import android.util.Log
 import com.dre.loyalty.core.networking.InvoiceService
 import com.dre.loyalty.core.networking.response.BasicResponse
 import com.dre.loyalty.core.networking.response.LoyaltyResponse
@@ -38,12 +39,15 @@ class InvoiceCloudDataSource @Inject constructor(
 
     override fun createInvoice(request: CreateInvoiceRequest): Call<BasicResponse> {
         val file = File(Uri.parse(request.imageUri).path.orEmpty())
-        val requestFile: RequestBody = file.asRequestBody("multipart/form-data".toMediaTypeOrNull())
+//        Log.d("test", file.path.toString());
+        val mediaTypeImg = "image/jpeg".toMediaTypeOrNull()
+        val requestFile: RequestBody = file.asRequestBody(mediaTypeImg)
+
         val body: MultipartBody.Part = MultipartBody.Part.createFormData("photoPath", file.name, requestFile)
         return service.createInvoice(
-            request.userId,
-            request.walletId,
-            request.hospitalId,
+            request.userId.toInt(),
+            request.walletId.toInt(),
+            request.hospitalId.toInt(),
             request.price,
             request.phoneNumber,
             request.date,
