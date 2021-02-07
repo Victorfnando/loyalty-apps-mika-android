@@ -15,6 +15,7 @@ import com.dre.loyalty.core.networking.response.LoyaltyResponse
 import com.dre.loyalty.features.authentication.data.entity.request.*
 import com.dre.loyalty.features.authentication.data.entity.response.ForgotPasswordEmailVerificationResponse
 import com.dre.loyalty.features.authentication.data.entity.response.LoginResponse
+import com.dre.loyalty.features.authentication.data.entity.response.RegisterResponse
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST
@@ -37,7 +38,7 @@ interface AuthenticationService {
     fun register(@Body request: RegisterRequest): Call<BasicResponse>
 
     @POST(EMAIL_CHECK_ENDPOINT)
-    fun checkMail(@Body request: EmailRequest): Call<BasicResponse>
+    fun checkMail(@Body request: EmailRequest): Call<LoyaltyResponse<RegisterResponse>>
 
     @POST(VERIFY_CODE_ENDPOINT)
     fun verifyCode(@Body request: VerifyCodeRequest): Call<BasicResponse>

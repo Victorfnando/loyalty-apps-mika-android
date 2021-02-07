@@ -17,8 +17,10 @@ import com.dre.loyalty.core.platform.functional.getOrElseNull
 import com.dre.loyalty.core.model.AuthCertificate
 import com.dre.loyalty.core.platform.NetworkHandler
 import com.dre.loyalty.core.networking.response.BasicResponse
+import com.dre.loyalty.core.networking.response.LoyaltyResponse
 import com.dre.loyalty.features.authentication.data.entity.mapper.AuthMapper
 import com.dre.loyalty.features.authentication.data.entity.request.*
+import com.dre.loyalty.features.authentication.data.entity.response.RegisterResponse
 import com.dre.loyalty.features.authentication.data.repository.datasource.cloud.AuthenticationCloudDataSourceContract
 import com.dre.loyalty.features.authentication.data.repository.datasource.local.AuthenticationLocalDataSourceContract
 import com.dre.loyalty.features.authentication.domain.AuthenticationRepositoryContract
@@ -56,7 +58,7 @@ class AuthenticationRepository @Inject constructor(
         }
     }
 
-    override fun checkMail(request: EmailRequest): Either<Failure, BasicResponse> {
+    override fun checkMail(request: EmailRequest): Either<Failure, LoyaltyResponse<RegisterResponse>> {
         return when(networkHandler.isNetworkAvailable()) {
             true -> {
                 return cloudDataSource.checkMail(request).request { it }

@@ -13,8 +13,10 @@ import androidx.lifecycle.MutableLiveData
 import com.dre.loyalty.core.platform.functional.Event
 import com.dre.loyalty.core.platform.BaseViewModel
 import com.dre.loyalty.core.networking.response.BasicResponse
+import com.dre.loyalty.core.networking.response.LoyaltyResponse
 import com.dre.loyalty.core.platform.util.validator.type.ValidationType
 import com.dre.loyalty.features.authentication.data.entity.request.EmailRequest
+import com.dre.loyalty.features.authentication.data.entity.response.RegisterResponse
 import com.dre.loyalty.features.authentication.domain.usecase.VerifyEmailUseCase
 import com.dre.loyalty.features.authentication.presentation.register.entity.RegisterButtonState
 import com.dre.loyalty.features.authentication.presentation.register.entity.RegisterEmailInputState
@@ -66,9 +68,13 @@ class RegisterViewModel @Inject constructor(
         _regisButtonState.value = RegisterButtonState(_emailInputState.value?.error == null)
     }
 
-    private fun handleVerifyEmailSuccess(response: BasicResponse) {
+    private fun handleVerifyEmailSuccess(response: LoyaltyResponse<RegisterResponse>) {
         _loading.value = View.GONE
-        _regisButtonState.value = RegisterButtonState(true)
-        _navigateOtpScreen.value = Event(email.orEmpty())
+        if(!response.data.isSuccess){
+            _regisButtonState.value = RegisterButtonState(false)
+        } else {
+            _regisButtonState.value = RegisterButtonState(true)
+            _navigateOtpScreen.value = Event(email.orEmpty())
+        }
     }
 }

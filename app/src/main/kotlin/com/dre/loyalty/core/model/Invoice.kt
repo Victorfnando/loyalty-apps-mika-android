@@ -22,5 +22,6 @@ data class Invoice(
     val location: String,
     val reason: String,
     val walletName: String,
-    val phoneNumber: String
+    val phoneNumber: String,
+    val isSuccess: Boolean
 )

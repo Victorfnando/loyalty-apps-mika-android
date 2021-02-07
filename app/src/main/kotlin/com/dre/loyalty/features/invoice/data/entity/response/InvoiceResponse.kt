@@ -34,5 +34,7 @@ data class InvoiceResponse(
     @SerializedName("walletName")
     val walletName: String,
     @SerializedName("phone")
-    val phoneNumber: String
+    val phoneNumber: String,
+    @SerializedName("isSuccess")
+    val isSuccess: Boolean
 )

@@ -16,7 +16,9 @@ import com.dre.loyalty.core.platform.functional.Event
 import com.dre.loyalty.core.model.User
 import com.dre.loyalty.core.platform.BaseViewModel
 import com.dre.loyalty.core.networking.response.BasicResponse
+import com.dre.loyalty.core.networking.response.LoyaltyResponse
 import com.dre.loyalty.features.authentication.data.entity.request.EmailRequest
+import com.dre.loyalty.features.authentication.data.entity.response.RegisterResponse
 import com.dre.loyalty.features.authentication.domain.entity.OtpCode
 import com.dre.loyalty.features.authentication.domain.usecase.VerifyEmailUseCase
 import com.dre.loyalty.features.authentication.presentation.otp.enumType.OtpType
@@ -57,7 +59,7 @@ abstract class OtpViewModel constructor(
         verifyCode(OtpCode(email, text))
     }
 
-    private fun handleSuccessVerifyEmail(response: BasicResponse) {
+    private fun handleSuccessVerifyEmail(response: LoyaltyResponse<RegisterResponse>) {
         _successVerifyEmail.value = Event(true)
     }
 

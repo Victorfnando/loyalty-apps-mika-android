@@ -14,14 +14,17 @@ import com.dre.loyalty.core.networking.exception.Failure
 import com.dre.loyalty.core.platform.functional.Either
 import com.dre.loyalty.core.interactor.UseCase
 import com.dre.loyalty.core.networking.response.BasicResponse
+import com.dre.loyalty.core.networking.response.LoyaltyResponse
 import com.dre.loyalty.features.authentication.data.entity.request.EmailRequest
+import com.dre.loyalty.features.authentication.data.entity.response.LoginResponse
+import com.dre.loyalty.features.authentication.data.entity.response.RegisterResponse
 import com.dre.loyalty.features.authentication.domain.AuthenticationRepositoryContract
 import javax.inject.Inject
 
 class VerifyEmailUseCase @Inject constructor(
     private val repository: AuthenticationRepositoryContract
-): UseCase<BasicResponse, EmailRequest>() {
-    override suspend fun run(params: EmailRequest): Either<Failure, BasicResponse> {
+): UseCase<LoyaltyResponse<RegisterResponse>, EmailRequest>() {
+    override suspend fun run(params: EmailRequest): Either<Failure, LoyaltyResponse<RegisterResponse>> {
         return repository.checkMail(params)
     }
 }

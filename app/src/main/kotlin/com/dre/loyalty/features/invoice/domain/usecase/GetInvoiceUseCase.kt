@@ -26,7 +26,7 @@ class GetInvoiceUseCase @Inject constructor(
 
     override suspend fun run(params: Param): Either<Failure, List<Invoice>> {
         return repository.getInvoiceList(
-            InvoiceListRequest(params.userId, params.status.position.toString())
+            InvoiceListRequest(params.userId, params.status.position)
         )
     }
 

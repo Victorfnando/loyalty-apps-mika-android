@@ -34,7 +34,8 @@ class InvoiceResponseMapper @Inject constructor() {
             response.hospitalCity,
             response.reason,
             response.walletName,
-            response.phoneNumber
+            response.phoneNumber,
+            response.isSuccess
         )
     }
 }

@@ -16,6 +16,7 @@ import com.dre.loyalty.core.networking.AuthenticationService
 import com.dre.loyalty.features.authentication.data.entity.request.*
 import com.dre.loyalty.features.authentication.data.entity.response.ForgotPasswordEmailVerificationResponse
 import com.dre.loyalty.features.authentication.data.entity.response.LoginResponse
+import com.dre.loyalty.features.authentication.data.entity.response.RegisterResponse
 import retrofit2.Call
 import javax.inject.Inject
 
@@ -31,7 +32,7 @@ class AuthenticationCloudDataSource @Inject constructor(
         return service.register(request)
     }
 
-    override fun checkMail(request: EmailRequest): Call<BasicResponse> {
+    override fun checkMail(request: EmailRequest): Call<LoyaltyResponse<RegisterResponse>> {
         return service.checkMail(request)
     }
 

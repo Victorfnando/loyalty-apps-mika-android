@@ -32,6 +32,7 @@ import com.dre.loyalty.features.authentication.presentation.inputuserdetail.scre
 import com.dre.loyalty.core.view.sheet.ConfirmationSheetModal
 import com.dre.loyalty.features.authentication.presentation.inputuserdetail.entity.*
 import com.dre.loyalty.features.authentication.presentation.inputuserdetail.screen.sheet.GenderSheetModal
+import com.dre.loyalty.features.authentication.presentation.otp.screen.OtpFragment
 import javax.inject.Inject
 
 class UserDetailFormFragment : BaseFragment() {
@@ -55,11 +56,11 @@ class UserDetailFormFragment : BaseFragment() {
         override fun afterTextChanged(s: Editable?) { vm.handleLastNameTextChangeListener(s.toString()) }
     }
 
-    private val emailWatcher: TextWatcher = object : TextWatcher {
-        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-        override fun afterTextChanged(s: Editable?) { vm.handleEmailTextChangedListener(s.toString()) }
-    }
+//    private val emailWatcher: TextWatcher = object : TextWatcher {
+//        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+//        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+//        override fun afterTextChanged(s: Editable?) { vm.handleEmailTextChangedListener(s.toString()) }
+//    }
 
     private val ktpWatcher: TextWatcher = object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -85,7 +86,7 @@ class UserDetailFormFragment : BaseFragment() {
             observe(lastNameInputState, ::renderLastName)
             observe(ktpInputState, ::renderKtp)
             observe(phoneInputState, ::updatePhoneInputState)
-            observe(emailInputState, ::renderEmail)
+            //observe(emailInputState, ::renderEmail)
             observe(registerButtonState, ::renderRegisterButton)
             observe(showConfirmationSheet, ::showConfirmationSheet)
             observe(navigateToCreateSecurity, ::navigateCreatePinScreen)
@@ -95,17 +96,20 @@ class UserDetailFormFragment : BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentUserDetailFormBinding.inflate(inflater, container, false)
+
         return binding!!.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         bindToolbar()
+        //val email = arguments?.getString(OtpFragment.ARG_EMAIL).orEmpty()
         binding?.etFormFirstname?.editText?.addTextChangedListener(firstNameWatcher)
         binding?.etFormLastname?.editText?.addTextChangedListener(lastNameWatcher)
-        binding?.etFormEmail?.editText?.addTextChangedListener(emailWatcher)
+        //binding?.etFormEmail?.editText?.addTextChangedListener(emailWatcher)
         binding?.etFormKtp?.editText?.addTextChangedListener(ktpWatcher)
         binding?.etPhone?.editText?.addTextChangedListener(phoneWatcher)
+        //binding?.etFormEmail?.editText?.setText(email)
         bindEtFormGender()
         bindEtDate()
         bindFooter()
@@ -114,7 +118,7 @@ class UserDetailFormFragment : BaseFragment() {
     override fun onDestroyView() {
         binding?.etFormFirstname?.editText?.removeTextChangedListener(firstNameWatcher)
         binding?.etFormLastname?.editText?.removeTextChangedListener(lastNameWatcher)
-        binding?.etFormEmail?.editText?.removeTextChangedListener(emailWatcher)
+        //binding?.etFormEmail?.editText?.removeTextChangedListener(emailWatcher)
         binding?.etFormKtp?.editText?.removeTextChangedListener(ktpWatcher)
         binding?.etPhone?.editText?.removeTextChangedListener(phoneWatcher)
         (activity as AppCompatActivity).setSupportActionBar(null)
@@ -210,13 +214,13 @@ class UserDetailFormFragment : BaseFragment() {
         }
     }
 
-    private fun renderEmail(state: EmailInputState?) {
-        binding?.etFormEmail?.error = if (state?.error == null || state.error == -1) {
-            ""
-        } else {
-            getString(state.error)
-        }
-    }
+//    private fun renderEmail(state: EmailInputState?) {
+//        binding?.etFormEmail?.error = if (state?.error == null || state.error == -1) {
+//            ""
+//        } else {
+//            getString(state.error)
+//        }
+//    }
 
     private fun renderSelectedDate(date: String?) {
         binding?.etFormDob?.text = date
@@ -253,7 +257,7 @@ class UserDetailFormFragment : BaseFragment() {
                     binding?.etFormLastname?.editText?.text.toString(),
                     binding?.etFormKtp?.editText?.text.toString(),
                     binding?.etPhone?.editText?.text.toString(),
-                    binding?.etFormEmail?.editText?.text.toString(),
+                    arguments?.getString(ARG_EMAIL).orEmpty(),
                     binding?.etFormGender?.editText?.text.toString(),
                     binding?.etFormDob?.editText?.text.toString()
                 )

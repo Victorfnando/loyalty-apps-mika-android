@@ -16,5 +16,5 @@ data class InvoiceListRequest(
     @SerializedName("userId")
     private val userId: String,
     @SerializedName("status")
-    private val status: String
+    private val status: Int
 )
