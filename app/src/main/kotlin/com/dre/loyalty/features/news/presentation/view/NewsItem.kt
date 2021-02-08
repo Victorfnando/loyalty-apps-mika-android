@@ -7,6 +7,8 @@
 
 package com.dre.loyalty.features.news.presentation.view
 
+import android.os.Build
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
@@ -31,8 +33,14 @@ class NewsItem(val item: News) : AbstractBindingItem<ItemNewsBinding>() {
         super.bindView(binding, payloads)
         binding.apply {
             tvDate.text = item.date
-            tvDesc.text = item.desc
-            tvTitle.text = item.title
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                tvTitle.text = Html.fromHtml(item.title, Html.FROM_HTML_MODE_COMPACT)
+                tvDesc.text = Html.fromHtml(item.desc,Html.FROM_HTML_MODE_COMPACT)
+            } else {
+                tvTitle.text = item.title
+                tvDesc.text = item.desc
+            }
             val url = GlideUrl(
                 item.imageUrl,
                 LazyHeaders.Builder()

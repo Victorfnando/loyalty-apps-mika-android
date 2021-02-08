@@ -15,6 +15,6 @@ import com.google.gson.annotations.SerializedName
 data class VerifyCodeRequest(
     @SerializedName("email")
     val email: String,
-    @SerializedName("code")
+    @SerializedName("codeVerify")
     val code: String
 )

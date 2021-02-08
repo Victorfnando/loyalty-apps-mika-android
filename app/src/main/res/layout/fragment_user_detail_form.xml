@@ -90,7 +90,7 @@
                 android:layout_marginTop="@dimen/space_20dp"
                 android:hint="@string/userDetail_hint_ktpNumber"
                 android:inputType="number"
-                android:maxLength="13"
+                android:maxLength="16"
                 app:fieldLabel="@string/userDetail_label_ktpNumber"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

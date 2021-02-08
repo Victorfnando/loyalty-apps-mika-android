@@ -164,6 +164,11 @@ class HomeFragment : BaseFragment() {
     private fun updateCard(state: Card?) {
         state?.let {
             binding?.cardMedicalNumber?.name = state.name
+            if(state.memberSince.isNullOrEmpty()){
+                binding?.cardMedicalNumber?.medicalNumber = "-"
+            } else {
+                binding?.cardMedicalNumber?.medicalNumber = state.memberSince
+            }
         }
     }
 

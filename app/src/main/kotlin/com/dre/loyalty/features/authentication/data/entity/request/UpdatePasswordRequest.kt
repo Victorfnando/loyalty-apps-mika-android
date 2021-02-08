@@ -15,7 +15,7 @@ import com.google.gson.annotations.SerializedName
 data class UpdatePasswordRequest(
     @SerializedName("userId")
     val userId: String,
-    @SerializedName("password")
+    @SerializedName("oldPassword")
     val password: String,
     @SerializedName("newPassword")
     val newPassword: String

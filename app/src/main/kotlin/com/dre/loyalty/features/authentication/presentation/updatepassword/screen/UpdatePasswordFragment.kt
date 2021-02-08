@@ -29,6 +29,7 @@ import com.dre.loyalty.core.platform.extension.viewModel
 import com.dre.loyalty.core.platform.functional.Event
 import com.dre.loyalty.core.platform.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
+import com.dre.loyalty.core.platform.util.enumtype.ConfirmationSheetType.RESPONSE_ERROR_SHEET
 import com.dre.loyalty.core.platform.util.enumtype.ConfirmationSheetType.UPDATE_PASSWORD_SUCCESS_SHEET
 import com.dre.loyalty.core.view.sheet.ConfirmationSheetModal
 import com.dre.loyalty.databinding.FragmentUpdatePasswordBinding
@@ -215,6 +216,16 @@ class UpdatePasswordFragment : BaseFragment() {
     private fun showSuccessUpdatePasswordSheet(event: Event<Boolean>?) {
         event?.getIfNotHandled()?.let {
             val modal = ConfirmationSheetModal.newInstance(UPDATE_PASSWORD_SUCCESS_SHEET)
+            modal.primaryButtonClickListener = {
+                requireActivity().finish()
+            }
+            modal.show(requireActivity().supportFragmentManager, ConfirmationSheetModal.TAG)
+        }
+    }
+
+    private fun showErrorUpdatePasswordSheet(event: Event<Boolean>?) {
+        event?.getIfNotHandled()?.let {
+            val modal = ConfirmationSheetModal.newInstance(RESPONSE_ERROR_SHEET)
             modal.primaryButtonClickListener = {
                 requireActivity().finish()
             }

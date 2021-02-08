@@ -200,8 +200,8 @@ class LoginFragment : BaseFragment() {
         val sheet = getNetworkErrorSheet(failure)?.also {
             it.primaryButtonClickListener = {
                 vm.handleLoginButtonClicked(
-                    binding?.etMail?.text.toString(),
-                    binding?.etPass?.text.toString()
+                    binding?.etMail?.editText?.text.toString(),
+                    binding?.etPass?.editText?.text.toString()
                 )
             }
             it.secondaryButtonClickListener = {

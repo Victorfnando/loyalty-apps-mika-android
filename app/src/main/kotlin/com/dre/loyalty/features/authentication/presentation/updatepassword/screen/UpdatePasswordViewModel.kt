@@ -11,6 +11,7 @@
 package com.dre.loyalty.features.authentication.presentation.updatepassword.screen
 
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dre.loyalty.R
@@ -24,6 +25,7 @@ import com.dre.loyalty.features.authentication.domain.usecase.UpdatePasswordUseC
 import com.dre.loyalty.features.authentication.presentation.updatepassword.entity.PasswordInputState
 import com.dre.loyalty.features.authentication.presentation.updatepassword.entity.SubmitButtonState
 import javax.inject.Inject
+import kotlin.coroutines.coroutineContext
 
 class UpdatePasswordViewModel @Inject constructor(
     private val authenticationManager: AuthenticationManager,
@@ -42,9 +44,10 @@ class UpdatePasswordViewModel @Inject constructor(
     private val _submitButtonState: MutableLiveData<SubmitButtonState> = MutableLiveData()
     val submitButtonState: LiveData<SubmitButtonState> = _submitButtonState
 
+    private val _errorUpdatePasswordSheet: MutableLiveData<Event<Boolean>> = MutableLiveData()
     private val _successUpdatePasswordSheet: MutableLiveData<Event<Boolean>> = MutableLiveData()
     val successUpdatePasswordSheet: LiveData<Event<Boolean>> = _successUpdatePasswordSheet
-
+    val errorUpdatePasswordSheet: LiveData<Event<Boolean>> = _errorUpdatePasswordSheet
     private val _tvFooterClicked: MutableLiveData<Event<Boolean>> = MutableLiveData()
     val tvFooterClicked: LiveData<Event<Boolean>> = _tvFooterClicked
 
@@ -164,6 +167,10 @@ class UpdatePasswordViewModel @Inject constructor(
     private fun handleSuccessUpdatePassword(response: BasicResponse) {
         _loading.value = View.GONE
         _submitButtonState.value = SubmitButtonState(true)
-        _successUpdatePasswordSheet.value = Event(true)
+        if(response.statusMessage.contains("Gagal")){
+            _errorUpdatePasswordSheet.value = Event(true)
+        } else {
+            _successUpdatePasswordSheet.value = Event(true)
+        }
     }
 }

@@ -121,18 +121,23 @@ class ProfileFragment : BaseFragment() {
     }
 
     private fun renderPhoto(url: String) {
-        binding?.ivProfile?.let {
-            val glideUrl = GlideUrl(
-                url,
-                LazyHeaders.Builder()
-                    .addHeader("User-Agent", "appllication")
-                    .build()
-            )
-            Glide.with(this)
-                .load(glideUrl)
-                .circleCrop()
-                .into(it)
+        if(url.isNullOrEmpty()){
+
+        } else {
+            binding?.ivProfile?.let {
+                val glideUrl = GlideUrl(
+                    url,
+                    LazyHeaders.Builder()
+                        .addHeader("User-Agent", "appllication")
+                        .build()
+                )
+                Glide.with(this)
+                    .load(glideUrl)
+                    .circleCrop()
+                    .into(it)
+            }
         }
+
     }
 
     private fun showProfilePictureSelectorModal(event: Event<Boolean>?) {

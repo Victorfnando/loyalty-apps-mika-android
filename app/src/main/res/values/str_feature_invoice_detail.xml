@@ -11,7 +11,7 @@
     <string name="invoiceDetail_label_id">ID</string>
     <string name="invoiceDetail_label_status">Status</string>
     <string name="invoiceDetail_label_cashback">Cashback Diterima</string>
-    <string name="invoiceDetail_label_eWallet">Gopay</string>
+    <string name="invoiceDetail_label_eWallet">e-Wallet</string>
     <string name="invoiceDetail_label_phone">No HP</string>
     <string name="invoiceDetail_label_transactionAmount">Jumlah Transaksi</string>
     <string name="invoiceDetail_label_transactionDate">Tanggal Transaksi</string>

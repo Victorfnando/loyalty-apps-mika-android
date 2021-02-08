@@ -70,11 +70,10 @@ class RegisterViewModel @Inject constructor(
 
     private fun handleVerifyEmailSuccess(response: LoyaltyResponse<RegisterResponse>) {
         _loading.value = View.GONE
-        if(!response.data.isSuccess){
-            _regisButtonState.value = RegisterButtonState(false)
-        } else {
-            _regisButtonState.value = RegisterButtonState(true)
-            _navigateOtpScreen.value = Event(email.orEmpty())
-        }
+        _regisButtonState.value = RegisterButtonState(true)
+        _navigateOtpScreen.value = Event(email.orEmpty())
+//        if(response.statusMessage.contains("Berhasil")){
+//
+//        }
     }
 }

@@ -18,7 +18,7 @@ class KtpValidation @Inject constructor() : ValidationStrategy {
             return ValidationResult(false, R.string.validation_failed_empty)
         } else if (!text.isDigitsOnly()) {
             return ValidationResult(false, R.string.validation_failed_format_number)
-        } else if (text.length != 13) {
+        } else if (text.length != 16) {
             return ValidationResult(false, R.string.validation_failed_format_ktp)
         }
         return ValidationResult(true)

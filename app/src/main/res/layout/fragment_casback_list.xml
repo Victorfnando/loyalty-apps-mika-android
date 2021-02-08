@@ -75,4 +75,5 @@
         android:layout_height="wrap_content"
         android:visibility="gone"
         app:constraint_referenced_ids="btn_upload_invoice, tv_empty_upload_label, iv_money" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
