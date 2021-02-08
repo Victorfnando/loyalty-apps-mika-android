@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~
+  ~ Created by Andreas on 2/8/21 10:41 PM
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 2/8/21 10:41 PM
+  ~ Github Link: https://github.com/oandrz
+  ~ Email: oentoro.andreas@gmail.com
+  ~
+  -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            <gradient
+                android:angle="45"
+                android:startColor="@color/mainColor_lighter"
+                android:centerColor="@color/mainColor"
+                android:endColor="@color/mainColor_lighter"
+                android:type="linear" />
+        </shape>
+    </item>
+</selector>
