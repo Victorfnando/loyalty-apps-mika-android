@@ -31,7 +31,10 @@ interface UserService {
 
     @Multipart
     @POST(CHANGE_PHOTO_PROFILE_ENDPOINT)
-    fun changePhotoProfile(@Part image: MultipartBody.Part): Call<LoyaltyResponse<ImageResponse>>
+    fun changePhotoProfile(
+        @Part("userId") userId: Int,
+        @Part image: MultipartBody.Part
+    ): Call<LoyaltyResponse<ImageResponse>>
 
     @POST(UPDATE_PROFILE_ENDPOINT)
     fun updateProfile(@Body request: UpdateProfileRequest): Call<BasicResponse>

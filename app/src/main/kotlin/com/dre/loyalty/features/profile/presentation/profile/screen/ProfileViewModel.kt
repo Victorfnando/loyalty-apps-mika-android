@@ -21,6 +21,7 @@ import com.dre.loyalty.features.profile.data.entity.failure.LogoutFailure
 import com.dre.loyalty.features.profile.data.entity.failure.UploadPhotoFailure
 import com.dre.loyalty.features.profile.domain.usecase.GetProfileUseCase
 import com.dre.loyalty.features.profile.domain.usecase.UpdateProfilePictureUseCase
+import com.dre.loyalty.features.profile.domain.usecase.UpdateProfilePictureUseCase.Param
 import com.dre.loyalty.features.profile.presentation.profile.entity.ProfileState
 import javax.inject.Inject
 
@@ -117,7 +118,10 @@ class ProfileViewModel @Inject constructor(
 
     fun uploadProfilePicture() {
         _loading.value = View.VISIBLE
-        updatePhotoProfileUseCase(selectedImageUri) {
+        updatePhotoProfileUseCase(Param(
+            authenticationManager.getUserId()?.toInt() ?: 0,
+            selectedImageUri
+        )) {
             it.fold(::handleFailedUploadPhoto, ::handleSuccessPhotoProfile)
         }
     }

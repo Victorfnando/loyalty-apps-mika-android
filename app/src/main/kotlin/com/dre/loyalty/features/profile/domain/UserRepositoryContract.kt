@@ -15,11 +15,12 @@ import com.dre.loyalty.core.networking.exception.Failure
 import com.dre.loyalty.core.networking.response.BasicResponse
 import com.dre.loyalty.core.platform.functional.Either
 import com.dre.loyalty.features.profile.data.entity.request.ContactUsRequest
+import com.dre.loyalty.features.profile.data.entity.request.UpdateProfileImageRequest
 import com.dre.loyalty.features.profile.data.entity.request.UpdateProfileRequest
 
 interface UserRepositoryContract {
     fun getUser(userId: String): Either<Failure, User>
-    fun changeProfileImage(uri: String): Either<Failure, String>
+    fun changeProfileImage(request: UpdateProfileImageRequest): Either<Failure, String>
     fun updateProfile(request: UpdateProfileRequest): Either<Failure, BasicResponse>
     fun submitContactUs(request: ContactUsRequest): Either<Failure, BasicResponse>
 }

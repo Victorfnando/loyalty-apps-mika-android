@@ -13,6 +13,6 @@ package com.dre.loyalty.features.profile.data.entity.response
 import com.google.gson.annotations.SerializedName
 
 data class ImageResponse(
-    @SerializedName("photoProfile")
+    @SerializedName("photoPath")
     val imageUri: String
 )

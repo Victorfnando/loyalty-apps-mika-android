@@ -18,6 +18,7 @@ import com.dre.loyalty.core.platform.extension.request
 import com.dre.loyalty.core.platform.functional.Either
 import com.dre.loyalty.features.profile.data.entity.mapper.UserResponseMapper
 import com.dre.loyalty.features.profile.data.entity.request.ContactUsRequest
+import com.dre.loyalty.features.profile.data.entity.request.UpdateProfileImageRequest
 import com.dre.loyalty.features.profile.data.entity.request.UpdateProfileRequest
 import com.dre.loyalty.features.profile.data.repository.datasource.UserCloudDataSourceContract
 import com.dre.loyalty.features.profile.domain.UserRepositoryContract
@@ -39,10 +40,10 @@ class UserRepository @Inject constructor(
         }
     }
 
-    override fun changeProfileImage(uri: String): Either<Failure, String> {
+    override fun changeProfileImage(request: UpdateProfileImageRequest): Either<Failure, String> {
         return when(networkHandler.isNetworkAvailable()) {
             true -> {
-                cloudDataSource.changeProfileImage(uri).request {
+                cloudDataSource.changeProfileImage(request).request {
                     it.data.imageUri
                 }
             }
