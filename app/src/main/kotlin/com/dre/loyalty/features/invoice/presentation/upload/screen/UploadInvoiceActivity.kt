@@ -30,6 +30,7 @@ class UploadInvoiceActivity : BaseActivity() {
     }
 
     companion object {
+        const val REQUEST_CODE_SUCCESS_UPLOAD = 121
         private const val EXTRA_IMAGE_URI = "EXTRA_IMAGE_URI"
 
         fun callingIntent(context: Context, imageUri: String): Intent {

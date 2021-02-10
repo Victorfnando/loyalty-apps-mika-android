@@ -32,6 +32,7 @@ import com.dre.loyalty.databinding.FragmentPagerInvoiceListBinding
 import com.dre.loyalty.features.camera.CameraActivity
 import com.dre.loyalty.features.camera.CameraRequestType
 import com.dre.loyalty.features.invoice.presentation.list.item.InvoiceListItem
+import com.dre.loyalty.features.invoice.presentation.upload.screen.UploadInvoiceActivity
 import com.dre.loyalty.features.profile.presentation.profile.screen.sheet.PhotoProfileSelectorModal
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
@@ -82,10 +83,17 @@ class InvoiceListPagerFragment : BaseFragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK && requestCode == CameraActivity.REQUEST_CODE_CAMERA) {
-            val uri = data?.extras?.getString(CameraActivity.EXTRA_URI)
-            uri?.let {
-                navigator.showUploadInvoice(requireContext(), Uri.parse(it))
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == CameraActivity.REQUEST_CODE_CAMERA) {
+                val uri = data?.extras?.getString(CameraActivity.EXTRA_URI)
+                uri?.let {
+                    startActivityForResult(
+                        UploadInvoiceActivity.callingIntent(requireContext(), it),
+                        UploadInvoiceActivity.REQUEST_CODE_SUCCESS_UPLOAD
+                    )
+                }
+            } else if (requestCode == UploadInvoiceActivity.REQUEST_CODE_SUCCESS_UPLOAD) {
+                vm.refresh()
             }
         }
     }
@@ -139,15 +147,6 @@ class InvoiceListPagerFragment : BaseFragment() {
             sheet.show(requireActivity().supportFragmentManager, SheetListModal.TAG)
         }
     }
-
-//    private fun showCamera(event: Event<Boolean>?) {
-//        event?.getIfNotHandled()?.let {
-//            startActivityForResult(
-//                CameraActivity.callingIntent(requireContext(), CameraRequestType.CAMERA),
-//                CameraActivity.REQUEST_CODE_CAMERA
-//            )
-//        }
-//    }
 
     private fun showPictureSelectorModal(event: Event<Boolean>?) {
         event?.getIfNotHandled()?.let {

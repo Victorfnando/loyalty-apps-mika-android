@@ -122,7 +122,10 @@ class UploadInvoiceFragment : BaseFragment() {
                     vm.handleImageSelected(it)
                 }
             } else if (requestCode == EWalletActivity.REQUEST_CODE_UPLOAD) {
-                requireActivity().finish()
+                requireActivity().run {
+                    setResult(RESULT_OK, Intent())
+                    finish()
+                }
             }
         }
     }
