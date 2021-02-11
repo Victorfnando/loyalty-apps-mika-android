@@ -25,6 +25,6 @@ class PhoneValidation @Inject constructor() : ValidationStrategy {
     }
 
     private fun isValidPhoneNumber(text: String) = text.isDigitsOnly()
-            && (text.length >= 9 && text.substring(0, 2) == "62" ||
-            text.length >= 9 && text.substring(0, 2) == "08")
+            && (text.length >= 2 && text.substring(0, 2) == "62" ||
+            text.length >= 2 && text.substring(0, 2) == "08")
 }

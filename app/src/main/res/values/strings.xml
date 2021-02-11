@@ -29,8 +29,8 @@
     <string name="sheet_responseError_button_primary">Coba lagi</string>
     <string name="sheet_responseError_button_secondary">Cek Pengaturan</string>
 
-    <string name="sheet_response_wrong_authentication_title">Email atau password salah, silahkan masukkan </string>
-    <string name="sheet_response_wrong_authentication_desc">Silahkan pastikan lagi bahwa email / password yang anda masukkan sudah benar.</string>
+    <string name="sheet_response_wrong_authentication_title">Email atau Password Salah</string>
+    <string name="sheet_response_wrong_authentication_desc">Silahkan cek email atau password kamu.</string>
     <string name="sheet_response_email_exist_title">Email sudah terdaftar</string>
     <string name="sheet_response_email_exist_description">Silahkan gunakan email lain yang belum terdaftar.</string>
     <string name="sheet_response_wrong_code_title">Kode OTP salah</string>

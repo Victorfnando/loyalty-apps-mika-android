@@ -12,8 +12,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dre.loyalty.core.platform.functional.Event
 import com.dre.loyalty.core.model.AuthCertificate
+import com.dre.loyalty.core.networking.exception.Failure
 import com.dre.loyalty.core.platform.BaseViewModel
 import com.dre.loyalty.core.platform.util.validator.type.ValidationType
+import com.dre.loyalty.features.authentication.data.entity.failure.AuthFailure
 import com.dre.loyalty.features.authentication.domain.usecase.DoLoginUseCase
 import com.dre.loyalty.features.authentication.presentation.login.entity.LoginButtonState
 import com.dre.loyalty.features.authentication.presentation.login.entity.LoginEmailInputState
@@ -81,7 +83,7 @@ class LoginViewModel @Inject constructor(
         _loading.value = View.VISIBLE
         _loginButtonState.value = LoginButtonState(false)
         doLoginUseCase(DoLoginUseCase.Param(email, password)) {
-            it.fold(::handleFailure, ::handleSuccessLogin)
+            it.fold(::handleAuthError, ::handleSuccessLogin)
         }
     }
 
@@ -93,6 +95,12 @@ class LoginViewModel @Inject constructor(
         _loading.value = View.GONE
         _loginButtonState.value = LoginButtonState(true)
         _navigateMain.value = Event(true)
+    }
+
+    private fun handleAuthError(failure: Failure) {
+        _loading.value = View.GONE
+        _loginButtonState.value = LoginButtonState(true)
+        handleFailure(AuthFailure())
     }
 
     private fun updateButtonState() {

@@ -26,8 +26,10 @@ import com.dre.loyalty.core.platform.extension.viewModel
 import com.dre.loyalty.core.platform.functional.Event
 import com.dre.loyalty.core.platform.navigation.Navigator
 import com.dre.loyalty.core.platform.BaseFragment
+import com.dre.loyalty.core.platform.util.enumtype.ConfirmationSheetType
 import com.dre.loyalty.core.view.sheet.ConfirmationSheetModal
 import com.dre.loyalty.databinding.FragmentLoginBinding
+import com.dre.loyalty.features.authentication.data.entity.failure.AuthFailure
 import com.dre.loyalty.features.authentication.presentation.login.entity.LoginButtonState
 import com.dre.loyalty.features.authentication.presentation.login.entity.LoginEmailInputState
 import com.dre.loyalty.features.authentication.presentation.login.entity.LoginPasswordInputState
@@ -197,12 +199,19 @@ class LoginFragment : BaseFragment() {
     private fun showFailureSheet(failure: Failure?) {
         if (failure == null) return
         binding?.btnLoginSticky?.isButtonEnabled = true
-        val sheet = getNetworkErrorSheet(failure)?.also {
+        val sheet = if (failure is AuthFailure) {
+            ConfirmationSheetModal.newInstance(ConfirmationSheetType.RESPONSE_WRONG_AUTHENTICATION)
+        } else {
+            getNetworkErrorSheet(failure)
+        }
+        sheet?.also {
             it.primaryButtonClickListener = {
-                vm.handleLoginButtonClicked(
-                    binding?.etMail?.editText?.text.toString(),
-                    binding?.etPass?.editText?.text.toString()
-                )
+                if (failure !is AuthFailure) {
+                    vm.handleLoginButtonClicked(
+                        binding?.etMail?.editText?.text.toString(),
+                        binding?.etPass?.editText?.text.toString()
+                    )
+                }
             }
             it.secondaryButtonClickListener = {
                 navigator.showSetting(requireContext())
