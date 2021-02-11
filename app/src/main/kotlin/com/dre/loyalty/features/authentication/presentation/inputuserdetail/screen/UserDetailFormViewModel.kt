@@ -64,6 +64,7 @@ class UserDetailFormViewModel @Inject constructor() : BaseViewModel() {
         _firstNameInputState.value = FirstNameInputState(-1)
         _lastNameInputState.value = LastNameInputState(-1)
         _ktpInputState.value = KTPInputState(-1)
+        _phoneInputState.value = PhoneInputState(-1)
         //_emailInputState.value = EmailInputState(-1)
         _registerButtonState.value = RegisterButtonState(false)
     }
@@ -180,4 +181,5 @@ class UserDetailFormViewModel @Inject constructor() : BaseViewModel() {
             && _selectedGender.value != null
             && _selectedDate.value != null
             && _phoneInputState.value?.error == null
+
 }

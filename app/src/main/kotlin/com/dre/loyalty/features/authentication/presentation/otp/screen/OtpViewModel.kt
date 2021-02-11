@@ -60,7 +60,11 @@ abstract class OtpViewModel constructor(
     }
 
     private fun handleSuccessVerifyEmail(response: LoyaltyResponse<RegisterResponse>) {
-        _successVerifyEmail.value = Event(true)
+        if(response.statusCode.equals("200")){
+            _successVerifyEmail.value = Event(true)
+        } else {
+            _successVerifyEmail.value = Event(false)
+        }
     }
 
     abstract fun getType(): OtpType

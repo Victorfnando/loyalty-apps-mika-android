@@ -18,11 +18,13 @@ class PhoneValidation @Inject constructor() : ValidationStrategy {
             return ValidationResult(false, R.string.validation_failed_empty)
         } else if (!isValidPhoneNumber(text)) {
             return ValidationResult(false, R.string.validation_failed_format_phone)
+        } else if (text.length < 9) {
+            return ValidationResult(false, R.string.validation_failed_format_phone)
         }
         return ValidationResult(true)
     }
 
     private fun isValidPhoneNumber(text: String) = text.isDigitsOnly()
-            && (text.length >= 2 && text.substring(0, 2) == "62" ||
-            text.length >= 2 && text.substring(0, 2) == "08")
+            && (text.length >= 9 && text.substring(0, 2) == "62" ||
+            text.length >= 9 && text.substring(0, 2) == "08")
 }

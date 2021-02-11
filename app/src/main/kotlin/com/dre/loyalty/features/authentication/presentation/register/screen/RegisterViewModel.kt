@@ -10,6 +10,7 @@ package com.dre.loyalty.features.authentication.presentation.register.screen
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.dre.loyalty.R
 import com.dre.loyalty.core.platform.functional.Event
 import com.dre.loyalty.core.platform.BaseViewModel
 import com.dre.loyalty.core.networking.response.BasicResponse
@@ -69,11 +70,14 @@ class RegisterViewModel @Inject constructor(
     }
 
     private fun handleVerifyEmailSuccess(response: LoyaltyResponse<RegisterResponse>) {
-        _loading.value = View.GONE
-        _regisButtonState.value = RegisterButtonState(true)
-        _navigateOtpScreen.value = Event(email.orEmpty())
-//        if(response.statusMessage.contains("Berhasil")){
-//
-//        }
+        if(response.statusCode.equals("400")){
+            _emailInputState.value =  RegisterEmailInputState(R.string.validation_failed_email_exist)
+            _loading.value = View.GONE
+            _regisButtonState.value = RegisterButtonState(true)
+        } else {
+            _loading.value = View.GONE
+            _regisButtonState.value = RegisterButtonState(true)
+            _navigateOtpScreen.value = Event(email.orEmpty())
+        }
     }
 }

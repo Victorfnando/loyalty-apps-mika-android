@@ -5,10 +5,9 @@
   ~ Last modified 1/1/21 3:26 PM
   ~ github: https://github.com/oandrz
   -->
-
 <resources>
     <string name="home_title">Selamat Datang</string>
-    <string name="home_label_medicalNumber">Nomor rekan medik saya</string>
+    <string name="home_label_medicalNumber">Member Sejak</string>
     <string name="home_label_section_seeAll">Lihat semua</string>
 
     <string name="home_item_cashBack_label_invoiceId">ID Kwitansi</string>

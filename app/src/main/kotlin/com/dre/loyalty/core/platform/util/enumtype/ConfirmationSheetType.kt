@@ -80,5 +80,19 @@ enum class ConfirmationSheetType(
         R.string.sheet_responseError_desc,
         R.string.sheet_responseError_button_primary,
         R.string.sheet_responseError_button_secondary
+    ),
+    RESPONSE_EMAIL_EXIST(
+            R.drawable.ic_img_response_error,
+            R.string.sheet_responseError_title,
+            R.string.sheet_responseError_desc,
+            R.string.sheet_responseError_button_primary,
+            R.string.sheet_responseError_button_secondary
+    ),
+
+    RESPONSE_WRONG_AUTHENTICATION(
+            R.drawable.ic_img_response_error,
+            R.string.sheet_response_wrong_authentication_desc,
+            R.string.sheet_response_wrong_authentication_title,
+            R.string.updatePassword_sheet_button_ok
     )
 }

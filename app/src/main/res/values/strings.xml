@@ -14,8 +14,9 @@
     <string name="validation_failed_password">Password Tidak Boleh Sama</string>
     <string name="validation_failed_password_confirm">Password Belum Sesuai</string>
     <string name="validation_failed_format_email">Format e-mail salah</string>
+    <string name="validation_failed_email_exist">Email sudah terdaftar.</string>
     <string name="validation_failed_format_number">Hanya boleh angka</string>
-    <string name="validation_failed_format_ktp">Nomor KTP harus 13 karakter</string>
+    <string name="validation_failed_format_ktp">Nomor KTP harus 16 karakter</string>
     <string name="validation_failed_format_phone">Format nomor HP salah</string>
 
     <string name="sheet_noInternet_title">Yah, Internet kamu mati</string>
@@ -27,4 +28,13 @@
     <string name="sheet_responseError_desc">Aplikasi gagal memuat data dengan benar</string>
     <string name="sheet_responseError_button_primary">Coba lagi</string>
     <string name="sheet_responseError_button_secondary">Cek Pengaturan</string>
+
+    <string name="sheet_response_wrong_authentication_title">Email atau password salah, silahkan masukkan </string>
+    <string name="sheet_response_wrong_authentication_desc">Silahkan pastikan lagi bahwa email / password yang anda masukkan sudah benar.</string>
+    <string name="sheet_response_email_exist_title">Email sudah terdaftar</string>
+    <string name="sheet_response_email_exist_description">Silahkan gunakan email lain yang belum terdaftar.</string>
+    <string name="sheet_response_wrong_code_title">Kode OTP salah</string>
+    <string name="sheet_response_wrong_code_description">Silahkan pastikan kembali check kode OTP yang telah kami kirimkan ke email kammu.</string>
+
+
 </resources>

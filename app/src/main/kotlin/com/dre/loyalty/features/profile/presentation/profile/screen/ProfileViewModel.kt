@@ -89,7 +89,7 @@ class ProfileViewModel @Inject constructor(
     }
 
     fun handleTnCMenuClicked() {
-        _navigateTnc.value = Event("https://google.com")
+        _navigateTnc.value = Event("https://admin.loyalty.digitalnative.id/term_codition.html")
     }
 
     fun handleLogoutMenuClicked() {
