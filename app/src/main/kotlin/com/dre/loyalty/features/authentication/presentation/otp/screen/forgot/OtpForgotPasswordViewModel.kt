@@ -12,6 +12,7 @@ package com.dre.loyalty.features.authentication.presentation.otp.screen.forgot
 
 import com.dre.loyalty.core.platform.functional.Event
 import com.dre.loyalty.core.model.User
+import com.dre.loyalty.core.networking.exception.Failure
 import com.dre.loyalty.core.networking.response.BasicResponse
 import com.dre.loyalty.features.authentication.domain.entity.OtpCode
 import com.dre.loyalty.features.authentication.domain.usecase.DoVerifyCodeForgotPasswordUseCase
@@ -35,16 +36,21 @@ class OtpForgotPasswordViewModel @Inject constructor(
     }
 
     private fun handleSuccessVerifyCode(response: BasicResponse) {
-        _navigateResetPassword.value = Event(User(
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            email,
-            ""
-        ))
+        if (response.statusCode == "200") {
+            _navigateResetPassword.value = Event(User(
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    email,
+                    ""
+            ))
+        } else {
+            handleFailure(Failure.ServerError)
+        }
+
     }
 }
