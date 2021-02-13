@@ -10,6 +10,7 @@
 
 package com.dre.loyalty.features.authentication.presentation.otp.screen.create
 
+import com.dre.loyalty.core.networking.exception.Failure
 import com.dre.loyalty.core.platform.functional.Event
 import com.dre.loyalty.core.networking.response.BasicResponse
 import com.dre.loyalty.features.authentication.domain.entity.OtpCode
@@ -34,6 +35,10 @@ class OtpRegisterViewModel @Inject constructor(
     }
 
     private fun handleSuccessVerifyCode(response: BasicResponse) {
-        _navigateDetailForm.value = Event(email)
+        if (response.statusCode == "200") {
+            _navigateDetailForm.value = Event(email)
+        } else {
+            handleFailure(Failure.ServerError)
+        }
     }
 }
