@@ -10,6 +10,7 @@
     <dimen name="card_id_height">160dp</dimen>
 
     <dimen name="news_card_width">224dp</dimen>
+    <dimen name="news_card_height">372dp</dimen>
     <dimen name="vertical_news_card_width">328dp</dimen>
 
     <dimen name="movie_details_title">20dp</dimen>

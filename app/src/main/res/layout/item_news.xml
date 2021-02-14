@@ -10,7 +10,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_news"
     android:layout_width="@dimen/news_card_width"
-    android:layout_height="wrap_content"
+    android:layout_height="@dimen/news_card_height"
     android:layout_marginTop="@dimen/space_20dp"
     android:layout_marginBottom="@dimen/space_32dp"
     app:cardElevation="@dimen/card_elevation">
