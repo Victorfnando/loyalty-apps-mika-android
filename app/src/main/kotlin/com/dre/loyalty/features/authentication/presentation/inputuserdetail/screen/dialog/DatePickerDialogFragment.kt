@@ -40,7 +40,7 @@ class DatePickerDialogFragment : DialogFragment(), DatePickerDialog.OnDateSetLis
         val day = c.get(Calendar.DAY_OF_MONTH)
 
         val dateDialog = DatePickerDialog(requireContext(), this, year, month, day)
-        dateDialog.datePicker.maxDate = c.timeInMillis
+        dateDialog.datePicker.maxDate = Calendar.getInstance().timeInMillis
         return dateDialog
     }
 
